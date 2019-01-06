@@ -1,0 +1,30 @@
+@mixin respond($breakpoint) {
+	@if $breakpoint == xs {
+    @media only screen and (min-width: 400px) { @content };   
+  }
+  @if $breakpoint == sm {
+    @media only screen and (min-width: 576px) { @content };   
+  }
+  @if $breakpoint == md { 
+		@media only screen and (min-width: 768px) { @content };   
+  }
+  @if $breakpoint == lg { 
+		@media only screen and (min-width: 992px) { @content }; 
+	}
+  @if $breakpoint == xl { 
+		@media only screen and (min-width: 1200px) { @content }; 
+	}
+	
+}
+
+@mixin fontawesome($fa_weight) {
+	font-family: 'Font Awesome 5 Pro';
+	font-weight: $fa_weight;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	line-height: 1;
+}

@@ -1,19 +1,51 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+// import logo from "./logo.svg";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import Nav from "./components/Nav";
+import Home from "./components/pages/Home";
+import Books from "./components/pages/Books";
+import Games from "./components/pages/Games";
+import Movies from "./components/pages/Movies";
+import Music from "./components/pages/Music";
+import Shows from "./components/pages/Shows";
+import "./App.scss";
 
 class App extends Component {
+  state = {
+    currentPage: ""
+  };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
+  renderPage = () => {
+    if (this.state.currentPage === "Movies") {
+      return <Movies />;
+    } else if (this.state.currentPage === "Shows") {
+      return <Shows />
+    } else if (this.state.currentPage === "Books") {
+      return <Books />
+    } else if (this.state.currentPage === "Music") {
+      return <Music />
+    } else if (this.state.currentPage === "Games") {
+      return <Games />
+    } else {
+      return <Home />;
+    }
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Recco</h2>
+      <Router>
+        <div>
+          <Nav
+          currentPage={this.state.currentPage}
+          handlePageChange={this.handlePageChange}
+          />
+          {this.renderPage()}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }

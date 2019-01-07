@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "../Header";
 import API from "../utils/API";
 
-class Books extends Component {
+class Friends extends Component {
   state = {
     search: "",
     bookList: [],
@@ -12,10 +12,10 @@ class Books extends Component {
   render() {
     return (
       <div>
-        {/* <Header title="Books"/> */}
+        {/* <Header title="Friends"/> */}
       </div>
     )
   }
 };
 
-export default Books;
+export default Friends;

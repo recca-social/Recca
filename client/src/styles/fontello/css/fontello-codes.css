@@ -1,0 +1,22 @@
+
+.icon-book:before { content: '\e800'; } /* '' */
+.icon-music:before { content: '\e801'; } /* '' */
+.icon-movie:before { content: '\e802'; } /* '' */
+.icon-cancel:before { content: '\e803'; } /* '' */
+.icon-star-filled:before { content: '\e804'; } /* '' */
+.icon-star:before { content: '\e805'; } /* '' */
+.icon-check-filled:before { content: '\e806'; } /* '' */
+.icon-check:before { content: '\e807'; } /* '' */
+.icon-users:before { content: '\e808'; } /* '' */
+.icon-user:before { content: '\e809'; } /* '' */
+.icon-link:before { content: '\e80a'; } /* '' */
+.icon-show:before { content: '\e80b'; } /* '' */
+.icon-spin1:before { content: '\e834'; } /* '' */
+.icon-spin2:before { content: '\e839'; } /* '' */
+.icon-link-ext:before { content: '\f08e'; } /* '' */
+.icon-plus-filled:before { content: '\f0fe'; } /* '' */
+.icon-game:before { content: '\f11b'; } /* '' */
+.icon-plus:before { content: '\f196'; } /* '' */
+.icon-steam:before { content: '\f1b7'; } /* '' */
+.icon-user-plus:before { content: '\f234'; } /* '' */
+.icon-user-times:before { content: '\f235'; } /* '' */

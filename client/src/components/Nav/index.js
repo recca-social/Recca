@@ -5,11 +5,11 @@ import "./Nav.scss";
 export function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg">
-      <Link className="navbar-brand" to="/"
-      onClick={() => props.handlePageChange("")}>
-        <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
-      </Link>
       <div className="navbar-nav">
+        <Link className="navbar-brand" to="/"
+        onClick={() => props.handlePageChange("")}>
+          <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
+        </Link>
         <Link to="/movies"
         onClick={() => props.handlePageChange("Movies")}
         className={props.currentPage === "Movies" ? "nav-link active" : "nav-link"}>
@@ -58,6 +58,16 @@ export function Nav(props) {
             <span className="nav-link__text">
               Games{props.currentPage === "Games" ? <span className="sr-only"> (current)</span> : ""}
             </span>
+          </div>
+        </Link>
+        <Link to="/friends"
+        onClick={() => props.handlePageChange("Friends")}
+        className={props.currentPage === "Friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
+          <div className="nav-link__tab">
+            <span className="nav-link__text">
+              Friends{props.currentPage === "Friends" ? <span className="sr-only"> (current)</span> : ""}
+            </span>
+            <i className="icon icon-users"></i>
           </div>
         </Link>
       </div>

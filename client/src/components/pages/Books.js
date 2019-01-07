@@ -12,7 +12,7 @@ class Books extends Component {
   render() {
     return (
       <div>
-        <Header title="Books"/>
+        {/* <Header title="Books"/> */}
       </div>
     )
   }

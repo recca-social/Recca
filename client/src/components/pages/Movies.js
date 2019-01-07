@@ -12,7 +12,7 @@ class Movies extends Component {
   render() {
     return (
       <div>
-        <Header title="Movies"/>
+        {/* <Header title="Movies"/> */}
       </div>
     )
   }

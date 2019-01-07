@@ -12,7 +12,7 @@ class Games extends Component {
   render() {
     return (
       <div>
-        <Header title="Games"/>
+        {/* <Header title="Games"/> */}
       </div>
     )
   }

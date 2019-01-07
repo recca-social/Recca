@@ -3,11 +3,23 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const routes = require("./routes");
-const mongoose = require("mongoose");
+const session = require("express-session");
+const mongoose = require("mongoose")
+const connection = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/recco");
+const MongoStore = require("connect-mongo")(session);
+const passport = require("passport");
 
 // Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+   secret: 'Recco Gecco',
+   store: new MongoStore({
+     mongooseConnection: mongoose.connection
+    })
+ }));
+app.use(passport.initialize());
+app.use(passport.session());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -23,7 +35,7 @@ app.get("*", (req, res) => {
 });
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recco");
+connection
 
 // Start the API server
 app.listen(PORT, () => {

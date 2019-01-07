@@ -3,13 +3,24 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const Salt_Work_Factor = 10;
 
-
-var userSchema = new Schema({
-  username: { type: String, required: true, index: { unique: true } },
-  passwordHash: { type: String, required: true }
+const userSchema = new Schema({
+  username: {type: String, required: true},
+  password: {type: String, required: true},
+  firstName:{ type: String, required: true},
+  lastName:{type: String, required: true},
+  friends: [
+    {type: Schema.Types.ObjectId, ref: 'User'}
+  ],
+  media:[
+    {type: Schema.Types.ObjectId, ref: "Media"}
+  ],
+  recommendations:[
+    {type: Schema.Types.ObjectId, ref: "Media"}
+  ],
+  totalRecommendations:{type: Number, default: 0}
+  
 });
 
-//boilerplate hashing function for mongo
 userSchema.virtual("password").set(function(value) {
   this.passwordHash = bcrypt.hashSync(value, Salt_Work_Factor);
 });

@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const loginRoutes = require("./loginRoutes/loginRoutes")
-// const apiRoutes = require("./api");
+const apiRoutes = require("./api");
 
-// API Routes
-// router.use("/api", apiRoutes);
+ //API Routes
+ router.use("/api", apiRoutes);
 
 // Login Routes "http:localhost:3001/login"
 router.use("/login", loginRoutes)

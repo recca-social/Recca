@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import logo from "./logo.svg";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/pages/Home";
@@ -8,6 +7,8 @@ import Games from "./components/pages/Games";
 import Movies from "./components/pages/Movies";
 import Music from "./components/pages/Music";
 import Shows from "./components/pages/Shows";
+import Friends from "./components/pages/Friends";
+import "./styles/fontello/css/fontello.css";
 import "./App.scss";
 
 class App extends Component {
@@ -30,6 +31,8 @@ class App extends Component {
       return <Music />
     } else if (this.state.currentPage === "Games") {
       return <Games />
+    } else if (this.state.currentPage === "Friends") {
+      return <Friends />
     } else {
       return <Home />;
     }

@@ -11,7 +11,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header title="Feed"/>
+        {/* <Header title="Feed"/> */}
       </div>
     )
   }

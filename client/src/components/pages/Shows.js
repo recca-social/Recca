@@ -12,7 +12,7 @@ class Shows extends Component {
   render() {
     return (
       <div>
-        <Header title="Shows"/>
+        {/* <Header title="Shows"/> */}
       </div>
     )
   }

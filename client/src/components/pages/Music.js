@@ -12,7 +12,7 @@ class Music extends Component {
   render() {
     return (
       <div>
-        <Header title="Music"/>
+        {/* <Header title="Music"/> */}
       </div>
     )
   }

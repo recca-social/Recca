@@ -20,11 +20,13 @@
     padding-left: 1rem;
     height: 100%;
   }
+  
+  .navbar-brand:hover {
+    background-color: $yellow-1;
+  }
 
-  .navbar-brand, .nav-link {
-    &:hover {
-      background-color: $yellow-1;
-    }
+  .nav-link:hover {
+    color: $yellow-1;
   }
 
   .logo {

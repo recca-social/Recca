@@ -1,23 +1,32 @@
 @import '../../styles/variables.scss'; // assuming a styles directory under src/
+@import '../../styles/mixins.scss';
 
 .navbar {
   padding: 0;
   background-color: $blue-1;
+  justify-content: start;
 
   .navbar-nav {
     height: 100%;
+    flex-direction: row;
+    width: 100%;
   }
 
   .navbar-brand {
     margin-right: 0;
-    padding: 5px 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 1rem;
+    padding-left: 1rem;
     height: 100%;
   }
+  
+  .navbar-brand:hover {
+    background-color: $yellow-1;
+  }
 
-  .navbar-brand, .nav-link {
-    &:hover {
-      background-color: $yellow-1;
-    }
+  .nav-link:hover {
+    color: $yellow-1;
   }
 
   .logo {
@@ -33,33 +42,36 @@
     color: rgba(0,0,0,.8);
     height: 100%;
     font-size: 18px;
+    padding: 0 !important;
+    position: relative;
+
+    &__tab {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
 
     &__text {
-      z-index: 2;
+      padding-right: 3px;
+      display: none;
+      @include respond(md) {
+        display: inline;
+      }
     }
 
     &.active {
       color: #fff;
-      position: relative;
+
+      .nav-link__tab {      
+        background-color: $gray-1;
+      }
 
       &:hover {
         background-color: transparent;
       }
-
-      // &::before {
-      //   content: "";
-      //   position: absolute;
-      //   top: 6px;
-      //   right: 0;
-      //   bottom: 0;
-      //   left: 0;
-      //   height: calc(100% - 6px);
-      //   width: 100%;
-      //   z-index: 1;
-      //   background-color: $gray-1;
-      //   border-top-left-radius: 6px;
-      //   border-top-right-radius: 6px;
-      // }
     }
   }
 }

@@ -1,4 +1,8 @@
 @import 'styles/variables.scss'; // assuming a styles directory under src/
+
+body {
+  background-color: $gray-1;
+}
 .App {
   text-align: center;
 }

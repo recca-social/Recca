@@ -29,6 +29,7 @@ router.route("/facebook").get(passport.authenticate("facebook-auth"));
 
 router.route("/facebook/callback").get(function(req, res, next){
   passport.authenticate('facebook-auth', function (err, user, info){
+    console.log("we're in the auth page")
     if (err) return next(err);
     if(!user) return res.redirect('/facebook');
     req.login(user, function (err){

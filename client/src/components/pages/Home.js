@@ -12,6 +12,7 @@ class Home extends Component {
     return (
       <div>
         {/* <Header title="Feed"/> */}
+        <a href="/auth/facebook">Login with Facebook</a>
       </div>
     )
   }

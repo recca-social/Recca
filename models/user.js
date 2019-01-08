@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
+const Salt_Work_Factor = 10;
 
 const userSchema = new Schema({
   username: {type: String, required: true},
@@ -21,6 +23,14 @@ const userSchema = new Schema({
   totalRecommendations:{type: Number, default: 0}
   
 });
+
+userSchema.virtual("password").set(function(value) {
+  this.passwordHash = bcrypt.hashSync(value, Salt_Work_Factor);
+});
+
+userSchema.methods.comparePassword =function(candidatePassword) {
+  return bcrypt.compareSync(candidatePassword, this.passwordHash);
+};
 
 const User = mongoose.model("User", userSchema);
 

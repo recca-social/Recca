@@ -53,7 +53,7 @@ passport.use('local-signup', new LocalStrat({
 passport.use('facebook-auth', new FacebookStrat({
   clientID: config.facebook_app_id,
   clientSecret: config.facebook_app_secret,
-  callbackUrl: config.callback_url,
+  callbackUrl: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback", 
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
   if (req.user) {
@@ -61,7 +61,7 @@ passport.use('facebook-auth', new FacebookStrat({
     user.facebook.id = profile.id;
     user.facebook.token = accessToken;
     user.save()
-      .then(user => done(null, user, { nextRoute: "/profile" }))
+      .then(user => done(null, user, { nextRoute: "/" }))
       .catch(err => done(err))
   } else {
     User.findOne({ 'facebook.token': accessToken }, function (err, user) {

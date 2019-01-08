@@ -8,14 +8,7 @@ class Music extends Component {
     musicList: [],
     musicResults: []
   }
-  apiQuery = () =>{
-    musicAPI.searchAlbum()
-    .then(res=>console.log(res))
-  }
-  componentDidMount(){
-    this.apiQuery()
-  }
-
+  
   render() {
     return (
       <div>

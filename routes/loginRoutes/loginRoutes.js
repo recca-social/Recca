@@ -25,7 +25,7 @@ router.route("/signup").post(function(req, res, next){
   })(req, res, next);
 })
 
-router.route("/facebook").get(passport.authenticate("facebook-auth"));
+router.route("/facebook").get(passport.authenticate("facebook-auth", {scope: 'public_profile'}));
 
 router.route("/facebook/callback").get(function(req, res, next){
   passport.authenticate('facebook-auth', function (err, user, info){

@@ -2,7 +2,6 @@ import React from "react";
 import "./results.scss";
 
 function Results(props) {
-  console.log(props)
   return (
     <div className="results-wrapper">
       {props.results ? props.results.map(result => (
@@ -23,7 +22,7 @@ function Results(props) {
 
           <div className="result__buttons">
             <button onClick={() => props.handleBookSave(result.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button>
-            <a href={result.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">More <i className="icon icon-link-ext"></i></a>
+            <a href={result.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">View <i className="icon icon-link-ext"></i></a>
             {/* {props.currentPage === "search" ? 
               <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
               <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>

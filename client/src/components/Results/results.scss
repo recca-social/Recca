@@ -40,28 +40,28 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    @-moz-document url-prefix() {
-      overflow: hidden;
-      position: relative;
-      &::before {
-        background: #fff;
-        bottom: -2px;
-        position: absolute;
-        right: 0;
-        float: right;
-        content: '\2026';
-        margin-left: -3rem;
-        width: 3rem;
-      }
-      &::after {
-        content: '';
-        background: #fff;
-        position: absolute;
-        height: 50px;
-        width: 100%;
-        z-index: 1;
-      }
-    }
+    // @-moz-document url-prefix() {
+    //   overflow: hidden;
+    //   position: relative;
+    //   &::before {
+    //     background: #fff;
+    //     bottom: -2px;
+    //     position: absolute;
+    //     right: 0;
+    //     float: right;
+    //     content: '\2026';
+    //     margin-left: -3rem;
+    //     width: 3rem;
+    //   }
+    //   &::after {
+    //     content: '';
+    //     background: #fff;
+    //     position: absolute;
+    //     height: 50px;
+    //     width: 100%;
+    //     z-index: 1;
+    //   }
+    // }
   }
 
   &__img {

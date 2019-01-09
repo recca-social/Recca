@@ -54,9 +54,10 @@ class Books extends Component {
     this.searchBooks("iain banks");
   }
 
-  // TODO fix this route to match our data model
   handleBookSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
+    console.log(book);
+    this.setState({ results : [] })
     booksAPI.saveBook({
       type: "book",
       title: book.title,
@@ -67,7 +68,6 @@ class Books extends Component {
       genre: book.genre,
       apiId: book.apiId
     }).then(() => {
-      alert(`A book added to your saved list:\n${book.title}`)
       //Once the book is saved, reset state for results
       this.setState({ results : [] })
     })
@@ -84,10 +84,13 @@ class Books extends Component {
               handleSearch={this.handleSearch}
             />
             {this.state.results.length ? 
-              <Results 
-                results={this.state.results}
-                handleBookSave={this.handleBookSave}
-              /> : ""}
+              <div>
+                <h2 className="text-center">Results</h2>
+                <Results 
+                  results={this.state.results}
+                  handleBookSave={this.handleBookSave}
+                />
+              </div> : ""}
             <hr />
             {this.state.saved ? 
               <div>

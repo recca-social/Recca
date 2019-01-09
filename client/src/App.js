@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/pages/Home";
 import Books from "./components/pages/Books";
@@ -9,6 +9,7 @@ import Music from "./components/pages/Music";
 import Shows from "./components/pages/Shows";
 import Friends from "./components/pages/Friends";
 import "./styles/fontello/css/fontello.css";
+import "./styles/fontello/css/fontello-codes.css";
 import "./App.scss";
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
       return <Games />
     } else if (this.state.currentPage === "Friends") {
       return <Friends />
+    // add logic for determining login page vs homepage
     } else {
       return <Home />;
     }
@@ -42,10 +44,12 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav
-          currentPage={this.state.currentPage}
-          handlePageChange={this.handlePageChange}
-          />
+          {this.state.currentPage !== "Login" ? 
+            <Nav
+            currentPage={this.state.currentPage}
+            handlePageChange={this.handlePageChange}
+            /> : ""}
+          
           {this.renderPage()}
         </div>
       </Router>

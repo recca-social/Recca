@@ -15,6 +15,7 @@
 .icon-eye:before { content: '\e80d'; } /* '' */
 .icon-eye-off:before { content: '\e80e'; } /* '' */
 .icon-trash-empty:before { content: '\e80f'; } /* '' */
+.icon-search:before { content: '\e810'; } /* '' */
 .icon-spin1:before { content: '\e834'; } /* '' */
 .icon-spin2:before { content: '\e839'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */

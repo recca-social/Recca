@@ -1,7 +1,7 @@
 import React from "react";
 import "./results.scss";
 
-function bookResults(props) {
+function Results(props) {
   return (
     <div>
 
@@ -37,4 +37,4 @@ function bookResults(props) {
   );
 }
 
-export default bookResults;
+export default Results;

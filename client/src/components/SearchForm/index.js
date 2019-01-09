@@ -12,7 +12,7 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="Search for a Book"
+          placeholder="Search Books"
           id="search"
         />
         <button onClick={props.handleSearch} className="btn btn-primary">

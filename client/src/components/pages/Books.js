@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import booksAPI from "../utils/booksAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
-import Results from "../Results/bookResults.js";
+import Results from "../Results";
 import "./mediaPages.scss";
 
 class Books extends Component {
   state = {
     search: "",
-    bookList: [],
-    bookResults: []
+    list: [],
+    results: []
   }
 
   handleInputChange = event => {
@@ -33,16 +33,19 @@ class Books extends Component {
           results.push(
             //TODO make this object match our data model
             {
-              id: book.id,
-              title: book.volumeInfo.title ? book.volumeInfo.title : "Title not found",
+              title: book.volumeInfo.title ? book.volumeInfo.title : "",
+              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
+              description: book.volumeInfo.description ? book.volumeInfo.description : "",
+              type: "book",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
-              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
-              description: book.volumeInfo.description ? book.volumeInfo.description : "Description not found"
+              genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
+              apiId: book.id
             }
           )
         });
       })
+      .then(() => console.log(results))
       .then(() => this.setState({ books: results }))
       .catch(err => console.log(err));
   };
@@ -74,13 +77,13 @@ class Books extends Component {
               handleInputChange={this.handleInputChange}
               handleSearch={this.handleSearch}
             />
-            {this.state.bookResults.length ? 
+            {this.state.results.length ? 
               <Results 
                 books={this.state.books}
                 handleBookSave={this.handleBookSave}
               /> : ""}
             <hr />
-            {this.state.bookList ? 
+            {this.state.list ? 
               <div>
                 <h2 className="text-center">Saved Books</h2>
                 <Results 

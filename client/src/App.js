@@ -9,6 +9,7 @@ import Music from "./components/pages/Music";
 import Shows from "./components/pages/Shows";
 import Friends from "./components/pages/Friends";
 import "./styles/fontello/css/fontello.css";
+import "./styles/fontello/css/fontello-codes.css";
 import "./App.scss";
 
 class App extends Component {

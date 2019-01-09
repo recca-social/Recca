@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.sidebar {
+  background-color: $gray-3;
+  color: $white;
+  min-height: calc(100vh - 43px);
+  max-height: calc(100vh - 43px);
+  overflow-y: scroll;
+  padding: 15px 0 0;
+
+  &__title {
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+  }
+}

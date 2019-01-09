@@ -1,15 +1,17 @@
 // background colors
 $black: #000;
+$black-2: rgba(#000, 0.8);
+
+
 $gray-1: #202020;
 $gray-2: #303030;
 $gray-3: #424242;
 
 // text colors
 $white: #fff;
-$white-text-secondary: rgba(#fff, 0.7);
-$white-text-disabled: rgba(#fff, 0.5);
+$white-2: rgba(#fff, 0.7);
+$white-3: rgba(#fff, 0.5);
 
-$black-text-secondary: rgba(#000, 0.8);
 
 $red-1: red;
 
@@ -18,3 +20,5 @@ $blue-2: #1B668F;
 $blue-3: #2EB1E9; //links?
 
 $yellow-1: #FEC74D; // accent-color
+
+$green-1: #6ac174;

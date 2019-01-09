@@ -2,38 +2,37 @@ import React from "react";
 import "./results.scss";
 
 function Results(props) {
+  console.log(props)
   return (
-    <div>
+    <div className="results-wrapper">
+      {props.results ? props.results.map(result => (
+        <div className="result" key={result.apiId}>
+          <div className="result__header">
+            <img
+              alt={result.title} className="result__img"
+              src={result.image}
+            />
+            <div className="result__details">
+              <h3 className="result__title">{result.title}</h3>
+              <p className="result__description">{result.description}</p>
+            </div>
+          </div>
+          <p className="result__byline">
+            {result.type === "book" ? "Author(s): " : ""}<strong>{result.authors}</strong>
+          </p>
 
+          <div className="result__buttons">
+            <button onClick={() => props.handleBookSave(result.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button>
+            <a href={result.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">More <i className="icon icon-link-ext"></i></a>
+            {/* {props.currentPage === "search" ? 
+              <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
+              <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
+            } */}
+              
+          </div>
+        </div>
+      )) : ""}
     </div>
-
-    // <div className="results">
-    //   {props.books.map(book => (
-    //     <div className="list-group-item result" key={book.id}>
-    //       <div className="result__header">
-    //         <h3 className="result__title">{book.title}</h3>
-    //         <div className="result__buttons">
-    //           <a href={book.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary view">View</a>
-    //           {props.currentPage === "search" ? 
-    //             <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
-    //             <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
-    //           }
-                
-    //         </div>
-    //       </div>
-    //       <p className="result__byline">
-    //         Author(s): <strong>{book.authors}</strong>
-    //       </p>
-    //       <img
-    //         alt={book.title} className="results__img"
-    //         src={book.image} />
-    //       <p className="results__description">
-    //         {book.description}
-    //       </p>
-    //       <div className="clearfix"></div>
-    //     </div>
-    //   ))}
-    // </div>
   );
 }
 

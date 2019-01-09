@@ -11,7 +11,6 @@ const mediaSchema = new Schema({
     platform: String,
     index: Number,
     active: Boolean,
-    currentItem: Boolean,
     completed: Boolean,
     recommended: Boolean,
     userDescription: String,

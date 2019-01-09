@@ -8,7 +8,7 @@ import "./mediaPages.scss";
 class Books extends Component {
   state = {
     search: "",
-    list: [],
+    saved: [],
     results: []
   }
 
@@ -33,10 +33,10 @@ class Books extends Component {
           results.push(
             //TODO make this object match our data model
             {
+              type: "book",
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
               description: book.volumeInfo.description ? book.volumeInfo.description : "",
-              type: "book",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
@@ -46,26 +46,32 @@ class Books extends Component {
         });
       })
       .then(() => console.log(results))
-      .then(() => this.setState({ books: results }))
+      .then(() => this.setState({ results }))
       .catch(err => console.log(err));
   };
 
+  componentDidMount() {
+    this.searchBooks("iain banks");
+  }
+
   // TODO fix this route to match our data model
-  /*
   handleBookSave = id => {
-    const book = this.state.books.find(book => book.id === id);
+    const book = this.state.results.find(book => book.apiId === id);
     booksAPI.saveBook({
-      id: book.id,
+      type: "book",
       title: book.title,
+      image: book.image,
+      description: book.description,
       link: book.link,
       authors: book.authors,
-      image: book.image,
-      description: book.description
+      genre: book.genre,
+      apiId: book.apiId
     }).then(() => {
       alert(`A book added to your saved list:\n${book.title}`)
+      //Once the book is saved, reset state for results
+      this.setState({ results : [] })
     })
   };
-  */
 
   render() {
     return (
@@ -79,15 +85,15 @@ class Books extends Component {
             />
             {this.state.results.length ? 
               <Results 
-                books={this.state.books}
+                results={this.state.results}
                 handleBookSave={this.handleBookSave}
               /> : ""}
             <hr />
-            {this.state.list ? 
+            {this.state.saved ? 
               <div>
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
-                  books={this.state.books}
+                  saved={this.state.saved}
                   handleBookSave={this.handleBookSave}
                 />
               </div> : ""}

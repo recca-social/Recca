@@ -1,3 +1,116 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
+.results-wrapper {
+
+}
+
+.result {
+  padding: 20px 120px 20px 20px;
+  background: $white-2;
+  margin-bottom: 20px;
+  position: relative;
+  border-radius: 3px;
+
+  &__title, &__description, &__byline {
+    color: $black-2;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+  }
+
+  &__details {
+    padding: 0 20px 10px;
+    max-height: 170px;
+    // overflow-y: scroll;
+    flex: 1 1 auto;
+  }
+
+  &__description {
+    margin-bottom: 0;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-height: 132px; /* Fallback for non-webkit */
+    font-size: 16px;
+    line-height: 1.4em;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @-moz-document url-prefix() {
+      overflow: hidden;
+      position: relative;
+      &::before {
+        background: #fff;
+        bottom: -2px;
+        position: absolute;
+        right: 0;
+        float: right;
+        content: '\2026';
+        margin-left: -3rem;
+        width: 3rem;
+      }
+      &::after {
+        content: '';
+        background: #fff;
+        position: absolute;
+        height: 50px;
+        width: 100%;
+        z-index: 1;
+      }
+    }
+  }
+
+  &__img {
+    height: 170px;
+    flex: 0 0 auto;
+  }
+
+  &__byline {
+
+  }
+
+  &__buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .btn {
+      width: 120px;
+      text-align: center;
+      border-radius: 0;
+      color: $black;
+      position: relative;
+
+      &:first-of-type {
+        border-top-right-radius: 3px;
+      }
+
+      &:hover, &:focus {
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          background: rgba(255,255,255, 0.2);
+        }
+      }
+    }
+
+    .btn-save {
+      background-color: $green-1
+    }
+
+    .btn-more {
+      background-color: $yellow-1
+    }
+  }
+}

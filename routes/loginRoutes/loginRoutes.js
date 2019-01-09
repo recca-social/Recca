@@ -25,18 +25,14 @@ router.route("/signup").post(function(req, res, next){
   })(req, res, next);
 })
 
-router.route("/facebook").get(passport.authenticate("facebook-auth"));
+router.route("/facebook").get(
+  function(){
+    console.log("calling passport facebook-auth");
+    passport.authenticate('facebook-auth', {scope: 'public_profile'})
+  }
+  );
 
-router.route("/facebook/callback").get(function(req, res, next){
-  passport.authenticate('facebook-auth', function (err, user, info){
-    if (err) return next(err);
-    if(!user) return res.redirect('/facebook');
-    req.login(user, function (err){
-      if(err) return next(err);
-      console.log("successful facebook auth");
-      res.redirect('/');
-    });
-  })(req, res, next);
-})
+router.route("/facebook/callback").get(passport.authenticate('facebook-auth', 
+{ successRedirect: '/', failureRedirect: '/login' }));
 
 module.exports = router;

@@ -51,23 +51,26 @@ passport.use('local-signup', new LocalStrat({
 ));
 
 passport.use('facebook-auth', new FacebookStrat({
-  clientID: config.facebook_app_id,
-  clientSecret: config.facebook_app_secret,
-  callbackUrl: config.callback_url,
+  clientID: "334182594097924",
+  clientSecret: "fbb8e455aae21c48fca50ded4d4b7e45",
+  callbackUrl: "https://localhost:3001/login/facebook/callback",
+  profileFields: ['id', 'displayName', 'name'],
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
+  console.log("in facebook-auth");
   if (req.user) {
+    console.log("all ready logged in");
     let user = req.user;
     user.facebook.id = profile.id;
     user.facebook.token = accessToken;
     user.save()
-      .then(user => done(null, user, { nextRoute: "/profile" }))
+      .then(user => done(null, user))
       .catch(err => done(err))
   } else {
-    User.findOne({ 'facebook.token': accessToken }, function (err, user) {
+    db.User.findOne({ 'facebook.token': accessToken }, function (err, user) {
       if (err) return done(err);
       if (!user) {
-        var newUser = new User();
+        var newUser = new db.User();
         newUser.facebook.id = profile.id;
         newUser.facebook.token = accessToken;
         username = profile.displayName;

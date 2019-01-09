@@ -11,7 +11,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-        {/* <Header title="Feed"/> */}
+        <div>
+          {/* <Header title="Feed"/> */}
+        </div>
+        <div>
+          <a href="/login/facebook">login with facebook</a>
+        </div>
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../Header";
-import API from "../utils/API";
+// import Header from "../Header";
+// import API from "../utils/API";
 
 class Shows extends Component {
   state = {

@@ -1,10 +1,29 @@
 var axios = require("axios");
 var querystring = require('querystring');
 
-
+function parseAlbums(spotifyObject){
+    const albumArray = spotifyObject.albums.items;
+    console.log(albumArray)
+    let parsedArray = [];
+    for ( let i = 0; i < albumArray.length; i++){
+        let artistArray = [];
+        for (let a = 0; a < albumArray[i].artists.length; a++){
+            artistArray.push(albumArray[i].artists[a].name)
+        }
+        let albumObject = {
+            albumName: albumArray[i].name,
+            artist: artistArray,
+            albumLink: albumArray[i].external_urls,
+            apiId: albumArray[i].id,
+            image: albumArray[i].images[0].url
+        }
+        parsedArray.push(albumObject)
+    }
+    return parsedArray;
+}
 
 module.exports = {
-    search: function(req, res){
+    searchAlbum: function(req, res){
         axios.post("https://accounts.spotify.com/api/token", 
         querystring.stringify({
             "grant_type": "client_credentials"
@@ -23,8 +42,7 @@ module.exports = {
                 }
             })
             .then(function(spotifyResponse){
-                console.log(spotifyResponse.data);
-                res.json(spotifyResponse.data)
+                res.json(parseAlbums(spotifyResponse.data))
             })
         })
     }

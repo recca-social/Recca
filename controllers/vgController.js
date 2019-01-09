@@ -125,7 +125,6 @@ function parseData(array){
         } else {
                 // parsedObject.coverArt = findCover(array[i].cover)
                 parsedArray.push(parsedObject);
-
         }
 
     }

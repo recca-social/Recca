@@ -8,6 +8,7 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
+    
     //method for finding user and populating media, recommendations, and friends
     findUser: function(req, res){
         db.User
@@ -20,6 +21,7 @@ module.exports = {
         })
         .catch(err => res.status(422).json(err));
     },
+
     //method for adding friend to user friend array
     addFriend: function(req, res){
         db.User
@@ -33,5 +35,5 @@ module.exports = {
             res.json(dbFriend);
         })
         .catch(err => res.status(422).json(err));
-    },
+    }
 }

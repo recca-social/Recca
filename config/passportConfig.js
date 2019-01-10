@@ -50,7 +50,7 @@ passport.use('local-signup', new LocalStrat({
   }
 ));
 
-passport.use('facebook-auth', new FacebookStrat({
+passport.use(new FacebookStrat({
   clientID: "334182594097924",
   clientSecret: "fbb8e455aae21c48fca50ded4d4b7e45",
   callbackUrl: "https://localhost:3001/login/facebook/callback",

@@ -55,7 +55,7 @@ passport.use('facebook-auth', new FacebookStrat({
   clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
   callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback",
   passReqToCallback: true
-}, function (accessToken, refreshToken, profile, done) {
+}, function (req, accessToken, refreshToken, profile, done) {
   // if we're signed in
   if (req.user) {
     User.findOne({ 'username': req.user.username }).then(function (err, user) {

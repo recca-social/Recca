@@ -60,11 +60,7 @@ passport.use('facebook-auth', new FacebookStrat({
       if (err) return done(err);
       if (!user) {
         var newUser = new User();
-        newUser.facebook.id = profile.id;
         newUser.facebook.token = accessToken;
-        username = profile.displayName;
-        firstName = profile.name.givenName;
-        lastName = profile.name.familyName;
         newUser.save()
           .then(done(null, user))
           .catch(err => done(err))

@@ -1,7 +1,7 @@
 const passport = require('passport'),
   LocalStrat = require('passport-local').Strategy,
   FacebookStrat = require('passport-facebook').Strategy,
-  db = require("../models"),
+  User = require("../models/user"),
   config = require("./authConfig")
 
 passport.use('local-login', new LocalStrat({
@@ -9,7 +9,7 @@ passport.use('local-login', new LocalStrat({
   passwordField: 'password',
 }, function (username, password, done) {
   console.log("You're in passport");
-  db.User.findOne({ username: username }).then(function (user) {
+  User.findOne({ username: username }).then(function (user) {
     console.log("Here's the retrieved info:" + user)
     // check if username exists
     if (!user) {
@@ -28,7 +28,7 @@ passport.use('local-signup', new LocalStrat({
   passReqToCallback: true
 },
   function (req, username, password, done) {
-    db.User.findOne({ username: username }).then(function (err, user) {
+    User.findOne({ username: username }).then(function (err, user) {
       if (err) throw err;
       if (user) {
         return done(null, false, { message: "Username in use" })
@@ -37,7 +37,7 @@ passport.use('local-signup', new LocalStrat({
         var newPassword = password;
         var newFirstName = req.body.firstName;
         var newLastName = req.body.lastName;
-        db.User.create({
+        User.create({
           username: newUsername,
           password: newPassword,
           firstName: newFirstName,
@@ -56,7 +56,7 @@ passport.use('facebook-auth', new FacebookStrat({
   callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback", 
  
 }, function (accessToken, refreshToken, profile, done) {
-    db.User.findOne({ 'facebook.token': accessToken }).then( function (err, user) {
+    User.findOne({ 'facebook.token': accessToken }).then( function (err, user) {
       if (err) return done(err);
       if (!user) {
         var newUser = new User();

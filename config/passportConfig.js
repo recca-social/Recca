@@ -53,28 +53,33 @@ passport.use('local-signup', new LocalStrat({
 passport.use('facebook-auth', new FacebookStrat({
   clientID: "369801490490347",
   clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
-  callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback", 
- 
+  callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback",
+
 }, function (accessToken, refreshToken, profile, done) {
   console.log(profile)
-    User.findOne({ 'facebook.token': accessToken }).then( function (err, user) {
-      if (err) return done(err);
-      if (!user) {
-        var nameArr = profile.name.split(" ");
-        var newUser = new User();
-        newUser.facebook.token = accessToken;
-        newUser.facebook.id = profile.id
-        newUser.username = profile.name,
-        newUser.firstName = nameArr[0],
-        newUser.lastName = nameArr[1],
-        newUser.save()
-          .then(done(null, user))
-          .catch(err => done(err))
+  User.findOne({ 'facebook.token': accessToken }).then(function (err, user) {
+    if (err) return done(err);
+    if (!user) {
+      var newUser = new User();
+      newUser.facebook.token = accessToken;
+      newUser.facebook.id = profile.id;
+      newUser.username = profile.displayName;
+      if ((profile.givenName) && (profile.lastName)) {
+        newUser.firstName = profile.givenName;
+        newUser.lastName = profile.familyName
       } else {
-        return done(null, user)
+        var nameArr = profile.displayName.split(" ");
+        newUser.firstName = nameArr[0];
+        newUser.lastName = nameArr[1];
       }
-    })
-  }
+      newUser.save()
+        .then(done(null, user))
+        .catch(err => done(err))
+    } else {
+      return done(null, user)
+    }
+  })
+}
 ));
 
 

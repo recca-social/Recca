@@ -60,12 +60,13 @@ passport.use('facebook-auth', new FacebookStrat({
     User.findOne({ 'facebook.token': accessToken }).then( function (err, user) {
       if (err) return done(err);
       if (!user) {
+        var nameArr = name.split(" ");
         var newUser = new User();
         newUser.facebook.token = accessToken;
         newUser.facebook.id = profile.id
         newUser.username = profile.name,
-        newUser.firstName = profile.first_name,
-        newUser.lastName = profile.last_name,
+        newUser.firstName = nameArr[0],
+        newUser.lastName = nameArr[1],
         newUser.save()
           .then(done(null, user))
           .catch(err => done(err))

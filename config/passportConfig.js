@@ -55,6 +55,7 @@ passport.use('facebook-auth', new FacebookStrat({
   clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
   callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback", 
   passReqToCallback: true,
+  profileFields: ["name", "display_name"],
   enableProof: true,
 }, function (req, accessToken, refreshToken, profile, done) {
   console.log(req)

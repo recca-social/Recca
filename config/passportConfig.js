@@ -54,12 +54,26 @@ passport.use('facebook-auth', new FacebookStrat({
   clientID: "369801490490347",
   clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
   callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback", 
-  
+ 
 }, function (accessToken, refreshToken, profile, done) {
-    return done (null, {})
+    User.findOne({ 'facebook.token': accessToken }, function (err, user) {
+      if (err) return done(err);
+      if (!user) {
+        var newUser = new User();
+        newUser.facebook.id = profile.id;
+        newUser.facebook.token = accessToken;
+        username = profile.displayName;
+        firstName = profile.name.givenName;
+        lastName = profile.name.familyName;
+        newUser.save()
+          .then(done(null, user))
+          .catch(err => done(err))
+      } else {
+        return done(null, user)
+      }
     })
-  
-);
+  }
+));
 
 
 

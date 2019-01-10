@@ -27,14 +27,11 @@ router.route("/signup").post(function (req, res, next) {
 
 router.route("/facebook").get(passport.authenticate("facebook-auth"));
 
-router.route("/facebook/callback").get(function (req, res, next) {
-  console.log(111);
-  passport.authenticate('facebook-auth', { failureRedirect: '/login' }),
+router.route("/facebook/callback").get(passport.authenticate('facebook-auth', { failureRedirect: '/login' }),
     function (req, res) {
       console.log("hey we're in the redirect")
       res.redirect('/');
-    }
-});
+    });
 
 
 module.exports = router;

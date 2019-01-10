@@ -27,10 +27,7 @@ router.route("/signup").post(function (req, res, next) {
 
 router.route("/facebook").get(passport.authenticate('facebook', { scope: 'public_profile' }));
 
-router.route("/facebook/callback").get(passport.authenticate('facebook',
-  { failureRedirect: '/login' }),
-  function (req, res) {
-    res.redirect('/');
-  });
+router.route("/facebook/callback").get(passport.authenticate('facebook-auth', { successRedirect:"/", failureRedirect: '/login' }));
+
 
 module.exports = router;

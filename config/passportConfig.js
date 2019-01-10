@@ -1,7 +1,7 @@
 const passport = require('passport'),
   LocalStrat = require('passport-local').Strategy,
   FacebookStrat = require('passport-facebook').Strategy,
-  db = require("../models"),
+  User = require("../models/user"),
   config = require("./authConfig")
 
 passport.use('local-login', new LocalStrat({
@@ -9,7 +9,7 @@ passport.use('local-login', new LocalStrat({
   passwordField: 'password',
 }, function (username, password, done) {
   console.log("You're in passport");
-  db.User.findOne({ username: username }).then(function (user) {
+  User.findOne({ username: username }).then(function (user) {
     console.log("Here's the retrieved info:" + user)
     // check if username exists
     if (!user) {
@@ -28,7 +28,7 @@ passport.use('local-signup', new LocalStrat({
   passReqToCallback: true
 },
   function (req, username, password, done) {
-    db.User.findOne({ username: username }).then(function (err, user) {
+    User.findOne({ username: username }).then(function (err, user) {
       if (err) throw err;
       if (user) {
         return done(null, false, { message: "Username in use" })
@@ -37,7 +37,7 @@ passport.use('local-signup', new LocalStrat({
         var newPassword = password;
         var newFirstName = req.body.firstName;
         var newLastName = req.body.lastName;
-        db.User.create({
+        User.create({
           username: newUsername,
           password: newPassword,
           firstName: newFirstName,
@@ -50,41 +50,58 @@ passport.use('local-signup', new LocalStrat({
   }
 ));
 
-passport.use(new FacebookStrat({
-  clientID: "334182594097924",
-  clientSecret: "fbb8e455aae21c48fca50ded4d4b7e45",
-  callbackUrl: "https://localhost:3001/login/facebook/callback",
-  profileFields: ['id', 'displayName', 'name'],
+passport.use('facebook-auth', new FacebookStrat({
+  clientID: "369801490490347",
+  clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
+  callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback",
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
-  console.log("in facebook-auth");
+  // if we're signed in
   if (req.user) {
-    console.log("all ready logged in");
-    let user = req.user;
-    user.facebook.id = profile.id;
-    user.facebook.token = accessToken;
-    user.save()
-      .then(user => done(null, user))
-      .catch(err => done(err))
+    User.findOne({ 'username': req.user.username }).then(function (err, user) {
+      // check for facebook access token, if we can't find one, add this one and return the user
+      if (!user.facebook.token) {
+        var thisUser = user;
+        thisUser.facebook.token = accessToken;
+        thisUser.facebook.id = profile.id
+        thisUser.save()
+          .then(done(null, user))
+          .catch(err => done(err))
+      } else {
+        // we  do find one and we're done, returning the user
+        return done(null, user)
+      }
+    })
   } else {
-    db.User.findOne({ 'facebook.token': accessToken }, function (err, user) {
+    //we're not signed in and we need to check if the accesstoken is on one of our user models
+    User.findOne({ 'facebook.token': accessToken }).then(function (err, user) {
       if (err) return done(err);
+      // if we don't find a user with that accessToken, we make on with the data provided by facebook
       if (!user) {
-        var newUser = new db.User();
-        newUser.facebook.id = profile.id;
+        var newUser = new User();
         newUser.facebook.token = accessToken;
-        username = profile.displayName;
-        firstName = profile.name.givenName;
-        lastName = profile.name.familyName;
+        newUser.facebook.id = profile.id;
+        newUser.username = profile.displayName;
+        // if facebook data is incomplete we cheat
+        if ((profile.name.givenName) && (profile.name.lastName)) {
+          newUser.firstName = profile.givenName;
+          newUser.lastName = profile.familyName
+        } else {
+          var nameArr = profile.displayName.split(" ");
+          newUser.firstName = nameArr[0];
+          newUser.lastName = nameArr[1];
+        }
         newUser.save()
           .then(done(null, user))
           .catch(err => done(err))
       } else {
+        // if we do find one we sign 'em in easy peasy
         return done(null, user)
       }
     })
   }
 }));
+
 
 
 

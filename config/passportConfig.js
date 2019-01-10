@@ -54,33 +54,54 @@ passport.use('facebook-auth', new FacebookStrat({
   clientID: "369801490490347",
   clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
   callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback",
-
+  passReqToCallback: true
 }, function (accessToken, refreshToken, profile, done) {
-  console.log(profile)
-  User.findOne({ 'facebook.token': accessToken }).then(function (err, user) {
-    if (err) return done(err);
-    if (!user) {
-      var newUser = new User();
-      newUser.facebook.token = accessToken;
-      newUser.facebook.id = profile.id;
-      newUser.username = profile.displayName;
-      if ((profile.givenName) && (profile.lastName)) {
-        newUser.firstName = profile.givenName;
-        newUser.lastName = profile.familyName
+  // if we're signed in
+  if (req.user) {
+    User.findOne({ 'username': req.user.username }).then(function (err, user) {
+      // check for facebook access token, if we can't find one, add this one and return the user
+      if (!user.facebook.token) {
+        var thisUser = user;
+        thisUser.facebook.token = accessToken;
+        thisUser.facebook.id = profile.id
+        thisUser.save()
+          .then(done(null, user))
+          .catch(err => done(err))
       } else {
-        var nameArr = profile.displayName.split(" ");
-        newUser.firstName = nameArr[0];
-        newUser.lastName = nameArr[1];
+        // we  do find one and we're done, returning the user
+        return done(null, user)
       }
-      newUser.save()
-        .then(done(null, user))
-        .catch(err => done(err))
-    } else {
-      return done(null, user)
-    }
-  })
-}
-));
+    })
+  } else {
+    //we're not signed in and we need to check if the accesstoken is on one of our user models
+    User.findOne({ 'facebook.token': accessToken }).then(function (err, user) {
+      if (err) return done(err);
+      // if we don't find a user with that accessToken, we make on with the data provided by facebook
+      if (!user) {
+        var newUser = new User();
+        newUser.facebook.token = accessToken;
+        newUser.facebook.id = profile.id;
+        newUser.username = profile.displayName;
+        // if facebook data is incomplete we cheat
+        if ((profile.name.givenName) && (profile.name.lastName)) {
+          newUser.firstName = profile.givenName;
+          newUser.lastName = profile.familyName
+        } else {
+          var nameArr = profile.displayName.split(" ");
+          newUser.firstName = nameArr[0];
+          newUser.lastName = nameArr[1];
+        }
+        newUser.save()
+          .then(done(null, user))
+          .catch(err => done(err))
+      } else {
+        // if we do find one we sigen 'em in easy peasy
+        return done(null, user)
+      }
+    })
+  }
+}));
+
 
 
 

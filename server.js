@@ -27,11 +27,11 @@ if (process.env.NODE_ENV === "production") {
 
 // Adding routes, both API and view
 app.use(routes);
-app.get("/login/facebook", passport.authenticate("facebook-auth"));
-app.get("/login/facebook/callback", passport.authenticate("facebook-auth", { failureRedirect: "/login/local" }),
-  function (req, res) {
-    res.redirect("/");
-  });
+// app.get("/login/facebook", passport.authenticate("facebook-auth"));
+// app.get("/login/facebook/callback", passport.authenticate("facebook-auth", { failureRedirect: "/" }),
+//   function (req, res) {
+//     res.redirect("/");
+//   });
 
 // Send every request to the React app
 // Define any API routes before this runs

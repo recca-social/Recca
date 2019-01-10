@@ -6,8 +6,8 @@ const Salt_Work_Factor = 10;
 const userSchema = new Schema({
   username: {type: String},
   passwordHash: {type: String},
-  firstName:{ type: String},
-  lastName:{type: String},
+  firstName:{ type: String, required: true},
+  lastName:{type: String, required: true},
   facebook:{
     id: {type: String},
     token: {type: String}

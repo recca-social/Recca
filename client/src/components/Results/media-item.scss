@@ -1,0 +1,141 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.media-wrapper {
+  // margin-top: -10px;
+}
+
+.media-item {
+  padding: 20px 151px 20px 20px;
+  background: $white-2;
+  margin-bottom: 20px;
+  position: relative;
+  border-radius: 3px;
+  min-height: 190px;
+
+  &__title, &__description, &__byline {
+    color: $black-2;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+  }
+
+  &__details {
+    padding: 0 20px 10px;
+    max-height: 170px;
+    flex: 1 1 auto;
+  }
+
+  &__description {
+    margin-bottom: 0;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-height: 90px; /* Fallback for non-webkit */
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.4em;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // @-moz-document url-prefix() {
+    //   overflow: hidden;
+    //   position: relative;
+    //   &::before {
+    //     background: #fff;
+    //     bottom: -2px;
+    //     position: absolute;
+    //     right: 0;
+    //     float: right;
+    //     content: '\2026';
+    //     margin-left: -3rem;
+    //     width: 3rem;
+    //   }
+    //   &::after {
+    //     content: '';
+    //     background: #fff;
+    //     position: absolute;
+    //     height: 50px;
+    //     width: 100%;
+    //     z-index: 1;
+    //   }
+    // }
+  }
+
+  &__img {
+    height: 170px;
+    flex: 0 0 auto;
+  }
+
+  &__byline {
+
+  }
+
+  .btn {
+    color: $black;
+  }
+
+  &__buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      width: 136px;
+      text-align: center;
+      padding-right: 32px;
+      border-radius: 0;
+      color: $black;
+      position: relative;
+
+      &:hover, &:focus {
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          background: rgba(255,255,255, 0.2);
+        }
+      }
+
+      .icon {
+        position: absolute;
+        right: 5px;
+      }
+    }
+  }
+
+
+  .btn-save {
+    background-color: $green-1;
+  }
+
+  .btn-more {
+    background-color: $blue-3;
+    margin-bottom: 8px;
+  }
+
+  .btn-remove {
+    background-color: $red-1;
+  }
+
+  .btn-complete {
+    background-color: $green-1;
+  }
+
+  .btn-active {
+    // background-color: $green-1;
+  }
+
+  .btn-recommend {
+    background-color: $yellow-1;
+  }
+}

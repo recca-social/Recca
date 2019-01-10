@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.main {
+  padding: 30px;
+
+  h2 {
+    color: $white;
+  }
+
+  hr {
+    border-color: $white-3;
+    width: 80%;
+  }
+}
+
+.sidebar {
+  display: none;
+  @include respond(md) {
+    display: block;
+  }
+}

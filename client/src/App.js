@@ -17,7 +17,7 @@ const App = () => {
     return (
       <Router>     
         <div>
-          <Route path={["/", "books", "games", "movies", "music", "shows", "friends"]} component={Nav} />
+          <Route exact path={["/", "/books", "/games", "/movies", "/music", "/shows", "/friends"]} component={Nav} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/books" component={Books} />

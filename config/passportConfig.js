@@ -95,7 +95,7 @@ passport.use('facebook-auth', new FacebookStrat({
           .then(done(null, user))
           .catch(err => done(err))
       } else {
-        // if we do find one we sigen 'em in easy peasy
+        // if we do find one we sign 'em in easy peasy
         return done(null, user)
       }
     })

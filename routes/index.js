@@ -12,7 +12,7 @@ router.use("/login", loginRoutes)
 router.route("/logout").get(function(req, res){
   req.logout();
   console.log("logged out")
-  res.status(200);
+  res.redirect("/login");
 });
 
 module.exports = router;

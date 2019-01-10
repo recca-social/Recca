@@ -53,7 +53,8 @@ class Books extends Component {
     this.searchBooks("iain banks");
   }
 
-  handleBookSave = id => {
+
+  handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
     console.log(book);
     this.setState({ results : [] })
@@ -70,7 +71,23 @@ class Books extends Component {
       //Once the book is saved, reset state for results
       this.setState({ results : [] })
     })
-  };
+  }
+
+  handleDelete = id => {
+    console.log(`Delete item with id: ${id}`)
+  }
+
+  handleActive = id => {
+    console.log(`Active item with id: ${id}`)
+  }
+
+  handleComplete = id => {
+    console.log(`Complete item with id: ${id}`)
+  }
+
+  handleRecommend = id => {
+    console.log(`Recommend item with id: ${id}`)
+  }
 
   render() {
     return (
@@ -83,20 +100,23 @@ class Books extends Component {
               handleSearch={this.handleSearch}
             />
             {this.state.results.length ? 
-              <div className="results-wrapper">
+              <div className="media-wrapper">
                 <h2 className="text-center">Results</h2>
                 <Results 
-                  results={this.state.results}
-                  handleBookSave={this.handleBookSave}
+                  items={this.state.results}
+                  handleSave={this.handleSave}
                 />
               </div> : ""}
             <hr />
             {this.state.saved ? 
-              <div>
+              <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
-                  saved={this.state.saved}
-                  handleBookSave={this.handleBookSave}
+                  items={this.state.saved}
+                  handleDelete={this.handleDelete}
+                  handleActive={this.handleActive}
+                  handleComplete={this.handleComplete}
+                  handleRecommend={this.handleRecommend}
                 />
               </div> : ""}
           </div>

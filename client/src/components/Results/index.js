@@ -1,37 +1,32 @@
 import React from "react";
-import "./results.scss";
+import "./media-item.scss";
 
 function Results(props) {
   return (
     <div>
-      {props.results ? props.results.map(result => (
-        <div className="result" key={result.apiId}>
-          <div className="result__header">
+      {props.items ? props.items.map(item => (
+        <div className="media-item" key={item.apiId}>
+          <div className="media-item__header">
             <img
-              alt={result.title} className="result__img"
-              src={result.image}
+              alt={item.title} className="media-item__img"
+              src={item.image}
             />
-            <div className="result__details">
-              <h3 className="result__title">{result.title}</h3>
-              <p className="result__description">{result.description}</p>
+            <div className="media-item__details">
+              <h3 className="media-item__title">{item.title}</h3>
+              <a href={item.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">View <i className="icon icon-link-ext"></i></a>
+              <p className="media-item__description">{item.description}</p>
             </div>
           </div>
-          <p className="result__byline">
-            {result.type === "book" ? "Author(s): " : ""}<strong>{result.creators}</strong>
+          <p className="media-item__byline">
+            {item.type === "book" ? "Author(s): " : ""}<strong>{item.creators}</strong>
           </p>
-          <a href={result.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">View <i className="icon icon-link-ext"></i></a>
 
-          <div className="result__buttons">
-            <button onClick={() => true } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
-            <button onClick={() => true } className="btn btn-active">Set Active <i className="icon icon-eye"></i></button>
-            <button onClick={() => true } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
-            {/* <button onClick={() => props.handleBookSave(result.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button> */}
-            <a href={result.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">View <i className="icon icon-link-ext"></i></a>
-            <button onClick={() => true } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>
-            {/* {props.currentPage === "search" ? 
-              <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
-              <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
-            } */}
+          <div className="media-item__buttons">
+            <button onClick={() => props.handleRecommend(item.id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
+            <button onClick={() => props.handleActive(item.id) } className="btn btn-active">Set Active <i className="icon icon-eye"></i></button>
+            <button onClick={() => props.handleComplete(item.id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
+            {/* <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button> */}
+            <button onClick={() => props.handleDelete(item.id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>
               
           </div>
         </div>

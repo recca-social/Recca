@@ -1,11 +1,11 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.results-wrapper {
-  margin-top: -10px;
+.media-wrapper {
+  // margin-top: -10px;
 }
 
-.result {
+.media-item {
   padding: 20px 151px 20px 20px;
   background: $white-2;
   margin-bottom: 20px;
@@ -33,7 +33,8 @@
     margin-bottom: 0;
     display: block; /* Fallback for non-webkit */
     display: -webkit-box;
-    max-height: 132px; /* Fallback for non-webkit */
+    max-height: 90px; /* Fallback for non-webkit */
+    text-align: justify;
     font-size: 16px;
     line-height: 1.4em;
     -webkit-line-clamp: 4;
@@ -79,22 +80,19 @@
 
   &__buttons {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     right: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     .btn {
       width: 136px;
       text-align: center;
+      padding-right: 32px;
       border-radius: 0;
       color: $black;
       position: relative;
-
-      &:first-of-type {
-        border-top-right-radius: 3px;
-      }
 
       &:hover, &:focus {
         &::after {
@@ -107,6 +105,11 @@
           background: rgba(255,255,255, 0.2);
         }
       }
+
+      .icon {
+        position: absolute;
+        right: 5px;
+      }
     }
   }
 
@@ -117,6 +120,7 @@
 
   .btn-more {
     background-color: $blue-3;
+    margin-bottom: 8px;
   }
 
   .btn-remove {

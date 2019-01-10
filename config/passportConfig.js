@@ -67,7 +67,7 @@ passport.use('facebook-auth', new FacebookStrat({
       .then(user => done(null, user, { nextRoute: "/" }))
       .catch(err => done(err))
   } else {
-    User.findOne({ 'facebook.token': accessToken }, function (err, user) {
+    db.User.findOne({ 'facebook.token': accessToken }, function (err, user) {
       if (err) return done(err);
       if (!user) {
         var newUser = new User();

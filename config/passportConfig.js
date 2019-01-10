@@ -51,9 +51,9 @@ passport.use('local-signup', new LocalStrat({
 ));
 
 passport.use('facebook-auth', new FacebookStrat({
-  clientID: "369801490490347",
-  clientSecret: "44ebbca25fa8d5f133cb4e85482cad21",
-  callbackURL: "https://serene-scrubland-33759.herokuapp.com/login/facebook/callback",
+  clientID: config.facebook_app_id,
+  clientSecret: config.facebook_app_secret,
+  callbackURL: config.callback_url,
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
   // if we're signed in

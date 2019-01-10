@@ -13,11 +13,11 @@ const passport = require("passport");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
-   secret: 'Recco Gecco',
-   store: new MongoStore({
-     mongooseConnection: mongoose.connection
-    })
- }));
+  secret: 'Recco Gecco',
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  })
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 // Serve up static assets (usually on heroku)
@@ -27,6 +27,11 @@ if (process.env.NODE_ENV === "production") {
 
 // Adding routes, both API and view
 app.use(routes);
+app.get("/login/facebook", passport.authenticate("facebook-auth"));
+app.get("/login/facebook/callback", passport.authenticate("facebook-auth", { failureRedirect: "/login/local" }),
+  function (req, res) {
+    res.redirect("/");
+  });
 
 // Send every request to the React app
 // Define any API routes before this runs

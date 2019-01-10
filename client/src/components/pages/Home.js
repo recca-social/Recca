@@ -11,7 +11,17 @@ class Home extends Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
+        <div>
+          {/* <Header title="Feed"/> */}
+        </div>
+        <div>
+          <a href="/login/facebook">login with facebook</a>
+        </div>
+=======
         {/* <Header title="Feed"/> */}
+        <a href="/login/facebook">Login with Facebook</a>
+>>>>>>> master
       </div>
     )
   }

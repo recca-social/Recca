@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import booksAPI from "../utils/booksAPI";
+import bookAPI from "../../utils/bookAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
@@ -8,7 +8,7 @@ import "./mediaPages.scss";
 class Books extends Component {
   state = {
     search: "",
-    list: [],
+    saved: [],
     results: []
   }
 
@@ -27,18 +27,17 @@ class Books extends Component {
 
   searchBooks = query => {
     const results = [];
-    booksAPI.search(query)
+    bookAPI.search(query)
       .then(function(res) {
         res.data.items.forEach(book => {
           results.push(
-            //TODO make this object match our data model
             {
+              type: "book",
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
               description: book.volumeInfo.description ? book.volumeInfo.description : "",
-              type: "book",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
+              creators: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
               apiId: book.id
             }
@@ -46,26 +45,49 @@ class Books extends Component {
         });
       })
       .then(() => console.log(results))
-      .then(() => this.setState({ books: results }))
+      .then(() => this.setState({ results }))
       .catch(err => console.log(err));
   };
 
-  // TODO fix this route to match our data model
-  /*
-  handleBookSave = id => {
-    const book = this.state.books.find(book => book.id === id);
-    booksAPI.saveBook({
-      id: book.id,
+  componentDidMount() {
+    this.searchBooks("iain banks");
+  }
+
+
+  handleSave = id => {
+    const book = this.state.results.find(book => book.apiId === id);
+    console.log(book);
+    this.setState({ results : [] })
+    bookAPI.saveBook({
+      type: "book",
       title: book.title,
-      link: book.link,
-      authors: book.authors,
       image: book.image,
-      description: book.description
+      description: book.description,
+      link: book.link,
+      creators: book.authors,
+      genre: book.genre,
+      apiId: book.apiId
     }).then(() => {
-      alert(`A book added to your saved list:\n${book.title}`)
+      //Once the book is saved, reset state for results
+      this.setState({ results : [] })
     })
-  };
-  */
+  }
+
+  handleDelete = id => {
+    console.log(`Delete item with id: ${id}`)
+  }
+
+  handleActive = id => {
+    console.log(`Active item with id: ${id}`)
+  }
+
+  handleComplete = id => {
+    console.log(`Complete item with id: ${id}`)
+  }
+
+  handleRecommend = id => {
+    console.log(`Recommend item with id: ${id}`)
+  }
 
   render() {
     return (
@@ -78,17 +100,23 @@ class Books extends Component {
               handleSearch={this.handleSearch}
             />
             {this.state.results.length ? 
-              <Results 
-                books={this.state.books}
-                handleBookSave={this.handleBookSave}
-              /> : ""}
+              <div className="media-wrapper">
+                <h2 className="text-center">Results</h2>
+                <Results 
+                  items={this.state.results}
+                  handleSave={this.handleSave}
+                />
+              </div> : ""}
             <hr />
-            {this.state.list ? 
-              <div>
+            {this.state.saved ? 
+              <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
-                  books={this.state.books}
-                  handleBookSave={this.handleBookSave}
+                  items={this.state.saved}
+                  handleDelete={this.handleDelete}
+                  handleActive={this.handleActive}
+                  handleComplete={this.handleComplete}
+                  handleRecommend={this.handleRecommend}
                 />
               </div> : ""}
           </div>

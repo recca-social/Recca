@@ -1,39 +1,37 @@
 import React from "react";
-import "./results.scss";
+import "./media-item.scss";
 
 function Results(props) {
   return (
     <div>
+      {props.items ? props.items.map(item => (
+        <div className="media-item" key={item.apiId}>
+          <div className="media-item__header">
+            <img
+              alt={item.title} className="media-item__img"
+              src={item.image}
+            />
+            <div className="media-item__details">
+              <h3 className="media-item__title">{item.title}</h3>
+              <a href={item.link} target="_blank" rel="noopener noreferrer" className="btn btn-more">View <i className="icon icon-link-ext"></i></a>
+              <p className="media-item__description">{item.description}</p>
+            </div>
+          </div>
+          <p className="media-item__byline">
+            {item.type === "book" ? "Author(s): " : ""}<strong>{item.creators}</strong>
+          </p>
 
+          <div className="media-item__buttons">
+            <button onClick={() => props.handleRecommend(item.id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
+            <button onClick={() => props.handleActive(item.id) } className="btn btn-active">Set Active <i className="icon icon-eye"></i></button>
+            <button onClick={() => props.handleComplete(item.id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
+            {/* <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button> */}
+            <button onClick={() => props.handleDelete(item.id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>
+              
+          </div>
+        </div>
+      )) : ""}
     </div>
-
-    // <div className="results">
-    //   {props.books.map(book => (
-    //     <div className="list-group-item result" key={book.id}>
-    //       <div className="result__header">
-    //         <h3 className="result__title">{book.title}</h3>
-    //         <div className="result__buttons">
-    //           <a href={book.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary view">View</a>
-    //           {props.currentPage === "search" ? 
-    //             <button onClick={() => props.handleBookSave(book.id)} className="btn btn-primary save">Save</button> :
-    //             <button onClick={() => props.handleDelete(book.id)} className="btn btn-danger save">Remove</button>
-    //           }
-                
-    //         </div>
-    //       </div>
-    //       <p className="result__byline">
-    //         Author(s): <strong>{book.authors}</strong>
-    //       </p>
-    //       <img
-    //         alt={book.title} className="results__img"
-    //         src={book.image} />
-    //       <p className="results__description">
-    //         {book.description}
-    //       </p>
-    //       <div className="clearfix"></div>
-    //     </div>
-    //   ))}
-    // </div>
   );
 }
 

@@ -2,15 +2,16 @@
 @import '../../styles/mixins.scss';
 
 .results-wrapper {
-
+  margin-top: -10px;
 }
 
 .result {
-  padding: 20px 120px 20px 20px;
+  padding: 20px 151px 20px 20px;
   background: $white-2;
   margin-bottom: 20px;
   position: relative;
   border-radius: 3px;
+  min-height: 190px;
 
   &__title, &__description, &__byline {
     color: $black-2;
@@ -25,7 +26,6 @@
   &__details {
     padding: 0 20px 10px;
     max-height: 170px;
-    // overflow-y: scroll;
     flex: 1 1 auto;
   }
 
@@ -73,6 +73,10 @@
 
   }
 
+  .btn {
+    color: $black;
+  }
+
   &__buttons {
     position: absolute;
     top: 0;
@@ -82,7 +86,7 @@
     height: 100%;
 
     .btn {
-      width: 120px;
+      width: 136px;
       text-align: center;
       border-radius: 0;
       color: $black;
@@ -104,13 +108,30 @@
         }
       }
     }
+  }
 
-    .btn-save {
-      background-color: $green-1
-    }
 
-    .btn-more {
-      background-color: $yellow-1
-    }
+  .btn-save {
+    background-color: $green-1;
+  }
+
+  .btn-more {
+    background-color: $blue-3;
+  }
+
+  .btn-remove {
+    background-color: $red-1;
+  }
+
+  .btn-complete {
+    background-color: $green-1;
+  }
+
+  .btn-active {
+    // background-color: $green-1;
+  }
+
+  .btn-recommend {
+    background-color: $yellow-1;
   }
 }

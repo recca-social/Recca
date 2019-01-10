@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import booksAPI from "../utils/booksAPI";
+import bookAPI from "../../utils/bookAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
@@ -27,18 +27,17 @@ class Books extends Component {
 
   searchBooks = query => {
     const results = [];
-    booksAPI.search(query)
+    bookAPI.search(query)
       .then(function(res) {
         res.data.items.forEach(book => {
           results.push(
-            //TODO make this object match our data model
             {
               type: "book",
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
               description: book.volumeInfo.description ? book.volumeInfo.description : "",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
+              creators: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
               apiId: book.id
             }
@@ -58,13 +57,13 @@ class Books extends Component {
     const book = this.state.results.find(book => book.apiId === id);
     console.log(book);
     this.setState({ results : [] })
-    booksAPI.saveBook({
+    bookAPI.saveBook({
       type: "book",
       title: book.title,
       image: book.image,
       description: book.description,
       link: book.link,
-      authors: book.authors,
+      creators: book.authors,
       genre: book.genre,
       apiId: book.apiId
     }).then(() => {
@@ -84,7 +83,7 @@ class Books extends Component {
               handleSearch={this.handleSearch}
             />
             {this.state.results.length ? 
-              <div>
+              <div className="results-wrapper">
                 <h2 className="text-center">Results</h2>
                 <Results 
                   results={this.state.results}

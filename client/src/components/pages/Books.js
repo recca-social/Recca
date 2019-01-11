@@ -39,7 +39,7 @@ class Books extends Component {
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
               description: book.volumeInfo.description ? book.volumeInfo.description : "No description available",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              creators: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
+              creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
               apiId: book.id
             }
@@ -57,7 +57,6 @@ class Books extends Component {
 
   handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
-    console.log(book);
     this.setState({ results : [] })
     mediaAPI.create({
       type: "book",
@@ -65,7 +64,7 @@ class Books extends Component {
       image: book.image,
       description: book.description,
       link: book.link,
-      creator: book.authors,
+      creator: book.creator,
       genre: book.genre,
       apiId: book.apiId
     }, "5c37677ee6badaca32d5dc25").then(() => {
@@ -86,7 +85,6 @@ class Books extends Component {
   }
 
   handleDelete = id => {
-    console.log(`Delete item with id: ${id}`)
     mediaAPI.delete(id)
     .then(this.getBooks('5c37677ee6badaca32d5dc25'))
     .catch(err => console.log(err))

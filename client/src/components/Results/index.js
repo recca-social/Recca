@@ -50,12 +50,12 @@ function Results(props) {
             </div>
           </div>
 
-          {item.creators ? 
+          {item.creator ? 
             <p className="media-item__creator">
               <strong>
-                {creatorText(item.type, item.creators)}
+                {creatorText(item.type, item.creator)}
               </strong>
-              {item.creators}
+              {item.creator}
             </p>
           : ""}
 
@@ -70,8 +70,8 @@ function Results(props) {
               <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
               <button onClick={() => props.handleActive(item._id) } className="btn btn-active">
                 {item.active ?
-                <span>Set Active <i className="icon icon-eye"></i></span> :
-                <span>Unset Active <i className="icon icon-eye-off"></i></span>}
+                <span>Unset Active <i className="icon icon-eye-off"></i></span> :
+                <span>Set Active <i className="icon icon-eye"></i></span>}
               </button>
               <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
               <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       

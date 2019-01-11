@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../Header";
-import musicAPI from "../../utils/musicAPI";
+// import Header from "../Header";
+// import musicAPI from "../../utils/musicAPI";
 
 class Music extends Component {
   state = {

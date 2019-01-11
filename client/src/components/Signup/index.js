@@ -1,65 +1,58 @@
 import React, { Component } from "react";
-import API from "../../utils/userAPI"
+import axios from "axios";
 import "./style.css";
 
-class Login extends Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      user: {},
+      loggedIn: false,
       username: "",
       password: "",
+      firstName: "",
+      lastName: "",
+      confirmPassword: "",
       redirectTo: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    API.isLoggedIn().then(function (res) {
-      if (res.data.isLoggedIn) {
-        this.setState({
-          user: res.data.user,
-          redirectTo: "/home"
-        })
-      }
-    })
-      .catch(err => console.log(err))
-  }
-
   handleChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
     this.setState({
-      [event.target.name]: event.target.value
+      [name]: value
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("handleSubmit");
-    API.localLogIn(this.state.username, this.state.password)
+    console.log("Sign-up username: " + this.state.username);
+    axios
+      .post("/login/signup", {
+        username: this.state.username,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
+      })
       .then(response => {
-        if (response.data.user) {
-          // update App.js state
-          this.props.updateUser({
-            loggedIn: true,
-            user: this.state.user
-          });
-          // update the state to redirect to home
+        console.log(response);
+        if (response.data) {
+          console.log("successful signup");
           this.setState({
-            redirectTo: "/home"
+            redirectTo: "/"
+            // loggedIn: true,
+            // username: response.data.username
           });
         } else {
-          console.log(response.data.message)
+          console.log("username already taken");
         }
       })
       .catch(error => {
-        console.log("login error: ");
-        console.log(error);
+        console.log("Sign-up server error: " + error);
       });
   }
-
-
-
 
   render() {
     return (
@@ -75,7 +68,27 @@ class Login extends Component {
             </div>
             <h3>Recco</h3>
           </div>
-          <form method="post" action="/login/local" className="login-form">
+          <form method="post" action="/login/signup" className="login-form">
+            <div className="input-container first-name">
+              <input
+                type="text"
+                className="input"
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="input-container last-name">
+              <input
+                type="text"
+                className="input"
+                name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
             <div className="input-container">
               <i className="fas fa-user" />
               <input
@@ -95,20 +108,17 @@ class Login extends Component {
                 className="input"
                 name="password"
                 placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
               />
             </div>
-            <input
-              type="submit"
-              name="login"
-              value="Log In"
-              className="button"
-              onClick={this.handleSubmit}
-            />
-            <a href="/signup" className="register">
+            {/* <a href="/" className="register">
               Create Account
-            </a>
+            </a> */}
+            <input
+              className="register"
+              value="Sign Up"
+              onClick={this.handleSubmit}
+              type="submit"
+            />
           </form>
           <div className="separator">
             <span className="separator-text">OR</span>
@@ -120,9 +130,12 @@ class Login extends Component {
             </a>
           </div>
         </div>
+        <p>
+          Back to <a href="/login">Login</a>
+        </p>
       </div>
     );
   }
 }
 
-export default Login;
+export default Signup;

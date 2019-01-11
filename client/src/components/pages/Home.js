@@ -6,15 +6,15 @@ class Home extends Component {
   state = {
     search: "",
     activity: []
-  }
+  };
 
   render() {
     return (
       <div>
         {/* <Header title="Feed"/> */}
       </div>
-    )
+    );
   }
-};
+}
 
 export default Home;

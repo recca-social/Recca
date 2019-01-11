@@ -3,16 +3,84 @@
 
 .sidebar {
   background-color: $gray-3;
-  color: $white;
+  color: $white-1;
   min-height: calc(100vh - 43px);
   // max-height: calc(100vh - 43px);
   // height: 100%;
   // overflow-y: scroll;
-  padding: 15px 0 0;
+  padding: 0;
 
   &__title {
     font-size: 18px;
     line-height: 18px;
     text-align: center;
+    padding: 12px 0;
+    background: $white-2;
+    text-shadow: 2px 1px 8px $black-1;
+  }
+
+  &__content {
+    // margin-top: 10px;
+  }
+
+  &__media-item {
+    padding: 10px 50px 10px 10px;
+    border-bottom: 2px solid $blue-3;
+    // border: 2px solid $blue-3;
+    clear: both; 
+    position: relative;
+
+    .btn-active {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      height: 100%;
+      font-size: 34px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background: transparent;
+      color: $white-1;
+      border: none;
+
+      &:hover, &:focus, &:active {
+        background: $white-1;
+        color: $black-2;
+        .icon:before {
+          content:"\e80e";
+        }
+      }
+    }
+
+    .icon {
+      &:before {
+      }
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &:first-of-type {
+      border-top: 2px solid $blue-3;
+    }
+
+    + .sidebar__media-item {
+      // border-top: 2px solid $blue-3;
+    }
+  }
+
+  &__img {
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  &__link {
+    color: $yellow-1;
+
+    &:hover {
+      color: $white-1;
+      text-decoration: none;
+    }
   }
 }

@@ -34,7 +34,7 @@ function Results(props) {
   return (
     <div>
       {props.items ? props.items.map(item => (
-        <div className="media-item" key={item.apiId}>
+        <div className={"media-item " + (item.active ? "media-item--active" : '')} key={item.apiId}>
           <div className="media-item__header">
             <img
               alt={item.title} className="media-item__img"
@@ -44,10 +44,8 @@ function Results(props) {
               <h3 className="media-item__title">
                 {item.link ? 
                   <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
-                  : item.title }
-              
+                : item.title }
               </h3>
-              
               <p className="media-item__description">{item.description}</p>
             </div>
           </div>
@@ -70,7 +68,11 @@ function Results(props) {
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
               <button onClick={() => props.handleRecommend(item.id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
-              <button onClick={() => props.handleActive(item.id) } className="btn btn-active">Set Active <i className="icon icon-eye"></i></button>
+              <button onClick={() => props.handleActive(item.id) } className="btn btn-active">
+                {item.active ?
+                <span>Set Active <i className="icon icon-eye"></i></span> :
+                <span>Unset Active <i className="icon icon-eye-off"></i></span>}
+              </button>
               <button onClick={() => props.handleComplete(item.id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
               <button onClick={() => props.handleDelete(item.id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       
             </div>

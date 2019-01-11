@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import bookAPI from "../../utils/bookAPI";
+import mediaAPI from "../../utils/mediaAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
@@ -34,10 +35,10 @@ class Books extends Component {
             {
               type: "book",
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
-              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x195",
+              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
               description: book.volumeInfo.description ? book.volumeInfo.description : "",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              creators: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not found",
+              creators: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
               apiId: book.id
             }
@@ -50,7 +51,7 @@ class Books extends Component {
   };
 
   componentDidMount() {
-    this.searchBooks("iain banks");
+    this.searchBooks("harry potter");
   }
 
 
@@ -58,7 +59,7 @@ class Books extends Component {
     const book = this.state.results.find(book => book.apiId === id);
     console.log(book);
     this.setState({ results : [] })
-    bookAPI.saveBook({
+    mediaAPI.saveMedia({
       type: "book",
       title: book.title,
       image: book.image,
@@ -67,10 +68,15 @@ class Books extends Component {
       creators: book.authors,
       genre: book.genre,
       apiId: book.apiId
-    }).then(() => {
+    }, "5c37677ee6badaca32d5dc25").then(() => {
       //Once the book is saved, reset state for results
       this.setState({ results : [] })
+      this.getBooks('5c37677ee6badaca32d5dc25')
     })
+  }
+
+  getBooks = id => {
+    console.log(`Get books function called for user with id ${id}`)
   }
 
   handleDelete = id => {
@@ -104,6 +110,7 @@ class Books extends Component {
                 <h2 className="text-center">Results</h2>
                 <Results 
                   items={this.state.results}
+                  resultType="results"
                   handleSave={this.handleSave}
                 />
               </div> : ""}
@@ -113,6 +120,7 @@ class Books extends Component {
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
                   items={this.state.saved}
+                  resultType="saved"
                   handleDelete={this.handleDelete}
                   handleActive={this.handleActive}
                   handleComplete={this.handleComplete}

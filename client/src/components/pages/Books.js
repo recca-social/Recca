@@ -90,8 +90,10 @@ class Books extends Component {
     .catch(err => console.log(err))
   }
 
-  handleActive = id => {
-    console.log(`Active item with id: ${id}`)
+  toggleActive = id => {
+    mediaAPI.toggleActive(id)
+    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .catch(err => console.log(err))
   }
 
   handleComplete = id => {
@@ -122,18 +124,19 @@ class Books extends Component {
                 />
               </div> : ""}
             <hr />
-            {this.state.saved ? 
+            {this.state.saved.length ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
                   items={this.state.saved}
                   resultType="saved"
                   handleDelete={this.handleDelete}
-                  handleActive={this.handleActive}
+                  toggleActive={this.toggleActive}
                   handleComplete={this.handleComplete}
                   handleRecommend={this.handleRecommend}
                 />
-              </div> : ""}
+              </div> : 
+              <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
           
 

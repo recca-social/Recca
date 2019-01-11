@@ -22,5 +22,19 @@ module.exports = {
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    },
+    //method to toggle media active state
+    toggleActive: function(req, res) {
+        db.Media
+        .findById( req.params.id )
+        .then(res => {
+            if (res.data.active) {
+                db.Media.findByIdAndUpdate(req.params.id, {active: false})
+            } else {
+                db.Media.findByIdAndUpdate(req.params.id, {active: true})
+            }
+        })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
 }

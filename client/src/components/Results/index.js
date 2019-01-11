@@ -34,7 +34,7 @@ function Results(props) {
   return (
     <div>
       {props.items ? props.items.map(item => (
-        <div className={"media-item " + (item.active ? "media-item--active" : '')} key={item.apiId}>
+        <div key={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <div className="media-item__header">
             <img
               alt={item.title} className="media-item__img"
@@ -68,7 +68,7 @@ function Results(props) {
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
               <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
-              <button onClick={() => props.handleActive(item._id) } className="btn btn-active">
+              <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
                 {item.active ?
                 <span>Unset Active <i className="icon icon-eye-off"></i></span> :
                 <span>Set Active <i className="icon icon-eye"></i></span>}

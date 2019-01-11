@@ -5,16 +5,13 @@
   background-color: $gray-3;
   color: $white-1;
   min-height: calc(100vh - 43px);
-  // max-height: calc(100vh - 43px);
-  // height: 100%;
-  // overflow-y: scroll;
   padding: 0;
 
   &__title {
     font-size: 18px;
     line-height: 18px;
     text-align: center;
-    padding: 12px 0;
+    padding: 15px 0 12px;
     background: $white-2;
     text-shadow: 2px 1px 8px $black-1;
   }
@@ -24,14 +21,20 @@
   }
 
   &__media-item {
-    padding: 10px 50px 10px 10px;
-    border-bottom: 2px solid $blue-3;
-    // border: 2px solid $blue-3;
+    padding: 10px 55px 10px 10px;
+    border-bottom: 2px solid $gray-3;
+    background: $blue-3;
     clear: both; 
     position: relative;
 
+    &:first-of-type {
+      box-shadow: inset 0px 7px 13px -7px $black-2;
+      padding-top: 15px;
+    }
+
     .btn-active {
       position: absolute;
+      padding: 0;
       top: 50%;
       right: 0;
       height: 100%;
@@ -51,21 +54,8 @@
       }
     }
 
-    .icon {
-      &:before {
-      }
-    }
-
     p {
       margin-bottom: 0;
-    }
-
-    &:first-of-type {
-      border-top: 2px solid $blue-3;
-    }
-
-    + .sidebar__media-item {
-      // border-top: 2px solid $blue-3;
     }
   }
 
@@ -77,6 +67,7 @@
 
   &__link {
     color: $yellow-1;
+    text-shadow: 1px 1px 5px $black-1;
 
     &:hover {
       color: $white-1;

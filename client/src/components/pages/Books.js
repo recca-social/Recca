@@ -144,7 +144,7 @@ class Books extends Component {
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
-            type="book"
+            mediaType="book"
           />
           </div>
       </div>

@@ -55,10 +55,20 @@ body {
 	border: 0;
     width: 286px;
     height: 38px;
-    padding: 5px;
+    padding-left: 10px;
 }
 .login-form .input:focus {
     outline: none;
+}
+.first-name .input {
+	border: 0;
+    width: 310px;
+    height: 38px;
+}
+.last-name .input {
+	border: 0;
+    width: 310px;
+    height: 38px;
 }
 #show-password {
 	float: right;
@@ -98,7 +108,9 @@ body {
 	outline: none;
 }
 .login-form .register {
-	margin-top: 5px;
+	margin-top: 15px;
+    width: 100%;
+    height: 44px;
     background: #1B668F;
     border: 0;
     color: #FFFFFF;
@@ -106,7 +118,6 @@ body {
     font-size: 15px;
     display: block;
     text-align: center;
-    cursor: pointer;
 }
 .login-form .register:hover	{
 	background: #b7b7b7;
@@ -148,6 +159,12 @@ body {
     padding-right: 10px;
 }
 
+p {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+}
+
 @media screen and (max-height: 600px) {
 	.login-form-container {
 		margin-top: 0;
@@ -164,9 +181,13 @@ body {
 		margin-bottom: 10px;
 		width: auto;
 	}
-	.login-form .input {
-		width: 276px;
-	}
+    .login-form .input {
+		width: 286px;
+    }
+    .first-name .input,
+    .last-name .input {
+        width: 310px;
+    }
 	.socmed-login .socmed-btn i {
 		margin-right: 5px;
 		width: 19px;

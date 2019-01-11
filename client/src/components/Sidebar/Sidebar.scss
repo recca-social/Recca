@@ -24,20 +24,48 @@
   }
 
   &__media-item {
-    padding: 10px;
+    padding: 10px 50px 10px 10px;
+    border-bottom: 2px solid $blue-3;
     // border: 2px solid $blue-3;
     clear: both; 
+    position: relative;
+
+    .btn-active {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      height: 100%;
+      font-size: 34px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background: transparent;
+      color: $white-1;
+      border: none;
+
+      &:hover, &:focus, &:active {
+        background: $white-1;
+        color: $black-2;
+        .icon:before {
+          content:"\e80e";
+        }
+      }
+    }
+
+    .icon {
+      &:before {
+      }
+    }
 
     p {
       margin-bottom: 0;
     }
 
-    &:last-of-type {
-      border-bottom: 2px solid $blue-3;
+    &:first-of-type {
+      border-top: 2px solid $blue-3;
     }
 
     + .sidebar__media-item {
-      border-top: 2px solid $blue-3;
+      // border-top: 2px solid $blue-3;
     }
   }
 

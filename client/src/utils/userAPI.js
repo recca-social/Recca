@@ -1,5 +1,19 @@
 import axios from "axios";
 
-export default{
-    
+export default {
+    isLoggedIn: function () {
+        return axios.get("/login/check")
+    },
+
+    localLogIn: function (username, password) {
+        return axios.post("/login/local",
+            {
+                username: username,
+                password: password,
+            })
+    },
+
+    facebookLogIn: function () {
+        return axios.get("/login/facebook")
+    }
 }

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
+import userAPI from "../../utils/userAPI";
 import "./style.css";
 
 class Login extends Component {
   state = {
-    user: [],
+    user: {},
     username: "",
     password: ""
   };
+
+
+
 
   render() {
     return (
@@ -14,7 +18,7 @@ class Login extends Component {
         <div className="login-form-content">
           <div className="login-form-header">
             <div className="logo">
-              <img src="./images/reccoon-lg.png" style={{ height: "100px" }} />
+              <img src="./images/reccoon-lg.png" alt="logo" style={{ height: "100px" }} />
             </div>
             <h3>Recco</h3>
           </div>
@@ -22,10 +26,10 @@ class Login extends Component {
             <div className="input-container">
               <i className="fas fa-user" />
               <input
-                type="email"
+                type="text"
                 className="input"
-                name="email"
-                placeholder="Email"
+                name="username"
+                placeholder="Username"
               />
             </div>
             <div className="input-container">

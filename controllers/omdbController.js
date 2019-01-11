@@ -12,13 +12,14 @@ module.exports = {
                 let responseArray = response.data.Search
                 let parsedArray = [];
                 for (let i = 0; i < responseArray.length; i++){
-                console.log(responseArray[i].imdbID)
                 axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=series&i=" + responseArray[i].imdbID)
                 .then(function(eachResponse){
                     let parsedObject = {
                         title: eachResponse.data.Title,
                         summary: eachResponse.data.Plot,
                         poster: eachResponse.data.Poster,
+                        director: eachResponse.data.Director,
+                        genre: eachResponse.data.Genre,
                         link: "https://www.imdb.com/title/" + eachResponse.data.imdbID,
                         year: eachResponse.data.Year
                     }
@@ -40,16 +41,16 @@ module.exports = {
                 res.json("No results found")
             } else {
                 let responseArray = response.data.Search
-                console.log(responseArray);
                 let parsedArray = [];
                 for (let i = 0; i < responseArray.length; i++){
-                console.log("here")
                 axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=movie&i=" + responseArray[i].imdbID)
                 .then(function(eachResponse){
                     let parsedObject = {
                         title: eachResponse.data.Title,
                         summary: eachResponse.data.Plot,
                         poster: eachResponse.data.Poster,
+                        director: eachResponse.data.Director,
+                        genre: eachResponse.data.Genre,
                         link: "https://www.imdb.com/title/" + eachResponse.data.imdbID,
                         year: eachResponse.data.Year
                     }

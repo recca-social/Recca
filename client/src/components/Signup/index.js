@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./style.css";
 
-class Login extends Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
+      loggedIn: false,
       username: "",
       password: "",
+      firstName: "",
+      lastName: "",
+      confirmPassword: "",
       redirectTo: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,38 +19,38 @@ class Login extends Component {
   }
 
   handleChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
     this.setState({
-      [event.target.name]: event.target.value
+      [name]: value
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("handleSubmit");
-
+    console.log("Sign-up username: " + this.state.username);
     axios
-      .post("/login/local", {
+      .post("/login/signup", {
         username: this.state.username,
-        password: this.state.password
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName
       })
       .then(response => {
-        console.log("login response: ");
         console.log(response);
-        if (response.status === 200) {
-          // update App.js state
-          this.props.updateUser({
-            loggedIn: true,
-            username: response.data.username
-          });
-          // update the state to redirect to home
+        if (response.data) {
+          console.log("successful signup");
           this.setState({
-            redirectTo: "/home"
+            redirectTo: "/"
+            // loggedIn: true,
+            // username: response.data.username
           });
+        } else {
+          console.log("username already taken");
         }
       })
       .catch(error => {
-        console.log("login error: ");
-        console.log(error);
+        console.log("Sign-up server error: " + error);
       });
   }
 
@@ -64,7 +68,27 @@ class Login extends Component {
             </div>
             <h3>Recco</h3>
           </div>
-          <form method="post" action="/login/local" className="login-form">
+          <form method="post" action="/login/signup" className="login-form">
+            <div className="input-container first-name">
+              <input
+                type="text"
+                className="input"
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="input-container last-name">
+              <input
+                type="text"
+                className="input"
+                name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
             <div className="input-container">
               <i className="fas fa-user" />
               <input
@@ -84,20 +108,17 @@ class Login extends Component {
                 className="input"
                 name="password"
                 placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
               />
             </div>
-            <input
-              type="submit"
-              name="login"
-              value="Log In"
-              className="button"
-              onClick={this.handleSubmit}
-            />
-            <a href="/signup" className="register">
+            {/* <a href="/" className="register">
               Create Account
-            </a>
+            </a> */}
+            <input
+              className="register"
+              value="Sign Up"
+              onClick={this.handleSubmit}
+              type="submit"
+            />
           </form>
           <div className="separator">
             <span className="separator-text">OR</span>
@@ -109,9 +130,12 @@ class Login extends Component {
             </a>
           </div>
         </div>
+        <p>
+          Back to <a href="/login">Login</a>
+        </p>
       </div>
     );
   }
 }
 
-export default Login;
+export default Signup;

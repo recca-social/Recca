@@ -8,7 +8,9 @@ router.route("/local").post(function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) { return next(err); }
       console.log("we're logged in")
-      return res.status(200);
+      console.log(user)
+      req.session.save({userId:user._id})
+      return res.redirect("/");
     });
   })(req, res, next);
 });
@@ -20,6 +22,7 @@ router.route("/signup").post(function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) { return next(err) }
       console.log("successful login")
+      req.session.save({userId:user})
       res.redirect('/');
     });
   })(req, res, next);

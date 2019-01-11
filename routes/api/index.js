@@ -3,7 +3,7 @@ const mediaRoutes = require("./media");
 const userRoutes = require("./user");
 const spotifyRoutes = require("./spotify");
 const vgRoutes = require("./vg");
-const omdbRoutes = require("./ombd")
+const omdbRoutes = require("./omdb")
 
 router.use("/media", mediaRoutes);
 router.use("/user", userRoutes);

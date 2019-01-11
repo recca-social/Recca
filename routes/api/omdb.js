@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const omdbController = require("../../controllers/ombdController");
+const omdbController = require("../../controllers/omdbController");
 
 router.route("/show/search/:query")
 .get(omdbController.searchSeries);

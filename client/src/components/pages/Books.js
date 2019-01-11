@@ -141,7 +141,10 @@ class Books extends Component {
           
 
 
-          <Sidebar />
+          <Sidebar 
+            items={this.state.saved}
+            toggleActive={this.toggleActive}
+          />
           </div>
       </div>
     )

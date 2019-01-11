@@ -34,7 +34,7 @@ function Results(props) {
   return (
     <div>
       {props.items ? props.items.map(item => (
-        <div key={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
+        <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.completed ? 'media-item--completed' : '')}>
           <div className="media-item__header">
             <img
               alt={item.title} className="media-item__img"
@@ -70,10 +70,14 @@ function Results(props) {
               <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
               <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
                 {item.active ?
-                <span>Unset Active <i className="icon icon-eye-off"></i></span> :
-                <span>Set Active <i className="icon icon-eye"></i></span>}
+                <span>Active <i className="icon icon-eye"></i></span> :
+                <span>Inactive <i className="icon icon-eye-off"></i></span>}
               </button>
-              <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
+              <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">
+                {item.completed ? 
+                <span>Complete <i className="icon icon-check"></i></span> :
+                <span>Incomplete <i className="icon icon-check-empty"></i></span>}
+              </button>
               <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       
             </div>
           : props.resultType === "results" ?

@@ -1,5 +1,7 @@
 import axios from "axios";
 
-export default{
-    
+export default {
+  getUserMedia: function(id){
+    return axios.get("api/user/find/" + id)
+  }
 }

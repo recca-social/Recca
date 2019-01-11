@@ -13,8 +13,12 @@
   border-radius: 3px;
   min-height: 190px;
 
-  &__title, &__description, &__byline {
+  &__title, &__description, &__creator, &__genre {
     color: $black-2;
+  }
+
+  &__creator, &__genre {
+    margin-bottom: 0;
   }
 
   &__header {
@@ -23,17 +27,36 @@
     margin-bottom: 15px;
   }
 
+  &__title {
+    font-size: 20px;
+
+    a {
+      color: $yellow-1;
+      text-shadow: 2px 1px 8px $black;
+
+      &:hover {
+        text-decoration: none;
+        text-shadow: none;
+        color: $black;
+      }
+    }
+  }
+
   &__details {
     padding: 0 20px 10px;
     max-height: 170px;
+    overflow: hidden;
     flex: 1 1 auto;
+
+
+    
   }
 
   &__description {
     margin-bottom: 0;
     display: block; /* Fallback for non-webkit */
     display: -webkit-box;
-    max-height: 90px; /* Fallback for non-webkit */
+    max-height: 135px; /* Fallback for non-webkit */
     text-align: justify;
     font-size: 16px;
     line-height: 1.4em;
@@ -70,7 +93,7 @@
     flex: 0 0 auto;
   }
 
-  &__byline {
+  &__creator {
 
   }
 
@@ -78,10 +101,21 @@
     color: $black;
   }
 
-  &__buttons {
-    position: absolute;
+  &__buttons--saved {
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  &__buttons--results {
+    top: 0;
+
+    .btn:first-of-type {
+      border-top-right-radius: 3px;
+    }
+  }
+
+  &__buttons {
+    position: absolute;
     right: 0;
     display: flex;
     flex-direction: column;

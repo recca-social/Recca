@@ -67,14 +67,14 @@ function Results(props) {
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
-              <button onClick={() => props.handleRecommend(item.id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
-              <button onClick={() => props.handleActive(item.id) } className="btn btn-active">
+              <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
+              <button onClick={() => props.handleActive(item._id) } className="btn btn-active">
                 {item.active ?
                 <span>Set Active <i className="icon icon-eye"></i></span> :
                 <span>Unset Active <i className="icon icon-eye-off"></i></span>}
               </button>
-              <button onClick={() => props.handleComplete(item.id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
-              <button onClick={() => props.handleDelete(item.id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       
+              <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">Complete <i className="icon icon-check-filled"></i></button>
+              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">

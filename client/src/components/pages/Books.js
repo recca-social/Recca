@@ -59,7 +59,7 @@ class Books extends Component {
     const book = this.state.results.find(book => book.apiId === id);
     console.log(book);
     this.setState({ results : [] })
-    mediaAPI.saveMedia({
+    mediaAPI.create({
       type: "book",
       title: book.title,
       image: book.image,

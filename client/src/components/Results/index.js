@@ -67,7 +67,7 @@ function Results(props) {
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
-              <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star-filled"></i></button>
+              <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star"></i></button>
               <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
                 {item.active ?
                 <span>Active <i className="icon icon-eye"></i></span> :
@@ -78,7 +78,7 @@ function Results(props) {
                 <span>Complete <i className="icon icon-check"></i></span> :
                 <span>Incomplete <i className="icon icon-check-empty"></i></span>}
               </button>
-              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash"></i></button>       
+              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">

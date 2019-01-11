@@ -2,17 +2,24 @@ import React from "react";
 import "./Sidebar.scss";
 
 function Sidebar(props) {
+  function displayMetadata(type, creator, platform) {
+    if ((type === "book" || type === "music") && creator) {
+      return creator;
+    } else if ((type === "movie" || type === "show" || type === "game") && platform) {
+      return `Platform: ${platform}`
+    }
+  }
   return (
     <div className="col-md-3 sidebar">
       <div className="sidebar__title">Active Media <i className="icon icon-eye"></i></div>
       <div className="sidebar__content">
         {/* Check for media items and check that there is at least 1 active item */}
         {props.items && props.items.filter(item => item.active === true).length >= 1 ? 
-        props.items.filter(item => item.active === true).map(item => (
+        props.items.filter(item => item.active === true && item.type === props.type).map(item => (
           <div key={item._id} className="sidebar__media-item">
             <img src={item.image} alt={item.title} className="sidebar__img" />
             <a href={'#' + item.apiId} className="sidebar__link"><strong>{item.title}</strong></a>
-            {item.creator ? <p>{item.creator}</p> : ''}
+            <p>{displayMetadata(item.type, item.creator, item.platform)}</p>
             <div className="clearfix"></div>
           </div>
         )) : <p className="text-center">Start setting your active media</p> }

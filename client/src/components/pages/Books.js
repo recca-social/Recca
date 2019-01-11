@@ -57,7 +57,7 @@ class Books extends Component {
 
   handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
-    this.setState({ results : [] })
+    this.setState({ search: "", results : [] })
     mediaAPI.create({
       type: "book",
       title: book.title,
@@ -144,6 +144,7 @@ class Books extends Component {
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
+            type="book"
           />
           </div>
       </div>

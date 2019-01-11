@@ -174,6 +174,12 @@
 
   .btn-remove {
     background-color: $red-1;
+
+    &:hover {
+      .icon-trash-empty:before {
+        content: "\f1f8";
+      }
+    }
   }
 
   .btn-complete {
@@ -204,5 +210,11 @@
 
   .btn-recommend {
     background-color: $yellow-1;
+
+    &:hover {
+      .icon-star:before {
+        content: "\e804";
+      }
+    }
   }
 }

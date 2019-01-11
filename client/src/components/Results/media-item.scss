@@ -8,13 +8,29 @@
 .media-item {
   padding: 20px 151px 20px 20px;
   background: $white-2;
+  // border: 2px solid transparent;
   margin-bottom: 20px;
   position: relative;
-  border-radius: 3px;
+  border-radius: 10px;
   min-height: 190px;
+  // box-shadow: 0px 2px 12px 2px $white-3;
 
-  &__title, &__description, &__byline {
+  &--active {
+    border: 2px solid $blue-3;
+    box-shadow: 0px 2px 12px 2px $blue-3;
+  }
+
+  &--completed {
+    border: 2px solid $green-1;
+    box-shadow: 0px 2px 12px 2px $green-1;
+  }
+
+  &__title, &__description, &__creator, &__genre {
     color: $black-2;
+  }
+
+  &__creator, &__genre {
+    margin-bottom: 0;
   }
 
   &__header {
@@ -23,17 +39,37 @@
     margin-bottom: 15px;
   }
 
+  &__title {
+    font-size: 20px;
+
+    a {
+      color: $yellow-1;
+      text-shadow: 2px 1px 8px $black-1;
+
+      &:hover {
+        text-decoration: none;
+        text-shadow: none;
+        color: $black-1;
+      }
+    }
+  }
+
   &__details {
-    padding: 0 20px 10px;
+    padding: 0;
     max-height: 170px;
+    overflow: hidden;
     flex: 1 1 auto;
+
+    @include respond(md) {
+      padding: 0 20px 10px;
+    }
   }
 
   &__description {
     margin-bottom: 0;
     display: block; /* Fallback for non-webkit */
     display: -webkit-box;
-    max-height: 90px; /* Fallback for non-webkit */
+    max-height: 135px; /* Fallback for non-webkit */
     text-align: justify;
     font-size: 16px;
     line-height: 1.4em;
@@ -68,30 +104,52 @@
   &__img {
     height: 170px;
     flex: 0 0 auto;
+    display: none;
+
+    @include respond(md) {
+      display: block;
+    }
   }
 
-  &__byline {
+  &__creator {
 
   }
 
   .btn {
-    color: $black;
+    color: $black-1;
   }
+
+  // &__buttons--saved {
+  //   top: 0;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
+
+  // &__buttons--results {
+  //   top: 0;
+
+  //   .btn:first-of-type {
+  //     border-top-right-radius: 10px;
+  //   }
+  // }
 
   &__buttons {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
     right: 0;
     display: flex;
     flex-direction: column;
+
+    .btn:first-of-type {
+      border-top-right-radius: 10px;
+    }
 
     .btn {
       width: 136px;
       text-align: center;
       padding-right: 32px;
       border-radius: 0;
-      color: $black;
+      color: $black-1;
       position: relative;
 
       &:hover, &:focus {
@@ -125,17 +183,47 @@
 
   .btn-remove {
     background-color: $red-1;
+
+    &:hover {
+      .icon-trash-empty:before {
+        content: "\f1f8";
+      }
+    }
   }
 
   .btn-complete {
     background-color: $green-1;
+
+    &:hover {
+      .icon-check:before {
+        content: "\e812";
+      }
+      .icon-check-empty:before {
+        content: "\e811";
+      }
+    }
   }
 
   .btn-active {
-    // background-color: $green-1;
+    background-color: $blue-3;
+
+    &:hover {
+      .icon-eye:before {
+        content: "\e80e";
+      }
+      .icon-eye-off:before {
+        content: "\e80d";
+      }
+    }
   }
 
   .btn-recommend {
     background-color: $yellow-1;
+
+    &:hover {
+      .icon-star:before {
+        content: "\e804";
+      }
+    }
   }
 }

@@ -5,8 +5,6 @@
 .icon-cancel:before { content: '\e803'; } /* '' */
 .icon-star-filled:before { content: '\e804'; } /* '' */
 .icon-star:before { content: '\e805'; } /* '' */
-.icon-check-filled:before { content: '\e806'; } /* '' */
-.icon-check:before { content: '\e807'; } /* '' */
 .icon-users:before { content: '\e808'; } /* '' */
 .icon-user:before { content: '\e809'; } /* '' */
 .icon-link:before { content: '\e80a'; } /* '' */
@@ -16,6 +14,8 @@
 .icon-eye-off:before { content: '\e80e'; } /* '' */
 .icon-trash-empty:before { content: '\e80f'; } /* '' */
 .icon-search:before { content: '\e810'; } /* '' */
+.icon-check:before { content: '\e811'; } /* '' */
+.icon-check-empty:before { content: '\e812'; } /* '' */
 .icon-spin1:before { content: '\e834'; } /* '' */
 .icon-spin2:before { content: '\e839'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */

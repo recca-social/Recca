@@ -13,9 +13,9 @@ const mediaSchema = new Schema({
     year: String, // used for movies/shows release year
     rating: String, // used for movies/shows
     index: Number, // used for display order of saved items
-    active: Boolean, // used for active media sidebar display
-    completed: Boolean, // used to display completed media in the sidebar under active media
-    recommended: Boolean, // used to trigger user description input, which displays in the feed
+    active: { type: Boolean, default: false }, // used for active media sidebar display
+    completed: { type: Boolean, default: false }, // used to display completed media in the sidebar under active media
+    recommended: { type: Boolean, default: false }, // used to trigger user description input, which displays in the feed
     userDescription: String, // ^
     apiId: String // id returned from api when searched
 });

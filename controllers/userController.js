@@ -84,6 +84,17 @@ module.exports = {
                 }
             })
             .catch(err => res.status(422).json(err));
+    },
+
+    getFeed: function(req, res){
+        db.User
+        .findById({ _id: req.session.userId })
+        .populate("friends")
+        .populate("media")
+        .populate("posts")
+        .then(function(dbUser){
+            res.json(dbUser)
+        })
     }
 
     // todo: add in a delete friend request route in case of accidental rejections.

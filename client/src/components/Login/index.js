@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/userAPI";
-import {Redirect} from "react-router-dom";
+import { Redirect, BrowserRouter as Link } from "react-router-dom";
 import "./style.css";
 
 class Login extends Component {
@@ -10,23 +10,27 @@ class Login extends Component {
       username: "",
       password: "",
       message: "",
-      isLoggedIn:false
+      isLoggedIn: false
     };
+    this.pageChange = this.pageChange.bind(this);
     this.isUser = this.isUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  isUser = () =>{
+  isUser = () => {
     API.isLoggedIn()
-    .then(res => {
-      if (res.data.isLoggedIn) {
-        this.setState({
-          isLoggedIn:res.data.isLoggedIn
-        });
-        return
-      }
-    })
+      .then(res => {
+        if (res.data.isLoggedIn === true) {
+          this.setState({
+            isLoggedIn: true
+          });
+        } else {
+          this.setState({
+            isLoggedIn: false
+          })
+        }
+      })
       .catch(err => console.log(err))
   }
 
@@ -38,6 +42,10 @@ class Login extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  pageChange(event) {
+    
   }
 
   handleSubmit(event) {
@@ -52,7 +60,7 @@ class Login extends Component {
           });
         } else {
           this.setState({
-            message:response.data.message
+            message: response.data.message
           })
         }
       })
@@ -63,70 +71,69 @@ class Login extends Component {
   }
 
   render() {
-    
     return (
       <div>
-      {this.state.isLoggedIn ? <Redirect to="/home" /> :
-      <div className="login-form-container" id="login-form">
-        <div className="login-form-content">
-          <div className="login-form-header">
-            <div className="logo">
-              <img
-                src="./images/reccoon-lg.png"
-                alt="recco"
-                style={{ height: "100px" }}
-              />
+        {!this.state.isLoggedIn ?
+          <div className="login-form-container" id="login-form">
+            <div className="login-form-content">
+              <div className="login-form-header">
+                <div className="logo">
+                  <img
+                    src="./images/reccoon-lg.png"
+                    alt="recco"
+                    style={{ height: "100px" }}
+                  />
+                </div>
+                <h3>Recco</h3>
+              </div>
+              <form method="post" action="/login/local" className="login-form">
+                <div className="input-container">
+                  <i className="fas fa-user" />
+                  <input
+                    type="text"
+                    className="input"
+                    name="username"
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="input-container">
+                  <i className="fas fa-lock" />
+                  <input
+                    type="password"
+                    id="login-password"
+                    className="input"
+                    name="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <input
+                  type="submit"
+                  name="login"
+                  value="Log In"
+                  className="button"
+                  onClick={this.handleSubmit}
+                />
+                <Link to="/signup" className='register'>
+                    <span>Create Account</span>
+                </Link>
+              </form>
+              <div className="separator">
+                <span className="separator-text">OR</span>
+              </div>
+              <div className="socmed-login">
+                <a href="/login/facebook" className="socmed-btn facebook-btn">
+                  <i className="fab fa-facebook-square" />
+                  <span>Login with Facebook</span>
+                </a>
+              </div>
             </div>
-            <h3>Recco</h3>
           </div>
-          <form method="post" action="/login/local" className="login-form">
-            <div className="input-container">
-              <i className="fas fa-user" />
-              <input
-                type="text"
-                className="input"
-                name="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="input-container">
-              <i className="fas fa-lock" />
-              <input
-                type="password"
-                id="login-password"
-                className="input"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <input
-              type="submit"
-              name="login"
-              value="Log In"
-              className="button"
-              onClick={this.handleSubmit}
-            />
-            <a href="/signup" className="register">
-              Create Account
-            </a>
-          </form>
-          <div className="separator">
-            <span className="separator-text">OR</span>
-          </div>
-          <div className="socmed-login">
-            <a href="/login/facebook" className="socmed-btn facebook-btn">
-              <i className="fab fa-facebook-square" />
-              <span>Login with Facebook</span>
-            </a>
-          </div>
-        </div>
+      : <Redirect to="/home" />}
       </div>
-  }
-</div>
     );
   }
 }

@@ -7,6 +7,8 @@ function Sidebar(props) {
       return creator;
     } else if ((type === "movie" || type === "show" || type === "game") && platform) {
       return `Platform: ${platform}`
+    } else {
+      return ''
     }
   }
   return (

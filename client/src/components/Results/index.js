@@ -67,25 +67,43 @@ function Results(props) {
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
-              <button onClick={() => props.handleRecommend(item._id) } className="btn btn-recommend">Recommend <i className="icon icon-star"></i></button>
+              <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
               <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
                 {item.active ?
                 <span>Active <i className="icon icon-eye"></i></span> :
-                <span>Inactive <i className="icon icon-eye-off"></i></span>}
+                <span>Active <i className="icon icon-eye-off"></i></span>}
               </button>
               <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">
                 {item.completed ? 
                 <span>Complete <i className="icon icon-check"></i></span> :
-                <span>Incomplete <i className="icon icon-check-empty"></i></span>}
+                <span>Complete <i className="icon icon-check-empty"></i></span>}
               </button>
               <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">
               <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button>
+              <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
             </div>
           : ""}
               
+          <div className="modal fade" id={"modal-" + item.apiId} tabIndex="-1" role="dialog" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  ...
+                </div>
+                <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(item.apiId) }>Post recommendation</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       )) : ""}
     </div>

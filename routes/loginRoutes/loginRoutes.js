@@ -3,7 +3,7 @@ const passport = require("../../config/passportConfig")
 
 router.route("/check").get(function(req, res){
   if(req.user){
-    res.json({isLoggedIn:true, user:req.user});
+    res.json({isLoggedIn:true});
   } else {
     res.json({isLoggedIn:false})
   }

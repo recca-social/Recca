@@ -1,4 +1,5 @@
 module.exports = {
   User: require("./user"),
-  Media: require("./media")
+  Media: require("./media"),
+  Friends: require("./friendRequest")
 };

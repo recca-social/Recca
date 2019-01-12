@@ -9,7 +9,9 @@ router.route("/create")
 router.route("/find/:id")
 .get(userController.findUser);
 
-router.route("/friend/add/:id")
-.post(userController.addFriend)
+router.route("/friend")
+.get(userController.userByUserName)
+.post(userController.newFriendRequest)
+.put(userController.handleFriendRequest)
 
 module.exports = router;

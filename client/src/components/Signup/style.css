@@ -160,9 +160,9 @@ body {
 }
 
 p {
-    margin-top: 1rem;
+    /* margin-top: 1rem;
     margin-bottom: 0;
-    text-align: center;
+    text-align: center; */
 }
 
 @media screen and (max-height: 600px) {

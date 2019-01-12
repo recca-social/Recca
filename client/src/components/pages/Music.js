@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../Header";
-import API from "../utils/API";
+// import Header from "../Header";
+// import musicAPI from "../../utils/musicAPI";
 
 class Music extends Component {
   state = {
@@ -8,7 +8,7 @@ class Music extends Component {
     musicList: [],
     musicResults: []
   }
-
+  
   render() {
     return (
       <div>

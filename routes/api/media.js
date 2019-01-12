@@ -17,7 +17,5 @@ router.route("/active/:id")
 router.route("/completed/:id")
 .get(mediaController.toggleComplete);
 
-router.route("/recommend/:id")
-.get(mediaController.setRecommend);
 
 module.exports = router;

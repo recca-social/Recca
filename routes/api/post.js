@@ -3,3 +3,5 @@ const postController = require("../../controllers/postController");
 
 router.route("/create/:id")
 .post(postController.create);
+
+module.exports = router;

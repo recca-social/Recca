@@ -17,7 +17,7 @@ export default {
         return axios.get("/login/facebook")
     },
 
-    getUserMedia: function (id) {
+    getUserMedia: function () {
         return axios.get("api/user/find/")
     },
     

@@ -3,6 +3,7 @@ var db = require("../models");
 module.exports = {
     // method to post new media to db and update user model with event info
     create: function(req, res){
+        console.log(req.body)
         db.Media
         .create(req.body)
         .then(function(dbMedia){

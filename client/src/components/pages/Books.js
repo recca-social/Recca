@@ -55,7 +55,7 @@ class Books extends Component {
   }
 
   componentDidMount() {
-    this.getBooks("5c37677ee6badaca32d5dc25");
+    this.getBooks();
   }
 
 
@@ -71,17 +71,18 @@ class Books extends Component {
       creator: book.creator,
       genre: book.genre,
       apiId: book.apiId
-    }, "5c37677ee6badaca32d5dc25").then(() => {
+    }).then(() => {
       //Once the book is saved, reset state for results
       this.setState({ results : [] })
-      this.getBooks('5c37677ee6badaca32d5dc25')
+      this.getBooks()
     })
   }
 
-  getBooks = id => {
+  getBooks = () => {
     let userMedia = [];
-    userAPI.getUserMedia('5c37677ee6badaca32d5dc25')
+    userAPI.getUserFeed()
     .then(function(res) {
+      console.log(res.data)
       userMedia = res.data.media;
     })
     .then(() => this.setState({ saved: userMedia }))
@@ -131,7 +132,7 @@ class Books extends Component {
                 />
               </div> : ""}
             <hr />
-            {this.state.saved.length ? 
+            {this.state.saved ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
                 <Results 

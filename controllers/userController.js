@@ -39,6 +39,7 @@ module.exports = {
         db.User
         .findById({ _id: req.session.userId })
         .populate("friends")
+        .populate("media")
         .populate("posts")
         .then(function(dbUser){
             res.json(dbUser)

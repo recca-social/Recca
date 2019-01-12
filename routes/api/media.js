@@ -2,7 +2,7 @@ const router = require("express").Router();
 const mediaController = require("../../controllers/mediaController");
 
 //route for creating new media
-router.route("/create/:id")
+router.route("/create/")
 .post(mediaController.create);
 
 //route for deleting events

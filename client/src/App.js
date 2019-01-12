@@ -9,7 +9,6 @@ import Music from "./components/pages/Music";
 import Shows from "./components/pages/Shows";
 import Friends from "./components/pages/Friends";
 import Login from "./components/Login";
-import Signup from "./components/Signup";
 import "./styles/fontello/css/fontello.css";
 import "./styles/fontello/css/fontello-codes.css";
 import "./App.scss";
@@ -18,18 +17,16 @@ const App = () => {
     return (
       <Router>     
         <div>
-          <Route path={["/home", "books", "games", "movies", "music", "shows", "friends"]} component={Nav} />
+          <Route path={["/home", "/books", "/games", "/movies", "/music", "/shows", "/friends"]} component={Nav} />
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/home" component={Home} />
             <Route exact path="/books" component={Books} />
             <Route exact path="/games" component={Games} />
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/music" component={Music} />
             <Route exact path="/shows" component={Shows} />
             <Route exact path="/friends" component={Friends} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/home" component={Home} />
           </Switch>
         </div>
       </Router>

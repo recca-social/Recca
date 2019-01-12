@@ -10,8 +10,8 @@ router.use("/login", loginRoutes)
 
 //Logout Routes "http:localhost:3001/logout"
 router.route("/logout").get(function(req, res){
+  req.session.destroy();
   req.logout();
-  console.log("logged out")
   res.redirect("/login");
 });
 

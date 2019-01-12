@@ -17,7 +17,8 @@ router.route("/local").post(function (req, res, next) {
       if (err) { return next(err); }
       console.log("we're logged in")
       console.log(user)
-      req.session.save({userId:user._id})
+      req.session.userId =user._id;
+      req.session.save();
       return res.json({user:user});
     });
   })(req, res, next);

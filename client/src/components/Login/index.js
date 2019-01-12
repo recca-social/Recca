@@ -1,30 +1,37 @@
 import React, { Component } from "react";
-import API from "../../utils/userAPI"
+import API from "../../utils/userAPI";
+import {Redirect} from "react-router-dom";
 import "./style.css";
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      user: {},
       username: "",
       password: "",
-      redirectTo: null
+      message: "",
+      isLoggedIn:false
     };
+    this.isUser = this.isUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    API.isLoggedIn().then(function (res) {
+  isUser = () =>{
+    API.isLoggedIn()
+    .then(res => {
       if (res.data.isLoggedIn) {
         this.setState({
-          user: res.data.user,
-          redirectTo: "/home"
-        })
+          isLoggedIn:res.data.isLoggedIn
+        });
+        return
       }
     })
       .catch(err => console.log(err))
+  }
+
+  componentDidMount() {
+    this.isUser();
   }
 
   handleChange(event) {
@@ -40,16 +47,13 @@ class Login extends Component {
       .then(response => {
         if (response.data.user) {
           // update App.js state
-          this.props.updateUser({
-            loggedIn: true,
-            user: this.state.user
-          });
-          // update the state to redirect to home
           this.setState({
-            redirectTo: "/home"
+            isLoggedIn: true
           });
         } else {
-          console.log(response.data.message)
+          this.setState({
+            message:response.data.message
+          })
         }
       })
       .catch(error => {
@@ -58,11 +62,11 @@ class Login extends Component {
       });
   }
 
-
-
-
   render() {
+    
     return (
+      <div>
+      {this.state.isLoggedIn ? <Redirect to="/home" /> :
       <div className="login-form-container" id="login-form">
         <div className="login-form-content">
           <div className="login-form-header">
@@ -121,6 +125,8 @@ class Login extends Component {
           </div>
         </div>
       </div>
+  }
+</div>
     );
   }
 }

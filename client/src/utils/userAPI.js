@@ -1,7 +1,23 @@
 import axios from "axios";
 
 export default {
-  getUserMedia: function(id){
-    return axios.get("api/user/find/" + id)
-  }
+    isLoggedIn: function () {
+        return axios.get("/login/check")
+    },
+
+    localLogIn: function (username, password) {
+        return axios.post("/login/local",
+            {
+                username: username,
+                password: password,
+            })
+    },
+
+    facebookLogIn: function () {
+        return axios.get("/login/facebook")
+    },
+
+    getUserMedia: function (id) {
+        return axios.get("api/user/find/" + id)
+    }
 }

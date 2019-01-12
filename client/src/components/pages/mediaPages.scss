@@ -4,13 +4,26 @@
 .main {
   padding: 30px;
 
-  h2 {
-    color: $white-1;
-  }
-
   hr {
     border-color: $white-3;
     width: 80%;
+  }
+
+  .btn-clear {
+    margin-bottom: 0px;
+    margin-top: -30px;
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: $blue-3;
+    text-align: right;
+    cursor: pointer;
+    float: right;
+
+    &:hover {
+      color: $white-1;
+    }
   }
 }
 

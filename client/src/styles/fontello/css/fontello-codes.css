@@ -5,6 +5,7 @@
 .icon-cancel:before { content: '\e803'; } /* '' */
 .icon-star-filled:before { content: '\e804'; } /* '' */
 .icon-star:before { content: '\e805'; } /* '' */
+.icon-lock:before { content: '\e806'; } /* '' */
 .icon-users:before { content: '\e808'; } /* '' */
 .icon-user:before { content: '\e809'; } /* '' */
 .icon-link:before { content: '\e80a'; } /* '' */
@@ -22,6 +23,7 @@
 .icon-bookmark-empty:before { content: '\f097'; } /* '' */
 .icon-plus-filled:before { content: '\f0fe'; } /* '' */
 .icon-game:before { content: '\f11b'; } /* '' */
+.icon-collapse:before { content: '\f151'; } /* '' */
 .icon-plus:before { content: '\f196'; } /* '' */
 .icon-steam:before { content: '\f1b7'; } /* '' */
 .icon-trash:before { content: '\f1f8'; } /* '' */

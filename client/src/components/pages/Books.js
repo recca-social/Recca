@@ -50,6 +50,10 @@ class Books extends Component {
       .catch(err => console.log(err));
   };
 
+  clearResults = () => {
+    this.setState({results: []})
+  }
+
   componentDidMount() {
     this.getBooks("5c37677ee6badaca32d5dc25");
   }
@@ -117,8 +121,11 @@ class Books extends Component {
             {this.state.results.length ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Results</h2>
+                <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
+                <div className="clearfix"></div>
                 <Results 
                   items={this.state.results}
+                  clearResults={this.clearResults}
                   resultType="results"
                   handleSave={this.handleSave}
                 />

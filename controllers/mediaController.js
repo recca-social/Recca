@@ -18,7 +18,7 @@ module.exports = {
     //method to delete media from db
     delete: function(req, res) {
         db.Media
-        .findById({ _id:req.params.id })
+        .findById({ _id: req.params.id })
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));

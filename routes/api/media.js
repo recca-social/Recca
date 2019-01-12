@@ -9,10 +9,15 @@ router.route("/create/:id")
 router.route("/delete/:id")
 .delete(mediaController.delete);
 
+//route for toggling active item
 router.route("/active/:id")
 .get(mediaController.toggleActive);
 
+//route for toggling completed
 router.route("/completed/:id")
 .get(mediaController.toggleComplete);
+
+router.route("/recommend/:id")
+.get(mediaController.setRecommend);
 
 module.exports = router;

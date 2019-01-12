@@ -10,6 +10,6 @@ router.route("/find/:id")
 .get(userController.findUser);
 
 router.route("/friend/add/:id")
-.post(userController.addFriend)
+.post(userController.addFriend);
 
 module.exports = router;

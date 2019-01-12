@@ -21,8 +21,8 @@ const userSchema = new Schema({
   media:[
     {type: Schema.Types.ObjectId, ref: "Media"}
   ],
-  recommendations:[
-    {type: Schema.Types.ObjectId, ref: "Media"}
+  posts:[
+    {type: Schema.Types.ObjectId, ref: "Post"}
   ],
   totalRecommendations:{type: Number, default: 0}
   

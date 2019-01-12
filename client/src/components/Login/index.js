@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/userAPI";
-import { Redirect, BrowserRouter as Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./style.css";
 
 class Login extends Component {
@@ -102,7 +102,6 @@ class Login extends Component {
                   <i className="fas fa-lock" />
                   <input
                     type="password"
-                    id="login-password"
                     className="input"
                     name="password"
                     placeholder="Password"
@@ -119,8 +118,7 @@ class Login extends Component {
                 />
                 <Link to="/signup" className='register'>
                     <span>Create Account</span>
-                </Link>
-              </form>
+                </Link>             </form>
               <div className="separator">
                 <span className="separator-text">OR</span>
               </div>

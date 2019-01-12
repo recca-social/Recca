@@ -28,13 +28,32 @@ module.exports = {
         db.Media
         .findById( req.params.id )
         .then(res => {
-            if (res.data.active) {
-                db.Media.findByIdAndUpdate(req.params.id, {active: false})
-            } else {
-                db.Media.findByIdAndUpdate(req.params.id, {active: true})
+            if (res.active == true) {
+                return db.Media.findOneAndUpdate({_id: req.params.id}, {$set: {active: false}}, {new: true})
+            } else if (res.active == false) {
+                return db.Media.findOneAndUpdate({_id: req.params.id}, {$set: {active: true}}, {new: true})
             }
         })
-        .then(dbModel => res.json(dbModel))
+        .then(dbMedia => {
+            console.log(dbMedia)
+            res.json(dbMedia)
+        })
+        .catch(err => res.status(422).json(err));
+    },
+    toggleComplete: function(req, res) {
+        db.Media.findById( req.params.id )
+        .then(res => {
+            if (res.completed == true) {
+                return db.Media.findOneAndUpdate({_id: req.params.id}, {$set: {completed: false, active: false}}, {new: true})
+            } else if (res.completed == false){
+                return db.Media.findOneAndUpdate({_id: req.params.id}, {$set: {completed: true, active: false}}, {new: true})
+            }
+
+        })
+        .then(dbMedia => {
+            console.log(dbMedia)
+            res.json(dbMedia)
+        })
         .catch(err => res.status(422).json(err));
     }
 }

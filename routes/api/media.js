@@ -9,4 +9,10 @@ router.route("/create/:id")
 router.route("/delete/:id")
 .delete(mediaController.delete);
 
+router.route("/active/:id")
+.get(mediaController.toggleActive);
+
+router.route("/completed/:id")
+.get(mediaController.toggleComplete);
+
 module.exports = router;

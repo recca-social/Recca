@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss'; // assuming a styles directory under src/
+@import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
 .navbar {
@@ -10,6 +10,8 @@
     height: 100%;
     flex-direction: row;
     width: 100%;
+    box-shadow: 0px 0px 6px 1px $black-1;
+    z-index: 1;
   }
 
   .navbar-brand {
@@ -50,8 +52,6 @@
       padding-bottom: 0.5rem;
       padding-right: 0.5rem;
       padding-left: 0.5rem;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
     }
 
     &__text {
@@ -63,7 +63,7 @@
     }
 
     &.active {
-      color: #fff;
+      color: $yellow-1;
 
       .nav-link__tab {      
         background-color: $gray-1;

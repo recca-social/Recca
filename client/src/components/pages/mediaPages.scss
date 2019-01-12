@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.main {
+  padding: 30px;
+
+  hr {
+    border-color: $white-3;
+    width: 80%;
+  }
+
+  .btn-clear {
+    margin-bottom: 0px;
+    margin-top: -30px;
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: $blue-3;
+    text-align: right;
+    cursor: pointer;
+    float: right;
+
+    &:hover {
+      color: $white-1;
+    }
+  }
+}
+
+.sidebar {
+  display: none;
+  @include respond(md) {
+    display: block;
+  }
+}

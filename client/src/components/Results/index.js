@@ -1,4 +1,5 @@
 import React from "react";
+import PostModal from "../PostModal"
 import "./media-item.scss";
 
 function Results(props) {
@@ -82,27 +83,20 @@ function Results(props) {
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">
-              <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button>
+              <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark-empty"></i></button>
               <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
             </div>
           : ""}
               
-          <div className="modal fade" id={"modal-" + item.apiId} tabIndex="-1" role="dialog" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  ...
-                </div>
-                <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(item.apiId) }>Post recommendation</button>
-              </div>
-            </div>
-          </div>
+          <PostModal 
+            postText={props.postText}
+            handleInputChange={props.handleInputChange}
+            handleRecommend={props.handleRecommend}
+            image={item.image}
+            title={item.title}
+            creator={item.creator}
+            apiId={item.apiId}
+          />
 
         </div>
       )) : ""}

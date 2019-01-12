@@ -13,10 +13,9 @@ function SearchForm(props) {
           type="text"
           className="form-control"
           placeholder="Search Books"
-          id="search"
         />
         <button onClick={props.handleSearch} className="btn btn-primary">
-        <i className="icon icon-search"></i><span className="sr-only">Search</span>
+          <i className="icon icon-search"></i><span className="sr-only">Search</span>
         </button>
       </div>
     </form>

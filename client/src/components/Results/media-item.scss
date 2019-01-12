@@ -79,28 +79,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    // @-moz-document url-prefix() {
-    //   overflow: hidden;
-    //   position: relative;
-    //   &::before {
-    //     background: #fff;
-    //     bottom: -2px;
-    //     position: absolute;
-    //     right: 0;
-    //     float: right;
-    //     content: '\2026';
-    //     margin-left: -3rem;
-    //     width: 3rem;
-    //   }
-    //   &::after {
-    //     content: '';
-    //     background: #fff;
-    //     position: absolute;
-    //     height: 50px;
-    //     width: 100%;
-    //     z-index: 1;
-    //   }
-    // }
   }
 
   &__img {
@@ -115,37 +93,25 @@
     }
   }
 
-  &__creator {
-
-  }
-
   .btn {
     color: $black-1;
   }
 
-  // &__buttons--saved {
-  //   top: 0;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  // }
-
-  // &__buttons--results {
-  //   top: 0;
-
-  //   .btn:first-of-type {
-  //     border-top-right-radius: 10px;
-  //   }
-  // }
-
   &__buttons {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -2px;
+    right: -2px;
     display: flex;
     flex-direction: column;
+    box-shadow: -2px 2px 12px 0 $black-2;
+    border-bottom-left-radius: 10px;
 
     .btn:first-of-type {
       border-top-right-radius: 10px;
+    }
+
+    .btn:last-of-type {
+      border-bottom-left-radius: 10px;
     }
 
     .btn {
@@ -174,60 +140,60 @@
       }
     }
   }
+}
 
+.btn-save {
+  background-color: $green-1;
 
-  .btn-save {
-    background-color: $green-1;
-  }
-
-  .btn-more {
-    background-color: $blue-3;
-    margin-bottom: 8px;
-  }
-
-  .btn-remove {
-    background-color: $red-1;
-
-    &:hover {
-      .icon-trash-empty:before {
-        content: "\f1f8";
-      }
+  &:hover {
+    .icon-bookmark-empty:before {
+      content: "\e80c";
     }
   }
+}
 
-  .btn-complete {
-    background-color: $green-1;
+.btn-remove {
+  background-color: $red-1;
 
-    &:hover {
-      .icon-check:before {
-        content: "\e812";
-      }
-      .icon-check-empty:before {
-        content: "\e811";
-      }
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
     }
   }
+}
 
-  .btn-active {
-    background-color: $blue-3;
+.btn-complete {
+  background-color: $green-1;
 
-    &:hover {
-      .icon-eye:before {
-        content: "\e80e";
-      }
-      .icon-eye-off:before {
-        content: "\e80d";
-      }
+  &:hover {
+    .icon-check:before {
+      content: "\e812";
+    }
+    .icon-check-empty:before {
+      content: "\e811";
     }
   }
+}
 
-  .btn-recommend {
-    background-color: $yellow-1;
+.btn-active {
+  background-color: $blue-3;
 
-    &:hover {
-      .icon-star:before {
-        content: "\e804";
-      }
+  &:hover {
+    .icon-eye:before {
+      content: "\e80e";
+    }
+    .icon-eye-off:before {
+      content: "\e80d";
+    }
+  }
+}
+
+.btn-recommend {
+  background-color: $yellow-1;
+
+  &:hover {
+    .icon-star:before {
+      content: "\e804";
     }
   }
 }

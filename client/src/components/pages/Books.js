@@ -11,7 +11,8 @@ class Books extends Component {
   state = {
     search: "",
     saved: [],
-    results: []
+    results: [],
+    postText: ""
   }
 
   handleInputChange = event => {
@@ -58,7 +59,6 @@ class Books extends Component {
     this.getBooks("5c37677ee6badaca32d5dc25");
   }
 
-
   handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
     this.setState({ search: "", results : [] })
@@ -88,6 +88,18 @@ class Books extends Component {
     .catch(err => console.log(err));
   }
 
+  handleRecommend = id => {
+    // event.preventDefault();
+    this.recommendMedia(id, this.state.postText);
+  }
+
+  recommendMedia = (id, postText) => {
+    console.log(`Recommend item with id: ${id}`)
+    console.log(`Post: ${postText}`)
+    // After recommendation is made, clear state for post text
+    this.setState({postText: ""})
+  }
+
   handleDelete = id => {
     mediaAPI.delete(id)
     .then(this.getBooks('5c37677ee6badaca32d5dc25'))
@@ -102,10 +114,6 @@ class Books extends Component {
 
   handleComplete = id => {
     console.log(`Complete item with id: ${id}`)
-  }
-
-  handleRecommend = id => {
-    console.log(`Recommend item with id: ${id}`)
   }
 
   render() {
@@ -128,6 +136,9 @@ class Books extends Component {
                   clearResults={this.clearResults}
                   resultType="results"
                   handleSave={this.handleSave}
+                  handleRecommend={this.handleRecommend}
+                  handleInputChange={this.handleInputChange}
+                  postText={this.state.postText}
                 />
               </div> : ""}
             <hr />
@@ -139,6 +150,8 @@ class Books extends Component {
                   resultType="saved"
                   handleDelete={this.handleDelete}
                   toggleActive={this.toggleActive}
+                  handleInputChange={this.handleInputChange}
+                  postText={this.state.postText}
                   handleComplete={this.handleComplete}
                   handleRecommend={this.handleRecommend}
                 />
@@ -146,8 +159,6 @@ class Books extends Component {
               <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
           
-
-
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}

@@ -12,9 +12,8 @@ module.exports = {
     //method for finding user and populating media, recommendations, and friends
     findUser: function(req, res){
         db.User
-        .findById({ _id: req.params.id })
+        .findById({ _id: req.session.userId })
         .populate("media")
-        .populate("recommendations")
         .populate("friends")
         .then(function(user){
             res.json(user)
@@ -28,12 +27,21 @@ module.exports = {
         .findById({ _id: req.body.id })
         .then(function(dbFriend){
             console.log(dbFriend)
-            return db.User.findOneAndUpdate({ _id: req.params.id }, {$push: { friends: dbFriend._id }})
+            return db.User.findOneAndUpdate({ _id: req.session.userId }, {$push: { friends: dbFriend._id }})
         })
         .then(function(dbFriend){
             console.log(dbFriend);
             res.json(dbFriend);
         })
         .catch(err => res.status(422).json(err));
+    },
+    getFeed: function(req, res){
+        db.User
+        .findById({ _id: req.session.userId })
+        .populate("friends")
+        .populate("posts")
+        .then(function(dbUser){
+            res.json(dbUser)
+        })
     }
 }

@@ -7,7 +7,7 @@ module.exports = {
         .create(req.body)
         .then(function(dbMedia){
             //push to user media array
-            return db.User.findOneAndUpdate({ _id: req.params.id }, {$push: { media: dbMedia._id }}, {new: true})
+            return db.User.findOneAndUpdate({ _id: req.session.userId }, {$push: { media: dbMedia._id }}, {new: true})
         })
         .then(function(dbUserInfo){
             console.log(dbUserInfo);

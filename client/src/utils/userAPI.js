@@ -18,6 +18,10 @@ export default {
     },
 
     getUserMedia: function (id) {
-        return axios.get("api/user/find/" + id)
+        return axios.get("api/user/find/")
+    },
+    
+    getUserFeed: function () {
+        return axios.get("api/user/feed/")
     }
 }

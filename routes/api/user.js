@@ -12,4 +12,7 @@ router.route("/find/:id")
 router.route("/friend/add/:id")
 .post(userController.addFriend);
 
+router.route("/feed/")
+.get(userController.getFeed)
+
 module.exports = router;

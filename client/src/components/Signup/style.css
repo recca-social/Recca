@@ -131,6 +131,7 @@ html {
     display: block;
     text-align: center;
     border-radius: .25rem;
+    cursor: pointer;
 }
 .login-form .register:hover	{
 	background: #49a154;

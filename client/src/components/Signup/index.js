@@ -39,7 +39,7 @@ class Signup extends Component {
       .then(response => {
         console.log(response);
         if (response.data) {
-          console.log("Response from sign-up: " + response.data);
+          console.log("Successful sign-up!");
           this.setState({
             isLoggedIn: true
           });

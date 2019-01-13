@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 import "./style.css";
 
 class Signup extends Component {
@@ -19,15 +19,15 @@ class Signup extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     axios
       .post("/login/signup", {
@@ -39,24 +39,23 @@ class Signup extends Component {
       .then(response => {
         console.log(response);
         if (response.data) {
-          console.log("response from signup: " + response.data);
+          console.log("Response from sign-up: " + response.data);
           this.setState({
             isLoggedIn: true
-            // username: response.data.username
           });
         } else {
-          console.log("username already taken");
+          console.log("Username already taken!");
         }
       })
       .catch(error => {
         console.log("Sign-up server error: " + error);
       });
-  }
+  };
 
   render() {
     return (
       <div>
-        {!this.state.isLoggedIn ?
+        {!this.state.isLoggedIn ? (
           <div className="login-form-container" id="login-form">
             <div className="login-form-content">
               <div className="login-form-header">
@@ -91,7 +90,7 @@ class Signup extends Component {
                   />
                 </div>
                 <div className="input-container">
-                  <i className="fas fa-user" />
+                  <span className="fas fa-user" />
                   <input
                     type="text"
                     className="input"
@@ -102,7 +101,7 @@ class Signup extends Component {
                   />
                 </div>
                 <div className="input-container">
-                  <i className="fas fa-lock" />
+                  <span className="fas fa-lock" />
                   <input
                     type="password"
                     className="input"
@@ -112,9 +111,6 @@ class Signup extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-                {/* <a href="/" className="register">
-                  Create Account
-                </a> */}
                 <input
                   className="register"
                   value="Sign Up"
@@ -126,17 +122,16 @@ class Signup extends Component {
                 <span className="separator-text">OR</span>
               </div>
               <div className="socmed-login">
-                <a href="/login/facebook" className="socmed-btn facebook-btn">
+                <Link to="/login/facebook" className="socmed-btn facebook-btn">
                   <i className="fab fa-facebook-square" />
                   <span>Login with Facebook</span>
-                </a>
+                </Link>
               </div>
             </div>
-            <p>
-              Back to <a href="/login">Login</a>
-            </p>
           </div>
-        : <Redirect to="/home" /> }
+        ) : (
+          <Redirect to="/home" />
+        )}
       </div>
     );
   }

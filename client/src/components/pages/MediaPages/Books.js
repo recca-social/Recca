@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import bookAPI from "../../utils/bookAPI";
-import mediaAPI from "../../utils/mediaAPI";
-import userAPI from "../../utils/userAPI";
-import SearchForm from "../SearchForm";
-import Sidebar from "../Sidebar";
-import Results from "../Results";
-import "./mediaPages.scss";
+import bookAPI from "../../../utils/bookAPI";
+import mediaAPI from "../../../utils/mediaAPI";
+import userAPI from "../../../utils/userAPI";
+import SearchForm from "../../SearchForm";
+import Sidebar from "../../Sidebar";
+import Results from "../../Results";
+import "../mediaPages.scss";
 
 class Books extends Component {
   state = {

@@ -136,7 +136,7 @@ class Signup extends Component {
               Back to <a href="/login">Login</a>
             </p>
           </div>
-        : <Redirect to="/home" /> }
+        : <Redirect to="/user/" /> }
       </div>
     );
   }

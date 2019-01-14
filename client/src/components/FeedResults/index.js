@@ -1,5 +1,5 @@
 import React from "react";
-import "./media-item.scss";
+import "src/components/FeedResults/media-item.scss";
 
 function Results(props) {
   function creatorText(type, string) {

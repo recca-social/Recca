@@ -6,11 +6,11 @@ export function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="navbar-nav">
-        <Link className="navbar-brand" to="/"
+        <Link className="navbar-brand" to="/user/"
         onClick={() => props.handlePageChange("")}>
           <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
         </Link>
-        <Link to="/movies"
+        <Link to="/user/movies"
         onClick={() => props.handlePageChange("Movies")}
         className={props.currentPage === "Movies" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
@@ -20,7 +20,7 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
-        <Link to="/shows"
+        <Link to="/user/shows"
         onClick={() => props.handlePageChange("Shows")}
         className={props.currentPage === "Shows" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
@@ -30,7 +30,7 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
-        <Link to="/books"
+        <Link to="/user/books"
         onClick={() => props.handlePageChange("Books")}
         className={props.currentPage === "Books" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
@@ -40,7 +40,7 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
-        <Link to="/music"
+        <Link to="/user/music"
         onClick={() => props.handlePageChange("Music")}
         className={props.currentPage === "Music" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
@@ -50,7 +50,7 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
-        <Link to="/games"
+        <Link to="/user/games"
         onClick={() => props.handlePageChange("Games")}
         className={props.currentPage === "Games" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
@@ -60,7 +60,7 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
-        <Link to="/friends"
+        <Link to="/user/friends"
         onClick={() => props.handlePageChange("Friends")}
         className={props.currentPage === "Friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
           <div className="nav-link__tab">

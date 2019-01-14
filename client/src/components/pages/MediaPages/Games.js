@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import Header from "../Header";
-// import API from "../utils/API";
+
 
 class Games extends Component {
   state = {

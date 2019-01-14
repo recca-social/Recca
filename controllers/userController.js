@@ -12,7 +12,7 @@ module.exports = {
     //method for finding user and populating media, recommendations, and friends
     findUser: function (req, res) {
         db.User
-            .findById({ _id: req.session.userId })
+            .findById({ _id: req.user._id })
             .populate("media")
             .populate("recommendations")
             .populate("friends")
@@ -36,7 +36,7 @@ module.exports = {
     // The first Id should be the logged in user, the second Id should be the target of the request
     // accessed via .post on /api/user/friend
     newFriendRequest: function (req, res) {
-        let participants = [req.session.userId, req.body.requestTo];
+        let participants = [req.user._id, req.body.requestTo];
         let requestTo = req.body.requestTo;
         db.Friends.findOne({ participants: participants }).then(result => {
             if (!result) {
@@ -57,13 +57,13 @@ module.exports = {
     // handling the friend request:  This guy takes strings 'accepted' or 'rejected' as req.body.status.  A green and red button would work fine.
     // accessed via the .put on api/user/friend
     handleFriendRequest: function (req, res) {
-        db.Friends.findOneAndUpdate({ 'requestTo': req.session.userId }, { $set: { 'status': req.body.status }}, {new:true})
+        db.Friends.findOneAndUpdate({ 'requestTo': req.user._id }, { $set: { 'status': req.body.status }}, {new:true})
             .then(friendReq => {
                 // if the requestTo participant accepts the request
                 if (friendReq.status === 'accepted') {
                     let friendArr = friendReq.participants
                     // find the accepting user A.K.A requestTo on our model
-                    db.User.findById(req.session.userId)
+                    db.User.findById(req.user._id)
                         .then(result => {
                             // update the friends array on the User model with new friend's A.K.A initiating User's ID
                             result.friends.push(friendArr[0]);
@@ -87,7 +87,7 @@ module.exports = {
     },
 
     pendingRequest: function(req, res){
-        db.Friends.find({requestTo:req.session.UserId, status:'pending'})
+        db.Friends.find({requestTo:req.user._id, status:'pending'})
         .then(results =>{
             if(results){
             res.json(results)
@@ -100,7 +100,7 @@ module.exports = {
 
     getFeed: function(req, res){
         db.User
-        .findById({ _id: req.session.userId })
+        .findById({ _id: req.user._id })
         .populate("friends")
         .populate("media")
         .populate("posts")

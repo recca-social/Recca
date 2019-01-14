@@ -5,8 +5,8 @@ export default {
         return axios.post("/api/media/create/", exportObject)
     },
 
-    delete: function() {
-        return axios.delete("api/media/delete/")
+    delete: function(id) {
+        return axios.delete("api/media/delete/" + id)
     },
 
     toggleActive: function(id) {

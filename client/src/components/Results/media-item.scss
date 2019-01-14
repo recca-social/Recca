@@ -105,15 +105,15 @@
     display: flex;
     flex-direction: column;
     box-shadow: -2px 2px 12px 0 $black-2;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
 
     .btn:first-of-type {
-      border-top-right-radius: 7px;
+      border-top-right-radius: 6px;
     }
 
     .btn:last-of-type {
-      border-bottom-left-radius: 7px;
+      border-bottom-left-radius: 6px;
     }
 
     .btn {
@@ -124,7 +124,10 @@
       color: $black-1;
       position: relative;
 
-      &:hover, &:focus {
+      &:hover, &:focus {      
+        box-shadow: 0px 1px 12px 0 $black-2;
+        z-index: 2;
+        
         &::after {
           content: "";
           position: absolute;

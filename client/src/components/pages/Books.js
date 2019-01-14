@@ -80,7 +80,7 @@ class Books extends Component {
 
   getBooks = () => {
     let userMedia = [];
-    userAPI.getUserFeed()
+    userAPI.getUserMedia()
     .then(function(res) {
       // console.log(res.data)
       userMedia = res.data.media;
@@ -99,19 +99,19 @@ class Books extends Component {
 
   handleDelete = id => {
     mediaAPI.delete(id)
-    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .then(this.getBooks())
     .catch(err => console.log(err))
   }
 
   toggleActive = id => {
     mediaAPI.toggleActive(id)
-    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .then(this.getBooks())
     .catch(err => console.log(err))
   }
 
   toggleCompleted = id => {
     mediaAPI.toggleCompleted(id)
-    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .then(this.getBooks())
     .catch(err => console.log(err))
   }
 

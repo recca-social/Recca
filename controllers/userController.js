@@ -32,9 +32,8 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
 
-    // newFriendRequest accepts an array of ID's as participants!  
-    // The first Id should be the logged in User's ID accessable via req.session.userId or req.user._id
-    // the second Id should be the target of the request as returned by userByUserName ^
+    // newFriendRequest accepts an array of id's as participants!  
+    // The first Id should be the logged in user, the second Id should be the target of the request
     // accessed via .post on /api/user/friend
     newFriendRequest: function (req, res) {
         let participants = req.body.participants;
@@ -68,15 +67,15 @@ module.exports = {
                         .then(result => {
                             // update the friends array on the User model with new friend's A.K.A initiating User's ID
                             result.friends.push(friendArr[0]);
-                            result.save();
+                            result.save(console.log('saved the requestTo friends array'));
                         })
                         .catch(err => console.log(err));
                     // find the initiating User
                     db.User.findById(friendArr[0])
                         .then(result => {
-                            // update the initiating User's friends array with our requestTo User's ID
+                            // update the initiating User's friends array with our requestTo dudeski
                             result.friends.push(friendArr[1]);
-                            result.save()
+                            result.save(console.log("saved the initiator's friends array"))
                         })
                         .catch(err => console.log(err))
                     res.json({ message: friendArr[0] + " and " + friendArr[1] + " are now friends." })

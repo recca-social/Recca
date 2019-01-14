@@ -1,5 +1,5 @@
 import React from "react";
-import PostModal from "../PostModal";
+import PostModal from "../PostModal"
 import "./media-item.scss";
 
 function Results(props) {

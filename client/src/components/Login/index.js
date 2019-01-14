@@ -130,7 +130,7 @@ class Login extends Component {
               </div>
             </div>
           </div>
-      : <Redirect to="/user/" />}
+      : <Redirect to="/home" />}
       </div>
     );
   }

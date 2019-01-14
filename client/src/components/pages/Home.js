@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Header from "../Header";
-import userAPI from "../../../utils/userAPI";
+import userAPI from "../../utils/userAPI";
 
 class Home extends Component {
   state = {
@@ -11,7 +11,7 @@ class Home extends Component {
   getFeed = () =>{
     userAPI.getUserFeed()
     .then(function(res) {
-        
+      console.log(res.data)
     })
   }
 

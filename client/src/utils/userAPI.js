@@ -13,14 +13,18 @@ export default {
     },
 
     findUserbyUsername: function(username){
-        return axios.get("/api/user/friend", {
+        return axios.get("/api/user/find/username", {
             username: username
         })
     },
 
-    newFriendRequest:function (userOneId, userTwoId){
+    pendingRequest: function(){
+        return axios.get("/api/user/friend")
+    },
+
+    newFriendRequest:function (requestTo){
       return axios.post("/api/user/friend",{
-          participants:[userOneId, userTwoId],
+          requestTo:requestTo,
       })  
     },
 
@@ -35,7 +39,7 @@ export default {
     },
 
     getUserMedia: function () {
-        return axios.get("api/user/find/")
+        return axios.get("api/user/find")
     },
     
     getUserFeed: function () {

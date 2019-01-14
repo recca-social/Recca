@@ -36,8 +36,8 @@ module.exports = {
     // The first Id should be the logged in user, the second Id should be the target of the request
     // accessed via .post on /api/user/friend
     newFriendRequest: function (req, res) {
-        let participants = req.body.participants;
-        let requestTo = req.body.participants[1];
+        let participants = [req.session.userId, req.body.requestTo];
+        let requestTo = req.body.requestTo;
         db.Friends.findOne({ participants: participants }).then(result => {
             if (!result) {
                 db.Friends.create({
@@ -57,7 +57,7 @@ module.exports = {
     // handling the friend request:  This guy takes strings 'accepted' or 'rejected' as req.body.status.  A green and red button would work fine.
     // accessed via the .put on api/user/friend
     handleFriendRequest: function (req, res) {
-        db.Friends.findOneAndUpdate({ 'requestTo': req.session.userId }, { $set: { 'status': req.body.status } })
+        db.Friends.findOneAndUpdate({ 'requestTo': req.session.userId }, { $set: { 'status': req.body.status }}, {new:true})
             .then(friendReq => {
                 // if the requestTo participant accepts the request
                 if (friendReq.status === 'accepted') {
@@ -85,6 +85,18 @@ module.exports = {
             })
             .catch(err => res.status(422).json(err));
     },
+
+    pendingRequest: function(req, res){
+        db.Friends.find({requestTo:req.session.UserId, status:'pending'})
+        .then(results =>{
+            if(results){
+            res.json(results)
+            } else {
+                res.json({message: 'No pending friend requests'})
+            }
+    })
+    .catch(err => res.status(422).json(err))
+},
 
     getFeed: function(req, res){
         db.User

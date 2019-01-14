@@ -2,7 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .sidebar {
-  background-color: $gray-3;
+  background-color: $white-3;
   color: $white-1;
   min-height: calc(100vh - 43px);
   padding: 0;
@@ -12,18 +12,22 @@
     line-height: 18px;
     text-align: center;
     padding: 15px 0 12px;
-    background: $white-2;
+    background: $gray-3;
     text-shadow: 2px 1px 8px $black-1;
+    text-transform: capitalize;
   }
 
-  &__content {
-    // margin-top: 10px;
+  &__media-item--active {
+    background: $blue-3;
+  }
+
+  &__media-item--completed {
+    background: $green-1;
   }
 
   &__media-item {
     padding: 10px 55px 10px 10px;
     border-bottom: 2px solid $gray-3;
-    background: $blue-3;
     clear: both; 
     position: relative;
 
@@ -73,5 +77,9 @@
       color: $white-1;
       text-decoration: none;
     }
+  }
+
+  &__message {
+    margin-top: 15px;
   }
 }

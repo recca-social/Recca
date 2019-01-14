@@ -109,6 +109,12 @@ class Books extends Component {
     .catch(err => console.log(err))
   }
 
+  toggleCompleted = id => {
+    mediaAPI.toggleCompleted(id)
+    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .catch(err => console.log(err))
+  }
+
   handleComplete = id => {
     console.log(`Complete item with id: ${id}`)
   }
@@ -147,6 +153,7 @@ class Books extends Component {
                   resultType="saved"
                   handleDelete={this.handleDelete}
                   toggleActive={this.toggleActive}
+                  toggleCompleted={this.toggleCompleted}
                   handleInputChange={this.handleInputChange}
                   postText={this.state.postText}
                   handleComplete={this.handleComplete}
@@ -159,6 +166,7 @@ class Books extends Component {
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
+            toggleCompleted={this.toggleCompleted}
             mediaType="book"
           />
           </div>

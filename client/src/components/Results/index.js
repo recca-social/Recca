@@ -92,6 +92,7 @@ function Results(props) {
             postText={props.postText}
             handleInputChange={props.handleInputChange}
             handleRecommend={props.handleRecommend}
+            media={item}
             image={item.image}
             title={item.title}
             creator={item.creator}

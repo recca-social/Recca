@@ -33,13 +33,17 @@ html {
     z-index: 1;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 52%;
     margin-left: -200px;
     margin-top: -286px;
     background: #74a3bd;
     padding: 20px;
     border-radius: .25rem;
     color: #FFFFFF
+}
+#login-form {
+    position: absolute;
+    left: 52%;
 }
 
 .login-form-header {
@@ -114,16 +118,16 @@ html {
 .login-form .submit-btn:hover {
     background: rgb(248, 179, 30);
 }
-.login-form .submit-btn:focus {
+/* .login-form .submit-btn:focus {
 	outline: none;
-}
+} */
 .login-form .create-btn {
-	margin-top: 5px;
+    margin-top: 5px;
     background: #1B668F;
     height: 42px;
     border: 0;
     color: #FFFFFF;
-    padding: 8px;
+    padding: 9px 8px 8px 8px;
     font-size: 15px;
     display: block;
     text-align: center;
@@ -167,6 +171,7 @@ html {
     text-align: center;
     border-radius: .25rem;
     height: 42px;
+    font-size: 15px;
 }
 .socmed-login .socmed-btn:hover {
     text-decoration: none;
@@ -191,11 +196,14 @@ html {
 		min-width: 283px;
 		right: 10px;
 		margin-bottom: 10px;
-		width: auto;
-	}
-	.login-form .input {
-		width: 276px;
-	}
+        width: auto;
+    }
+
+    .username,
+    .password {
+        max-width: 243px;
+    }
+	
 	.socmed-login .socmed-btn i {
 		margin-right: 5px;
 		width: 19px;

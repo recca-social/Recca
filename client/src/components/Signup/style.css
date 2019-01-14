@@ -40,6 +40,10 @@ html {
     padding: 20px;
     color: #FFFFFF;
 }
+#login-form {
+    position: absolute;
+    left: 52%;
+}
 
 .login-form-header {
     text-align: center;
@@ -166,6 +170,7 @@ html {
     display: block;
     margin-top: 5px;
     text-align: center;
+    font-size: 15px;
 }
 
 .socmed-login .socmed-btn:hover {

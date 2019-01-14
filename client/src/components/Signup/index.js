@@ -61,7 +61,7 @@ class Signup extends Component {
               <div className="login-form-header">
                 <div className="logo">
                   <img
-                    src="./images/reccoon-lg.png"
+                    src="./images/recco-logo.png"
                     alt="recco"
                     style={{ height: "100px" }}
                   />

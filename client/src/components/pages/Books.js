@@ -82,23 +82,19 @@ class Books extends Component {
     let userMedia = [];
     userAPI.getUserFeed()
     .then(function(res) {
-      console.log(res.data)
+      // console.log(res.data)
       userMedia = res.data.media;
     })
     .then(() => this.setState({ saved: userMedia }))
     .catch(err => console.log(err));
   }
 
-  handleRecommend = id => {
-    // event.preventDefault();
-    this.recommendMedia(id, this.state.postText);
-  }
-
-  recommendMedia = (id, postText) => {
-    console.log(`Recommend item with id: ${id}`)
-    console.log(`Post: ${postText}`)
-    // After recommendation is made, clear state for post text
+  handleRecommend = mediaObj => {
+    mediaObj.postText = this.state.postText;
+    console.log(mediaObj)
     this.setState({postText: ""})
+    // set recommended = true if the mediaObj came from the user's list
+    // send recommendation to user's friends
   }
 
   handleDelete = id => {

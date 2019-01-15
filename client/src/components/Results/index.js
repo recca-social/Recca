@@ -105,11 +105,13 @@ function Results(props) {
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
               <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
-              <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
-                {item.active ?
-                <span>Active <i className="icon icon-eye"></i></span> :
-                <span>Active <i className="icon icon-eye-off"></i></span>}
-              </button>
+              {props.mediaType !== "movie" ?
+                <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
+                  {item.active ?
+                  <span>Active <i className="icon icon-eye"></i></span> :
+                  <span>Active <i className="icon icon-eye-off"></i></span>}
+                </button>
+              : ""}
               <button onClick={() => props.toggleComplete(item._id) } className="btn btn-complete">
                 {item.complete ? 
                 <span>Complete <i className="icon icon-check"></i></span> :

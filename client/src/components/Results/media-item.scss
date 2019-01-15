@@ -28,11 +28,11 @@
     box-shadow: 0px 2px 12px 2px $green-1;
   }
 
-  &__title, &__description, &__creator, &__genre {
+  &__title, &__description, &__metadata {
     color: $white-1;
   }
 
-  &__creator, &__genre {
+  &__metadata{
     margin-bottom: 0;
   }
 

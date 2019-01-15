@@ -43,28 +43,28 @@ module.exports = {
                 let responseArray = response.data.Search
                 let parsedArray = [];
                 for (let i = 0; i < responseArray.length; i++){
-                axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=movie&i=" + responseArray[i].imdbID)
-                .then(function(eachResponse){
-                    let parsedObject = {
-                        title: eachResponse.data.Title,
-                        summary: eachResponse.data.Plot,
-                        poster: eachResponse.data.Poster,
-                        director: eachResponse.data.Director,
-                        genre: eachResponse.data.Genre,
-                        link: "https://www.imdb.com/title/" + eachResponse.data.imdbID,
-                        year: eachResponse.data.Year
-                    }
-                    console.log(parsedObject)
-                    parsedArray.push(parsedObject)
-                    console.log(parsedArray);
-                    if (responseArray.length === parsedArray.length){
-                        res.json(parsedArray)
-                    }
-                })
+                    axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=movie&i=" + responseArray[i].imdbID)
+                    .then(function(eachResponse){
+                        let parsedObject = {
+                            title: eachResponse.data.Title,
+                            summary: eachResponse.data.Plot,
+                            poster: eachResponse.data.Poster,
+                            director: eachResponse.data.Director,
+                            genre: eachResponse.data.Genre,
+                            link: "https://www.imdb.com/title/" + eachResponse.data.imdbID,
+                            year: eachResponse.data.Year,
+                            rating: eachResponse.data.imdbRating,
+                            apiId: eachResponse.data.imdbID
+                        }
+                        console.log(parsedObject)
+                        parsedArray.push(parsedObject)
+                        console.log(parsedArray);
+                        if (responseArray.length === parsedArray.length){
+                            res.json(parsedArray)
+                        }
+                    })
+                }
             }
-            }
-            
-            
         })
     }
 }

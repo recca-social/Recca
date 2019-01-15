@@ -34,7 +34,7 @@ function Results(props) {
   }
   return (
     <div>
-      {props.items ? props.items.map(item => (
+      {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
         <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <div className="media-item__header">
             <img
@@ -45,14 +45,17 @@ function Results(props) {
               <h3 className="media-item__title">
                 {item.link ? 
                   <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
-                : item.title }
+                  : item.title }
+                  {item.year ? 
+                    <span className="media-item__year"> ({item.year})</span>
+                  : ""}
               </h3>
               <p className="media-item__description">{item.description}</p>
             </div>
           </div>
 
           {item.creator ? 
-            <p className="media-item__creator">
+            <p className="media-item__metadata media-item__creator">
               <strong>
                 {creatorText(item.type, item.creator)}
               </strong>
@@ -61,8 +64,14 @@ function Results(props) {
           : ""}
 
           {item.genre ?
-            <p className="media-item__genre">
+            <p className="media-item__metadata media-item__genre">
               <strong>Genre: </strong>{item.genre}
+            </p>
+          : ""}
+
+          {item.rating ?
+            <p className="media-item__metadata media-item__rating">
+              <strong>IMDB Rating: </strong>{item.rating}
             </p>
           : ""}
           

@@ -70,11 +70,18 @@ function Results(props) {
                     <span className="media-item__year"> ({item.year})</span>
                   : ""}
               </h3>
-              <p className="media-item__description">{item.description}</p>
+              {item.description ?
+                <p className="media-item__description">{item.description}</p>
+              : ""}
+              {props.mediaType === "music" && item.creator ?
+                <p className="media-item__metadata media-item__creator">
+                  <strong>{item.creator}</strong>
+                </p>
+              : ""}
             </div>
           </div>
 
-          {item.creator ? 
+          {item.creator && props.mediaType !== "music" ? 
             <p className="media-item__metadata media-item__creator">
               <strong>{creatorText(item.type, item.creator)}</strong>
               {item.creator}

@@ -7,7 +7,7 @@ function parseQueryString(string){
 function parseData(array){
     let parsedArray = [];
     for (let i = 0; i < array.length; i++){
-        const platformArr = [];
+        let platformArr = [];
         if (!array[i].platforms){
             platformArr = false;
         } else {
@@ -16,7 +16,7 @@ function parseData(array){
             }
         }
 
-        const genreArr = [];
+        let genreArr = [];
         if (!array[i].genre) {
             for (let a = 0; a < array[i].genres.length; a++){
                 genreArr.push(array[i].genres[a].name)

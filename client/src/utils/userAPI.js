@@ -6,31 +6,33 @@ export default {
     },
 
     localLogIn: function (username, password) {
-        return axios.post("/login/local",{
-                username: username,
-                password: password,
-            })
-    },
-
-    findUserbyUsername: function(username){
-        return axios.get("/api/user/find/username", {
-            username: username
+        return axios.post("/login/local", {
+            username: username,
+            password: password,
         })
     },
 
-    pendingRequest: function(){
+
+
+    findUserByName: function (query) {
+        return axios.get("/api/user/find/user", {
+            query: query
+        })
+    },
+
+    pendingRequest: function () {
         return axios.get("/api/user/friend")
     },
 
-    newFriendRequest:function (requestTo){
-      return axios.post("/api/user/friend",{
-          requestTo:requestTo,
-      })  
+    newFriendRequest: function (requestTo) {
+        return axios.post("/api/user/friend", {
+            requestTo: requestTo,
+        })
     },
 
-    handleFriendRequest: function(status){
+    handleFriendRequest: function (status) {
         return axios.put("/api/user/friend", {
-            status:status
+            status: status
         })
     },
 
@@ -41,7 +43,7 @@ export default {
     getUserMedia: function () {
         return axios.get("api/user/find")
     },
-    
+
     getUserFeed: function () {
         return axios.get("api/user/feed/")
     }

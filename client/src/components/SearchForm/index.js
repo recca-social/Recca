@@ -12,11 +12,10 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="Search Books"
-          id="search"
+          placeholder={"Search " + props.mediaType + (props.mediaType !== "music" ? "s" : "") }
         />
         <button onClick={props.handleSearch} className="btn btn-primary">
-        <i className="icon icon-search"></i><span className="sr-only">Search</span>
+          <i className="icon icon-search"></i><span className="sr-only">Search</span>
         </button>
       </div>
     </form>

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mediaSchema = new Schema({
+const postSchema = new Schema({
     title: { type: String, required: true }, // used by all
     image: String , // used by all
     description: String, // used by books, movies/shows (plot), music
@@ -13,12 +13,9 @@ const mediaSchema = new Schema({
     year: String, // used for movies/shows release year
     rating: String, // used for movies/shows
     index: Number, // used for display order of saved items
-    active: { type: Boolean, default: false }, // used for active media sidebar display
-    complete: { type: Boolean, default: false }, // used to display completed media in the sidebar under active media
-    recommended: { type: Boolean, default: false }, // used to trigger user description input, which displays in the feed
-    postText: String, // ^
+    postText: String, // used for user description of the item
     apiId: String // id returned from api when searched
-});
+})
 
-const Media = mongoose.model("Media", mediaSchema);
-module.exports = Media;
+const Post = mongoose.model("Post", postSchema);
+module.exports = Post;

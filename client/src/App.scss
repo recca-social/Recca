@@ -1,6 +1,6 @@
 @import 'styles/variables.scss'; // assuming a styles directory under src/
 
-body {
+html, body {
   background-color: $gray-1;
   color: $white-2;
 }

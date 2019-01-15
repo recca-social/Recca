@@ -16,7 +16,7 @@ function Sidebar(props) {
 
       {props.mediaType !== "movie" ? 
       <div>
-        <div className="sidebar__title">Active {props.mediaType}s</div>
+        <div className="sidebar__title">Active {props.mediaType}{props.mediaType !== "music" ? "s" : ""}</div>
         <div className="sidebar__media">
           {// Check for media items and check that there is at least 1 active item
           props.items.filter(item => item.active === true && item.type === props.mediaType).length >= 1 ? 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import API from "../../utils/userAPI";
 import { Redirect, Link } from "react-router-dom";
+import API from "../../utils/userAPI";
 import "./style.css";
 
 class Login extends Component {
@@ -28,58 +28,54 @@ class Login extends Component {
         } else {
           this.setState({
             isLoggedIn: false
-          })
+          });
         }
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
 
   componentDidMount() {
     this.isUser();
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
+  };
 
-  pageChange(event) {
-    
-  }
+  pageChange = event => {};
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
-    console.log("handleSubmit");
     API.localLogIn(this.state.username, this.state.password)
       .then(response => {
         if (response.data.user) {
-          // update App.js state
+          // Update App.js state
           this.setState({
             isLoggedIn: true
           });
         } else {
           this.setState({
             message: response.data.message
-          })
+          });
         }
       })
       .catch(error => {
-        console.log("login error: ");
-        console.log(error);
+        console.log("Login error: " + error);
       });
-  }
+  };
 
   render() {
     return (
       <div>
-        {!this.state.isLoggedIn ?
+        {!this.state.isLoggedIn ? (
           <div className="login-form-container" id="login-form">
             <div className="login-form-content">
               <div className="login-form-header">
                 <div className="logo">
                   <img
-                    src="./images/reccoon-lg.png"
+                    src="./images/recco-clean.png"
                     alt="recco"
                     style={{ height: "100px" }}
                   />
@@ -88,10 +84,10 @@ class Login extends Component {
               </div>
               <form method="post" action="/login/local" className="login-form">
                 <div className="input-container">
-                  <i className="fas fa-user" />
+                  <span className="fas fa-user" />
                   <input
                     type="text"
-                    className="input"
+                    className="username"
                     name="username"
                     placeholder="Username"
                     value={this.state.username}
@@ -99,10 +95,10 @@ class Login extends Component {
                   />
                 </div>
                 <div className="input-container">
-                  <i className="fas fa-lock" />
+                  <span className="fas fa-lock" />
                   <input
                     type="password"
-                    className="input"
+                    className="password"
                     name="password"
                     placeholder="Password"
                     value={this.state.password}
@@ -113,24 +109,27 @@ class Login extends Component {
                   type="submit"
                   name="login"
                   value="Log In"
-                  className="button"
+                  className="submit-btn"
                   onClick={this.handleSubmit}
                 />
-                <Link to="/signup" className='register'>
-                    <span>Create Account</span>
-                </Link>             </form>
+                <Link to="/signup" className="create-btn">
+                  Create Account
+                </Link>
+              </form>
               <div className="separator">
                 <span className="separator-text">OR</span>
               </div>
               <div className="socmed-login">
-                <a href="/login/facebook" className="socmed-btn facebook-btn">
+                <Link to="/login/facebook" className="socmed-btn facebook-btn">
                   <i className="fab fa-facebook-square" />
                   <span>Login with Facebook</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
-      : <Redirect to="/home" />}
+        ) : (
+          <Redirect to="/home" />
+        )}
       </div>
     );
   }

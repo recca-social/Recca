@@ -11,7 +11,8 @@ class Books extends Component {
   state = {
     search: "",
     saved: [],
-    results: []
+    results: [],
+    postText: ""
   }
 
   handleInputChange = event => {
@@ -55,9 +56,8 @@ class Books extends Component {
   }
 
   componentDidMount() {
-    this.getBooks("5c37677ee6badaca32d5dc25");
+    this.getBooks();
   }
-
 
   handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
@@ -71,41 +71,46 @@ class Books extends Component {
       creator: book.creator,
       genre: book.genre,
       apiId: book.apiId
-    }, "5c37677ee6badaca32d5dc25").then(() => {
+    }).then(() => {
       //Once the book is saved, reset state for results
       this.setState({ results : [] })
-      this.getBooks('5c37677ee6badaca32d5dc25')
+      this.getBooks()
     })
   }
 
-  getBooks = id => {
-    let userMedia = [];
-    userAPI.getUserMedia('5c37677ee6badaca32d5dc25')
-    .then(function(res) {
-      userMedia = res.data.media;
+  getBooks = () => {
+    userAPI.getUserMedia()
+    .then((res) => {
+      console.log(res.data.media)
+      this.setState({ saved: res.data.media });
     })
-    .then(() => this.setState({ saved: userMedia }))
     .catch(err => console.log(err));
+  }
+
+  handleRecommend = mediaObj => {
+    mediaObj.postText = this.state.postText;
+    console.log(mediaObj)
+    this.setState({postText: ""})
+    // set recommended = true if the mediaObj came from the user's list
+    // send recommendation to user's friends
   }
 
   handleDelete = id => {
     mediaAPI.delete(id)
-    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .then(this.getBooks())
     .catch(err => console.log(err))
   }
 
   toggleActive = id => {
     mediaAPI.toggleActive(id)
-    .then(this.getBooks('5c37677ee6badaca32d5dc25'))
+    .then(this.getBooks())
     .catch(err => console.log(err))
   }
 
-  handleComplete = id => {
-    console.log(`Complete item with id: ${id}`)
-  }
-
-  handleRecommend = id => {
-    console.log(`Recommend item with id: ${id}`)
+  toggleComplete = id => {
+    mediaAPI.toggleComplete(id)
+    .then(this.getBooks())
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -128,10 +133,13 @@ class Books extends Component {
                   clearResults={this.clearResults}
                   resultType="results"
                   handleSave={this.handleSave}
+                  handleRecommend={this.handleRecommend}
+                  handleInputChange={this.handleInputChange}
+                  postText={this.state.postText}
                 />
               </div> : ""}
             <hr />
-            {this.state.saved.length ? 
+            {this.state.saved ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
                 <Results 
@@ -139,18 +147,19 @@ class Books extends Component {
                   resultType="saved"
                   handleDelete={this.handleDelete}
                   toggleActive={this.toggleActive}
-                  handleComplete={this.handleComplete}
+                  toggleComplete={this.toggleComplete}
+                  handleInputChange={this.handleInputChange}
+                  postText={this.state.postText}
                   handleRecommend={this.handleRecommend}
                 />
               </div> : 
               <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
           
-
-
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
+            toggleComplete={this.toggleComplete}
             mediaType="book"
           />
           </div>

@@ -6,12 +6,10 @@ export function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="navbar-nav">
-        <Link className="navbar-brand" to="/"
-        onClick={() => props.handlePageChange("")}>
+        <Link className="navbar-brand" to="/">
           <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
         </Link>
         <Link to="/movies"
-        onClick={() => props.handlePageChange("Movies")}
         className={props.currentPage === "Movies" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-movie"></i>
@@ -21,7 +19,6 @@ export function Nav(props) {
           </div>
         </Link>
         <Link to="/shows"
-        onClick={() => props.handlePageChange("Shows")}
         className={props.currentPage === "Shows" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-show"></i>
@@ -31,7 +28,6 @@ export function Nav(props) {
           </div>
         </Link>
         <Link to="/books"
-        onClick={() => props.handlePageChange("Books")}
         className={props.currentPage === "Books" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-book"></i>
@@ -41,7 +37,6 @@ export function Nav(props) {
           </div>
         </Link>
         <Link to="/music"
-        onClick={() => props.handlePageChange("Music")}
         className={props.currentPage === "Music" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-music"></i>
@@ -51,7 +46,6 @@ export function Nav(props) {
           </div>
         </Link>
         <Link to="/games"
-        onClick={() => props.handlePageChange("Games")}
         className={props.currentPage === "Games" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-game"></i>
@@ -61,7 +55,6 @@ export function Nav(props) {
           </div>
         </Link>
         <Link to="/friends"
-        onClick={() => props.handlePageChange("Friends")}
         className={props.currentPage === "Friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
           <div className="nav-link__tab">
             <span className="nav-link__text">

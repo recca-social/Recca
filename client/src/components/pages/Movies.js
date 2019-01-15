@@ -38,7 +38,7 @@ class Movies extends Component {
               type: "movie",
               title: movie.title ? movie.title : "",
               year: movie.year ? movie.year : "",
-              image: movie.poster ? movie.poster : "http://placehold.it/128x170",
+              image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
               description: movie.summary ? movie.summary : "No plot summary available",
               link: movie.link ? movie.link : "",
               creator: movie.director ? movie.director : "",

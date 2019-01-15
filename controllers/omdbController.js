@@ -18,10 +18,12 @@ module.exports = {
                         title: eachResponse.data.Title,
                         summary: eachResponse.data.Plot,
                         poster: eachResponse.data.Poster,
-                        director: eachResponse.data.Director,
+                        writer: eachResponse.data.Writer,
                         genre: eachResponse.data.Genre,
                         link: "https://www.imdb.com/title/" + eachResponse.data.imdbID,
-                        year: eachResponse.data.Year
+                        year: eachResponse.data.Year,
+                        rating: eachResponse.data.imdbRating,
+                        apiId: eachResponse.data.imdbID
                     }
                     console.log(parsedObject)
                     parsedArray.push(parsedObject);

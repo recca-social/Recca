@@ -16,11 +16,17 @@ function Results(props) {
       } else {
         return "Artist: "
       }
-    } else if (type === "movie" || type === "show") {
+    } else if (type === "movie") {
       if (string.includes(",")) {
         return "Directors: "
       } else {
         return "Director: "
+      }
+    } else if (type === "show") {
+      if (string.includes(",")) {
+        return "Writers: "
+      } else {
+        return "Writer: "
       }
     } else if (type === "game") {
       if (string.includes(",")) {

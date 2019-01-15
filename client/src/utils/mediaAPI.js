@@ -13,6 +13,6 @@ export default {
         return axios.get("api/media/active/" + id)
     },
     toggleComplete: function(id) {
-        return axios.get("api/media/completed/"+id);
+        return axios.get("api/media/complete/"+id);
     }
 }

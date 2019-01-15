@@ -35,7 +35,7 @@ function Results(props) {
   return (
     <div>
       {props.items ? props.items.map(item => (
-        <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.completed ? 'media-item--completed' : '')}>
+        <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <div className="media-item__header">
             <img
               alt={item.title} className="media-item__img"
@@ -74,8 +74,8 @@ function Results(props) {
                 <span>Active <i className="icon icon-eye"></i></span> :
                 <span>Active <i className="icon icon-eye-off"></i></span>}
               </button>
-              <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">
-                {item.completed ? 
+              <button onClick={() => props.toggleComplete(item._id) } className="btn btn-complete">
+                {item.complete ? 
                 <span>Complete <i className="icon icon-check"></i></span> :
                 <span>Complete <i className="icon icon-check-empty"></i></span>}
               </button>

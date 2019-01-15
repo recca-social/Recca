@@ -14,7 +14,7 @@ const mediaSchema = new Schema({
     rating: String, // used for movies/shows
     index: Number, // used for display order of saved items
     active: { type: Boolean, default: false }, // used for active media sidebar display
-    completed: { type: Boolean, default: false }, // used to display completed media in the sidebar under active media
+    complete: { type: Boolean, default: false }, // used to display completed media in the sidebar under active media
     recommended: { type: Boolean, default: false }, // used to trigger user description input, which displays in the feed
     postText: String, // ^
     apiId: String // id returned from api when searched

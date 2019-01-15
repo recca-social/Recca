@@ -13,8 +13,8 @@ router.route("/delete/:id")
 router.route("/active/:id")
 .get(mediaController.toggleActive);
 
-//route for toggling completed
-router.route("/completed/:id")
+//route for toggling complete
+router.route("/complete/:id")
 .get(mediaController.toggleComplete);
 
 

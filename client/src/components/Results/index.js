@@ -77,7 +77,8 @@ function Results(props) {
 
           {item.rating ?
             <p className="media-item__metadata media-item__rating">
-              <strong>IMDB Rating: </strong>{item.rating}
+              <strong>Rating: </strong>
+              {props.mediaType === "game" ? Math.round(item.rating) : item.rating }
             </p>
           : ""}
           

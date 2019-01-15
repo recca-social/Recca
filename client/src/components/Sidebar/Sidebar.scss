@@ -37,24 +37,41 @@
       padding-top: 15px;
     }
 
-    .btn-active {
+    .btn-active, .btn-complete {
       position: absolute;
       padding: 0;
       top: 50%;
       right: 0;
       height: 100%;
-      font-size: 34px;
       transform: translateY(-50%);
       cursor: pointer;
       background: transparent;
       color: $white-1;
       border: none;
+      width: 55px;
 
       &:hover, &:focus, &:active {
         background: $white-1;
         color: $black-2;
+      }
+    }
+
+    .btn-active {
+      font-size: 28px;
+
+      &:hover, &:focus, &:active {
         .icon:before {
           content:"\e80e";
+        }
+      }
+    }
+
+    .btn-complete {
+      font-size: 24px;
+
+      &:hover, &:focus, &:active {
+        .icon:before {
+          content:"\e812";
         }
       }
     }

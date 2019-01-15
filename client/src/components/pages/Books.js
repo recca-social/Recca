@@ -97,19 +97,19 @@ class Books extends Component {
 
   handleDelete = id => {
     mediaAPI.delete(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 
   toggleActive = id => {
     mediaAPI.toggleActive(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 
   toggleComplete = id => {
     mediaAPI.toggleComplete(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 

@@ -42,8 +42,8 @@ function Sidebar(props) {
             {item.image ? <img src={item.image} alt={item.title} className="sidebar__img" /> : ''}
             <a href={'#' + item.apiId} className="sidebar__link"><strong>{item.title}</strong></a>
             <p>{displayMetadata(item.type, item.creator, item.platform)}</p>
-            <button onClick={() => props.toggleComplete(item._id) } className="btn-active">
-              <i className="icon icon-eye"><span className="sr-only">Set inactive</span></i>
+            <button onClick={() => props.toggleComplete(item._id) } className="btn-complete">
+              <i className="icon icon-check"><span className="sr-only">Set inactive</span></i>
             </button>
             <div className="clearfix"></div>
           </div>

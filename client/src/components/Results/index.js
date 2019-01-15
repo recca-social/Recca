@@ -38,6 +38,20 @@ function Results(props) {
       return "Creator: "
     }
   }
+  function platformText(string) {
+    if (string.includes(",")) {
+      return "Platforms: "
+    } else {
+      return "Platform: "
+    }
+  }
+  function genreText(string) {
+    if (string.includes(",")) {
+      return "Genres: "
+    } else {
+      return "Genre: "
+    }
+  }
   return (
     <div>
       {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
@@ -62,16 +76,22 @@ function Results(props) {
 
           {item.creator ? 
             <p className="media-item__metadata media-item__creator">
-              <strong>
-                {creatorText(item.type, item.creator)}
-              </strong>
+              <strong>{creatorText(item.type, item.creator)}</strong>
               {item.creator}
             </p>
           : ""}
 
           {item.genre ?
             <p className="media-item__metadata media-item__genre">
-              <strong>Genre: </strong>{item.genre}
+              <strong>{genreText(item.genre)}</strong>
+              {item.genre}
+            </p>
+          : ""}
+
+          {item.platform ?
+            <p className="media-item__metadata media-item__platform">
+              <strong>{platformText(item.platform)}</strong>
+              {item.platform}
             </p>
           : ""}
 

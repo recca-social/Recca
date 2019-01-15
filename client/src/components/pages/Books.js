@@ -79,13 +79,11 @@ class Books extends Component {
   }
 
   getBooks = () => {
-    let userMedia = [];
     userAPI.getUserMedia()
-    .then(function(res) {
-      // console.log(res.data)
-      userMedia = res.data.media;
+    .then((res) => {
+      console.log(res.data.media)
+      this.setState({ saved: res.data.media });
     })
-    .then(() => this.setState({ saved: userMedia }))
     .catch(err => console.log(err));
   }
 
@@ -109,14 +107,10 @@ class Books extends Component {
     .catch(err => console.log(err))
   }
 
-  toggleCompleted = id => {
-    mediaAPI.toggleCompleted(id)
+  toggleComplete = id => {
+    mediaAPI.toggleComplete(id)
     .then(this.getBooks())
     .catch(err => console.log(err))
-  }
-
-  handleComplete = id => {
-    console.log(`Complete item with id: ${id}`)
   }
 
   render() {
@@ -153,10 +147,9 @@ class Books extends Component {
                   resultType="saved"
                   handleDelete={this.handleDelete}
                   toggleActive={this.toggleActive}
-                  toggleCompleted={this.toggleCompleted}
+                  toggleComplete={this.toggleComplete}
                   handleInputChange={this.handleInputChange}
                   postText={this.state.postText}
-                  handleComplete={this.handleComplete}
                   handleRecommend={this.handleRecommend}
                 />
               </div> : 
@@ -166,7 +159,7 @@ class Books extends Component {
           <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
-            toggleCompleted={this.toggleCompleted}
+            toggleComplete={this.toggleComplete}
             mediaType="book"
           />
           </div>

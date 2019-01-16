@@ -21,6 +21,8 @@ router.route("/friend")
 
 
 router.route("/feed/")
-.get(userController.getFeed)
+.get(userController.getFeed);
 
+router.route("/getFeedItems/")
+.get(userController.getFeedItems);
 module.exports = router;

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // import Header from "../Header";
 import userAPI from "../../utils/userAPI";
+import FeedResults from "../FeedResults";
+import Header from "../Header"
 
 class Home extends Component {
   state = {
@@ -9,10 +11,14 @@ class Home extends Component {
   };
 
   getFeed = () =>{
-    userAPI.getUserFeed()
+    let feedPosts = []
+    userAPI.getFeedItems()
     .then(function(res) {
       console.log(res.data)
+      feedPosts = res.data
     })
+    .then(() => this.setState({ activity: feedPosts }))
+    .catch(err => console.log(err));
   }
 
   componentDidMount(){
@@ -22,8 +28,14 @@ class Home extends Component {
   render() {
     return (
       <div>
-        {/* <Header title="Feed"/> */}
-      </div>
+        { <Header title="User Feed"/> }
+        <div className="row justify-content-center">
+          <FeedResults 
+            items={this.state.activity}
+          />
+        </div>
+          
+        </div>
     );
   }
 }

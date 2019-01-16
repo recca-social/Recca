@@ -16,6 +16,7 @@
   position: relative;
   border-radius: 10px;
   min-height: 190px;
+  max-width: 1000px;
 
   &--active {
     border: 4px solid $blue-3;

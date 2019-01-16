@@ -119,13 +119,41 @@ module.exports = {
 
     getFeed: function (req, res) {
         db.User
-            .findById({ _id: req.user._id })
-            .populate("friends")
-            .populate("media")
-            .populate("posts")
-            .then(function (dbUser) {
-                res.json(dbUser)
-            })
+        .findById({ _id: req.session.userId })
+        .populate("friends")
+        .populate("media")
+        .populate("posts")
+        .then(function(dbUser){
+            res.json(dbUser)
+        })
+    },
+
+    getFeedItems: function(req, res){
+        db.User
+        .findById({ _id: req.session.userId })
+        .populate("friends")
+        .then(function(dbUser){
+            var friendsArray = dbUser.friends
+            var postsArray = [];
+            for (let i = 0; i < friendsArray.length; i++){
+                postsArray.push(...friendsArray[i].posts)
+            }
+            var postObjReturn = [];
+            for (let i = 0; i < postsArray.length; i++){
+                db.Post
+                .findById({ _id: postsArray[i]})
+                .then(function(postReturn){
+                    postObjReturn.push(postReturn)
+                    if (postsArray.length == postObjReturn.length){
+                        postObjReturn.sort(function (a, b) {
+                            return b.created_at - a.created_at;
+                          });
+                        res.json(postObjReturn)
+                    }
+                })
+
+            }
+        })
     }
 
     // todo: add in a delete friend request route in case of accidental rejections.

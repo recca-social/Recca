@@ -1,108 +1,66 @@
 import React from "react";
 import "./media-item.scss";
+import moment from "moment";
 
 function Results(props) {
-  function creatorText(type, string) {
-    if (type === "book") {
-      if (string.includes(",")) {
-        return "Authors: "
-      } else {
-        return "Author: "
-      }
-    } else if (type === "music") {
-      if (string.includes(",")) {
-        return "Artists: "
-      } else {
-        return "Artist: "
-      }
-    } else if (type === "movie" || type === "show") {
-      if (string.includes(",")) {
-        return "Directors: "
-      } else {
-        return "Director: "
-      }
-    } else if (type === "game") {
-      if (string.includes(",")) {
-        return "Studios: "
-      } else {
-        return "Studio: "
-      }
-    } else {
-      return "Creator: "
-    }
+  function typeCapitalized(string){
+    const upper = string.replace(/^\w/, c => c.toUpperCase());
+    return upper
   }
-  return (
+
+  function parseDate(date) {
+    var newDate = moment(date).format("MMM-DD-YY hh:mm a")
+    return newDate
+  }
+
+  return ( 
     <div>
       {props.items ? props.items.map(item => (
-        <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
+        <div key={item._id} id={item.apiId} className={'media-item'}>
           <div className="media-item__header">
             <img
               alt={item.title} className="media-item__img"
               src={item.image}
             />
             <div className="media-item__details">
-              <h3 className="media-item__title">
+              <h1 className="media-item__title font-weight-bold">Recommended by: {item.postAuthor}</h1>
+              <h5 className="media-item__title">
                 {item.link ? 
                   <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
                 : item.title }
-              </h3>
-              <p className="media-item__description">{item.description}</p>
+              </h5>
+              {item.genre ?
+                <p className="media-item__genre">
+                  <strong>Type: </strong>{typeCapitalized(item.type)}
+                </p>
+              : ""}
+              {item.postText ?
+              <div>
+                <span className="media-item__description font-weight-bold">{item.postAuthor} says:</span>
+                <p className="media-item__description">{item.postText}</p>
+              </div>
+              : 
+              <div>
+                <span className="media-item__description font-weight-bold">Web Description:</span>
+                <p className="media-item__description mb-3">{item.description}</p>
+              </div>
+                }
+            
             </div>
           </div>
 
           {item.creator ? 
             <p className="media-item__creator">
               <strong>
-                {creatorText(item.type, item.creator)}
+                Posted:
               </strong>
-              {item.creator}
+              {" " + parseDate(item.created_at)}
             </p>
-          : ""}
+          : ""}      
 
-          {item.genre ?
-            <p className="media-item__genre">
-              <strong>Genre: </strong>{item.genre}
-            </p>
-          : ""}
-          
-          {props.resultType === "saved" ? 
-            <div className="media-item__buttons media-item__buttons--saved">
-              <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
-              <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
-                {item.active ?
-                <span>Active <i className="icon icon-eye"></i></span> :
-                <span>Active <i className="icon icon-eye-off"></i></span>}
-              </button>
-              <button onClick={() => props.handleComplete(item._id) } className="btn btn-complete">
-                {item.complete ? 
-                <span>Complete <i className="icon icon-check"></i></span> :
-                <span>Complete <i className="icon icon-check-empty"></i></span>}
-              </button>
-              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
-            </div>
-          : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">
               <button onClick={() => props.handleSave(item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark"></i></button>
-              <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
             </div>
-          : ""}
-              
-          <div className="modal fade" id={"modal-" + item.apiId} tabIndex="-1" role="dialog" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  ...
-                </div>
-                <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(item.apiId) }>Post recommendation</button>
-              </div>
-            </div>
-          </div>
 
         </div>
       )) : ""}

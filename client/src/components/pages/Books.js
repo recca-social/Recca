@@ -12,7 +12,7 @@ class Books extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: "",
+    postText: ""
   }
 
   handleInputChange = event => {
@@ -81,7 +81,6 @@ class Books extends Component {
   getBooks = () => {
     userAPI.getUserMedia()
     .then((res) => {
-      console.log(res.data.media)
       this.setState({ saved: res.data.media });
     })
     .catch(err => console.log(err));
@@ -97,19 +96,19 @@ class Books extends Component {
 
   handleDelete = id => {
     mediaAPI.delete(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 
   toggleActive = id => {
     mediaAPI.toggleActive(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 
   toggleComplete = id => {
     mediaAPI.toggleComplete(id)
-    .then(this.getBooks())
+    .then(this.getBooks)
     .catch(err => console.log(err))
   }
 
@@ -122,6 +121,7 @@ class Books extends Component {
               search={this.state.search}
               handleInputChange={this.handleInputChange}
               handleSearch={this.handleSearch}
+              mediaType="book"
             />
             {this.state.results.length ? 
               <div className="media-wrapper">
@@ -132,6 +132,7 @@ class Books extends Component {
                   items={this.state.results}
                   clearResults={this.clearResults}
                   resultType="results"
+                  mediaType="book"
                   handleSave={this.handleSave}
                   handleRecommend={this.handleRecommend}
                   handleInputChange={this.handleInputChange}
@@ -145,6 +146,7 @@ class Books extends Component {
                 <Results 
                   items={this.state.saved}
                   resultType="saved"
+                  mediaType="book"
                   handleDelete={this.handleDelete}
                   toggleActive={this.toggleActive}
                   toggleComplete={this.toggleComplete}
@@ -160,6 +162,7 @@ class Books extends Component {
             items={this.state.saved}
             toggleActive={this.toggleActive}
             toggleComplete={this.toggleComplete}
+            handleDelete={this.handleDelete}
             mediaType="book"
           />
           </div>

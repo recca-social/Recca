@@ -1,6 +1,5 @@
-html {
-    background: #424242;
-}
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .background, 
 .backdrop {
@@ -25,6 +24,11 @@ html {
 	-o-filter: blur(5px);
 	-ms-filter: blur(5px);
 	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
+}
+
+.logo img {
+    border-radius: 50%;
+    box-shadow: 2px 2px 12px 0 #000;
 }
 
 .login-form-container {

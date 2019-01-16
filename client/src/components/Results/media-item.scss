@@ -145,60 +145,60 @@
       }
     }
   }
-}
 
-.btn-save {
-  background-color: $green-1;
-
-  &:hover {
-    .icon-bookmark-empty:before {
-      content: "\e80c";
+  .btn-save {
+    background-color: $green-1;
+  
+    &:hover {
+      .icon-bookmark-empty:before {
+        content: "\e80c";
+      }
     }
   }
-}
-
-.btn-remove {
-  background-color: $red-1;
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
+  
+  .btn-remove {
+    background-color: $red-1;
+  
+    &:hover {
+      .icon-trash-empty:before {
+        content: "\f1f8";
+      }
     }
   }
-}
-
-.btn-complete {
-  background-color: $green-1;
-
-  &:hover {
-    .icon-check:before {
-      content: "\e812";
-    }
-    .icon-check-empty:before {
-      content: "\e811";
-    }
-  }
-}
-
-.btn-active {
-  background-color: $blue-3;
-
-  &:hover {
-    .icon-eye:before {
-      content: "\e80e";
-    }
-    .icon-eye-off:before {
-      content: "\e80d";
+  
+  .btn-complete {
+    background-color: $green-1;
+  
+    &:hover {
+      .icon-check:before {
+        content: "\e812";
+      }
+      .icon-check-empty:before {
+        content: "\e811";
+      }
     }
   }
-}
-
-.btn-recommend {
-  background-color: $yellow-1;
-
-  &:hover {
-    .icon-star:before {
-      content: "\e804";
+  
+  .btn-active {
+    background-color: $blue-3;
+  
+    &:hover {
+      .icon-eye:before {
+        content: "\e80e";
+      }
+      .icon-eye-off:before {
+        content: "\e80d";
+      }
+    }
+  }
+  
+  .btn-recommend {
+    background-color: $yellow-1;
+  
+    &:hover {
+      .icon-star:before {
+        content: "\e804";
+      }
     }
   }
 }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-import API from "../../utils/userAPI";
-import "./style.css";
 import userAPI from "../../utils/userAPI";
-import authHandler from "../../utils/authHandler"
+import authHandler from "../../utils/authHandler";
+import Footer from "../Footer";
+import "./style.scss";
 
 class Login extends Component {
   constructor() {
@@ -33,7 +33,7 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    API.localLogIn(this.state.username, this.state.password)
+    userAPI.localLogIn(this.state.username, this.state.password)
       .then(response => {
         console.log(response);
         if (response.data.user) {
@@ -68,12 +68,12 @@ class Login extends Component {
             <div className="login-form-header">
               <div className="logo">
                 <img
-                  src="./images/recco-clean.png"
-                  alt="recco"
-                  style={{ height: "100px" }}
+                  src="/images/recca-logo.png"
+                  alt="recca the raccoon"
+                  style={{ height: "180px" }}
                 />
               </div>
-              <h3>Recco</h3>
+              <h1 className="sr-only">Recca</h1>
             </div>
             <form method="post" action="/login/local" className="login-form">
               <div className="input-container">
@@ -120,6 +120,8 @@ class Login extends Component {
             </div>
           </div>
         </div>
+
+        {/* <Footer /> */}
       </div>
 
     );

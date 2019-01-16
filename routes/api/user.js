@@ -7,7 +7,8 @@ router.route("/create")
 
 //route for finding user by id
 router.route("/find")
-.get(userController.findUser);
+.get(userController.findUser)
+.put(userController.removeFriend);
 
 //route for finding user by username
 router.route("/find/user")
@@ -17,8 +18,8 @@ router.route("/find/user")
 router.route("/friend")
 .get(userController.pendingRequest)
 .post(userController.newFriendRequest)
-.put(userController.handleFriendRequest);
-
+.put(userController.handleFriendRequest)
+.delete(userController.removeFriend);
 
 router.route("/feed/")
 .get(userController.getFeed)

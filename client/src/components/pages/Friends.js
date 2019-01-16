@@ -10,7 +10,6 @@ import userAPI from "../../utils/userAPI";
 class Friends extends Component {
   state = {
     search: "",
-    query: "",
     results: [],
     saved: [],
     requests: [],
@@ -27,13 +26,11 @@ class Friends extends Component {
 
   handleSearch = event => {
     event.preventDefault();
-    this.searchFriends(this.state.search);
+    this.searchFriends(this.state.search)
+    this.setState({ search: "" });
     console.log(this.state.search);
   };
 
-  // =========================================================================
-  // THIS IS ONLY SEARCHING FOR MYSELF
-  // THE USER CONTROLLER METHOD WAS NOT WORKING FOR TAKING IN THE SEARCH QUERY
   searchFriends = query => {
     const results = [];
     console.log(query);
@@ -90,16 +87,6 @@ class Friends extends Component {
       .catch(err => console.log(err));
   };
 
-  // handleFriendRequest = status => {
-  //   userAPI
-  //     .handleFriendRequest(status)
-  //     .then(res => {
-  //       // I THINK I NEED MORE HERE
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-
   handlePendingRequest = () => {
     userAPI
       .pendingRequest()
@@ -110,8 +97,7 @@ class Friends extends Component {
       .catch(err => console.log(err));
   };
 
-  // HANDLE ACCEPT FRIEND
-  handleAcceptFriend = status => {
+  handleAcceptRequest = status => {
     userAPI
       .handleFriendRequest("accepted")
       .then(res => {
@@ -121,8 +107,7 @@ class Friends extends Component {
       .catch(err => console.log(err));
   };
 
-  // HANDLE DECLINE FRIEND
-  handleDeclineFriend = status => {
+  handleDeclineRequest = status => {
     userAPI
       .handleFriendRequest("declined")
       .then(res => {
@@ -131,8 +116,21 @@ class Friends extends Component {
       .catch(err => console.log(err));
   };
 
+  handleRemoveFriend = id => {
+    console.log(id);
+    userAPI.removeFriend(id)
+      .then(res => {
+        console.log(res);
+        this.getFriends()
+      })
+      .catch(err => console.log(err));
+  }
+
   clearResults = () => {
-    this.setState({ results: [] });
+    this.setState({
+      results: [],
+      search: ""
+    });
   };
 
   componentDidMount() {
@@ -168,29 +166,32 @@ class Friends extends Component {
               ""
             )}
             <hr />
-            {this.state.saved ? 
+            {this.state.saved ? (
               <div className="media-wrapper">
-                <h2 className="text-center">Your Friends</h2>
-                <FriendResults 
+                <h2 className="text-center">My Friends</h2>
+                <FriendResults
                   items={this.state.saved}
                   resultType="saved"
-                  handleRemove={this.handleRemove}
+                  handleRemoveFriend={this.handleRemoveFriend}
                   // toggleActive={this.toggleActive}
                   // toggleComplete={this.toggleComplete}
                   // handleInputChange={this.handleInputChange}
                   // postText={this.state.postText}
                   // handleRecommend={this.handleRecommend}
                 />
-              </div> : 
-              <p className="text-center empty-media-msg">Use the search bar above to find and add friends!</p> }
-          
+              </div>
+            ) : (
+              <p className="text-center empty-media-msg">
+                Use the search bar above to find and add friends!
+              </p>
+            )}
           </div>
           <FriendSidebar
             items={this.state.requests}
             // handleFriendRequest={this.handleFriendRequest}
             handlePendingRequest={this.handlePendingRequest}
-            handleAcceptFriend={this.handleAcceptFriend}
-            handleDeclineFriend={this.handleDeclineFriend}
+            handleAcceptRequest={this.handleAcceptRequest}
+            handleDeclineRequest={this.handleDeclineRequest}
             mediaType="friend"
           />
         </div>

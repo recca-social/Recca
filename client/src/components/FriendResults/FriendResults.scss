@@ -10,13 +10,17 @@
 }
 
 .media-item {
-  padding: 20px 151px 20px 20px;
+  // padding: 20px 151px 20px 20px;
   background: $gray-3;
   margin-bottom: 20px;
   position: relative;
   border-radius: 10px;
-  min-height: 190px;
+  min-height: 10px;
   border: 4px solid $white-2;
+
+  &__friend {
+    margin: 0px;
+  }
 
   &--active {
     border: 4px solid $blue-3;
@@ -158,7 +162,47 @@
 }
 
 .btn-remove {
+  background-color: $yellow-1;
+
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
+    }
+  }
+}
+
+.btn-accept {
+  background-color: $green-1;
+
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
+    }
+  }
+}
+
+.btn-decline {
   background-color: $red-1;
+
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
+    }
+  }
+}
+
+.btn-unfriend {
+  background-color: rgb(224, 221, 219);
+
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
+    }
+  }
+}
+
+.btn-add {
+  background-color: $yellow-1;
 
   &:hover {
     .icon-trash-empty:before {

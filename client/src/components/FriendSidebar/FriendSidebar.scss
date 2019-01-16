@@ -8,6 +8,28 @@
   min-height: calc(100vh - 43px);
   padding: 0;
 
+  &__buttons {
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+    // display: flex;
+    // flex-direction: column;
+    float: left;
+    box-shadow: -2px 2px 12px 0 $black-2;
+    max-width: 100px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    // border-top-right-radius: 6px;
+    // border-bottom-left-radius: 6px;
+  }
+
+  &__buttons:hover, &__buttons:focus {
+    box-shadow: 0px 1px 12px 0 $black-2;
+    z-index: 2;
+  }
+
   &__title {
     font-size: 18px;
     line-height: 18px;
@@ -27,7 +49,7 @@
   }
 
   &__media-item {
-    padding: 10px 55px 10px 10px;
+    padding: 10px 10px 10px 10px;
     border-bottom: 2px solid $gray-3;
     clear: both; 
     position: relative;
@@ -83,4 +105,5 @@
   &__message {
     margin-top: 15px;
   }
+
 }

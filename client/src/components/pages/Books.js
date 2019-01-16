@@ -122,6 +122,7 @@ class Books extends Component {
               search={this.state.search}
               handleInputChange={this.handleInputChange}
               handleSearch={this.handleSearch}
+              mediaType="friend"
             />
             {this.state.results.length ? 
               <div className="media-wrapper">

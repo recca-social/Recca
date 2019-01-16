@@ -25,25 +25,22 @@ function Sidebar(props) {
             {/* <a href={'#' + item.apiId} className="sidebar__link"><strong>{item.title}</strong></a> */}
             <p>
                 {/* {displayMetadata(item.type, item.creator, item.platform)} */}
-                {item.participants[1]}
+                {item._id}
             </p>
-            <p><button onClick={() => props.handleAcceptFriend() }>
-              
-                Accept
-              
-            </button>
-            </p>
-            <p><button onClick={() => props.handleDeclineFriend() }>
-              
-                Decline
-              
-            </button>
-            </p>
+            <div className="sidebar__buttons">
+                <button onClick={() => props.handleAcceptRequest() } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>
+            </div>
+            <div className="sidebar__buttons">
+                <button onClick={() => props.handleDeclineRequest() } className="btn btn-decline">Decline <i className="icon icon-cancel"> </i></button>
+            </div>
             <div className="clearfix"></div>
           </div>
         )) 
         
-        : <p className="text-center sidebar__message">Active {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
+        :   <p className="text-center sidebar__message">
+                {/* {props.mediaType}{props.mediaType !== "music" ? "s" : "" }  */}
+                Friend requests will display here
+            </p> }
       </div>
 
       {/* <div className="sidebar__title">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" }</div>

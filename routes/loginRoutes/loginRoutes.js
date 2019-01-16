@@ -3,9 +3,9 @@ const passport = require("../../config/passportConfig")
 
 router.route("/check").get(function (req, res) {
   if (req.user) {
-    res.json({ isLoggedIn: true });
+    res.send(true);
   } else {
-    res.json({ isLoggedIn: false })
+    res.send(false)
   }
 })
 

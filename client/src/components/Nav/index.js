@@ -6,7 +6,7 @@ export function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="navbar-nav">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/home">
           <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
         </Link>
         <Link to="/movies"

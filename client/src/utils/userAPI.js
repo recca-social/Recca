@@ -12,7 +12,9 @@ export default {
         })
     },
 
-
+    logOut: function() {
+        return axios.get("/logout")
+    },
 
     findUserByName: function (query) {
         return axios.get("/api/user/find/user", {

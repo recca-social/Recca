@@ -81,7 +81,6 @@ class Books extends Component {
   getBooks = () => {
     userAPI.getUserMedia()
     .then((res) => {
-      console.log(res.data.media)
       this.setState({ saved: res.data.media });
     })
     .catch(err => console.log(err));
@@ -163,6 +162,7 @@ class Books extends Component {
             items={this.state.saved}
             toggleActive={this.toggleActive}
             toggleComplete={this.toggleComplete}
+            handleDelete={this.handleDelete}
             mediaType="book"
           />
           </div>

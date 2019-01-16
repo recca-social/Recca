@@ -68,7 +68,7 @@ class Login extends Component {
             <div className="login-form-header">
               <div className="logo">
                 <img
-                  src="./images/recco-clean.png"
+                  src="./images/recco-lg.png"
                   alt="recco"
                   style={{ height: "100px" }}
                 />

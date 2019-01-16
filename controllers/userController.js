@@ -27,9 +27,11 @@ module.exports = {
     // returns the userId which can and should be supplied as the SECOND ID in the participatants object sent to newFriendRequest
     // via .get on /api/user/friend
     userByName: function (req, res) {
+        console.log(req.body);
         let queryArr = req.body.query.split(" ");
-        if (queryArr.length == 1) {
+        if (queryArr.length === 1) {
             let queryItem = queryArr[0];
+            console.log(queryArr, queryItem)
             db.User.find({$or: [{username: queryItem}, {firstName: queryItem}, {lastName: queryItem}]})
                 .then(users => res.json(users))
                 .catch(err => res.status(422).json(err));

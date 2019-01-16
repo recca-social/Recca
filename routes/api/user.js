@@ -10,7 +10,7 @@ router.route("/find")
 .get(userController.findUser);
 
 //route for finding user by username
-router.route("/find/user")
+router.route("/find/name")
 .get(userController.userByName);
 
 //route for friend requests

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-import API from "../../utils/userAPI";
-import "./style.css";
 import userAPI from "../../utils/userAPI";
-import authHandler from "../../utils/authHandler"
+import authHandler from "../../utils/authHandler";
+import Footer from "../Footer";
+import "./style.scss";
 
 class Login extends Component {
   constructor() {
@@ -33,7 +33,7 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    API.localLogIn(this.state.username, this.state.password)
+    userAPI.localLogIn(this.state.username, this.state.password)
       .then(response => {
         console.log(response);
         if (response.data.user) {
@@ -120,6 +120,8 @@ class Login extends Component {
             </div>
           </div>
         </div>
+
+        {/* <Footer /> */}
       </div>
 
     );

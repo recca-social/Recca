@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
-import "./style.css";
+import "./style.scss";
 
 class Signup extends Component {
   constructor() {

@@ -78,7 +78,6 @@
       .btn-complete {
         &:hover, &:focus, &:active {
           background: $green-1;
-          // color: $white-1;
         }
     
         &:hover, &:focus, &:active {
@@ -124,19 +123,6 @@
     }
   }
 
-  .btn-active, .btn-complete {
-    // position: absolute;
-    // padding: 0;
-    // top: 50%;
-    // right: 0;
-    // height: 50%;
-    // transform: translateY(-50%);
-    // background: transparent;
-    // color: $white-1;
-    // border: none;
-    // width: 55px;
-  }
-
   .btn-active {
     font-size: 28px;
 
@@ -154,17 +140,6 @@
 
   .btn-complete {
     font-size: 24px;
-
-    // &:hover, &:focus, &:active {
-    //   background: $white-1;
-    //   color: $black-2;
-    // }
-
-    // &:hover, &:focus, &:active {
-    //   .icon:before {
-    //     content:"\e812";
-    //   }
-    // }
   }
 
   .btn-delete {

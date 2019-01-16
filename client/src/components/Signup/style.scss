@@ -1,6 +1,5 @@
-html {
-    background: #424242;
-}
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .background, 
 .backdrop {

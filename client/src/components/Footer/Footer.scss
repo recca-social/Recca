@@ -1,0 +1,55 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+body {
+  padding-bottom: 100px; 
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background: $blue-2;
+  padding: 20px 20px;
+
+  a {
+    color: $yellow-1;
+  }
+
+  h5, p {
+    text-align: center;
+  }
+
+  &__contact {
+    margin-bottom: 15px;
+
+    @include respond(md) {
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .contact--left {
+    p {
+      @include respond(md) {
+        text-align: right;
+      }
+    }
+  }
+
+  .contact--right {
+    p {
+      @include respond(md) {
+        text-align: left;
+      }
+    }
+  }
+
+  .btn-logout {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}

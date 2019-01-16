@@ -7,7 +7,7 @@ export function Nav(props) {
     <nav className="navbar navbar-expand-lg">
       <div className="navbar-nav">
         <Link className="navbar-brand" to="/">
-          <img src="/images/recca-lg.png" alt="Recca logo" className="logo" />
+          <img src="/images/recca-black.png" alt="Recca logo" className="logo" />
         </Link>
         <Link to="/movies"
         className={props.location.pathname === "/movies" ? "nav-link active" : "nav-link"}>

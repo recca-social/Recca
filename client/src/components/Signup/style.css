@@ -27,6 +27,11 @@ html {
 	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
 }
 
+.logo img {
+    border-radius: 50%;
+    box-shadow: 2px 2px 12px 0 #000;
+}
+
 .login-form-container {
     max-width: 350px;
     width: 100%;

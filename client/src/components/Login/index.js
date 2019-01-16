@@ -68,12 +68,12 @@ class Login extends Component {
             <div className="login-form-header">
               <div className="logo">
                 <img
-                  src="/images/recca-lg.png"
+                  src="/images/recca-logo.png"
                   alt="recca the raccoon"
-                  style={{ height: "100px" }}
+                  style={{ height: "180px" }}
                 />
               </div>
-              <h3>Recca</h3>
+              <h1 className="sr-only">Recca</h1>
             </div>
             <form method="post" action="/login/local" className="login-form">
               <div className="input-container">

@@ -6,16 +6,15 @@ router.route("/create")
 .post(userController.create);
 
 //route for finding user by id
-router.route("/find/:id")
+router.route("/find/")
 .get(userController.findUser);
 
-//route for friend requests
-router.route("/friend")
-.get(userController.userByUserName)
-.post(userController.newFriendRequest)
-.put(userController.handleFriendRequest)
+// router.route("/friend/add/:id")
+// .post(userController.addFriend);
 
 router.route("/feed/")
-.get(userController.getFeed)
+.get(userController.getFeed);
 
+router.route("/getFeedItems/")
+.get(userController.getFeedItems);
 module.exports = router;

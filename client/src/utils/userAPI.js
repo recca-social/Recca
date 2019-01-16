@@ -40,5 +40,9 @@ export default {
     
     getUserFeed: function () {
         return axios.get("api/user/feed/")
+    },
+
+    getFeedItems: function () {
+        return axios.get("api/user/getFeedItems/")
     }
 }

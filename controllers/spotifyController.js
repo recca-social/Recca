@@ -42,6 +42,7 @@ module.exports = {
                 }
             })
             .then(function(spotifyResponse){
+                console.log(spotifyResponse)
                 res.json(parseAlbums(spotifyResponse.data))
             })
         })

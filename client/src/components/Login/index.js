@@ -59,7 +59,6 @@ class Login extends Component {
       return <Redirect to={{
         pathname:"/home",
         state:{from: this.props.location},
-        isLoggedIn: true,
     }} />
     }
     return (

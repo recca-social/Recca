@@ -8,16 +8,11 @@ import Results from "../Results";
 import "./mediaPages.scss";
 
 class Books extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: "",
-      saved: [],
-      results: [],
-      postText: "",
-      isLoggedIn: props.isLoggedIn
-    }
+  state = {
+    search: "",
+    saved: [],
+    results: [],
+    postText: "",
   }
 
   handleInputChange = event => {
@@ -36,7 +31,7 @@ class Books extends Component {
   searchBooks = query => {
     const results = [];
     bookAPI.search(query)
-      .then(function (res) {
+      .then(function(res) {
         res.data.items.forEach(book => {
           results.push(
             {
@@ -57,7 +52,7 @@ class Books extends Component {
   };
 
   clearResults = () => {
-    this.setState({ results: [] })
+    this.setState({results: []})
   }
 
   componentDidMount() {
@@ -66,7 +61,7 @@ class Books extends Component {
 
   handleSave = id => {
     const book = this.state.results.find(book => book.apiId === id);
-    this.setState({ search: "", results: [] })
+    this.setState({ search: "", results : [] })
     mediaAPI.create({
       type: "book",
       title: book.title,
@@ -78,44 +73,44 @@ class Books extends Component {
       apiId: book.apiId
     }).then(() => {
       //Once the book is saved, reset state for results
-      this.setState({ results: [] })
+      this.setState({ results : [] })
       this.getBooks()
     })
   }
 
   getBooks = () => {
     userAPI.getUserMedia()
-      .then((res) => {
-        console.log(res.data.media)
-        this.setState({ saved: res.data.media });
-      })
-      .catch(err => console.log(err));
+    .then((res) => {
+      console.log(res.data.media)
+      this.setState({ saved: res.data.media });
+    })
+    .catch(err => console.log(err));
   }
 
   handleRecommend = mediaObj => {
     mediaObj.postText = this.state.postText;
     console.log(mediaObj)
-    this.setState({ postText: "" })
+    this.setState({postText: ""})
     // set recommended = true if the mediaObj came from the user's list
     // send recommendation to user's friends
   }
 
   handleDelete = id => {
     mediaAPI.delete(id)
-      .then(this.getBooks())
-      .catch(err => console.log(err))
+    .then(this.getBooks())
+    .catch(err => console.log(err))
   }
 
   toggleActive = id => {
     mediaAPI.toggleActive(id)
-      .then(this.getBooks())
-      .catch(err => console.log(err))
+    .then(this.getBooks())
+    .catch(err => console.log(err))
   }
 
   toggleComplete = id => {
     mediaAPI.toggleComplete(id)
-      .then(this.getBooks())
-      .catch(err => console.log(err))
+    .then(this.getBooks())
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -123,17 +118,17 @@ class Books extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-9 main">
-            <SearchForm
+            <SearchForm 
               search={this.state.search}
               handleInputChange={this.handleInputChange}
               handleSearch={this.handleSearch}
             />
-            {this.state.results.length ?
+            {this.state.results.length ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Results</h2>
                 <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                 <div className="clearfix"></div>
-                <Results
+                <Results 
                   items={this.state.results}
                   clearResults={this.clearResults}
                   resultType="results"
@@ -144,10 +139,10 @@ class Books extends Component {
                 />
               </div> : ""}
             <hr />
-            {this.state.saved ?
+            {this.state.saved ? 
               <div className="media-wrapper">
                 <h2 className="text-center">Saved Books</h2>
-                <Results
+                <Results 
                   items={this.state.saved}
                   resultType="saved"
                   handleDelete={this.handleDelete}
@@ -157,17 +152,17 @@ class Books extends Component {
                   postText={this.state.postText}
                   handleRecommend={this.handleRecommend}
                 />
-              </div> :
-              <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p>}
+              </div> : 
+              <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
-
-          <Sidebar
+          
+          <Sidebar 
             items={this.state.saved}
             toggleActive={this.toggleActive}
             toggleComplete={this.toggleComplete}
             mediaType="book"
           />
-        </div>
+          </div>
       </div>
     )
   }

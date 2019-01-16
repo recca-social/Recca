@@ -61,12 +61,12 @@ class Signup extends Component {
               <div className="login-form-header">
                 <div className="logo">
                   <img
-                    src="./images/recco-lg.png"
-                    alt="recco"
+                    src="/images/recca-lg.png"
+                    alt="recca the raccoon"
                     style={{ height: "100px" }}
                   />
                 </div>
-                <h3>Recco</h3>
+                <h3>Recca</h3>
               </div>
               <form method="post" action="/login/signup" className="login-form">
                 <div className="input-container first-name">

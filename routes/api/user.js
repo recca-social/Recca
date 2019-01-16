@@ -6,11 +6,19 @@ router.route("/create")
 .post(userController.create);
 
 //route for finding user by id
-router.route("/find/")
+router.route("/find")
 .get(userController.findUser);
 
-// router.route("/friend/add/:id")
-// .post(userController.addFriend);
+//route for finding user by username
+router.route("/find/user")
+.get(userController.userByName);
+
+//route for friend requests
+router.route("/friend")
+.get(userController.pendingRequest)
+.post(userController.newFriendRequest)
+.put(userController.handleFriendRequest);
+
 
 router.route("/feed/")
 .get(userController.getFeed);

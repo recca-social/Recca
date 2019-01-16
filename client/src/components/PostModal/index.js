@@ -33,7 +33,7 @@ const PostModal = props => (
             </div>
           </form>
         </div>
-        <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(props.apiId)} data-dismiss="modal">Post recommendation <i className="icon icon-star"></i></button>
+        <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(props.media)} data-dismiss="modal">Post recommendation <i className="icon icon-star"></i></button>
       </div>
     </div>
   </div>

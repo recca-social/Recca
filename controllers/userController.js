@@ -96,7 +96,7 @@ module.exports = {
                         })
                         .catch(err => console.log(err))
                     res.json({ message: friendArr[0] + " and " + friendArr[1] + " are now friends." })
-                } else {
+                } else if (friendReq.status === 'declined') {
                     res.json({ message: friendArr[0] + " and " + friendArr[1] + " are definitely not friends." })
                 }
             })

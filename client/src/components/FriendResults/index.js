@@ -74,18 +74,7 @@ function Results(props) {
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
-              <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
-              <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
-                {item.active ?
-                <span>Active <i className="icon icon-eye"></i></span> :
-                <span>Active <i className="icon icon-eye-off"></i></span>}
-              </button>
-              <button onClick={() => props.toggleComplete(item._id) } className="btn btn-complete">
-                {item.complete ? 
-                <span>Complete <i className="icon icon-check"></i></span> :
-                <span>Complete <i className="icon icon-check-empty"></i></span>}
-              </button>
-              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
+              <button onClick={() => props.handleRemove(item._id) } className="btn btn-remove">Unfriend <i className="icon icon-user-times"></i></button>       
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">

@@ -11,7 +11,7 @@ router.route("/find")
 
 //route for finding user by username
 router.route("/find/user")
-.get(userController.userByName);
+.post(userController.userByName);
 
 //route for friend requests
 router.route("/friend")

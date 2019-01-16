@@ -2,15 +2,15 @@ import React from "react";
 import "./FriendSidebar.scss";
 
 function Sidebar(props) {
-  function displayMetadata(type, creator, platform) {
-    if ((type === "book" || type === "music") && creator) {
-      return creator;
-    } else if ((type === "movie" || type === "show" || type === "game") && platform) {
-      return `Platform: ${platform}`
-    } else {
-      return ''
-    }
-  }
+//   function displayMetadata(type, creator, platform) {
+//     if ((type === "book" || type === "music") && creator) {
+//       return creator;
+//     } else if ((type === "movie" || type === "show" || type === "game") && platform) {
+//       return `Platform: ${platform}`
+//     } else {
+//       return ''
+//     }
+//   }
   return (
     <div className="col-md-3 sidebar">
 
@@ -41,10 +41,12 @@ function Sidebar(props) {
             </p>
             <div className="clearfix"></div>
           </div>
-        )) : <p className="text-center sidebar__message">Active {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
+        )) 
+        
+        : <p className="text-center sidebar__message">Active {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
       </div>
 
-      <div className="sidebar__title">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" }</div>
+      {/* <div className="sidebar__title">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" }</div>
       <div className="sidebar__media">
         {// Check for media items and check that there is at least 1 completed item
         props.items.filter(item => item.complete === true).length >= 1 ? 
@@ -60,7 +62,7 @@ function Sidebar(props) {
             <div className="clearfix"></div>
           </div>
         )) : <p className="text-center sidebar__message">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
-      </div>
+      </div> */}
 
     </div>
   )

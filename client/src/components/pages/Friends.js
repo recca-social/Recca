@@ -10,6 +10,7 @@ import userAPI from "../../utils/userAPI";
 class Friends extends Component {
   state = {
     search: "",
+    query: "",
     results: [],
     saved: [],
     requests: [],
@@ -111,18 +112,19 @@ class Friends extends Component {
 
   // HANDLE ACCEPT FRIEND
   handleAcceptFriend = status => {
-    // console.log(status);
     userAPI
-      .handleFriendRequest(status)
-      .then(this.getFriends())
+      .handleFriendRequest("accepted")
+      .then(res => {
+        console.log(res);
+        this.getFriends();
+      })
       .catch(err => console.log(err));
   };
 
   // HANDLE DECLINE FRIEND
   handleDeclineFriend = status => {
-    console.log(status);
     userAPI
-      .handleFriendRequest(status)
+      .handleFriendRequest("declined")
       .then(res => {
         console.log(res);
       })
@@ -166,6 +168,22 @@ class Friends extends Component {
               ""
             )}
             <hr />
+            {this.state.saved ? 
+              <div className="media-wrapper">
+                <h2 className="text-center">Your Friends</h2>
+                <FriendResults 
+                  items={this.state.saved}
+                  resultType="saved"
+                  handleRemove={this.handleRemove}
+                  // toggleActive={this.toggleActive}
+                  // toggleComplete={this.toggleComplete}
+                  // handleInputChange={this.handleInputChange}
+                  // postText={this.state.postText}
+                  // handleRecommend={this.handleRecommend}
+                />
+              </div> : 
+              <p className="text-center empty-media-msg">Use the search bar above to find and add friends!</p> }
+          
           </div>
           <FriendSidebar
             items={this.state.requests}

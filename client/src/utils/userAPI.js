@@ -15,7 +15,7 @@ export default {
 
 
     findUserByName: function (query) {
-        return axios.get("/api/user/find/user", {
+        return axios.post("/api/user/find/user", {
             query: query
         })
     },

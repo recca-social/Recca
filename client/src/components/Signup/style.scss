@@ -1,6 +1,5 @@
-body {
-    background: #202020;
-}
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .background, 
 .backdrop {
@@ -27,6 +26,11 @@ body {
 	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
 }
 
+.logo img {
+    border-radius: 50%;
+    box-shadow: 2px 2px 12px 0 #000;
+}
+
 .login-form-container {
     max-width: 350px;
     width: 100%;
@@ -38,6 +42,11 @@ body {
     margin-top: -286px;
     background: #74a3bd;
     padding: 20px;
+    color: #FFFFFF;
+}
+#login-form {
+    position: absolute;
+    left: 52%;
 }
 
 .login-form-header {
@@ -49,16 +58,37 @@ body {
     margin-top: 15px;
     font-size: 16px;
     color: #9e9e9e;
-	padding-bottom: 5px;
+    padding-bottom: 5px;
+    position: relative;
 }
 .login-form .input {
 	border: 0;
-    width: 286px;
+    width: 310px;
     height: 38px;
-    padding: 5px;
+    padding-left: 10px;
+    border-radius: .25rem;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+    text-indent: 24px;
 }
 .login-form .input:focus {
     outline: none;
+}
+.login-form .fas {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.first-name .input {
+	border: 0;
+    width: 310px;
+    height: 38px;
+    text-indent: 2px;
+}
+.last-name .input {
+	border: 0;
+    width: 310px;
+    height: 38px;
+    text-indent: 2px;
 }
 #show-password {
 	float: right;
@@ -98,20 +128,22 @@ body {
 	outline: none;
 }
 .login-form .register {
-	margin-top: 5px;
-    background: #1B668F;
+	margin-top: 15px;
+    width: 100%;
+    height: 42px;
+    background: #6ac174;
     border: 0;
     color: #FFFFFF;
     padding: 8px;
     font-size: 15px;
     display: block;
     text-align: center;
+    border-radius: .25rem;
     cursor: pointer;
 }
 .login-form .register:hover	{
-	background: #b7b7b7;
+	background: #49a154;
 }
-
 .login-form i {
     background: #FFFFFF;
     padding: 11px 0px 11px 10px;
@@ -142,6 +174,12 @@ body {
     display: block;
     margin-top: 5px;
     text-align: center;
+    font-size: 15px;
+}
+
+.socmed-login .socmed-btn:hover {
+    text-decoration: none;
+    background: #2f59af;
 }
 
 .socmed-login i {
@@ -155,20 +193,24 @@ body {
 	}
 }
 
-@media screen and (max-width: 400px) {
-	.login-form-container {
+@media screen and (max-width: 320px) {
+	/* .login-form-container {
 		left: 5px;
 		margin-left: 5px;
 		min-width: 283px;
 		right: 10px;
 		margin-bottom: 10px;
 		width: auto;
-	}
-	.login-form .input {
-		width: 276px;
-	}
-	.socmed-login .socmed-btn i {
+	} */
+    .login-form .input {
+		width: 280px;
+    }
+    .first-name .input,
+    .last-name .input {
+        width: 280px;
+    }
+	/* .socmed-login .socmed-btn i {
 		margin-right: 5px;
 		width: 19px;
-	}
+	} */
 }

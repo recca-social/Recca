@@ -1,6 +1,5 @@
-body {
-    background: #202020;
-}
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .background, 
 .backdrop {
@@ -27,17 +26,28 @@ body {
 	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
 }
 
+.logo img {
+    border-radius: 50%;
+    box-shadow: 2px 2px 12px 0 #000;
+}
+
 .login-form-container {
     max-width: 350px;
     width: 100%;
     z-index: 1;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 52%;
     margin-left: -200px;
     margin-top: -286px;
     background: #74a3bd;
     padding: 20px;
+    border-radius: .25rem;
+    color: #FFFFFF
+}
+#login-form {
+    position: absolute;
+    left: 52%;
 }
 
 .login-form-header {
@@ -49,26 +59,32 @@ body {
     margin-top: 15px;
     font-size: 16px;
     color: #9e9e9e;
-	padding-bottom: 5px;
+    padding-bottom: 5px;
+    position: relative;
 }
-.login-form .input {
-	border: 0;
-    width: 286px;
+.login-form .username {
+    border: 0;
+    width: 310px;
     height: 38px;
-    padding-left: 10px;
+    border-radius: .25rem;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+    text-indent: 32px;
+}
+.login-form .password {
+    border: 0;
+    width: 310px;
+    height: 38px;
+    border-radius: .25rem;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+    text-indent: 32px;
+}
+.login-form .fas {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 .login-form .input:focus {
     outline: none;
-}
-.first-name .input {
-	border: 0;
-    width: 310px;
-    height: 38px;
-}
-.last-name .input {
-	border: 0;
-    width: 310px;
-    height: 38px;
 }
 #show-password {
 	float: right;
@@ -90,8 +106,9 @@ body {
 .login-form .rememberme span {
 	vertical-align: top;
 }
-.login-form .button {
-	margin-top: 15px;
+.submit-btn {
+    margin-top: 15px;
+    margin-bottom: 5px;
     width: 100%;
     background: #FEC74D;
     border: 0;
@@ -99,28 +116,31 @@ body {
     padding: 10px;
     font-size: 15px;
 	cursor: pointer;
-	transition: background .3s;
+    transition: background .3s;
+    border-radius: .25rem;
 }
-.login-form .button:hover {
-	background: #1f6eb7;
+.login-form .submit-btn:hover {
+    background: rgb(248, 179, 30);
 }
-.login-form .button:focus {
+/* .login-form .submit-btn:focus {
 	outline: none;
-}
-.login-form .register {
-	margin-top: 15px;
-    width: 100%;
-    height: 44px;
+} */
+.login-form .create-btn {
+    margin-top: 5px;
     background: #1B668F;
+    height: 42px;
     border: 0;
     color: #FFFFFF;
-    padding: 8px;
+    padding: 9px 8px 8px 8px;
     font-size: 15px;
     display: block;
     text-align: center;
+    cursor: pointer;
+    border-radius: .25rem;
 }
-.login-form .register:hover	{
-	background: #b7b7b7;
+.login-form .create-btn:hover	{
+    background: rgb(11, 83, 122);
+    text-decoration: none;
 }
 
 .login-form i {
@@ -153,16 +173,17 @@ body {
     display: block;
     margin-top: 5px;
     text-align: center;
+    border-radius: .25rem;
+    height: 42px;
+    font-size: 15px;
+}
+.socmed-login .socmed-btn:hover {
+    text-decoration: none;
+    background: #2f59af;
 }
 
 .socmed-login i {
     padding-right: 10px;
-}
-
-p {
-    margin-top: 1rem;
-    margin-bottom: 0;
-    text-align: center;
 }
 
 @media screen and (max-height: 600px) {
@@ -172,22 +193,23 @@ p {
 	}
 }
 
-@media screen and (max-width: 400px) {
-	.login-form-container {
+@media screen and (max-width: 320px) {
+	/* .login-form-container {
 		left: 5px;
 		margin-left: 5px;
 		min-width: 283px;
 		right: 10px;
 		margin-bottom: 10px;
-		width: auto;
-	}
-    .login-form .input {
-		width: 286px;
+        width: auto;
+        position: fixed;
+        left: 0;
+    } */
+
+    .username,
+    .password {
+        max-width: 280px;
     }
-    .first-name .input,
-    .last-name .input {
-        width: 310px;
-    }
+	
 	.socmed-login .socmed-btn i {
 		margin-right: 5px;
 		width: 19px;

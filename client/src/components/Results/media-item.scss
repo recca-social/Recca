@@ -11,27 +11,28 @@
 
 .media-item {
   padding: 20px 151px 20px 20px;
-  background: $white-2;
+  background: $gray-3;
   margin-bottom: 20px;
   position: relative;
   border-radius: 10px;
   min-height: 190px;
+  border: 4px solid $white-2;
 
   &--active {
     border: 4px solid $blue-3;
     box-shadow: 0px 2px 12px 2px $blue-3;
   }
 
-  &--completed {
+  &--complete {
     border: 4px solid $green-1;
     box-shadow: 0px 2px 12px 2px $green-1;
   }
 
-  &__title, &__description, &__creator, &__genre {
-    color: $black-2;
+  &__title, &__description, &__metadata {
+    color: $white-1;
   }
 
-  &__creator, &__genre {
+  &__metadata{
     margin-bottom: 0;
   }
 
@@ -51,7 +52,7 @@
       &:hover {
         text-decoration: none;
         text-shadow: none;
-        color: $black-1;
+        color: $white-1;
       }
     }
   }
@@ -79,28 +80,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    // @-moz-document url-prefix() {
-    //   overflow: hidden;
-    //   position: relative;
-    //   &::before {
-    //     background: #fff;
-    //     bottom: -2px;
-    //     position: absolute;
-    //     right: 0;
-    //     float: right;
-    //     content: '\2026';
-    //     margin-left: -3rem;
-    //     width: 3rem;
-    //   }
-    //   &::after {
-    //     content: '';
-    //     background: #fff;
-    //     position: absolute;
-    //     height: 50px;
-    //     width: 100%;
-    //     z-index: 1;
-    //   }
-    // }
   }
 
   &__img {
@@ -115,27 +94,9 @@
     }
   }
 
-  &__creator {
-
-  }
-
   .btn {
     color: $black-1;
   }
-
-  // &__buttons--saved {
-  //   top: 0;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  // }
-
-  // &__buttons--results {
-  //   top: 0;
-
-  //   .btn:first-of-type {
-  //     border-top-right-radius: 10px;
-  //   }
-  // }
 
   &__buttons {
     position: absolute;
@@ -143,9 +104,16 @@
     right: 0;
     display: flex;
     flex-direction: column;
+    box-shadow: -2px 2px 12px 0 $black-2;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
 
     .btn:first-of-type {
-      border-top-right-radius: 10px;
+      border-top-right-radius: 6px;
+    }
+
+    .btn:last-of-type {
+      border-bottom-left-radius: 6px;
     }
 
     .btn {
@@ -156,7 +124,10 @@
       color: $black-1;
       position: relative;
 
-      &:hover, &:focus {
+      &:hover, &:focus {      
+        box-shadow: 0px 1px 12px 0 $black-2;
+        z-index: 2;
+        
         &::after {
           content: "";
           position: absolute;
@@ -175,29 +146,29 @@
     }
   }
 
-
   .btn-save {
     background-color: $green-1;
+  
+    &:hover {
+      .icon-bookmark-empty:before {
+        content: "\e80c";
+      }
+    }
   }
-
-  .btn-more {
-    background-color: $blue-3;
-    margin-bottom: 8px;
-  }
-
+  
   .btn-remove {
     background-color: $red-1;
-
+  
     &:hover {
       .icon-trash-empty:before {
         content: "\f1f8";
       }
     }
   }
-
+  
   .btn-complete {
     background-color: $green-1;
-
+  
     &:hover {
       .icon-check:before {
         content: "\e812";
@@ -207,10 +178,10 @@
       }
     }
   }
-
+  
   .btn-active {
     background-color: $blue-3;
-
+  
     &:hover {
       .icon-eye:before {
         content: "\e80e";
@@ -220,10 +191,10 @@
       }
     }
   }
-
+  
   .btn-recommend {
     background-color: $yellow-1;
-
+  
     &:hover {
       .icon-star:before {
         content: "\e804";

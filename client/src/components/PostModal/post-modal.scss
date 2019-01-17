@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.modal {
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .btn-recommend {
+    margin-bottom: 20px;
+    width: 50%;
+    transform: translateX(50%);
+    box-shadow: 2px 2px 12px 0 $black-3;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translate(50%, -2px);
+    }
+  }
+
+
+  &__title {
+    color: $black-1;
+    margin-bottom: 5px;
+  }
+
+  &__creator {
+    color: $black-1;
+    margin-bottom: 5px;
+  }
+}
+
+
+.modal-header {
+  border: none;
+
+  img {
+    float: left;
+    height: 75px;
+    margin-right: 15px;
+  }
+}

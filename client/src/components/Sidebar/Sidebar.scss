@@ -2,7 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .sidebar {
-  background-color: $gray-3;
+  background-color: $white-3;
   color: $white-1;
   min-height: calc(100vh - 43px);
   padding: 0;
@@ -12,46 +12,29 @@
     line-height: 18px;
     text-align: center;
     padding: 15px 0 12px;
-    background: $white-2;
+    background: $gray-3;
     text-shadow: 2px 1px 8px $black-1;
+    text-transform: capitalize;
   }
 
-  &__content {
-    // margin-top: 10px;
+  &__media-item--active {
+    background: $blue-3;
+  }
+
+  &__media-item--complete {
+    background: $green-1;
   }
 
   &__media-item {
     padding: 10px 55px 10px 10px;
     border-bottom: 2px solid $gray-3;
-    background: $blue-3;
     clear: both; 
     position: relative;
+    min-height: 85px;
 
     &:first-of-type {
       box-shadow: inset 0px 7px 13px -7px $black-2;
       padding-top: 15px;
-    }
-
-    .btn-active {
-      position: absolute;
-      padding: 0;
-      top: 50%;
-      right: 0;
-      height: 100%;
-      font-size: 34px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      background: transparent;
-      color: $white-1;
-      border: none;
-
-      &:hover, &:focus, &:active {
-        background: $white-1;
-        color: $black-2;
-        .icon:before {
-          content:"\e80e";
-        }
-      }
     }
 
     p {
@@ -68,10 +51,109 @@
   &__link {
     color: $yellow-1;
     text-shadow: 1px 1px 5px $black-1;
+    line-height: 1em;
 
     &:hover {
       color: $white-1;
       text-decoration: none;
+    }
+  }
+
+  &__message {
+    margin-top: 15px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 0;
+    top: 0;
+    right: 0;
+    height: 100%;
+    color: $white-1;
+    border: none;
+
+    &--active {
+      .btn-complete {
+        &:hover, &:focus, &:active {
+          background: $green-1;
+        }
+    
+        &:hover, &:focus, &:active {
+          .icon:before {
+            content:"\e811";
+          }
+        }
+      }
+    }
+
+    &--complete {
+
+      .btn-complete {
+        &:hover, &:focus, &:active {
+          background: $white-1;
+          color: $black-2;
+        }
+    
+        &:hover, &:focus, &:active {
+          .icon:before {
+            content:"\e812";
+          }
+        }
+      }
+    }
+
+    .sidebar-btn {
+      cursor: pointer;
+      background: transparent;
+      height: 50%;
+      color: $white-1;
+      border: none;
+      width: 55px;
+      padding: 0;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .btn-active {
+    font-size: 28px;
+
+    &:hover, &:focus, &:active {
+      background: $white-1;
+      color: $black-2;
+    }
+
+    &:hover, &:focus, &:active {
+      .icon:before {
+        content:"\e80e";
+      }
+    }
+  }
+
+  .btn-complete {
+    font-size: 24px;
+  }
+
+  .btn-delete {
+    font-size: 28px;
+
+    &:hover, &:focus, &:active {
+      background: $red-1;
+      color: $black-2;
+    }
+
+    &:hover, &:focus, &:active {
+      .icon:before {
+        content:"\f1f8";
+      }
     }
   }
 }

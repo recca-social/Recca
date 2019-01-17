@@ -1,71 +1,64 @@
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Nav.scss";
 
 export function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="navbar-nav">
-        <Link className="navbar-brand" to="/"
-        onClick={() => props.handlePageChange("")}>
-          <img src="/images/reccoon-lg.png" alt="Recco logo" className="logo" />
+        <Link className="navbar-brand" to="/">
+          <img src="/images/recca-black.png" alt="Recca logo" className="logo" />
         </Link>
         <Link to="/movies"
-        onClick={() => props.handlePageChange("Movies")}
-        className={props.currentPage === "Movies" ? "nav-link active" : "nav-link"}>
+        className={props.location.pathname === "/movies" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-movie"></i>
             <span className="nav-link__text">
-              Movies{props.currentPage === "Movies" ? <span className="sr-only"> (current)</span> : ""}
+              Movies{props.location.pathname === "/movies" ? <span className="sr-only"> (current)</span> : ""}
             </span>
           </div>
         </Link>
         <Link to="/shows"
-        onClick={() => props.handlePageChange("Shows")}
-        className={props.currentPage === "Shows" ? "nav-link active" : "nav-link"}>
+        className={props.location.pathname === "/shows" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-show"></i>
             <span className="nav-link__text">
-              Shows{props.currentPage === "Shows" ? <span className="sr-only"> (current)</span> : ""}
+              Shows{props.location.pathname === "/shows" ? <span className="sr-only"> (current)</span> : ""}
             </span>
           </div>
         </Link>
         <Link to="/books"
-        onClick={() => props.handlePageChange("Books")}
-        className={props.currentPage === "Books" ? "nav-link active" : "nav-link"}>
+        className={props.location.pathname === "/books" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-book"></i>
             <span className="nav-link__text">
-              Books{props.currentPage === "Books" ? <span className="sr-only"> (current)</span> : ""}
+              Books{props.location.pathname === "/books" ? <span className="sr-only"> (current)</span> : ""}
             </span>
           </div>
         </Link>
         <Link to="/music"
-        onClick={() => props.handlePageChange("Music")}
-        className={props.currentPage === "Music" ? "nav-link active" : "nav-link"}>
+        className={props.location.pathname === "/music" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-music"></i>
             <span className="nav-link__text">
-              Music{props.currentPage === "Music" ? <span className="sr-only"> (current)</span> : ""}
+              Music{props.location.pathname === "/music" ? <span className="sr-only"> (current)</span> : ""}
             </span>
           </div>
         </Link>
         <Link to="/games"
-        onClick={() => props.handlePageChange("Games")}
-        className={props.currentPage === "Games" ? "nav-link active" : "nav-link"}>
+        className={props.location.pathname === "/games" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
             <i className="icon icon-game"></i>
             <span className="nav-link__text">
-              Games{props.currentPage === "Games" ? <span className="sr-only"> (current)</span> : ""}
+              Games{props.location.pathname === "/games" ? <span className="sr-only"> (current)</span> : ""}
             </span>
           </div>
         </Link>
         <Link to="/friends"
-        onClick={() => props.handlePageChange("Friends")}
-        className={props.currentPage === "Friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
+        className={props.location.pathname === "/friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
           <div className="nav-link__tab">
             <span className="nav-link__text">
-              Friends{props.currentPage === "Friends" ? <span className="sr-only"> (current)</span> : ""}
+              Friends{props.location.pathname === "/friends" ? <span className="sr-only"> (current)</span> : ""}
             </span>
             <i className="icon icon-users"></i>
           </div>

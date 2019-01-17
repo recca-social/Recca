@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-    create: function(exportObject, id){
-        return axios.post("/api/media/create/" + id, exportObject)
+    create: function(exportObject){
+        return axios.post("/api/media/create/", exportObject)
     },
 
     delete: function(id) {
@@ -11,5 +11,9 @@ export default {
 
     toggleActive: function(id) {
         return axios.get("api/media/active/" + id)
+    },
+    
+    toggleComplete: function(id) {
+        return axios.get("api/media/complete/"+id);
     }
 }

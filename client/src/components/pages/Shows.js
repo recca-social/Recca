@@ -168,6 +168,7 @@ class Shows extends Component {
             items={this.state.saved}
             toggleActive={this.toggleActive}
             toggleComplete={this.toggleComplete}
+            handleDelete={this.handleDelete}
             mediaType="show"
           />
           </div>

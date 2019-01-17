@@ -117,7 +117,7 @@ module.exports = {
 
     getFeed: function (req, res) {
         db.User
-        .findById({ _id: req.session.userId })
+        .findById({ _id: req.user._id })
         .populate("friends")
         .populate("media")
         .populate("posts")
@@ -128,7 +128,7 @@ module.exports = {
 
     getFeedItems: function(req, res){
         db.User
-        .findById({ _id: req.session.userId })
+        .findById({ _id: req.user._id })
         .populate("friends")
         .then(function(dbUser){
             var friendsArray = dbUser.friends

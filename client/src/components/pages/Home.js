@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-// import Header from "../Header";
 import userAPI from "../../utils/userAPI";
+import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
-import Header from "../Header"
+import Header from "../Header";
 
 class Home extends Component {
   state = {
-    search: "",
     activity: []
   };
 
@@ -21,6 +20,23 @@ class Home extends Component {
     .catch(err => console.log(err));
   }
 
+  handleSave = id => {
+    const media = this.state.activity.find(media => media.apiId === id);
+    mediaAPI.create({
+      title: media.title,
+      image: media.image,
+      description: media.description,
+      creator: media.creator,
+      type: media.type,
+      link: media.link,
+      genre: media.genre,
+      platform: media.platform,
+      year: media.year,
+      rating: media.rating,
+      apiId: media.apiId
+    })
+  }
+
   componentDidMount(){
     this.getFeed()
   }
@@ -32,6 +48,7 @@ class Home extends Component {
         <div className="row justify-content-center">
           <FeedResults 
             items={this.state.activity}
+            handleSave={this.handleSave}
           />
         </div>
           

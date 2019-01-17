@@ -121,7 +121,7 @@ class Login extends Component {
           </div>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
 
     );

@@ -3,7 +3,7 @@ const db = require("../models");
 
 // This file empties the collection and inserts this new data
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recco");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recca");
 
 const userSeed = [
   {

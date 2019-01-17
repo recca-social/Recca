@@ -1,50 +1,62 @@
 import axios from "axios";
 
 export default {
-    isLoggedIn: function () {
-        return axios.get("/login/check")
-    },
+  isLoggedIn: function() {
+    return axios.get("/login/check");
+  },
 
-    localLogIn: function (username, password) {
-        return axios.post("/login/local", {
-            username: username,
-            password: password,
-        })
-    },
+  localLogIn: function(username, password) {
+    return axios.post("/login/local", {
+      username: username,
+      password: password
+    });
+  },
 
+  logOut: function() {
+    return axios.get("/logout");
+  },
 
+  findUserByName: function(query) {
+    return axios.post("/api/user/find/user", {
+      query: query
+    });
+  },
 
-    findUserByName: function (query) {
-        return axios.get("/api/user/find/user", {
-            query: query
-        })
-    },
+  pendingRequest: function() {
+    return axios.get("/api/user/friend");
+  },
 
-    pendingRequest: function () {
-        return axios.get("/api/user/friend")
-    },
+  newFriendRequest: function(requestTo) {
+    return axios.post("/api/user/friend", {
+      requestTo: requestTo
+    });
+  },
 
-    newFriendRequest: function (requestTo) {
-        return axios.post("/api/user/friend", {
-            requestTo: requestTo,
-        })
-    },
+  handleFriendRequest: function(id, status) {
+    return axios.put("/api/user/friend", {
+      id: id,
+      status: status
+    });
+  },
 
-    handleFriendRequest: function (status) {
-        return axios.put("/api/user/friend", {
-            status: status
-        })
-    },
+  // Remove Friend
+  removeFriend: function(id) {
+    return axios.delete("api/friend/" + id);
+  },
 
-    facebookLogIn: function () {
-        return axios.get("/login/facebook")
-    },
+  facebookLogIn: function() {
+    return axios.get("/login/facebook");
+  },
 
-    getUserMedia: function () {
-        return axios.get("api/user/find")
-    },
+  getUserMedia: function() {
+    return axios.get("api/user/find");
+  },
 
-    getUserFeed: function () {
-        return axios.get("api/user/feed/")
-    }
-}
+  getUserFeed: function() {
+    return axios.get("api/user/feed/");
+  },
+
+  getFeedItems: function() {
+    return axios.get("api/user/getFeedItems/");
+  }
+};

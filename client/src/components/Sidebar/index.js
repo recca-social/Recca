@@ -29,9 +29,14 @@ function Sidebar(props) {
                 <span className="sidebar__year"> ({item.year})</span>
               : ""}
               <p>{displayMetadata(item.type, item.creator, item.genre, item.platform)}</p>
-              <button onClick={() => props.toggleActive(item._id) } className="btn-active">
-                <i className="icon icon-eye"><span className="sr-only">Set inactive</span></i>
-              </button>
+              <div className="sidebar__buttons sidebar__buttons--active">
+                <button onClick={() => props.toggleActive(item._id) } className="btn-active sidebar-btn">
+                  <i className="icon icon-eye"><span className="sr-only">Set inactive</span></i>
+                </button>
+                <button onClick={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
+                  <i className="icon icon-check-empty"><span className="sr-only">Set complete</span></i>
+                </button>
+              </div>
               <div className="clearfix"></div>
             </div>
           )) : <p className="text-center sidebar__message">Active {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
@@ -51,10 +56,15 @@ function Sidebar(props) {
             {item.year ? 
               <span className="sidebar__year"> ({item.year})</span>
             : ""}
-            <p>{displayMetadata(item.type, item.creator, item.genre,  item.platform)}</p>
-            <button onClick={() => props.toggleComplete(item._id) } className="btn-complete">
-              <i className="icon icon-check"><span className="sr-only">Set inactive</span></i>
-            </button>
+            <p>{displayMetadata(item.type, item.creator, item.genre, item.platform)}</p>
+            <div className="sidebar__buttons sidebar__buttons--complete">
+              <button onClick={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
+                <i className="icon icon-check"><span className="sr-only">Set incomplete</span></i>
+              </button>
+              <button onClick={() => props.handleDelete(item._id) } className="btn-delete sidebar-btn">
+                <i className="icon icon-trash-empty"><span className="sr-only">Delete</span></i>
+              </button>
+            </div>
             <div className="clearfix"></div>
           </div>
         )) : <p className="text-center sidebar__message">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }

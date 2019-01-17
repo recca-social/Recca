@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import movieAPI from "../../utils/movieAPI";
 import mediaAPI from "../../utils/mediaAPI";
 import userAPI from "../../utils/userAPI";
+import postAPI from "../../utils/postAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
@@ -92,7 +93,7 @@ class Movies extends Component {
 
   handleRecommend = mediaObj => {
     mediaObj.postText = this.state.postText;
-    console.log(mediaObj)
+    postAPI.post(mediaObj);
     this.setState({postText: ""})
     // set recommended = true if the mediaObj came from the user's list
     // send recommendation to user's friends

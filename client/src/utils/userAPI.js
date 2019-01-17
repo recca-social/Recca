@@ -28,8 +28,9 @@ export default {
     });
   },
 
-  handleFriendRequest: function(status) {
+  handleFriendRequest: function(id, status) {
     return axios.put("/api/user/friend", {
+      id: id,
       status: status
     });
   },

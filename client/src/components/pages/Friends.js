@@ -97,21 +97,24 @@ class Friends extends Component {
       .catch(err => console.log(err));
   };
 
-  handleAcceptRequest = status => {
+  handleAcceptRequest = (id, status) => {
     userAPI
-      .handleFriendRequest("accepted")
+      .handleFriendRequest(id, status)
       .then(res => {
         console.log(res);
         this.getFriends();
+        this.handlePendingRequest();
       })
       .catch(err => console.log(err));
   };
 
-  handleDeclineRequest = status => {
+  handleDeclineRequest = (id, status) => {
     userAPI
-      .handleFriendRequest("declined")
+      .handleFriendRequest(id, status)
       .then(res => {
         console.log(res);
+        this.getFriends();
+        this.handlePendingRequest();
       })
       .catch(err => console.log(err));
   };

@@ -25,13 +25,13 @@ function Sidebar(props) {
             {/* <a href={'#' + item.apiId} className="sidebar__link"><strong>{item.title}</strong></a> */}
             <p>
                 {/* {displayMetadata(item.type, item.creator, item.platform)} */}
-                {item._id}
+                {item.participants[0].username} ({item.participants[0].firstName} {item.participants[0].lastName})
             </p>
             <div className="sidebar__buttons">
-                <button onClick={() => props.handleAcceptRequest() } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>
+                <button onClick={() => props.handleAcceptRequest(item._id, "accepted") } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>
             </div>
             <div className="sidebar__buttons">
-                <button onClick={() => props.handleDeclineRequest() } className="btn btn-decline">Decline <i className="icon icon-cancel"> </i></button>
+                <button onClick={() => props.handleDeclineRequest(item._id, "rejected") } className="btn btn-decline">Decline <i className="icon icon-cancel"> </i></button>
             </div>
             <div className="clearfix"></div>
           </div>

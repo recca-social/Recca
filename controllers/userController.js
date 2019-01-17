@@ -21,9 +21,7 @@ module.exports = {
   },
 
   //method for finding user by id, and removing friend from friends array
-  removeFriend: function(req, res) {
-
-  },
+  removeFriend: function(req, res) {},
 
   // this route is intended for finding users for potential friending purposes
   // returns the userId which can and should be supplied as the SECOND ID in the participatants object sent to newFriendRequest
@@ -96,11 +94,12 @@ module.exports = {
   // accessed via the .put on api/user/friend
   handleFriendRequest: function(req, res) {
     db.Friends.findOneAndUpdate(
-      { requestTo: req.user._id },
+      { _id: req.body.id },
       { $set: { status: req.body.status } },
       { new: true }
     )
       .then(friendReq => {
+        console.log(friendReq);
         // if the requestTo participant accepts the request
         if (friendReq.status === "accepted") {
           let friendArr = friendReq.participants;
@@ -120,17 +119,10 @@ module.exports = {
               result.save(console.log("saved the initiator's friends array"));
             })
             .catch(err => console.log(err));
-          res.json({
-            message: friendArr[0] + " and " + friendArr[1] + " are now friends."
-          });
-        } else if (friendReq.status === "declined") {
-          res.json({
-            message:
-              friendArr[0] +
-              " and " +
-              friendArr[1] +
-              " are definitely not friends."
-          });
+          res.json(friendReq);
+        } else if (friendReq.status === "rejected") {
+          console.log(friendReq.status);
+          res.json(friendReq);
         }
       })
       .catch(err => res.status(422).json(err));
@@ -138,6 +130,7 @@ module.exports = {
 
   pendingRequest: function(req, res) {
     db.Friends.find({ requestTo: req.user._id, status: "pending" })
+      .populate("participants")
       .then(results => {
         if (results) {
           res.json(results);
@@ -159,8 +152,7 @@ module.exports = {
   },
 
   removeFriend: function(req, res) {
-    db.Friends
-      .findById({ _id: req.params._id })
+    db.Friends.findById({ _id: req.params._id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

@@ -96,6 +96,7 @@ class Books extends Component {
   }
 
   handleDelete = id => {
+    console.log(id);
     mediaAPI.delete(id)
     .then(this.getBooks)
     .catch(err => console.log(err))

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import userAPI from "../../utils/userAPI";
-import authHandler from "../../utils/authHandler";
 import Footer from "../Footer";
 import "./style.scss";
 
@@ -38,7 +37,6 @@ class Login extends Component {
         console.log(response);
         if (response.data.user) {
           // Update App.js state
-          authHandler.signIn();
           this.setState({
             isLoggedIn: true
           });
@@ -56,10 +54,7 @@ class Login extends Component {
   render() {
     if (this.state.isLoggedIn === true) {
       console.log(this.state.isLoggedIn)
-      return <Redirect to={{
-        pathname:"/home",
-        state:{from: this.props.location},
-    }} />
+      return <Redirect to="/home" />
     }
     return (
       <div>

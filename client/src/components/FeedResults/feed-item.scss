@@ -9,13 +9,14 @@
   }
 }
 
-.media-item {
+.feed-item {
   padding: 20px 151px 20px 20px;
   background: $white-2;
   margin-bottom: 20px;
   position: relative;
   border-radius: 10px;
   min-height: 190px;
+  max-width: 1000px;
 
   &--active {
     border: 4px solid $blue-3;
@@ -43,6 +44,7 @@
 
   &__title {
     font-size: 20px;
+    margin-bottom: 0;
 
     a {
       color: $yellow-1;
@@ -58,8 +60,6 @@
 
   &__details {
     padding: 0;
-    max-height: 170px;
-    overflow: hidden;
     flex: 1 1 auto;
 
     @include respond(md) {
@@ -69,38 +69,7 @@
 
   &__description {
     margin-bottom: 0;
-    display: block; /* Fallback for non-webkit */
-    display: -webkit-box;
-    max-height: 135px; /* Fallback for non-webkit */
-    text-align: justify;
     font-size: 16px;
-    line-height: 1.4em;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    // @-moz-document url-prefix() {
-    //   overflow: hidden;
-    //   position: relative;
-    //   &::before {
-    //     background: #fff;
-    //     bottom: -2px;
-    //     position: absolute;
-    //     right: 0;
-    //     float: right;
-    //     content: '\2026';
-    //     margin-left: -3rem;
-    //     width: 3rem;
-    //   }
-    //   &::after {
-    //     content: '';
-    //     background: #fff;
-    //     position: absolute;
-    //     height: 50px;
-    //     width: 100%;
-    //     z-index: 1;
-    //   }
-    // }
   }
 
   &__img {
@@ -115,8 +84,9 @@
     }
   }
 
-  &__creator {
-
+  &__date {
+    margin-bottom: 5px;
+    font-size: 14px;
   }
 
   .btn {

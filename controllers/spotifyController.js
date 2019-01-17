@@ -3,7 +3,6 @@ var querystring = require('querystring');
 
 function parseAlbums(spotifyObject){
     const albumArray = spotifyObject.albums.items;
-    console.log(albumArray)
     let parsedArray = [];
     for ( let i = 0; i < albumArray.length; i++){
         let artistArray = [];
@@ -42,6 +41,7 @@ module.exports = {
                 }
             })
             .then(function(spotifyResponse){
+                console.log(spotifyResponse)
                 res.json(parseAlbums(spotifyResponse.data))
             })
         })

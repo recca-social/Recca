@@ -16,11 +16,17 @@ function Results(props) {
       } else {
         return "Artist: "
       }
-    } else if (type === "movie" || type === "show") {
+    } else if (type === "movie") {
       if (string.includes(",")) {
         return "Directors: "
       } else {
         return "Director: "
+      }
+    } else if (type === "show") {
+      if (string.includes(",")) {
+        return "Writers: "
+      } else {
+        return "Writer: "
       }
     } else if (type === "game") {
       if (string.includes(",")) {
@@ -32,9 +38,23 @@ function Results(props) {
       return "Creator: "
     }
   }
+  function platformText(string) {
+    if (string.includes(",")) {
+      return "Platforms: "
+    } else {
+      return "Platform: "
+    }
+  }
+  function genreText(string) {
+    if (string.includes(",")) {
+      return "Genres: "
+    } else {
+      return "Genre: "
+    }
+  }
   return (
     <div>
-      {props.items ? props.items.map(item => (
+      {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
         <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <div className="media-item__header">
             <img
@@ -45,35 +65,60 @@ function Results(props) {
               <h3 className="media-item__title">
                 {item.link ? 
                   <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
-                : item.title }
+                  : item.title }
+                  {item.year ? 
+                    <span className="media-item__year"> ({item.year})</span>
+                  : ""}
               </h3>
-              <p className="media-item__description">{item.description}</p>
+              {item.description ?
+                <p className="media-item__description">{item.description}</p>
+              : ""}
+              {props.mediaType === "music" && item.creator ?
+                <p className="media-item__metadata media-item__creator">
+                  <strong>{item.creator}</strong>
+                </p>
+              : ""}
             </div>
           </div>
 
-          {item.creator ? 
-            <p className="media-item__creator">
-              <strong>
-                {creatorText(item.type, item.creator)}
-              </strong>
+          {item.creator && props.mediaType !== "music" ? 
+            <p className="media-item__metadata media-item__creator">
+              <strong>{creatorText(item.type, item.creator)}</strong>
               {item.creator}
             </p>
           : ""}
 
           {item.genre ?
-            <p className="media-item__genre">
-              <strong>Genre: </strong>{item.genre}
+            <p className="media-item__metadata media-item__genre">
+              <strong>{genreText(item.genre)}</strong>
+              {item.genre}
+            </p>
+          : ""}
+
+          {item.platform ?
+            <p className="media-item__metadata media-item__platform">
+              <strong>{platformText(item.platform)}</strong>
+              {item.platform}
+            </p>
+          : ""}
+
+          {item.rating ?
+            <p className="media-item__metadata media-item__rating">
+              <strong>Rating: </strong>
+              {props.mediaType === "game" ? Math.round(item.rating) : item.rating }
             </p>
           : ""}
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">
               <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + item.apiId}>Recommend <i className="icon icon-star"></i></button>
-              <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
-                {item.active ?
-                <span>Active <i className="icon icon-eye"></i></span> :
-                <span>Active <i className="icon icon-eye-off"></i></span>}
-              </button>
+              {props.mediaType !== "movie" ?
+                <button onClick={() => props.toggleActive(item._id) } className="btn btn-active">
+                  {item.active ?
+                  <span>Active <i className="icon icon-eye"></i></span> :
+                  <span>Active <i className="icon icon-eye-off"></i></span>}
+                </button>
+              : ""}
               <button onClick={() => props.toggleComplete(item._id) } className="btn btn-complete">
                 {item.complete ? 
                 <span>Complete <i className="icon icon-check"></i></span> :

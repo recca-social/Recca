@@ -14,7 +14,9 @@ const postSchema = new Schema({
     rating: String, // used for movies/shows
     index: Number, // used for display order of saved items
     postText: String, // used for user description of the item
-    apiId: String // id returned from api when searched
+    apiId: String, // id returned from api when searched,
+    postAuthor: {type: String, required: true}, //name of the post author
+    created_at: { type: Date, required: true, default: Date.now }
 })
 
 const Post = mongoose.model("Post", postSchema);

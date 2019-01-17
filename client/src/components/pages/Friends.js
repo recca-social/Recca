@@ -150,6 +150,7 @@ class Friends extends Component {
               search={this.state.search}
               handleInputChange={this.handleInputChange}
               handleSearch={this.handleSearch}
+              mediaType="user"
             />
             {this.state.results.length ? (
               <div className="media-wrapper">

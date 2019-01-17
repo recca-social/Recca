@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
-import "./style.css";
+import "./style.scss";
 
 class Signup extends Component {
   constructor() {
@@ -61,12 +61,12 @@ class Signup extends Component {
               <div className="login-form-header">
                 <div className="logo">
                   <img
-                    src="./images/recco-clean.png"
-                    alt="recco"
-                    style={{ height: "100px" }}
+                    src="/images/recca-logo.png"
+                    alt="recca the raccoon"
+                    style={{ height: "180px" }}
                   />
                 </div>
-                <h3>Recco</h3>
+                <h1 className="sr-only">Recca</h1>
               </div>
               <form method="post" action="/login/signup" className="login-form">
                 <div className="input-container first-name">

@@ -12,6 +12,10 @@ export default {
     });
   },
 
+  logOut: function() {
+    return axios.get("/logout");
+  },
+
   findUserByName: function(query) {
     return axios.post("/api/user/find/user", {
       query: query
@@ -50,5 +54,9 @@ export default {
 
   getUserFeed: function() {
     return axios.get("api/user/feed/");
+  },
+
+  getFeedItems: function() {
+    return axios.get("api/user/getFeedItems/");
   }
 };

@@ -11,7 +11,7 @@ router.use("/login", loginRoutes)
 //Logout Routes "http:localhost:3001/logout"
 router.route("/logout").get(function(req, res){
   req.logout();
-  res.send("doo doo doo")
+  res.send("You're logged out")
 });
 
 module.exports = router;

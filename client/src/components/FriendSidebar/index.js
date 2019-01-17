@@ -27,10 +27,10 @@ function Sidebar(props) {
                 {/* {displayMetadata(item.type, item.creator, item.platform)} */}
                 {item.participants[0].username} ({item.participants[0].firstName} {item.participants[0].lastName})
             </p>
-            <div className="sidebar__buttons">
+            <div>
                 <button onClick={() => props.handleAcceptRequest(item._id, "accepted") } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>
             </div>
-            <div className="sidebar__buttons">
+            <div>
                 <button onClick={() => props.handleDeclineRequest(item._id, "rejected") } className="btn btn-decline">Decline <i className="icon icon-cancel"> </i></button>
             </div>
             <div className="clearfix"></div>

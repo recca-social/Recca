@@ -12,7 +12,7 @@ const FriendSidebar = props => {
         props.items.filter(item => item.status === "pending").map(item => (
           <div key={item._id} className="sidebar__media-item sidebar__media-item--active">
             <p>
-                <i className="icon icon-user"> </i><strong>{item.participants[0].username}</strong> ({item.participants[0].firstName} {item.participants[0].lastName})
+                <i className="icon icon-user"> </i><strong>{item.participants[0].firstName} {item.participants[0].lastName}</strong> ({item.participants[0].username})
             </p>
             <div className="accept-btn-container">
                 <button onClick={() => props.handleAcceptRequest(item._id, "accepted") } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>

@@ -1,16 +1,21 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
+.login-wrapper {
+    height: calc(100vh - 120px);
+    padding: 60px 0;
+}
+
 .logo img {
     border-radius: 50%;
     box-shadow: 2px 2px 12px 0 #000;
 }
 
-.login-form-container {
+.login-block {
     max-width: 350px;
     width: 100%;
     z-index: 1;
-    margin: 60px auto 60px;
+    margin: 0 auto 0;
     background: #74a3bd;
     padding: 20px;
     border-radius: .25rem;

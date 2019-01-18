@@ -5,13 +5,13 @@ const FriendModal = props => (
     <div className="modal-dialog" role="document">
       <div className="modal-content">
         <div className="modal-header">
-          
+          Hello
           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div className="modal-body">
-          Hello
+          Hello World
         </div>
       </div>
     </div>

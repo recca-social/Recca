@@ -2,14 +2,13 @@
 @import '../../styles/mixins.scss';
 
 body {
-  padding-bottom: 100px; 
+  // padding-bottom: 100px; 
 }
 
 .footer {
-  position: fixed;
-  bottom: 0;
   background: $blue-2;
   padding: 20px 20px;
+  position: relative;
 
   a {
     color: $yellow-1;
@@ -17,6 +16,10 @@ body {
 
   h5, p {
     text-align: center;
+  }
+
+  h5 {
+    color: $white-1;
   }
 
   &__contact {

@@ -1,13 +1,13 @@
 import React from "react";
-import FriendModal from "../FriendModal";
+// import FriendModal from "../FriendModal";
 import "./FriendResults.scss";
 
 const FriendResults = props => {
   return (
     <div>
       {props.items ? props.items.map(item => (
-        <div key={item._id} id={item._id} className={"media-item " + (item._id ? "media-item--friend" : "")}>
-          {item.firstName ?
+        <div key={item.username} id={item._id} className={"media-item " + (item._id ? "media-item--friend" : "")}>
+          {item.username ?
             <p className="media-item__friend">
               <i className="icon icon-user"> </i><strong>{item.username}</strong> ({item.firstName} {item.lastName})
             </p>
@@ -18,9 +18,9 @@ const FriendResults = props => {
             </div>
           : ""}
               
-          <FriendModal 
+          {/* <FriendModal 
             apiId={item.apiId}
-          />
+          /> */}
 
         </div>
       )) : ""}

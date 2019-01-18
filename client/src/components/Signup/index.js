@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
+import Footer from "../Footer";
 import "./style.scss";
-import userAPI from "../../utils/userAPI";
 
 class Signup extends Component {
   constructor() {
@@ -60,7 +60,7 @@ class Signup extends Component {
     return (
       <div>
         {!this.state.isLoggedIn ? (
-          <div className="login-form-container" id="login-form">
+          <div className="login-form-container">
             <div className="login-form-content">
               <div className="login-form-header">
                 <div className="logo">
@@ -72,7 +72,7 @@ class Signup extends Component {
                 </div>
                 <h1 className="sr-only">Recca</h1>
               </div>
-              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p>:<span></span>}
+              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p>: ""}
               <form method="post" action="/login/signup" className="login-form">
                 <div className="input-container first-name">
                   <input
@@ -137,6 +137,7 @@ class Signup extends Component {
         ) : (
           <Redirect to="/home" />
         )}
+        <Footer loginPage={true} />
       </div>
     );
   }

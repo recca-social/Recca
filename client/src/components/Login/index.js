@@ -5,8 +5,8 @@ import Footer from "../Footer";
 import "./style.scss";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
@@ -58,7 +58,7 @@ class Login extends Component {
     }
     return (
       <div>
-        <div className="login-form-container" id="login-form">
+        <div className="login-form-container">
           <div className="login-form-content">
             <div className="login-form-header">
               <div className="logo">
@@ -71,6 +71,7 @@ class Login extends Component {
               <h1 className="sr-only">Recca</h1>
             </div>
             <form method="post" action="/login/local" className="login-form">
+            {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : <span></span> }
               <div className="input-container">
                 <span className="fas fa-user" />
                 <input
@@ -116,7 +117,7 @@ class Login extends Component {
           </div>
         </div>
 
-        <Footer />
+        <Footer loginPage={true} />
       </div>
 
     );

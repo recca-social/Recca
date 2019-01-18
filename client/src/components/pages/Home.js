@@ -3,7 +3,8 @@ import userAPI from "../../utils/userAPI";
 import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
-import { Redirect, Link } from "react-router-dom";
+import Footer from "../Footer";
+import { Redirect } from "react-router-dom";
 
 class Home extends Component {
   state = {
@@ -58,22 +59,22 @@ class Home extends Component {
 
   render() {
     if ( this.state.itemSaved === true){
-      {this.setState({
+      this.setState({
         itemSaved: false
-      })}
+      })
       return <Redirect to={"/" + this.state.redirectTo} />
     }
     return (
       <div>
         { <Header title="User Feed"/> }
-        <div className="row justify-content-center">
+        <div className="row justify-content-center feed">
           <FeedResults 
             items={this.state.activity}
             handleSave={this.handleSave}
           />
         </div>
-          
-        </div>
+        <Footer />
+      </div>
     );
   }
 }

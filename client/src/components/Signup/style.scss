@@ -186,6 +186,12 @@
     padding-right: 10px;
 }
 
+.warning {
+    margin: 0 auto;
+    text-align: center;
+    color: darkred;
+}
+
 @media screen and (max-height: 600px) {
 	.login-form-container {
 		margin-top: 0;

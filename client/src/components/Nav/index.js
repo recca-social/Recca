@@ -54,10 +54,11 @@ export function Nav(props) {
             </span>
           </div>
         </Link>
+        <p className="greeting">Hello, <strong>{props.firstName}</strong></p>
         <Link to="/friends"
-        className={props.location.pathname === "/friends" ? "nav-link ml-auto active" : "nav-link ml-auto"}>
+        className={props.location.pathname === "/friends" ? "nav-link active" : "nav-link"}>
           <div className="nav-link__tab">
-            <span className="nav-link__text">
+            <span className="nav-link__text sr-only">
               Friends{props.location.pathname === "/friends" ? <span className="sr-only"> (current)</span> : ""}
             </span>
             <i className="icon icon-users"></i>

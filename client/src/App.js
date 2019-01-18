@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/pages/Home";
 import Books from "./components/pages/Books";
@@ -11,16 +11,46 @@ import Friends from "./components/pages/Friends";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import userAPI from "./utils/userAPI";
 import "./styles/fontello/css/fontello.css";
 import "./styles/fontello/css/fontello-codes.css";
 import "./App.scss";
 
 
-const App = () => {
+class App extends Component {
+  state = {
+    firstName: ""
+  }
+
+  componentDidMount() {
+    this.getName();
+  }
+
+  componentDidChange() {
+    this.getName();
+  }
+
+  handleGetName = () => {
+    this.getName();
+  }
+
+  getName = () => {
+    userAPI.getUserMedia()
+    .then((res) => {
+      console.log(res.data)
+      this.setState({ firstName: res.data.firstName });
+    })
+    .catch(err => console.log(err));
+  }
+
+  render() {
     return (
-      <Router>     
+      <Router>
         <div>
-          <Route path={["/home", "/books", "/games", "/movies", "/music", "/shows", "/friends"]} component={Nav} />
+          <Route
+            path={["/home", "/books", "/games", "/movies", "/music", "/shows", "/friends"]} 
+            render={(props) => (<Nav {...props} firstName={this.state.firstName} handleGetName={this.handleGetName} />)}
+          />
           <Switch>
             <Route exact path="/signup" component={Signup} />
             <ProtectedRoute exact path="/books" component={Books} />
@@ -30,11 +60,14 @@ const App = () => {
             <ProtectedRoute exact path="/shows" component={Shows} />
             <ProtectedRoute exact path="/friends" component={Friends} />
             <ProtectedRoute exact path="/home" component={Home} />
-            <Route path="/" component={Login} />
+            <Route path="/" 
+              render={(props) => (<Login {...props} handleLogin={this.handleLoginName} />)}
+            />
           </Switch>
         </div>
       </Router>
     );
+  }
 }
 
 export default App;

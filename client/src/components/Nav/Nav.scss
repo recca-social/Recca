@@ -73,11 +73,24 @@
         background-color: transparent;
       }
     }
+
+    &:last-of-type {
+      margin-left: auto;
+
+      @include respond(sm) {
+        margin-left: 0;
+      }
+    }
   }
 
   .greeting {
     margin: auto 5px auto auto;
     color: $black-2;
     height: 100%;
+    display: none;
+
+    @include respond(sm) {
+      display: block;
+    }
   }
 }

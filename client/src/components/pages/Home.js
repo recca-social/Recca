@@ -59,9 +59,9 @@ class Home extends Component {
 
   render() {
     if ( this.state.itemSaved === true){
-      {this.setState({
+      this.setState({
         itemSaved: false
-      })}
+      })
       return <Redirect to={"/" + this.state.redirectTo} />
     }
     return (

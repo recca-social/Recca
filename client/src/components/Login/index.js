@@ -71,6 +71,7 @@ class Login extends Component {
               <h1 className="sr-only">Recca</h1>
             </div>
             <form method="post" action="/login/local" className="login-form">
+            {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : <span></span> }
               <div className="input-container">
                 <span className="fas fa-user" />
                 <input

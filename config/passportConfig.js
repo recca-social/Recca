@@ -28,11 +28,15 @@ passport.use('local-signup', new LocalStrat({
   passReqToCallback: true
 },
   function (req, username, password, done) {
-    User.findOne({ username: username }).then(function (err, user) {
-      if (err) throw err;
+    console.log("we're in passport")
+    User.findOne({ username: username }).then(function (user) {
+      console.log("we're in the findOne signup")
+      console.log(user)
       if (user) {
-        return done(null, false, { message: "Username in use" })
+        console.log("user found in passport")
+        return done(null, false, {message: "Username in use"})
       } else if (password && req.body.firstName && req.body.lastName) {
+        console.log("we're in the making a new user function")
         var newUsername = username;
         var newPassword = password;
         var newFirstName = req.body.firstName;
@@ -44,9 +48,9 @@ passport.use('local-signup', new LocalStrat({
           lastName: newLastName
         }).then(function (newUser) {
           return done(null, newUser)
-        })
+        }).catch(err =>console.log(err))
       }
-    })
+    }).catch(err => console.log(err))
   }
 ));
 

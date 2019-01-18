@@ -12,7 +12,8 @@ router.route("/check").get(function (req, res) {
 router.route("/local").post(function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {
     if (err) { return next(err) }
-    if (!user) { return res.json({ message: 'Username or password are incorrect' }) }
+    if (!user) {
+       return next(res.json({ message: 'Username or password are incorrect' })) }
     req.logIn(user, function (err) {
       if (err) { return next(err); }
       console.log("we're logged in");
@@ -25,7 +26,10 @@ router.route("/signup").post(function (req, res, next) {
   passport.authenticate('local-signup', function (err, user, info) {
     console.log("User: " + user)
     if (err) { return next(err) };
-    if (!user) { return res.json({ message: info }) };
+    if (!user) {
+      console.log("We're in the !user block of the verification callback here is the info")
+      return res.json({message: "Username is in use, please try again"})
+    };
     req.logIn(user, function (err) {
       if (err) { return next(err) }
       console.log("successful login");

@@ -3,7 +3,7 @@ import userAPI from "../../utils/userAPI";
 import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Home extends Component {
   state = {

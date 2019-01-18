@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import authHandler from "../../utils/authHandler";
 
 class ProtectedRoute extends React.Component {
@@ -22,14 +22,12 @@ class ProtectedRoute extends React.Component {
 
 
     render() {
-        console.log(this.props)
         return (
             <Route {...this.props} render={(...props) => (
                 this.state.isAuth ?
                     <React.Component {...this.props.component} /> :
                     <Redirect to="/" />
-            )
-            } />
+            )} />
         )
     };
 };

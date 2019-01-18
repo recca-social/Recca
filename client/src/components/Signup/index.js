@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 import "./style.scss";
-import userAPI from "../../utils/userAPI";
 
 class Signup extends Component {
   constructor() {

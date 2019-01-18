@@ -1,36 +1,23 @@
 import React from "react";
 import "./FriendSidebar.scss";
 
-function Sidebar(props) {
-//   function displayMetadata(type, creator, platform) {
-//     if ((type === "book" || type === "music") && creator) {
-//       return creator;
-//     } else if ((type === "movie" || type === "show" || type === "game") && platform) {
-//       return `Platform: ${platform}`
-//     } else {
-//       return ''
-//     }
-//   }
+const FriendSidebar = props => {
   return (
     <div className="col-md-3 sidebar">
-
       <div className="sidebar__title">Pending {props.mediaType} Requests</div>
       <div className="sidebar__media">
-        {// Check for friend requests and check that there is at least 1 request
+        {// Check for friend requests and check that there is at least 1 pending request
         props.items.filter(item => item.status === "pending").length >= 1 ? 
         // Filter for pending requests in the current type
         props.items.filter(item => item.status === "pending").map(item => (
           <div key={item._id} className="sidebar__media-item sidebar__media-item--active">
-            {/* {item.image ? <img src={item.image} alt={item.title} className="sidebar__img" /> : ''} */}
-            {/* <a href={'#' + item.apiId} className="sidebar__link"><strong>{item.title}</strong></a> */}
             <p>
-                {/* {displayMetadata(item.type, item.creator, item.platform)} */}
-                {item.participants[0].username} ({item.participants[0].firstName} {item.participants[0].lastName})
+                <i className="icon icon-user"> </i><strong>{item.participants[0].username}</strong> ({item.participants[0].firstName} {item.participants[0].lastName})
             </p>
-            <div>
+            <div className="accept-btn-container">
                 <button onClick={() => props.handleAcceptRequest(item._id, "accepted") } className="btn btn-accept">Accept <i className="icon icon-check"> </i></button>
             </div>
-            <div>
+            <div className="decline-btn-container">
                 <button onClick={() => props.handleDeclineRequest(item._id, "rejected") } className="btn btn-decline">Decline <i className="icon icon-cancel"> </i></button>
             </div>
             <div className="clearfix"></div>
@@ -65,4 +52,4 @@ function Sidebar(props) {
   )
 }
 
-export default Sidebar;
+export default FriendSidebar;

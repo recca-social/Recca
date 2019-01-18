@@ -1,5 +1,5 @@
 import React from "react";
-import PostModal from "../PostModal"
+import FriendModal from "../FriendModal";
 import "./FriendResults.scss";
 
 const FriendResults = props => {
@@ -13,13 +13,13 @@ const FriendResults = props => {
             </p>
           : ""}
           {props.resultType === "results" ?
-            <div className="media-item__buttons media-item__buttons--results">
-              <button onClick={() => props.handleAddFriend(item.apiId)} className="btn btn-add">Add Friend <i className="icon icon-user-plus"></i></button>
+            <div id={item.apiId} className="media-item__buttons media-item__buttons--results">
+              <button onClick={() => props.handleAddFriend(item.apiId)} className="btn btn-add" data-toggle="modal" data-target={"#modal-" + item.apiId}>Add Friend <i className="icon icon-user-plus"></i></button>
             </div>
           : ""}
               
-          <PostModal 
-            postText={props.postText}
+          <FriendModal 
+            apiId={item.apiId}
           />
 
         </div>

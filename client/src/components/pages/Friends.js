@@ -156,6 +156,7 @@ class Friends extends Component {
                 </button>
                 <div className="clearfix" />
                 <FriendResults
+                  key={this._id}
                   items={this.state.results}
                   clearResults={this.clearResults}
                   resultType="results"

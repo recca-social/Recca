@@ -14,12 +14,12 @@ const FriendResults = props => {
           : ""}
           {props.resultType === "results" ?
             <div id={item.apiId} className="media-item__buttons media-item__buttons--results">
-              <button onClick={() => props.handleAddFriend(item.apiId)} className="btn btn-add" data-toggle="modal" data-target={"#modal-" + item.apiId}>Add Friend <i className="icon icon-user-plus"></i></button>
+              <button onClick={() => props.handleAddFriend(item.apiId)} className="btn btn-add" data-toggle="modal" data-target={"#modal-" + item.username}>Add Friend <i className="icon icon-user-plus"></i></button>
             </div>
           : ""}
               
           {/* <FriendModal 
-            apiId={item.apiId}
+            username={item.username}
           /> */}
 
         </div>

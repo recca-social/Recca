@@ -6,6 +6,9 @@ function parseQueryString(string){
 
 function parseData(array){
     let parsedArray = [];
+    if (!array){
+        return("No results found")
+    }
     for (let i = 0; i < array.length; i++){
         let platformArr = [];
         if (!array[i].platforms){
@@ -17,7 +20,8 @@ function parseData(array){
         }
 
         let genreArr = [];
-        if (!array[i].genre) {
+        if (array[i].genre) {
+            console.log(array[i].genre)
             for (let a = 0; a < array[i].genres.length; a++){
                 genreArr.push(array[i].genres[a].name)
             }

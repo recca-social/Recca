@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 import "./style.scss";
+import userAPI from "../../utils/userAPI";
 
 class Signup extends Component {
   constructor() {
@@ -13,7 +14,8 @@ class Signup extends Component {
       firstName: "",
       lastName: "",
       confirmPassword: "",
-      isLoggedIn: false
+      isLoggedIn: false,
+      message: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +30,7 @@ class Signup extends Component {
   };
 
   handleSubmit = event => {
+    console.log("we clicked the signup button")
     event.preventDefault();
     axios
       .post("/login/signup", {
@@ -37,14 +40,15 @@ class Signup extends Component {
         lastName: this.state.lastName
       })
       .then(response => {
-        console.log(response);
-        if (response.data) {
+        console.log(response)
+        if (response.data.user) {
           console.log("Successful sign-up!");
           this.setState({
             isLoggedIn: true
           });
         } else {
           console.log("Username already taken!");
+          this.setState({message: response.data.message})
         }
       })
       .catch(error => {
@@ -68,6 +72,7 @@ class Signup extends Component {
                 </div>
                 <h1 className="sr-only">Recca</h1>
               </div>
+              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p>:<span></span>}
               <form method="post" action="/login/signup" className="login-form">
                 <div className="input-container first-name">
                   <input

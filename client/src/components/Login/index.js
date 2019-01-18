@@ -58,7 +58,7 @@ class Login extends Component {
     }
     return (
       <div>
-        <div className="login-form-container" id="login-form">
+        <div className="login-form-container">
           <div className="login-form-content">
             <div className="login-form-header">
               <div className="logo">
@@ -117,7 +117,7 @@ class Login extends Component {
           </div>
         </div>
 
-        <Footer />
+        <Footer loginPage={true} />
       </div>
 
     );

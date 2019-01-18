@@ -1,66 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.background, 
-.backdrop {
-	background: #3f689c;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.backdrop {
-	filter: alpha(opacity=90);
-	opacity: .9;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-}
-
-.background {
-	filter: blur(15px);
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
-}
-
-.logo img {
-    border-radius: 50%;
-    box-shadow: 2px 2px 12px 0 #000;
-}
-
-.login-form-container {
-    max-width: 350px;
-    width: 100%;
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -200px;
-    margin-top: -286px;
-    background: #74a3bd;
-    padding: 20px;
-    color: #FFFFFF;
-}
-#login-form {
-    position: absolute;
-    left: 52%;
-}
-
-.login-form-header {
-    text-align: center;
-}
-
-.login-form .input-container {
-	border-bottom: 1px solid #CCCCCC;
-    margin-top: 15px;
-    font-size: 16px;
-    color: #9e9e9e;
-    padding-bottom: 5px;
-    position: relative;
-}
 .login-form .input {
 	border: 0;
     width: 310px;
@@ -90,26 +30,7 @@
     height: 38px;
     text-indent: 2px;
 }
-#show-password {
-	float: right;
-    vertical-align: bottom;
-    text-align: center;
-    margin-top: 7px;
-	cursor: pointer;
-}
-.login-form .forgot-password {
-	float: right;
-}
-.login-form .rememberme-container {
-	margin-top: 15px;
-	padding: 0;
-}
-.login-form .rememberme-container input {
-	margin-left: 0;
-}
-.login-form .rememberme span {
-	vertical-align: top;
-}
+
 .login-form .button {
 	margin-top: 15px;
     width: 100%;
@@ -147,76 +68,10 @@
 .login-form i {
     background: #FFFFFF;
     padding: 11px 0px 11px 10px;
-    /* height: 38px; */
-}
-
-.separator {
-    margin: 20px 0;
-    border-top: 1px solid #CCCCCC;
-    position: relative;
-}
-
-.separator-text {
-    display: block;
-    position: absolute;
-    top: -11px;
-    left: 50%;
-    margin-left: -22px;
-    padding: 0px 10px;
-    background: #74a3bd;
-    color: #FFFFFF;
-}
-
-.socmed-login .socmed-btn {
-    padding: 10px 25px;
-    background: #4167b2;
-    color: #FFFFFF;
-    display: block;
-    margin-top: 5px;
-    text-align: center;
-    font-size: 15px;
-}
-
-.socmed-login .socmed-btn:hover {
-    text-decoration: none;
-    background: #2f59af;
-}
-
-.socmed-login i {
-    padding-right: 10px;
 }
 
 .warning {
     margin: 0 auto;
     text-align: center;
     color: darkred;
-}
-
-@media screen and (max-height: 600px) {
-	.login-form-container {
-		margin-top: 0;
-		top: 10px;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	/* .login-form-container {
-		left: 5px;
-		margin-left: 5px;
-		min-width: 283px;
-		right: 10px;
-		margin-bottom: 10px;
-		width: auto;
-	} */
-    .login-form .input {
-		width: 280px;
-    }
-    .first-name .input,
-    .last-name .input {
-        width: 280px;
-    }
-	/* .socmed-login .socmed-btn i {
-		margin-right: 5px;
-		width: 19px;
-	} */
 }

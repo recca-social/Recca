@@ -1,31 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.background, 
-.backdrop {
-	background: #3f689c;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.backdrop {
-	filter: alpha(opacity=90);
-	opacity: .9;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-}
-
-.background {
-	filter: blur(15px);
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=5);
-}
-
 .logo img {
     border-radius: 50%;
     box-shadow: 2px 2px 12px 0 #000;
@@ -35,19 +10,11 @@
     max-width: 350px;
     width: 100%;
     z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 52%;
-    margin-left: -200px;
-    margin-top: -286px;
+    margin: 60px auto 60px;
     background: #74a3bd;
     padding: 20px;
     border-radius: .25rem;
     color: #FFFFFF
-}
-#login-form {
-    position: absolute;
-    left: 52%;
 }
 
 .login-form-header {
@@ -122,9 +89,7 @@
 .login-form .submit-btn:hover {
     background: rgb(248, 179, 30);
 }
-/* .login-form .submit-btn:focus {
-	outline: none;
-} */
+
 .login-form .create-btn {
     margin-top: 5px;
     background: #1B668F;
@@ -146,7 +111,6 @@
 .login-form i {
     background: #FFFFFF;
     padding: 11px 0px 11px 10px;
-    /* height: 38px; */
 }
 
 .separator {
@@ -183,35 +147,5 @@
 }
 
 .socmed-login i {
-    padding-right: 10px;
-}
-
-@media screen and (max-height: 600px) {
-	.login-form-container {
-		margin-top: 0;
-		top: 10px;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	/* .login-form-container {
-		left: 5px;
-		margin-left: 5px;
-		min-width: 283px;
-		right: 10px;
-		margin-bottom: 10px;
-        width: auto;
-        position: fixed;
-        left: 0;
-    } */
-
-    .username,
-    .password {
-        max-width: 280px;
-    }
-	
-	.socmed-login .socmed-btn i {
-		margin-right: 5px;
-		width: 19px;
-	}
+    margin-right: 10px;
 }

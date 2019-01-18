@@ -3,6 +3,7 @@ import userAPI from "../../utils/userAPI";
 import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
+import Footer from "../Footer";
 import { Redirect } from "react-router-dom";
 
 class Home extends Component {
@@ -66,14 +67,14 @@ class Home extends Component {
     return (
       <div>
         { <Header title="User Feed"/> }
-        <div className="row justify-content-center">
+        <div className="row justify-content-center feed">
           <FeedResults 
             items={this.state.activity}
             handleSave={this.handleSave}
           />
         </div>
-          
-        </div>
+        <Footer />
+      </div>
     );
   }
 }

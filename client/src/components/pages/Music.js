@@ -6,6 +6,7 @@ import postAPI from "../../utils/postAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
+import Footer from "../Footer";
 import "./mediaPages.scss";
 
 class Music extends Component {
@@ -32,20 +33,25 @@ class Music extends Component {
   searchMusic = query => {
     const results = [];
     musicAPI.searchAlbum(query)
-      .then(function(res) {
-        console.log(res.data)
-        res.data.forEach(music => {
-          results.push(
-            {
-              type: "music",
-              title: music.albumName ? music.albumName : "",
-              image: music.image ? music.image : "http://placehold.it/128x128",
-              link: music.albumLink.spotify ? music.albumLink.spotify : "",
-              creator: music.artist ? music.artist.join(", ") : "",
-              apiId: music.apiId
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(music => {
+            results.push(
+              {
+                type: "music",
+                title: music.albumName ? music.albumName : "",
+                image: music.image ? music.image : "http://placehold.it/128x128",
+                link: music.albumLink.spotify ? music.albumLink.spotify : "",
+                creator: music.artist ? music.artist.join(", ") : "",
+                apiId: music.apiId
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -57,6 +63,7 @@ class Music extends Component {
 
   componentDidMount() {
     this.getMusic();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {
@@ -112,57 +119,64 @@ class Music extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-9 main">
-            <SearchForm 
-              search={this.state.search}
-              handleInputChange={this.handleInputChange}
-              handleSearch={this.handleSearch}
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-9 main">
+              <SearchForm 
+                search={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleSearch={this.handleSearch}
+                mediaType="music"
+              />
+              {this.state.results.length ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Results</h2>
+                  <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
+                  <div className="clearfix"></div>
+                  <Results 
+                    items={this.state.results}
+                    clearResults={this.clearResults}
+                    resultType="results"
+                    mediaType="music"
+                    handleSave={this.handleSave}
+                    handleRecommend={this.handleRecommend}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                  />
+                </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
+              <hr />
+              {this.state.saved ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Saved Music</h2>
+                  <Results 
+                    items={this.state.saved}
+                    resultType="saved"
+                    mediaType="music"
+                    handleDelete={this.handleDelete}
+                    toggleActive={this.toggleActive}
+                    toggleComplete={this.toggleComplete}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                    handleRecommend={this.handleRecommend}
+                  />
+                </div> : 
+                <p className="text-center empty-media-msg">Use the search bar above to find and save music!</p> }
+            </div>
+            
+            <Sidebar 
+              items={this.state.saved}
+              toggleActive={this.toggleActive}
+              toggleComplete={this.toggleComplete}
+              handleDelete={this.handleDelete}
               mediaType="music"
             />
-            {this.state.results.length ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Results</h2>
-                <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
-                <div className="clearfix"></div>
-                <Results 
-                  items={this.state.results}
-                  clearResults={this.clearResults}
-                  resultType="results"
-                  mediaType="music"
-                  handleSave={this.handleSave}
-                  handleRecommend={this.handleRecommend}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                />
-              </div> : ""}
-            <hr />
-            {this.state.saved ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Saved Music</h2>
-                <Results 
-                  items={this.state.saved}
-                  resultType="saved"
-                  mediaType="music"
-                  handleDelete={this.handleDelete}
-                  toggleActive={this.toggleActive}
-                  toggleComplete={this.toggleComplete}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                  handleRecommend={this.handleRecommend}
-                />
-              </div> : 
-              <p className="text-center empty-media-msg">Use the search bar above to find and save music!</p> }
           </div>
-          
-          <Sidebar 
-            items={this.state.saved}
-            toggleActive={this.toggleActive}
-            toggleComplete={this.toggleComplete}
-            mediaType="music"
-          />
-          </div>
+        </div>
+        <Footer />
       </div>
     )
   }

@@ -6,6 +6,7 @@ import postAPI from "../../utils/postAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
+import Footer from "../Footer";
 import "./mediaPages.scss";
 
 class Books extends Component {
@@ -13,7 +14,8 @@ class Books extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -32,21 +34,27 @@ class Books extends Component {
   searchBooks = query => {
     const results = [];
     bookAPI.search(query)
-      .then(function(res) {
-        res.data.items.forEach(book => {
-          results.push(
-            {
-              type: "book",
-              title: book.volumeInfo.title ? book.volumeInfo.title : "",
-              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
-              description: book.volumeInfo.description ? book.volumeInfo.description : "No description available",
-              link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
-              genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
-              apiId: book.id
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.totalItems === 0) {
+          this.setState({ message: "No results found" })
+        } else {
+          res.data.items.forEach(book => {
+            results.push(
+              {
+                type: "book",
+                title: book.volumeInfo.title ? book.volumeInfo.title : "",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
+                description: book.volumeInfo.description ? book.volumeInfo.description : "",
+                link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+                creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
+                genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
+                apiId: book.id
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -58,6 +66,7 @@ class Books extends Component {
 
   componentDidMount() {
     this.getBooks();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {
@@ -96,6 +105,7 @@ class Books extends Component {
   }
 
   handleDelete = id => {
+    console.log(id);
     mediaAPI.delete(id)
     .then(this.getBooks)
     .catch(err => console.log(err))
@@ -115,58 +125,64 @@ class Books extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-9 main">
-            <SearchForm 
-              search={this.state.search}
-              handleInputChange={this.handleInputChange}
-              handleSearch={this.handleSearch}
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-9 main">
+              <SearchForm 
+                search={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleSearch={this.handleSearch}
+                mediaType="book"
+              />
+              {this.state.results.length ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Results</h2>
+                  <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
+                  <div className="clearfix"></div>
+                  <Results 
+                    items={this.state.results}
+                    clearResults={this.clearResults}
+                    resultType="results"
+                    mediaType="book"
+                    handleSave={this.handleSave}
+                    handleRecommend={this.handleRecommend}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                  />
+                </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
+              <hr />
+              {this.state.saved ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Saved Books</h2>
+                  <Results 
+                    items={this.state.saved}
+                    resultType="saved"
+                    mediaType="book"
+                    handleDelete={this.handleDelete}
+                    toggleActive={this.toggleActive}
+                    toggleComplete={this.toggleComplete}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                    handleRecommend={this.handleRecommend}
+                  />
+                </div> : 
+                <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
+            </div>
+            
+            <Sidebar 
+              items={this.state.saved}
+              toggleActive={this.toggleActive}
+              toggleComplete={this.toggleComplete}
+              handleDelete={this.handleDelete}
               mediaType="book"
             />
-            {this.state.results.length ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Results</h2>
-                <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
-                <div className="clearfix"></div>
-                <Results 
-                  items={this.state.results}
-                  clearResults={this.clearResults}
-                  resultType="results"
-                  mediaType="book"
-                  handleSave={this.handleSave}
-                  handleRecommend={this.handleRecommend}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                />
-              </div> : ""}
-            <hr />
-            {this.state.saved ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Saved Books</h2>
-                <Results 
-                  items={this.state.saved}
-                  resultType="saved"
-                  mediaType="book"
-                  handleDelete={this.handleDelete}
-                  toggleActive={this.toggleActive}
-                  toggleComplete={this.toggleComplete}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                  handleRecommend={this.handleRecommend}
-                />
-              </div> : 
-              <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
-          
-          <Sidebar 
-            items={this.state.saved}
-            toggleActive={this.toggleActive}
-            toggleComplete={this.toggleComplete}
-            handleDelete={this.handleDelete}
-            mediaType="book"
-          />
-          </div>
+        </div>
+        <Footer />
       </div>
     )
   }

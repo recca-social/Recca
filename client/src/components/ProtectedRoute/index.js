@@ -1,16 +1,35 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import authHandler from "../../utils/authHandler";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    return (
-        <Route {...rest} render={(props) => (
-            authHandler.isAuthenticated === true?
-                <Component {...props} /> :
-                <Redirect to="/" />
-                )
-        } />
-    )
+class ProtectedRoute extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            loaded: false,
+            isAuth: false,
+        }
+    }
+   
+
+    componentWillMount(){
+        let localAuth = authHandler.checkAuth();
+        this.setState({
+            isAuth : localAuth,
+            loaded: true,
+        })
+    }
+
+
+    render() {
+        return (
+            <Route {...this.props} render={(...props) => (
+                this.state.isAuth ?
+                    <React.Component {...this.props.component} /> :
+                    <Redirect to="/" />
+            )} />
+        )
+    };
 };
 
 export default ProtectedRoute;

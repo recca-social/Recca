@@ -3,9 +3,13 @@ import userAPI from "../../utils/userAPI";
 import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
+import Footer from "../Footer";
+import { Redirect } from "react-router-dom";
 
 class Home extends Component {
   state = {
+    itemSaved: false,
+    redirectTo: "",
     activity: []
   };
 
@@ -13,7 +17,6 @@ class Home extends Component {
     let feedPosts = []
     userAPI.getFeedItems()
     .then(function(res) {
-      console.log(res.data)
       feedPosts = res.data
     })
     .then(() => this.setState({ activity: feedPosts }))
@@ -35,24 +38,43 @@ class Home extends Component {
       rating: media.rating,
       apiId: media.apiId
     })
+    .then( ()=>{
+      let newPage = media.type
+      if (newPage !== "music"){
+        newPage += "s"
+      }
+    
+      this.setState({
+        redirectTo: newPage,
+        itemSaved: true
+      })
+    }
+ )
   }
 
   componentDidMount(){
-    this.getFeed()
+    this.getFeed();
+    window.scrollTo(0, 0)
   }
 
   render() {
+    if ( this.state.itemSaved === true){
+      this.setState({
+        itemSaved: false
+      })
+      return <Redirect to={"/" + this.state.redirectTo} />
+    }
     return (
       <div>
         { <Header title="User Feed"/> }
-        <div className="row justify-content-center">
+        <div className="row justify-content-center feed">
           <FeedResults 
             items={this.state.activity}
             handleSave={this.handleSave}
           />
         </div>
-          
-        </div>
+        <Footer />
+      </div>
     );
   }
 }

@@ -1,101 +1,32 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.media-wrapper {
-  > h2 {
-    color: $white-1;
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
+.friend-result {
+  background: $yellow-1;
 }
 
-.media-item {
-  // padding: 20px 151px 20px 20px;
+.friend-details {
+  margin-bottom: 0;
+}
+
+.friend-item {
+  padding: 15px 151px 15px 15px;
   background: $gray-3;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   position: relative;
   border-radius: 10px;
-  min-height: 10px;
-  border: 4px solid $white-2;
 
-  &__friend {
-    margin: 0px;
+  &--friend {
+    background: $yellow-1;
+    color: $black-1;
+    border: 2px solid $white-1;
+    min-height: 10px;
   }
 
-  &--active {
-    border: 4px solid $blue-3;
-    box-shadow: 0px 2px 12px 2px $blue-3;
-  }
-
-  &--complete {
-    border: 4px solid $green-1;
-    box-shadow: 0px 2px 12px 2px $green-1;
-  }
-
-  &__title, &__description, &__creator, &__genre {
+  &--result {
     color: $white-1;
-  }
-
-  &__creator, &__genre {
-    margin-bottom: 0;
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 15px;
-  }
-
-  &__title {
-    font-size: 20px;
-
-    a {
-      color: $yellow-1;
-      text-shadow: 2px 1px 8px $black-1;
-
-      &:hover {
-        text-decoration: none;
-        text-shadow: none;
-        color: $white-1;
-      }
-    }
-  }
-
-  &__details {
-    padding: 0;
-    max-height: 170px;
-    overflow: hidden;
-    flex: 1 1 auto;
-
-    @include respond(md) {
-      padding: 0 20px 10px;
-    }
-  }
-
-  &__description {
-    margin-bottom: 0;
-    display: block; /* Fallback for non-webkit */
-    display: -webkit-box;
-    max-height: 135px; /* Fallback for non-webkit */
-    text-align: justify;
-    font-size: 16px;
-    line-height: 1.4em;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__img {
-    max-height: 170px;
-    max-width: 170px;
-    flex: 0 0 auto;
-    display: none;
-    box-shadow: -2px 2px 12px 0 $black-2;
-
-    @include respond(md) {
-      display: block;
-    }
+    border: 2px solid $white-1;
+    min-height: 10px;
   }
 
   .btn {
@@ -149,100 +80,24 @@
       }
     }
   }
-}
-
-.btn-save {
-  background-color: $green-1;
-
-  &:hover {
-    .icon-bookmark-empty:before {
-      content: "\e80c";
+  
+  .btn-unfriend {
+    background-color: rgb(224, 221, 219);
+  
+    &:hover {
+      .icon-trash-empty:before {
+        content: "\f1f8";
+      }
     }
   }
-}
-
-.btn-remove {
-  background-color: $yellow-1;
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
-    }
-  }
-}
-
-.btn-accept {
-  background-color: $green-1;
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
-    }
-  }
-}
-
-.btn-decline {
-  background-color: $red-1;
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
-    }
-  }
-}
-
-.btn-unfriend {
-  background-color: rgb(224, 221, 219);
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
-    }
-  }
-}
-
-.btn-add {
-  background-color: $yellow-1;
-
-  &:hover {
-    .icon-trash-empty:before {
-      content: "\f1f8";
-    }
-  }
-}
-
-.btn-complete {
-  background-color: $green-1;
-
-  &:hover {
-    .icon-check:before {
-      content: "\e812";
-    }
-    .icon-check-empty:before {
-      content: "\e811";
-    }
-  }
-}
-
-.btn-active {
-  background-color: $blue-3;
-
-  &:hover {
-    .icon-eye:before {
-      content: "\e80e";
-    }
-    .icon-eye-off:before {
-      content: "\e80d";
-    }
-  }
-}
-
-.btn-recommend {
-  background-color: $yellow-1;
-
-  &:hover {
-    .icon-star:before {
-      content: "\e804";
+  
+  .btn-add {
+    background-color: $yellow-1;
+  
+    &:hover {
+      .icon-trash-empty:before {
+        content: "\f1f8";
+      }
     }
   }
 }

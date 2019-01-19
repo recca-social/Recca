@@ -1,7 +1,7 @@
 {
-  "name": "recco",
+  "name": "recca",
   "version": "1.0.0",
-  "description": "Recco",
+  "description": "Recca",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",

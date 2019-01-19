@@ -17,7 +17,8 @@ function parseData(array){
         }
 
         let genreArr = [];
-        if (!array[i].genre) {
+        if (array[i].genre) {
+            console.log(array[i].genre)
             for (let a = 0; a < array[i].genres.length; a++){
                 genreArr.push(array[i].genres[a].name)
             }
@@ -66,7 +67,12 @@ module.exports = {
             data: 'search "'+ parseQueryString(req.params.query) + '"; fields *, cover.*, genres.*, platforms.*, release_dates.*; limit 10;'
           })
         .then(function(response){
-            res.json(parseData(response.data));
+            if (response.data.length === 0){
+                res.json({message:"No results found"})
+            } else {
+                res.json(parseData(response.data));
+            }
+            
         })
     }
 }

@@ -1,41 +1,28 @@
 import React from "react";
-import PostModal from "../PostModal"
+import PostModal from "../PostModal";
+import Truncate from 'react-truncate';
 import "./media-item.scss";
 
 function Results(props) {
-  function creatorText(type, string) {
+  function typeCheckPluralizer(type, string) {
+    var creatorTitle;
+    
     if (type === "book") {
-      if (string.includes(",")) {
-        return "Authors: "
-      } else {
-        return "Author: "
-      }
+      creatorTitle = "Author"
     } else if (type === "music") {
-      if (string.includes(",")) {
-        return "Artists: "
-      } else {
-        return "Artist: "
-      }
+      creatorTitle = "Artist"
     } else if (type === "movie") {
-      if (string.includes(",")) {
-        return "Directors: "
-      } else {
-        return "Director: "
-      }
+      creatorTitle = "Director"
     } else if (type === "show") {
-      if (string.includes(",")) {
-        return "Writers: "
-      } else {
-        return "Writer: "
-      }
-    } else if (type === "game") {
-      if (string.includes(",")) {
-        return "Studios: "
-      } else {
-        return "Studio: "
-      }
+      creatorTitle = "Writer"
     } else {
-      return "Creator: "
+      return creatorTitle = "Creator"
+    }
+
+    if (string.includes(",")) {
+      return `${creatorTitle}s`
+    } else {
+      return creatorTitle;
     }
   }
   function platformText(string) {
@@ -56,12 +43,16 @@ function Results(props) {
     <div>
       {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
         <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
-          <div className="media-item__header">
+          <img
+            alt={item.title} className="media-item__img media-item__img--mobile"
+            src={item.image}
+          />
+          <div className="media-item__top">
             <img
               alt={item.title} className="media-item__img"
               src={item.image}
             />
-            <div className="media-item__details">
+            <div className="media-item__main">
               <h3 className="media-item__title">
                 {item.link ? 
                   <a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
@@ -70,20 +61,20 @@ function Results(props) {
                     <span className="media-item__year"> ({item.year})</span>
                   : ""}
               </h3>
-              {item.description ?
-                <p className="media-item__description">{item.description}</p>
-              : ""}
-              {props.mediaType === "music" && item.creator ?
-                <p className="media-item__metadata media-item__creator">
-                  <strong>{item.creator}</strong>
-                </p>
+              {item.description ? <p className="media-item__description"><Truncate lines={4} ellipsis={"..."}>{item.description}</Truncate></p>
               : ""}
             </div>
           </div>
 
+          {props.mediaType === "music" && item.creator ?
+            <p className="media-item__metadata media-item__creator">
+              <strong>{item.creator}</strong>
+            </p>
+          : ""}
+
           {item.creator && props.mediaType !== "music" ? 
             <p className="media-item__metadata media-item__creator">
-              <strong>{creatorText(item.type, item.creator)}</strong>
+              <strong>{typeCheckPluralizer(item.type, item.creator)}: </strong>
               {item.creator}
             </p>
           : ""}
@@ -108,6 +99,8 @@ function Results(props) {
               {props.mediaType === "game" ? Math.round(item.rating) : item.rating }
             </p>
           : ""}
+
+          <div className="clearfix"></div>
           
           {props.resultType === "saved" ? 
             <div className="media-item__buttons media-item__buttons--saved">

@@ -4,6 +4,12 @@
 .main {
   padding: 30px;
 
+  .no-results {
+    color: $white-1;
+    text-align: center;
+    margin: -15px 0 20px;
+  }
+
   hr {
     border-color: $white-3;
     width: 80%;
@@ -27,9 +33,7 @@
   }
 }
 
-.sidebar {
-  display: none;
-  @include respond(md) {
-    display: block;
-  }
+.feed {
+  min-height: calc(100vh - 267px);
+  max-width: 100%;
 }

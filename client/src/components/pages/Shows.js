@@ -6,6 +6,7 @@ import postAPI from "../../utils/postAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
+import Footer from "../Footer";
 import "./mediaPages.scss";
 
 class Shows extends Component {
@@ -13,7 +14,8 @@ class Shows extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -32,26 +34,30 @@ class Shows extends Component {
   searchShows = query => {
     const results = [];
     showAPI.search(query)
-      .then(function(res) {
-        console.log(res.data)
-        res.data.forEach(show => {
-          results.push(
-            {
-              type: "show",
-              title: show.title ? show.title : "",
-              year: show.year ? show.year : "",
-              image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
-              description: show.summary ? show.summary : "No plot summary available",
-              link: show.link ? show.link : "",
-              creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
-              genre: show.genre ? show.genre : "",
-              rating: show.rating ? show.rating : "",
-              apiId: show.apiId
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(show => {
+            results.push(
+              {
+                type: "show",
+                title: show.title ? show.title : "",
+                year: show.year ? show.year : "",
+                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                description: show.summary ? show.summary : "No plot summary available",
+                link: show.link ? show.link : "",
+                creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
+                genre: show.genre ? show.genre : "",
+                rating: show.rating ? show.rating : "",
+                apiId: show.apiId
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
-      .then(() => this.setState({ results }))
       .catch(err => console.log(err));
   };
 
@@ -61,6 +67,7 @@ class Shows extends Component {
 
   componentDidMount() {
     this.getShows();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {
@@ -120,57 +127,64 @@ class Shows extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-9 main">
-            <SearchForm 
-              search={this.state.search}
-              handleInputChange={this.handleInputChange}
-              handleSearch={this.handleSearch}
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-9 main">
+              <SearchForm 
+                search={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleSearch={this.handleSearch}
+                mediaType="show"
+              />
+              {this.state.results.length ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Results</h2>
+                  <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
+                  <div className="clearfix"></div>
+                  <Results 
+                    items={this.state.results}
+                    clearResults={this.clearResults}
+                    resultType="results"
+                    mediaType="show"
+                    handleSave={this.handleSave}
+                    handleRecommend={this.handleRecommend}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                  />
+                </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
+              <hr />
+              {this.state.saved ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Saved Shows</h2>
+                  <Results 
+                    items={this.state.saved}
+                    resultType="saved"
+                    mediaType="show"
+                    handleDelete={this.handleDelete}
+                    toggleActive={this.toggleActive}
+                    toggleComplete={this.toggleComplete}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                    handleRecommend={this.handleRecommend}
+                  />
+                </div> : 
+                <p className="text-center empty-media-msg">Use the search bar above to find and save shows!</p> }
+            </div>
+            
+            <Sidebar 
+              items={this.state.saved}
+              toggleActive={this.toggleActive}
+              toggleComplete={this.toggleComplete}
+              handleDelete={this.handleDelete}
               mediaType="show"
             />
-            {this.state.results.length ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Results</h2>
-                <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
-                <div className="clearfix"></div>
-                <Results 
-                  items={this.state.results}
-                  clearResults={this.clearResults}
-                  resultType="results"
-                  mediaType="show"
-                  handleSave={this.handleSave}
-                  handleRecommend={this.handleRecommend}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                />
-              </div> : ""}
-            <hr />
-            {this.state.saved ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Saved Shows</h2>
-                <Results 
-                  items={this.state.saved}
-                  resultType="saved"
-                  mediaType="show"
-                  handleDelete={this.handleDelete}
-                  toggleActive={this.toggleActive}
-                  toggleComplete={this.toggleComplete}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                  handleRecommend={this.handleRecommend}
-                />
-              </div> : 
-              <p className="text-center empty-media-msg">Use the search bar above to find and save shows!</p> }
           </div>
-          
-          <Sidebar 
-            items={this.state.saved}
-            toggleActive={this.toggleActive}
-            toggleComplete={this.toggleComplete}
-            mediaType="show"
-          />
-          </div>
+        </div>
+        <Footer />
       </div>
     )
   }

@@ -55,7 +55,7 @@ module.exports = {
         let participants = [req.user._id, req.body.requestTo];
         let requestTo = req.body.requestTo;
         let inverseParticipants = [req.body.requestTo, req.body.requestTo];
-        db.Friends.find({$or:[{ participants: participants }, {participants: inverseParticipants}]})
+        db.Friends.findOne({$or: [{ participants: participants }, {participants: inverseParticipants}]})
             .then(result => {
                 if (!result) {
                     db.Friends.create({
@@ -63,7 +63,7 @@ module.exports = {
                         requestTo: requestTo
                     })
                         .then(newResult => {
-                            res.json({ message: "Friend Request Created" });
+                            res.json(newResult);
                         })
                         .catch(err => res.status(422).json(err));
                 } else {

@@ -41,8 +41,13 @@ module.exports = {
                 }
             })
             .then(function(spotifyResponse){
-                console.log(spotifyResponse)
-                res.json(parseAlbums(spotifyResponse.data))
+                if (spotifyResponse.data.albums.items.length === 0){
+                    res.json({Message: "No results found"})
+                } else {
+                    
+                    res.json(parseAlbums(spotifyResponse.data))
+                }
+
             })
         })
     }

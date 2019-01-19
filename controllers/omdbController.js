@@ -7,7 +7,7 @@ module.exports = {
         axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=series&s=" + req.params.query)
         .then(function(response){
             if (!response.data.Search){
-                res.json("No results found")
+                res.json({Message: "No results found"})
             } else {
                 let responseArray = response.data.Search
                 let parsedArray = [];
@@ -40,7 +40,7 @@ module.exports = {
         axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=movie&s=" + req.params.query)
         .then(function(response){
             if (!response.data.Search){
-                res.json("No results found")
+                res.json({Message: "No results found"})
             } else {
                 let responseArray = response.data.Search
                 let parsedArray = [];

@@ -34,7 +34,6 @@ class Games extends Component {
     const results = [];
     gameAPI.search(query)
       .then(function(res) {
-        console.log(res.data)
         res.data.forEach(game => {
           results.push(
             {

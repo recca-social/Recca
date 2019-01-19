@@ -17,7 +17,6 @@ class Home extends Component {
     let feedPosts = []
     userAPI.getFeedItems()
     .then(function(res) {
-      console.log(res.data)
       feedPosts = res.data
     })
     .then(() => this.setState({ activity: feedPosts }))

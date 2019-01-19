@@ -26,16 +26,14 @@ class Friends extends Component {
   handleSearch = event => {
     event.preventDefault();
     this.searchFriends(this.state.search)
-    console.log(this.state.search);
   };
 
   searchFriends = query => {
     const results = [];
-    console.log(query);
     userAPI
       .findUserByName(query)
       .then(res => {
-        if(!res.data.message){
+        if (!res.data.message) {
         res.data.forEach(friend => {
           results.push({
             type: "friend",
@@ -44,16 +42,13 @@ class Friends extends Component {
             username: friend.username ? friend.username : "",
             apiId: friend._id
           });
-      
         })
         this.setState({message: ""});
-      } else {
-        this.setState({
-          message:res.data.message
-        })
-      }
-        console.log(res.data);
-        console.log(results);
+        } else {
+          this.setState({
+            message:res.data.message
+          })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -63,8 +58,7 @@ class Friends extends Component {
     userAPI
       .newFriendRequest(requestTo)
       .then(res => {
-        console.log(res.data.message);
-        if (res.data.message === "Hey, this person all ready got a friend request from you!") {
+        if (res.data.message === "Hey, this person already got a friend request from you!") {
           alert("You already sent a friend request to them!");
         } else {
           alert("Friend Request Sent!");
@@ -84,7 +78,6 @@ class Friends extends Component {
     userAPI
       .getUserMedia()
       .then(res => {
-        console.log(res.data.friends);
         this.setState({ saved: res.data.friends });
       })
       .catch(err => console.log(err));
@@ -94,7 +87,6 @@ class Friends extends Component {
     userAPI
       .pendingRequest()
       .then(res => {
-        console.log(res.data);
         this.setState({ requests: res.data });
       })
       .catch(err => console.log(err));
@@ -104,7 +96,6 @@ class Friends extends Component {
     userAPI
       .handleFriendRequest(id, status)
       .then(res => {
-        console.log(res);
         this.getFriends();
         this.handlePendingRequest();
       })
@@ -123,7 +114,6 @@ class Friends extends Component {
   };
 
   handleRemoveFriend = id => {
-    console.log(id);
     userAPI.removeFriend(id)
       .then(res => {
         console.log(res);

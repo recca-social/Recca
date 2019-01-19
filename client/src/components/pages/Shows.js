@@ -34,7 +34,6 @@ class Shows extends Component {
     const results = [];
     showAPI.search(query)
       .then(function(res) {
-        console.log(res.data)
         res.data.forEach(show => {
           results.push(
             {

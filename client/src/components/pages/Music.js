@@ -34,7 +34,6 @@ class Music extends Component {
     const results = [];
     musicAPI.searchAlbum(query)
       .then(function(res) {
-        console.log(res.data)
         res.data.forEach(music => {
           results.push(
             {

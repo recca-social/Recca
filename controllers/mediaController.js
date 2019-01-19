@@ -11,7 +11,7 @@ module.exports = {
         .then(function(userInfo){
             for (let i = 0; i < userInfo.media.length; i++){
                 if (userInfo.media[i].apiId === req.body.apiId){
-                    return{message: "Duplicate media entry"}
+                    return{message: "You already have that item saved."}
                 }
             }
             return req.body

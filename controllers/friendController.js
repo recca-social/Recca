@@ -92,7 +92,7 @@ module.exports = {
                         .catch(err => res.status(422).json(err));
                 } else {
                     res.json({
-                        message: "Hey, this person already got a friend request from you!"
+                        message: "You already have a pending request with that user"
                     });
                 }
             })

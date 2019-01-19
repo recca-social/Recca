@@ -63,6 +63,7 @@ class Music extends Component {
 
   componentDidMount() {
     this.getMusic();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {

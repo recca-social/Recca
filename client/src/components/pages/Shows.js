@@ -67,6 +67,7 @@ class Shows extends Component {
 
   componentDidMount() {
     this.getShows();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {

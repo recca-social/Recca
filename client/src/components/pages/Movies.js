@@ -66,6 +66,7 @@ class Movies extends Component {
 
   componentDidMount() {
     this.getMovies();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {

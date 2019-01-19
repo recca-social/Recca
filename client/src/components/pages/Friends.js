@@ -132,6 +132,7 @@ class Friends extends Component {
   componentDidMount() {
     this.getFriends();
     this.handlePendingRequest();
+    window.scrollTo(0, 0)
   }
 
   render() {

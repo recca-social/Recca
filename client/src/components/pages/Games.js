@@ -84,9 +84,9 @@ class Games extends Component {
       platform: game.platform,
       rating: game.rating,
       apiId: game.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the game is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message: res.data.messaage })
       this.getGames()
     })
   }

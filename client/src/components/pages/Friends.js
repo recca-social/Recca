@@ -64,7 +64,7 @@ class Friends extends Component {
       .newFriendRequest(requestTo)
       .then(res => {
         if (res.data.message) {
-          alert("You already sent a friend request to them!");
+          // alert("You already have a pending request with that user");
           this.setState({
             message: res.data.message
           })

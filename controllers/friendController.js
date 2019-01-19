@@ -17,7 +17,13 @@ module.exports = {
                         { lastName: { $regex: queryItem, $options: 'i' } }
                     ]
                 })
-                    .then(userArr => res.json(userArr))
+                    .then(userArr => {
+                        if (userArr.length > 0) {
+                            return res.json(userArr)
+                        } else {
+                            return res.json({ message: "No users found" })
+                        }
+                    })
                     .catch(err => res.status(422).json(err));
             } else if (queryArr.length == 2) {
                 db.User.find({
@@ -26,7 +32,13 @@ module.exports = {
                         { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[1], $options: 'i' } }] }
                     ]
                 })
-                    .then(userArr => res.json(userArr))
+                    .then(userArr => {
+                        if (userArr.length > 0) {
+                            return res.json(userArr)
+                        } else {
+                            return res.json({ message: "No users found" })
+                        }
+                    })
                     .catch(err => res.status(422).json(err));
             } else if (queryArr.length == 3) {
                 db.User.find({
@@ -35,11 +47,23 @@ module.exports = {
                         { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[2], $options: 'i' } }] }
                     ]
                 })
-                    .then(userArr => res.json(userArr))
+                    .then(userArr => {
+                        if (userArr.length > 0) {
+                            return res.json(userArr)
+                        } else {
+                            return res.json({ message: "No users found" })
+                        }
+                    })
                     .catch(err => res.status(422).json(err));
             } else {
                 db.User.find({ username: queryArr.join(" ") })
-                    .then(userArr => res.json(userArr))
+                    .then(userArr => {
+                        if (userArr.length > 0) {
+                            return res.json(userArr)
+                        } else {
+                            return res.json({ message: "No users found" })
+                        }
+                    })
                     .catch(err => res.status(422).json(err));
             }
         } else {
@@ -55,7 +79,7 @@ module.exports = {
         let participants = [req.user._id, req.body.requestTo];
         let requestTo = req.body.requestTo;
         let inverseParticipants = [req.body.requestTo, req.user._id];
-        db.Friends.findOne({$or: [{ participants: participants }, {participants: inverseParticipants}]})
+        db.Friends.findOne({ $or: [{ participants: participants }, { participants: inverseParticipants }] })
             .then(result => {
                 if (!result) {
                     db.Friends.create({
@@ -68,7 +92,7 @@ module.exports = {
                         .catch(err => res.status(422).json(err));
                 } else {
                     res.json({
-                        message: "Hey, this person already got a friend request from you!"
+                        message: "You already have a pending request with that user"
                     });
                 }
             })

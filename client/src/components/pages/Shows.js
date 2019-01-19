@@ -84,9 +84,9 @@ class Shows extends Component {
       genre: show.genre,
       rating: show.rating,
       apiId: show.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the show is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message : res.data.message })
       this.getShows()
     })
   }

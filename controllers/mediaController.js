@@ -3,18 +3,40 @@ var db = require("../models");
 module.exports = {
     // method to post new media to db and update user model with event info
     create: function(req, res){
-        console.log(req.body)
-        db.Media
-        .create(req.body)
-        .then(function(dbMedia){
-            //push to user media array
-            return db.User.findOneAndUpdate({ _id: req.user._id }, {$push: { media: dbMedia._id }}, {new: true})
+        db.User.findOne({ _id: req.user._id })
+        .populate("media")
+        .then(function(dbUser){
+            return dbUser;
         })
-        .then(function(dbUserInfo){
-            console.log(dbUserInfo);
-            res.json(dbUserInfo);
+        .then(function(userInfo){
+            for (let i = 0; i < userInfo.media.length; i++){
+                if (userInfo.media[i].apiId === req.body.apiId){
+                    return{message: "You already have that item saved."}
+                }
+            }
+            return req.body
         })
-        .catch(err => res.status(422).json(err));
+        .then(function(returnItem){
+            if(!returnItem.message){
+                db.Media.create(req.body)
+                .then(function(dbMedia){
+                    return db.User.findOneAndUpdate({ _id: req.user._id }, {$push: { media: dbMedia._id }}, {new: true})
+                })
+                .then(function(dbUserInfo){
+                    return dbUserInfo;
+                })
+                .catch(err => res.status(422).json(err));
+            } else {
+                return returnItem
+            }
+            
+        })
+        .then(function(finalReturn){
+            console.log(finalReturn)
+            res.json(finalReturn)
+        })
+        
+        
     },
     //method to delete media from db
     delete: function(req, res) {

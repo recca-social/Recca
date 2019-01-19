@@ -5,7 +5,7 @@ const app = express();
 const routes = require("./routes");
 const session = require("express-session");
 const mongoose = require("mongoose")
-const connection = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/recco2");
+const connection = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/recca");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 

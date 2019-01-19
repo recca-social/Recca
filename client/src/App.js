@@ -10,7 +10,6 @@ import Shows from "./components/pages/Shows";
 import Friends from "./components/pages/Friends";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles/fontello/css/fontello.css";
 import "./styles/fontello/css/fontello-codes.css";
@@ -36,7 +35,6 @@ const App = () => {
           <ProtectedRoute exact path="/home" component={Home} />
           <Route path="/" component={Login} />
         </Switch>
-        {/* <Footer /> */}
       </div>
     </Router>
   );

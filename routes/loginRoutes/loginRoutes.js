@@ -13,7 +13,7 @@ router.route("/local").post(function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {
     if (err) { return next(err) }
     if (!user) {
-       return res.json({ message: 'Username or password are incorrect' }) }
+       return res.json({ message: 'Username or password is incorrect' }) }
     req.logIn(user, function (err) {
       if (err) { return next(err); }
       console.log("we're logged in");

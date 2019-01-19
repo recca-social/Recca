@@ -26,7 +26,6 @@ class Friends extends Component {
   handleSearch = event => {
     event.preventDefault();
     this.searchFriends(this.state.search)
-    this.setState({ search: "" });
     console.log(this.state.search);
   };
 
@@ -65,10 +64,7 @@ class Friends extends Component {
       .newFriendRequest(requestTo)
       .then(res => {
         console.log(res.data.message);
-        if (
-          res.data.message ===
-          "Hey, this person all ready got a friend request from you!"
-        ) {
+        if (res.data.message === "Hey, this person all ready got a friend request from you!") {
           alert("You already sent a friend request to them!");
         } else {
           alert("Friend Request Sent!");
@@ -186,11 +182,6 @@ class Friends extends Component {
                     items={this.state.saved}
                     resultType="saved"
                     handleRemoveFriend={this.handleRemoveFriend}
-                    // toggleActive={this.toggleActive}
-                    // toggleComplete={this.toggleComplete}
-                    // handleInputChange={this.handleInputChange}
-                    // postText={this.state.postText}
-                    // handleRecommend={this.handleRecommend}
                   />
                 </div>
               ) : (
@@ -201,7 +192,6 @@ class Friends extends Component {
             </div>
             <FriendSidebar
               items={this.state.requests}
-              // handleFriendRequest={this.handleFriendRequest}
               handlePendingRequest={this.handlePendingRequest}
               handleAcceptRequest={this.handleAcceptRequest}
               handleDeclineRequest={this.handleDeclineRequest}

@@ -1,109 +1,42 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.sidebar {
-  background-color: $white-3;
-  // background: linear-gradient(to right, $white-3, $gray-3);
-  color: $white-1;
-  min-height: calc(100vh - 43px);
-  padding: 0;
+// Accept and Decline button styling
+.accept-btn-container,
+.decline-btn-container {
+  float: left;
+  box-shadow: -2px 2px 12px 0 $black-2;
+  max-width: 100px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
 
-  &__buttons {
-    // position: absolute;
-    // bottom: 0;
-    // left: 0;
-    // display: flex;
-    // flex-direction: column;
-    // float: left;
-    box-shadow: -2px 2px 12px 0 $black-2;
-    max-width: 100px;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    // border-top-right-radius: 6px;
-    // border-bottom-left-radius: 6px;
-  }
-
-  &__buttons:hover, &__buttons:focus {
-    box-shadow: 0px 1px 12px 0 $black-2;
+.accept-btn-container:hover,
+.decline-btn-container:hover,
+.accept-btn-container:focus,
+.decline-btn-container:focus {
+  box-shadow: 0px 1px 12px 0 $black-2;
     z-index: 2;
-  }
+}
 
-  &__title {
-    font-size: 18px;
-    line-height: 18px;
-    text-align: center;
-    padding: 15px 0 12px;
-    background: $gray-3;
-    text-shadow: 2px 1px 8px $black-1;
-    text-transform: capitalize;
-  }
+.btn-accept {
+  background-color: $green-1;
 
-  &__media-item--active {
-    background: $blue-3;
-  }
-
-  &__media-item--complete {
-    background: $green-1;
-  }
-
-  &__media-item {
-    padding: 10px 10px 10px 10px;
-    border-bottom: 2px solid $gray-3;
-    clear: both; 
-    position: relative;
-
-    &:first-of-type {
-      box-shadow: inset 0px 7px 13px -7px $black-2;
-      padding-top: 15px;
-    }
-
-    .btn-active {
-      position: absolute;
-      padding: 0;
-      top: 50%;
-      right: 0;
-      height: 100%;
-      font-size: 34px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      background: transparent;
-      color: $white-1;
-      border: none;
-
-      &:hover, &:focus, &:active {
-        background: $white-1;
-        color: $black-2;
-        .icon:before {
-          content:"\e80e";
-        }
-      }
-    }
-
-    p {
-      margin-bottom: 0;
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
     }
   }
+}
 
-  &__img {
-    height: 50px;
-    float: left;
-    margin-right: 10px;
-  }
+.btn-decline {
+  background-color: $red-1;
 
-  &__link {
-    color: $yellow-1;
-    text-shadow: 1px 1px 5px $black-1;
-
-    &:hover {
-      color: $white-1;
-      text-decoration: none;
+  &:hover {
+    .icon-trash-empty:before {
+      content: "\f1f8";
     }
   }
-
-  &__message {
-    margin-top: 15px;
-  }
-
 }

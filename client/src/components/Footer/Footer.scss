@@ -1,14 +1,9 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-body {
-  // padding-bottom: 100px; 
-}
-
 .footer {
   background: $blue-2;
   padding: 20px 20px;
-  position: relative;
 
   a {
     color: $yellow-1;

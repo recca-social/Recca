@@ -162,8 +162,8 @@ class Friends extends Component {
                 handleSearch={this.handleSearch}
                 mediaType="user"
               />
-              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : ""}
-              {this.state.results.length ? (
+              {this.state.message.length > 0 ? <p className="no-results">{this.state.message}</p> : ""}
+              {this.state.results.length ?
                 <div className="media-wrapper">
                   <h2 className="text-center">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">
@@ -176,12 +176,9 @@ class Friends extends Component {
                     resultType="results"
                     handleAddFriend={this.handleAddFriend}
                   />
-                </div>
-              ) : (
-                  ""
-                )}
+                </div> : ""}
               <hr />
-              {this.state.saved ? (
+              {this.state.saved ?
                 <div className="media-wrapper">
                   <h2 className="text-center">My Friends</h2>
                   <FriendResults
@@ -190,11 +187,10 @@ class Friends extends Component {
                     handleRemoveFriend={this.handleRemoveFriend}
                   />
                 </div>
-              ) : (
-                  <p className="text-center empty-media-msg">
-                    Use the search bar above to find and add friends!
+                : <p className="text-center empty-media-msg">
+                  Use the search bar above to find and add friends!
                 </p>
-                )}
+              }
             </div>
             <FriendSidebar
               items={this.state.requests}

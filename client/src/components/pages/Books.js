@@ -40,7 +40,7 @@ class Books extends Component {
               type: "book",
               title: book.volumeInfo.title ? book.volumeInfo.title : "",
               image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
-              description: book.volumeInfo.description ? book.volumeInfo.description : "No description available",
+              description: book.volumeInfo.description ? book.volumeInfo.description : "",
               link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
               creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
               genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",

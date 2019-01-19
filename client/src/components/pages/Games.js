@@ -61,6 +61,7 @@ class Games extends Component {
 
   componentDidMount() {
     this.getGames();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {

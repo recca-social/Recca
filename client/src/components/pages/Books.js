@@ -59,6 +59,7 @@ class Books extends Component {
 
   componentDidMount() {
     this.getBooks();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {

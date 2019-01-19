@@ -53,7 +53,8 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    this.getFeed()
+    this.getFeed();
+    window.scrollTo(0, 0)
   }
 
   render() {

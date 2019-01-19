@@ -34,7 +34,6 @@ class Music extends Component {
     const results = [];
     musicAPI.searchAlbum(query)
       .then(res => {
-        console.log(res)
         // If no results, set state with message
         if (res.data.message) {
           this.setState({ message: res.data.message })

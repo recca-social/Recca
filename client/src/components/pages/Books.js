@@ -35,7 +35,6 @@ class Books extends Component {
     const results = [];
     bookAPI.search(query)
       .then(res => {
-        console.log(res)
         // If no results, set state with message
         if (res.data.totalItems === 0) {
           this.setState({ message: "No results found" })

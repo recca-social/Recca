@@ -34,7 +34,6 @@ class Movies extends Component {
     const results = [];
     movieAPI.search(query)
       .then(res => {
-        console.log(res)
         // If no results, set state with message
         if (res.data.message) {
           this.setState({ message: res.data.message })

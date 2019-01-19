@@ -34,7 +34,6 @@ class Games extends Component {
     const results = [];
     gameAPI.search(query)
       .then(res => {
-        console.log(res)
         // If no results, set state with message
         if (res.data.message) {
           this.setState({ message: res.data.message })

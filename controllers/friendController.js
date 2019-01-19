@@ -54,7 +54,7 @@ module.exports = {
     newFriendRequest: function (req, res) {
         let participants = [req.user._id, req.body.requestTo];
         let requestTo = req.body.requestTo;
-        let inverseParticipants = [req.body.requestTo, req.body.requestTo];
+        let inverseParticipants = [req.body.requestTo, req.user._id];
         db.Friends.findOne({$or: [{ participants: participants }, {participants: inverseParticipants}]})
             .then(result => {
                 if (!result) {
@@ -68,7 +68,7 @@ module.exports = {
                         .catch(err => res.status(422).json(err));
                 } else {
                     res.json({
-                        message: "Hey, this person all ready got a friend request from you!"
+                        message: "Hey, this person already got a friend request from you!"
                     });
                 }
             })

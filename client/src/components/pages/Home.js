@@ -38,16 +38,21 @@ class Home extends Component {
       rating: media.rating,
       apiId: media.apiId
     })
-    .then( ()=>{
-      let newPage = media.type
-      if (newPage !== "music"){
+    .then( (res)=>{
+      if(res.data.message){
+        console.log(res.data)
+      } else {
+        let newPage = media.type
+        if (newPage !== "music"){
         newPage += "s"
       }
     
-      this.setState({
+        this.setState({
         redirectTo: newPage,
         itemSaved: true
       })
+      }
+      
     }
  )
   }

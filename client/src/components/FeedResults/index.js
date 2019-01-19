@@ -3,10 +3,6 @@ import "./feed-item.scss";
 import moment from "moment";
 
 function Results(props) {
-  // function typeCapitalized(string){
-  //   const upper = string.replace(/^\w/, c => c.toUpperCase());
-  //   return upper
-  // }
 
   function parseDate(date) {
     var newDate = moment(date).format("MMM-DD-YY hh:mm a")

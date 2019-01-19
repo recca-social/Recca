@@ -33,25 +33,30 @@ class Movies extends Component {
   searchMovies = query => {
     const results = [];
     movieAPI.search(query)
-      .then(function(res) {
-        res.data.forEach(movie => {
-          results.push(
-            {
-              type: "movie",
-              title: movie.title ? movie.title : "",
-              year: movie.year ? movie.year : "",
-              image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
-              description: movie.summary ? movie.summary : "No plot summary available",
-              link: movie.link ? movie.link : "",
-              creator: movie.director ? movie.director : "",
-              genre: movie.genre ? movie.genre : "",
-              rating: movie.rating ? movie.rating : "",
-              apiId: movie.apiId
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(movie => {
+            results.push(
+              {
+                type: "movie",
+                title: movie.title ? movie.title : "",
+                year: movie.year ? movie.year : "",
+                image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                description: movie.summary ? movie.summary : "No plot summary available",
+                link: movie.link ? movie.link : "",
+                creator: movie.director ? movie.director : "",
+                genre: movie.genre ? movie.genre : "",
+                rating: movie.rating ? movie.rating : "",
+                apiId: movie.apiId
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
-      .then(() => this.setState({ results }))
       .catch(err => console.log(err));
   };
 
@@ -61,6 +66,7 @@ class Movies extends Component {
 
   componentDidMount() {
     this.getMovies();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {
@@ -146,6 +152,9 @@ class Movies extends Component {
                     postText={this.state.postText}
                   />
                 </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">

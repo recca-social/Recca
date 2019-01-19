@@ -33,19 +33,25 @@ class Music extends Component {
   searchMusic = query => {
     const results = [];
     musicAPI.searchAlbum(query)
-      .then(function(res) {
-        res.data.forEach(music => {
-          results.push(
-            {
-              type: "music",
-              title: music.albumName ? music.albumName : "",
-              image: music.image ? music.image : "http://placehold.it/128x128",
-              link: music.albumLink.spotify ? music.albumLink.spotify : "",
-              creator: music.artist ? music.artist.join(", ") : "",
-              apiId: music.apiId
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(music => {
+            results.push(
+              {
+                type: "music",
+                title: music.albumName ? music.albumName : "",
+                image: music.image ? music.image : "http://placehold.it/128x128",
+                link: music.albumLink.spotify ? music.albumLink.spotify : "",
+                creator: music.artist ? music.artist.join(", ") : "",
+                apiId: music.apiId
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -57,6 +63,7 @@ class Music extends Component {
 
   componentDidMount() {
     this.getMusic();
+    window.scrollTo(0, 0)
   }
 
   handleSave = id => {
@@ -138,6 +145,9 @@ class Music extends Component {
                     postText={this.state.postText}
                   />
                 </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">

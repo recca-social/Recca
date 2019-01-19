@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 
 
-var connStr = 'mongodb://localhost:27017/recco';
+var connStr = 'mongodb://localhost:27017/recca';
 mongoose.connect(connStr, function (err) {
     if (err) throw err;
     console.log('Successfully connected to MongoDB');

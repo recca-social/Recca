@@ -6,9 +6,6 @@ function parseQueryString(string){
 
 function parseData(array){
     let parsedArray = [];
-    if (!array){
-        return("No results found")
-    }
     for (let i = 0; i < array.length; i++){
         let platformArr = [];
         if (!array[i].platforms){
@@ -70,7 +67,12 @@ module.exports = {
             data: 'search "'+ parseQueryString(req.params.query) + '"; fields *, cover.*, genres.*, platforms.*, release_dates.*; limit 10;'
           })
         .then(function(response){
-            res.json(parseData(response.data));
+            if (response.data.length === 0){
+                res.json({message:"No results found"})
+            } else {
+                res.json(parseData(response.data));
+            }
+            
         })
     }
 }

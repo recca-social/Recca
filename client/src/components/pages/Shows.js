@@ -14,7 +14,8 @@ class Shows extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -33,25 +34,30 @@ class Shows extends Component {
   searchShows = query => {
     const results = [];
     showAPI.search(query)
-      .then(function(res) {
-        res.data.forEach(show => {
-          results.push(
-            {
-              type: "show",
-              title: show.title ? show.title : "",
-              year: show.year ? show.year : "",
-              image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
-              description: show.summary ? show.summary : "No plot summary available",
-              link: show.link ? show.link : "",
-              creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
-              genre: show.genre ? show.genre : "",
-              rating: show.rating ? show.rating : "",
-              apiId: show.apiId
-            }
-          )
-        });
+      .then(res => {
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(show => {
+            results.push(
+              {
+                type: "show",
+                title: show.title ? show.title : "",
+                year: show.year ? show.year : "",
+                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                description: show.summary ? show.summary : "No plot summary available",
+                link: show.link ? show.link : "",
+                creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
+                genre: show.genre ? show.genre : "",
+                rating: show.rating ? show.rating : "",
+                apiId: show.apiId
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
-      .then(() => this.setState({ results }))
       .catch(err => console.log(err));
   };
 
@@ -146,6 +152,9 @@ class Shows extends Component {
                     postText={this.state.postText}
                   />
                 </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">

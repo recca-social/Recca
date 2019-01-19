@@ -33,23 +33,30 @@ class Games extends Component {
   searchGames = query => {
     const results = [];
     gameAPI.search(query)
-      .then(function(res) {
-        res.data.forEach(game => {
-          results.push(
-            {
-              type: "game",
-              title: game.title ? game.title : "",
-              year: game.releaseYear ? game.releaseYear : "",
-              image: game.coverArt ? game.coverArt : "http://placehold.it/128x170",
-              description: game.description ? game.description : "",
-              link: game.link ? game.link : "",
-              genre: game.genre ? game.genre.join(", ") : "",
-              platform: game.platforms ? game.platforms.join(", ") : "",
-              rating: game.rating ? game.rating : "",
-              apiId: game.id
-            }
-          )
-        });
+      .then(res => {
+        console.log(res)
+        // If no results, set state with message
+        if (res.data.message) {
+          this.setState({ message: res.data.message })
+        } else {
+          res.data.forEach(game => {
+            results.push(
+              {
+                type: "game",
+                title: game.title ? game.title : "",
+                year: game.releaseYear ? game.releaseYear : "",
+                image: game.coverArt ? game.coverArt : "http://placehold.it/128x170",
+                description: game.description ? game.description : "",
+                link: game.link ? game.link : "",
+                genre: game.genre ? game.genre.join(", ") : "",
+                platform: game.platforms ? game.platforms.join(", ") : "",
+                rating: game.rating ? game.rating : "",
+                apiId: game.id
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -146,6 +153,9 @@ class Games extends Component {
                     postText={this.state.postText}
                   />
                 </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">

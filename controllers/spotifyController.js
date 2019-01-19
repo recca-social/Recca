@@ -42,7 +42,7 @@ module.exports = {
             })
             .then(function(spotifyResponse){
                 if (spotifyResponse.data.albums.items.length === 0){
-                    res.json({Message: "No results found"})
+                    res.json({message: "No results found"})
                 } else {
                     
                     res.json(parseAlbums(spotifyResponse.data))

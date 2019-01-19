@@ -4,6 +4,12 @@
 .main {
   padding: 30px;
 
+  .no-results {
+    color: $white-1;
+    text-align: center;
+    margin: -15px 0 20px;
+  }
+
   hr {
     border-color: $white-3;
     width: 80%;

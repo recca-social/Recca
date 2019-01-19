@@ -14,7 +14,8 @@ class Books extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -33,21 +34,28 @@ class Books extends Component {
   searchBooks = query => {
     const results = [];
     bookAPI.search(query)
-      .then(function(res) {
-        res.data.items.forEach(book => {
-          results.push(
-            {
-              type: "book",
-              title: book.volumeInfo.title ? book.volumeInfo.title : "",
-              image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
-              description: book.volumeInfo.description ? book.volumeInfo.description : "",
-              link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-              creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
-              genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
-              apiId: book.id
-            }
-          )
-        });
+      .then(res => {
+        console.log(res)
+        // If no results, set state with message
+        if (res.data.totalItems === 0) {
+          this.setState({ message: "No results found" })
+        } else {
+          res.data.items.forEach(book => {
+            results.push(
+              {
+                type: "book",
+                title: book.volumeInfo.title ? book.volumeInfo.title : "",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
+                description: book.volumeInfo.description ? book.volumeInfo.description : "",
+                link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
+                creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
+                genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
+                apiId: book.id
+              }
+            )
+          });
+          this.setState({ results: results, message: "" })
+        }
       })
       .then(() => this.setState({ results }))
       .catch(err => console.log(err));
@@ -143,6 +151,9 @@ class Books extends Component {
                     postText={this.state.postText}
                   />
                 </div> : ""}
+              {this.state.message ? 
+                <p className="no-results">{this.state.message}</p> : ""
+              }
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">

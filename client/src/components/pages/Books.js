@@ -6,6 +6,7 @@ import postAPI from "../../utils/postAPI";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";
+import Footer from "../Footer";
 import "./mediaPages.scss";
 
 class Books extends Component {
@@ -116,58 +117,61 @@ class Books extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-9 main">
-            <SearchForm 
-              search={this.state.search}
-              handleInputChange={this.handleInputChange}
-              handleSearch={this.handleSearch}
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-9 main">
+              <SearchForm 
+                search={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleSearch={this.handleSearch}
+                mediaType="book"
+              />
+              {this.state.results.length ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Results</h2>
+                  <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
+                  <div className="clearfix"></div>
+                  <Results 
+                    items={this.state.results}
+                    clearResults={this.clearResults}
+                    resultType="results"
+                    mediaType="book"
+                    handleSave={this.handleSave}
+                    handleRecommend={this.handleRecommend}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                  />
+                </div> : ""}
+              <hr />
+              {this.state.saved ? 
+                <div className="media-wrapper">
+                  <h2 className="text-center">Saved Books</h2>
+                  <Results 
+                    items={this.state.saved}
+                    resultType="saved"
+                    mediaType="book"
+                    handleDelete={this.handleDelete}
+                    toggleActive={this.toggleActive}
+                    toggleComplete={this.toggleComplete}
+                    handleInputChange={this.handleInputChange}
+                    postText={this.state.postText}
+                    handleRecommend={this.handleRecommend}
+                  />
+                </div> : 
+                <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
+            </div>
+            
+            <Sidebar 
+              items={this.state.saved}
+              toggleActive={this.toggleActive}
+              toggleComplete={this.toggleComplete}
+              handleDelete={this.handleDelete}
               mediaType="book"
             />
-            {this.state.results.length ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Results</h2>
-                <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
-                <div className="clearfix"></div>
-                <Results 
-                  items={this.state.results}
-                  clearResults={this.clearResults}
-                  resultType="results"
-                  mediaType="book"
-                  handleSave={this.handleSave}
-                  handleRecommend={this.handleRecommend}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                />
-              </div> : ""}
-            <hr />
-            {this.state.saved ? 
-              <div className="media-wrapper">
-                <h2 className="text-center">Saved Books</h2>
-                <Results 
-                  items={this.state.saved}
-                  resultType="saved"
-                  mediaType="book"
-                  handleDelete={this.handleDelete}
-                  toggleActive={this.toggleActive}
-                  toggleComplete={this.toggleComplete}
-                  handleInputChange={this.handleInputChange}
-                  postText={this.state.postText}
-                  handleRecommend={this.handleRecommend}
-                />
-              </div> : 
-              <p className="text-center empty-media-msg">Use the search bar above to find and save books!</p> }
           </div>
-          
-          <Sidebar 
-            items={this.state.saved}
-            toggleActive={this.toggleActive}
-            toggleComplete={this.toggleComplete}
-            handleDelete={this.handleDelete}
-            mediaType="book"
-          />
-          </div>
+        </div>
+        <Footer />
       </div>
     )
   }

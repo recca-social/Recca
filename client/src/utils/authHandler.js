@@ -5,7 +5,6 @@ const authHandler = {
     checkAuth(cb) {
         axios.get("/login/check")
         .then(res => {
-            console.log(res.data)
             this.isAuthenticated = res.data
         })
     }

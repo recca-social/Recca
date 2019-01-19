@@ -27,6 +27,11 @@
   }
 }
 
+.feed {
+  min-height: calc(100vh - 267px);
+  max-width: 100%;
+}
+
 .sidebar {
   display: none;
   @include respond(md) {

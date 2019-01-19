@@ -2,72 +2,78 @@ const db = require("../models");
 
 module.exports = {
   //method for creating new users
-  create: function(req, res) {
+  create: function (req, res) {
     db.User.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   //method for finding user and populating media, recommendations, and friends
-  findUser: function(req, res) {
+  findUser: function (req, res) {
     db.User.findById({ _id: req.user._id })
       .populate("media")
       .populate("recommendations")
       .populate("friends")
-      .then(function(user) {
+      .then(function (user) {
         res.json(user);
       })
       .catch(err => res.status(422).json(err));
   },
 
   //method for finding user by id, and removing friend from friends array
-  removeFriend: function(req, res) {},
+  removeFriend: function (req, res) { },
 
   // this route is intended for finding users for potential friending purposes
   // returns the userId which can and should be supplied as the SECOND ID in the participatants object sent to newFriendRequest
   // via .get on /api/user/friend
-  userByName: function(req, res) {
-    let queryArr = req.body.query.split(" ");
-    if (queryArr.length == 1) {
-      let queryItem = queryArr[0];
-      db.User.find({
-        $or: [
-          { username: queryItem },
-          { firstName: queryItem },
-          { lastName: queryItem }
-        ]
-      })
-        .then(users => res.json(users))
-        .catch(err => res.status(422).json(err));
-    } else if (queryArr.length == 2) {
-      db.User.find({
-        $or: [
-          { username: queryArr.join(" ") },
-          { $and: [{ firstName: queryArr[0] }, { lastName: queryArr[1] }] }
-        ]
-      })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
-    } else if (queryArr.length == 3) {
-      db.User.find({
-        $or: [
-          { username: queryArr.join(" ") },
-          { $and: [{ firstName: queryArr[0] }, { lastName: queryArr[2] }] }
-        ]
-      })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
+  userByName: function (req, res) {
+    let fullName = "" + req.user.firstName + "" + req.user.lastName + "";
+      let queryArr = req.body.query.split(" ");
+      if ((req.body.query != req.user.username) && (req.body.query != fullName) && ((queryArr[0] != req.user.firstName)&&(queryArr[2] != req.user.lastName)) ) {
+      if (queryArr.length == 1) {
+        let queryItem = queryArr[0];
+        db.User.find({
+          $or: [
+            { username: { $regex: queryItem, $options: 'i' } },
+            { firstName: { $regex: queryItem, $options: 'i' } },
+            { lastName: { $regex: queryItem, $options: 'i' } }
+          ]
+        })
+          .then(users => res.json(users))
+          .catch(err => res.status(422).json(err));
+      } else if (queryArr.length == 2) {
+        db.User.find({
+          $or: [
+            { username: { $regex: queryArr.join(" "), $options: 'i' } },
+            { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[1], $options: 'i' } }] }
+          ]
+        })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      } else if (queryArr.length == 3) {
+        db.User.find({
+          $or: [
+            { username: { $regex: queryArr.join(" "), $options: 'i' } },
+            { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[2], $options: 'i' } }] }
+          ]
+        })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      } else {
+        db.User.find({ username: queryArr.join(" ") })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      }
     } else {
-      db.User.find({ username: queryArr.join(" ") })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
+      res.json({ message: "Recca will always be your friend." });
+      console.log("Recca will always love you")
     }
   },
 
   // newFriendRequest accepts an array of id's as participants!
   // The first Id should be the logged in user, the second Id should be the target of the request
   // accessed via .post on /api/user/friend
-  newFriendRequest: function(req, res) {
+  newFriendRequest: function (req, res) {
     let participants = [req.user._id, req.body.requestTo];
     let requestTo = req.body.requestTo;
     db.Friends.findOne({ participants: participants })
@@ -92,7 +98,7 @@ module.exports = {
 
   // handling the friend request:  This guy takes strings 'accepted' or 'rejected' as req.body.status.  A green and red button would work fine.
   // accessed via the .put on api/user/friend
-  handleFriendRequest: function(req, res) {
+  handleFriendRequest: function (req, res) {
     db.Friends.findOneAndUpdate(
       { _id: req.body.id },
       { $set: { status: req.body.status } },
@@ -128,7 +134,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  pendingRequest: function(req, res) {
+  pendingRequest: function (req, res) {
     db.Friends.find({ requestTo: req.user._id, status: "pending" })
       .populate("participants")
       .then(results => {
@@ -141,10 +147,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  getFeedItems: function(req, res) {
+  getFeedItems: function (req, res) {
     db.User.findById({ _id: req.user._id })
       .populate("friends")
-      .then(function(dbUser) {
+      .then(function (dbUser) {
         var friendsArray = dbUser.friends;
         var postsArray = [];
         for (let i = 0; i < friendsArray.length; i++) {
@@ -152,10 +158,10 @@ module.exports = {
         }
         var postObjReturn = [];
         for (let i = 0; i < postsArray.length; i++) {
-          db.Post.findById({ _id: postsArray[i] }).then(function(postReturn) {
+          db.Post.findById({ _id: postsArray[i] }).then(function (postReturn) {
             postObjReturn.push(postReturn);
             if (postsArray.length == postObjReturn.length) {
-              postObjReturn.sort(function(a, b) {
+              postObjReturn.sort(function (a, b) {
                 return b.created_at - a.created_at;
               });
               res.json(postObjReturn);
@@ -165,17 +171,17 @@ module.exports = {
       });
   },
 
-  getFeed: function(req, res) {
+  getFeed: function (req, res) {
     db.User.findById({ _id: req.user._id })
       .populate("friends")
       .populate("media")
       .populate("posts")
-      .then(function(dbUser) {
+      .then(function (dbUser) {
         res.json(dbUser);
       });
   },
 
-  removeFriend: function(req, res) {
+  removeFriend: function (req, res) {
     db.Friends.findById({ _id: req.params._id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))

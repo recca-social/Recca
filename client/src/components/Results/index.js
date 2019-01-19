@@ -3,39 +3,25 @@ import PostModal from "../PostModal"
 import "./media-item.scss";
 
 function Results(props) {
-  function creatorText(type, string) {
+  function typeCheckPluralizer(type, string) {
+    var creatorTitle;
+    
     if (type === "book") {
-      if (string.includes(",")) {
-        return "Authors: "
-      } else {
-        return "Author: "
-      }
+      creatorTitle = "Author"
     } else if (type === "music") {
-      if (string.includes(",")) {
-        return "Artists: "
-      } else {
-        return "Artist: "
-      }
+      creatorTitle = "Artist"
     } else if (type === "movie") {
-      if (string.includes(",")) {
-        return "Directors: "
-      } else {
-        return "Director: "
-      }
+      creatorTitle = "Director"
     } else if (type === "show") {
-      if (string.includes(",")) {
-        return "Writers: "
-      } else {
-        return "Writer: "
-      }
-    } else if (type === "game") {
-      if (string.includes(",")) {
-        return "Studios: "
-      } else {
-        return "Studio: "
-      }
+      creatorTitle = "Writer"
     } else {
-      return "Creator: "
+      return creatorTitle = "Creator"
+    }
+
+    if (string.includes(",")) {
+      return `${creatorTitle}s`
+    } else {
+      return creatorTitle;
     }
   }
   function platformText(string) {
@@ -83,7 +69,7 @@ function Results(props) {
 
           {item.creator && props.mediaType !== "music" ? 
             <p className="media-item__metadata media-item__creator">
-              <strong>{creatorText(item.type, item.creator)}</strong>
+              <strong>{typeCheckPluralizer(item.type, item.creator)}: </strong>
               {item.creator}
             </p>
           : ""}

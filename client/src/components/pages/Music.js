@@ -76,9 +76,9 @@ class Music extends Component {
       link: music.link,
       creator: music.creator,
       apiId: music.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the music is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message: res.data.messaage })
       this.getMusic()
     })
   }

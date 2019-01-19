@@ -83,9 +83,9 @@ class Movies extends Component {
       genre: movie.genre,
       rating: movie.rating,
       apiId: movie.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the movie is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message: res.data.messaage })
       this.getMovies()
     })
   }

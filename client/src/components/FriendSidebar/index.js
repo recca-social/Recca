@@ -3,7 +3,7 @@ import "./FriendSidebar.scss";
 
 const FriendSidebar = props => {
   return (
-    <div className="col-md-3 sidebar">
+    <div className="col-md-3 sidebar sidebar--friends">
       <div className="sidebar__title">Pending {props.mediaType} Requests</div>
       <div className="sidebar__media">
         {// Check for friend requests and check that there is at least 1 pending request

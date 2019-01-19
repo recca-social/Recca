@@ -6,6 +6,10 @@
   color: $white-1;
   min-height: calc(100vh - 163px);
   padding: 0;
+  display: none;
+  @include respond(md) {
+    display: block;
+  }
 
   &__title {
     font-size: 18px;

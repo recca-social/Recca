@@ -1,6 +1,10 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
+.sidebar--friends {
+  display: block;
+}
+
 // Accept and Decline button styling
 .accept-btn-container,
 .decline-btn-container {

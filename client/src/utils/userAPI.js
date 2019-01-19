@@ -16,29 +16,6 @@ export default {
     return axios.get("/logout");
   },
 
-  findUserByName: function(query) {
-    return axios.post("/api/user/find/user", {
-      query: query
-    });
-  },
-
-  pendingRequest: function() {
-    return axios.get("/api/user/friend");
-  },
-
-  newFriendRequest: function(requestTo) {
-    return axios.post("/api/user/friend", {
-      requestTo: requestTo
-    });
-  },
-
-  handleFriendRequest: function(id, status) {
-    return axios.put("/api/user/friend", {
-      id: id,
-      status: status
-    });
-  },
-
   // Remove Friend
   removeFriend: function(id) {
     return axios.delete("api/friend/" + id);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "../SearchForm";
 import FriendResults from "../FriendResults";
 import FriendSidebar from "../FriendSidebar";
+import friendAPI from "../../utils/friendAPI";
 import userAPI from "../../utils/userAPI";
 import Footer from "../Footer";
 
@@ -30,24 +31,28 @@ class Friends extends Component {
 
   searchFriends = query => {
     const results = [];
-    userAPI
+    friendAPI
       .findUserByName(query)
       .then(res => {
         if (!res.data.message) {
-        res.data.forEach(friend => {
-          results.push({
-            type: "friend",
-            firstName: friend.firstName ? friend.firstName : "",
-            lastName: friend.lastName ? friend.lastName : "",
-            username: friend.username ? friend.username : "",
-            apiId: friend._id
-          });
-        })
-        this.setState({message: ""});
-        } else {
-          this.setState({
-            message:res.data.message
+          res.data.forEach(friend => {
+            results.push({
+              type: "friend",
+              firstName: friend.firstName ? friend.firstName : "",
+              lastName: friend.lastName ? friend.lastName : "",
+              username: friend.username ? friend.username : "",
+              apiId: friend._id
+            });
           })
+          this.setState({ message: "" });
+        } else {
+          if (res.data.message) {
+            this.setState({
+              message: res.data.message
+            })
+          } else {
+
+          }
         }
       })
       .then(() => this.setState({ results }))
@@ -55,13 +60,19 @@ class Friends extends Component {
   };
 
   handleAddFriend = requestTo => {
-    userAPI
+    friendAPI
       .newFriendRequest(requestTo)
       .then(res => {
-        if (res.data.message === "Hey, this person already got a friend request from you!") {
+        if (res.data.message) {
           alert("You already sent a friend request to them!");
+          this.setState({
+            message: res.data.message
+          })
         } else {
           alert("Friend Request Sent!");
+          this.setState({
+            message: "Friend Request Sent!"
+          })
         }
       })
       .then(() => {
@@ -84,16 +95,20 @@ class Friends extends Component {
   };
 
   handlePendingRequest = () => {
-    userAPI
+    friendAPI
       .pendingRequest()
       .then(res => {
-        this.setState({ requests: res.data });
+        if(!res.data.message){
+        this.setState({ requests: res.data, message: "" });
+      } else {
+        this.setState({message: res.data.message})
+      }
       })
       .catch(err => console.log(err));
   };
 
   handleAcceptRequest = (id, status) => {
-    userAPI
+    friendAPI
       .handleFriendRequest(id, status)
       .then(res => {
         this.getFriends();
@@ -103,7 +118,7 @@ class Friends extends Component {
   };
 
   handleDeclineRequest = (id, status) => {
-    userAPI
+    friendAPI
       .handleFriendRequest(id, status)
       .then(res => {
         console.log(res);
@@ -114,7 +129,7 @@ class Friends extends Component {
   };
 
   handleRemoveFriend = id => {
-    userAPI.removeFriend(id)
+    friendAPI.removeFriend(id)
       .then(res => {
         console.log(res);
         this.getFriends()
@@ -132,6 +147,7 @@ class Friends extends Component {
   componentDidMount() {
     this.getFriends();
     this.handlePendingRequest();
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -162,8 +178,8 @@ class Friends extends Component {
                   />
                 </div>
               ) : (
-                ""
-              )}
+                  ""
+                )}
               <hr />
               {this.state.saved ? (
                 <div className="media-wrapper">
@@ -175,10 +191,10 @@ class Friends extends Component {
                   />
                 </div>
               ) : (
-                <p className="text-center empty-media-msg">
-                  Use the search bar above to find and add friends!
+                  <p className="text-center empty-media-msg">
+                    Use the search bar above to find and add friends!
                 </p>
-              )}
+                )}
             </div>
             <FriendSidebar
               items={this.state.requests}

@@ -27,40 +27,46 @@ module.exports = {
   // returns the userId which can and should be supplied as the SECOND ID in the participatants object sent to newFriendRequest
   // via .get on /api/user/friend
   userByName: function (req, res) {
-    let queryArr = req.body.query.split(" ");
-    if (queryArr.length == 1) {
-      let queryItem = queryArr[0];
-      db.User.find({
-        $or: [
-          { username: { $regex: queryItem, $options: 'i' } },
-          { firstName: { $regex: queryItem, $options: 'i' } },
-          { lastName: { $regex: queryItem, $options: 'i' } }
-        ]
-      })
-        .then(users => res.json(users))
-        .catch(err => res.status(422).json(err));
-    } else if (queryArr.length == 2) {
-      db.User.find({
-        $or: [
-          { username: { $regex: queryArr.join(" "), $options: 'i' } },
-          { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[1], $options: 'i' } }] }
-        ]
-      })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
-    } else if (queryArr.length == 3) {
-      db.User.find({
-        $or: [
-          { username: { $regex: queryArr.join(" "), $options: 'i' } },
-          { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[2], $options: 'i' } }] }
-        ]
-      })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
+    let fullName = "" + req.user.firstName + "" + req.user.lastName + "";
+      let queryArr = req.body.query.split(" ");
+      if ((req.body.query != req.user.username) && (req.body.query != fullName) && ((queryArr[0] != req.user.firstName)&&(queryArr[2] != req.user.lastName)) ) {
+      if (queryArr.length == 1) {
+        let queryItem = queryArr[0];
+        db.User.find({
+          $or: [
+            { username: { $regex: queryItem, $options: 'i' } },
+            { firstName: { $regex: queryItem, $options: 'i' } },
+            { lastName: { $regex: queryItem, $options: 'i' } }
+          ]
+        })
+          .then(users => res.json(users))
+          .catch(err => res.status(422).json(err));
+      } else if (queryArr.length == 2) {
+        db.User.find({
+          $or: [
+            { username: { $regex: queryArr.join(" "), $options: 'i' } },
+            { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[1], $options: 'i' } }] }
+          ]
+        })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      } else if (queryArr.length == 3) {
+        db.User.find({
+          $or: [
+            { username: { $regex: queryArr.join(" "), $options: 'i' } },
+            { $and: [{ firstName: { $regex: queryArr[0], $options: 'i' } }, { lastName: { $regex: queryArr[2], $options: 'i' } }] }
+          ]
+        })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      } else {
+        db.User.find({ username: queryArr.join(" ") })
+          .then(userArr => res.json(userArr))
+          .catch(err => res.status(422).json(err));
+      }
     } else {
-      db.User.find({ username: queryArr.join(" ") })
-        .then(userArr => res.json(userArr))
-        .catch(err => res.status(422).json(err));
+      res.json({ message: "Recca will always be your friend." });
+      console.log("Recca will always love you")
     }
   },
 

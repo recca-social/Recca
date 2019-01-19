@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
-import Footer from "../Footer";
 import "./style.scss";
+import userAPI from "../../utils/userAPI";
+import Footer from "../Footer";
 
 class Signup extends Component {
   constructor() {

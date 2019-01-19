@@ -11,7 +11,8 @@ class Friends extends Component {
     results: [],
     saved: [],
     requests: [],
-    status: ""
+    status: "",
+    message: ""
   };
 
   handleInputChange = event => {
@@ -34,6 +35,7 @@ class Friends extends Component {
     userAPI
       .findUserByName(query)
       .then(res => {
+        if(!res.data.message){
         res.data.forEach(friend => {
           results.push({
             type: "friend",
@@ -42,7 +44,14 @@ class Friends extends Component {
             username: friend.username ? friend.username : "",
             apiId: friend._id
           });
-        });
+      
+        })
+        this.setState({message: ""});
+      } else {
+        this.setState({
+          message:res.data.message
+        })
+      }
         console.log(res.data);
         console.log(results);
       })
@@ -147,6 +156,7 @@ class Friends extends Component {
                 handleSearch={this.handleSearch}
                 mediaType="user"
               />
+              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : ""}
               {this.state.results.length ? (
                 <div className="media-wrapper">
                   <h2 className="text-center">Results</h2>

@@ -139,7 +139,7 @@ class Shows extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -159,7 +159,7 @@ class Shows extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Shows</h2>
+                  <h2 className="text-center header-saved">Saved Shows</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"

@@ -165,7 +165,7 @@ class Friends extends Component {
               {this.state.message.length > 0 ? <p className="no-results">{this.state.message}</p> : ""}
               {this.state.results.length ?
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">
                     Clear <i className="icon icon-collapse" />
                   </button>
@@ -180,7 +180,7 @@ class Friends extends Component {
               <hr />
               {this.state.saved ?
                 <div className="media-wrapper">
-                  <h2 className="text-center">My Friends</h2>
+                  <h2 className="text-center header-saved">My Friends</h2>
                   <FriendResults
                     items={this.state.saved}
                     resultType="saved"

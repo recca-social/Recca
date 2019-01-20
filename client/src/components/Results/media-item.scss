@@ -3,16 +3,23 @@
 
 .media-wrapper {
   > h2 {
-    color: $white-1;
     font-size: 22px;
-    margin-bottom: 15px;
+    padding: 10px 0;
+    margin: 0 5px 15px;
   }
+}
+
+.header-saved {
+  color: $black-1;
+  background: $yellow-1;
+  font-size: 22px;
+  margin: 0 10px 15px;
 }
 
 .media-item {
   padding: 20px;
   background: $gray-3;
-  margin-bottom: 20px;
+  margin: 0 30px 20px;
   position: relative;
   border-radius: 10px;
   min-height: 190px;

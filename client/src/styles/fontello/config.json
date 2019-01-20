@@ -191,6 +191,12 @@
       "css": "logout",
       "code": 59399,
       "src": "fontawesome"
+    },
+    {
+      "uid": "1c4068ed75209e21af36017df8871802",
+      "css": "down-big",
+      "code": 59411,
+      "src": "fontawesome"
     }
   ]
 }

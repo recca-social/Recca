@@ -44,7 +44,7 @@ class Games extends Component {
                 type: "game",
                 title: game.title ? game.title : "",
                 year: game.releaseYear ? game.releaseYear : "",
-                image: game.coverArt ? game.coverArt : "http://placehold.it/128x170",
+                image: game.coverArt ? game.coverArt : "/images/placehold-img.jpg",
                 description: game.description ? game.description : "",
                 link: game.link ? game.link : "",
                 genre: game.genre ? game.genre.join(", ") : "",
@@ -139,7 +139,7 @@ class Games extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -159,7 +159,7 @@ class Games extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Games</h2>
+                  <h2 className="text-center header-saved">Saved Games</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"

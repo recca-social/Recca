@@ -1,50 +1,44 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.media-wrapper {
-  > h2 {
-    color: $white-1;
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
+// .media-wrapper {
+//   > h2 {
+//     color: $white-1;
+//     font-size: 22px;
+//     margin-bottom: 15px;
+//   }
+// }
+
+.feed-item-wrapper {
+  margin: 0 auto 20px;
 }
 
 .feed-item {
-  padding: 20px 151px 20px 20px;
-  background: $white-2;
+  padding: 5px 20px 15px;
+  background: $gray-3;
   margin-bottom: 20px;
   position: relative;
+  border: 2px solid $white-1;
   border-radius: 10px;
   min-height: 190px;
   max-width: 1000px;
+  color: $white-1;
 
-  &--active {
-    border: 4px solid $blue-3;
-    box-shadow: 0px 2px 12px 2px $blue-3;
-  }
+  &__user {
+    font-size: 20px;
+    margin-bottom: 3px;
+    width: 100%;
+    padding-right: 128px;
+    line-height: 1;
 
-  &--complete {
-    border: 4px solid $green-1;
-    box-shadow: 0px 2px 12px 2px $green-1;
-  }
-
-  &__title, &__description, &__creator, &__genre {
-    color: $black-2;
-  }
-
-  &__creator, &__genre {
-    margin-bottom: 0;
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 15px;
+    span {
+      font-size: 16px;
+    }
   }
 
   &__title {
     font-size: 20px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
 
     a {
       color: $yellow-1;
@@ -53,7 +47,7 @@
       &:hover {
         text-decoration: none;
         text-shadow: none;
-        color: $black-1;
+        color: $white-1;
       }
     }
   }
@@ -74,38 +68,20 @@
 
   &__img {
     max-height: 170px;
-    max-width: 170px;
-    flex: 0 0 auto;
-    display: none;
+    width: 128px;
+    float: left;
+    margin: 0 15px 5px 0;
     box-shadow: -2px 2px 12px 0 $black-2;
-
-    @include respond(md) {
-      display: block;
-    }
   }
 
   &__date {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 14px;
   }
 
   .btn {
     color: $black-1;
   }
-
-  // &__buttons--saved {
-  //   top: 0;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  // }
-
-  // &__buttons--results {
-  //   top: 0;
-
-  //   .btn:first-of-type {
-  //     border-top-right-radius: 10px;
-  //   }
-  // }
 
   &__buttons {
     position: absolute;
@@ -145,58 +121,12 @@
     }
   }
 
-
   .btn-save {
     background-color: $green-1;
-  }
-
-  .btn-more {
-    background-color: $blue-3;
-    margin-bottom: 8px;
-  }
-
-  .btn-remove {
-    background-color: $red-1;
-
+  
     &:hover {
-      .icon-trash-empty:before {
-        content: "\f1f8";
-      }
-    }
-  }
-
-  .btn-complete {
-    background-color: $green-1;
-
-    &:hover {
-      .icon-check:before {
-        content: "\e812";
-      }
-      .icon-check-empty:before {
-        content: "\e811";
-      }
-    }
-  }
-
-  .btn-active {
-    background-color: $blue-3;
-
-    &:hover {
-      .icon-eye:before {
-        content: "\e80e";
-      }
-      .icon-eye-off:before {
-        content: "\e80d";
-      }
-    }
-  }
-
-  .btn-recommend {
-    background-color: $yellow-1;
-
-    &:hover {
-      .icon-star:before {
-        content: "\e804";
+      .icon-bookmark-empty:before {
+        content: "\e80c";
       }
     }
   }

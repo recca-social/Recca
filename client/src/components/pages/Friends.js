@@ -162,10 +162,10 @@ class Friends extends Component {
                 handleSearch={this.handleSearch}
                 mediaType="user"
               />
-              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : ""}
-              {this.state.results.length ? (
+              {this.state.message.length > 0 ? <p className="no-results">{this.state.message}</p> : ""}
+              {this.state.results.length ?
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">
                     Clear <i className="icon icon-collapse" />
                   </button>
@@ -176,25 +176,21 @@ class Friends extends Component {
                     resultType="results"
                     handleAddFriend={this.handleAddFriend}
                   />
-                </div>
-              ) : (
-                  ""
-                )}
+                </div> : ""}
               <hr />
-              {this.state.saved ? (
+              {this.state.saved ?
                 <div className="media-wrapper">
-                  <h2 className="text-center">My Friends</h2>
+                  <h2 className="text-center header-saved">My Friends</h2>
                   <FriendResults
                     items={this.state.saved}
                     resultType="saved"
                     handleRemoveFriend={this.handleRemoveFriend}
                   />
                 </div>
-              ) : (
-                  <p className="text-center empty-media-msg">
-                    Use the search bar above to find and add friends!
+                : <p className="text-center empty-media-msg">
+                  Use the search bar above to find and add friends!
                 </p>
-                )}
+              }
             </div>
             <FriendSidebar
               items={this.state.requests}

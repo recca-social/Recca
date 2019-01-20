@@ -72,11 +72,13 @@ class Home extends Component {
     return (
       <div>
         { <Header title="User Feed"/> }
-        <div className="row justify-content-center feed">
-          <FeedResults 
-            items={this.state.activity}
-            handleSave={this.handleSave}
-          />
+        <div className="container">
+          <div className="row feed">
+            <FeedResults 
+              items={this.state.activity}
+              handleSave={this.handleSave}
+            />
+          </div>
         </div>
         <Footer />
       </div>

@@ -14,7 +14,8 @@ class Games extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -86,7 +87,7 @@ class Games extends Component {
       apiId: game.apiId.toString()
     }).then((res) => {
       //Once the game is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getGames()
     })
   }

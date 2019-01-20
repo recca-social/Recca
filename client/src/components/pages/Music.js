@@ -14,7 +14,8 @@ class Music extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -78,7 +79,7 @@ class Music extends Component {
       apiId: music.apiId
     }).then((res) => {
       //Once the music is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getMusic()
     })
   }

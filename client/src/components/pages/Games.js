@@ -44,7 +44,7 @@ class Games extends Component {
                 type: "game",
                 title: game.title ? game.title : "",
                 year: game.releaseYear ? game.releaseYear : "",
-                image: game.coverArt ? game.coverArt : "http://placehold.it/128x170",
+                image: game.coverArt ? game.coverArt : "/images/placehold-img.jpg",
                 description: game.description ? game.description : "",
                 link: game.link ? game.link : "",
                 genre: game.genre ? game.genre.join(", ") : "",

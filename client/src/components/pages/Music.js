@@ -43,7 +43,7 @@ class Music extends Component {
               {
                 type: "music",
                 title: music.albumName ? music.albumName : "",
-                image: music.image ? music.image : "http://placehold.it/128x128",
+                image: music.image ? music.image : "/images/placehold-img-sq.jpg",
                 link: music.albumLink.spotify ? music.albumLink.spotify : "",
                 creator: music.artist ? music.artist.join(", ") : "",
                 apiId: music.apiId

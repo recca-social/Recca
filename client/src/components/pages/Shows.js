@@ -45,7 +45,7 @@ class Shows extends Component {
                 type: "show",
                 title: show.title ? show.title : "",
                 year: show.year ? show.year : "",
-                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "/images/placehold-img.jpg" : "/images/placehold-img.jpg",
                 description: show.summary ? show.summary : "No plot summary available",
                 link: show.link ? show.link : "",
                 creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",

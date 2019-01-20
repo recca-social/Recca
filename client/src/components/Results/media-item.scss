@@ -92,6 +92,7 @@
     margin-bottom: 10px;
     box-shadow: -2px 2px 12px 0 $black-2;
     flex: 0 0 auto;
+    align-self: center;
     display: none;
 
     @include respond(md) {

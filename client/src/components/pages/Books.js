@@ -44,7 +44,7 @@ class Books extends Component {
               {
                 type: "book",
                 title: book.volumeInfo.title ? book.volumeInfo.title : "",
-                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "/images/placehold-img.jpg",
                 description: book.volumeInfo.description ? book.volumeInfo.description : "",
                 link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
                 creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",

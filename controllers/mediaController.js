@@ -32,7 +32,6 @@ module.exports = {
             
         })
         .then(function(finalReturn){
-            console.log(finalReturn)
             res.json(finalReturn)
         })
         

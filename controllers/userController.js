@@ -27,15 +27,19 @@ module.exports = {
       .populate("friends")
       .then(function (dbUser) {
         var friendsArray = dbUser.friends;
-        var postsArray = [];
+        var postTotal = 0;
         for (let i = 0; i < friendsArray.length; i++) {
-          postsArray.push(...friendsArray[i].posts);
+          postTotal += friendsArray[i].posts.length
         }
         var postObjReturn = [];
-        for (let i = 0; i < postsArray.length; i++) {
-          db.Post.findById({ _id: postsArray[i] }).then(function (postReturn) {
-            postObjReturn.push(postReturn);
-            if (postsArray.length == postObjReturn.length) {
+        for (let i = 0; i < friendsArray.length; i++) {
+          db.User.findById({ _id: friendsArray[i]._id })
+          .populate("posts")
+          .then(function (friendReturn) {
+            for (let a = 0; a < friendReturn.posts.length; a++){
+              postObjReturn.push(friendReturn.posts[a]);
+            }
+            if (postTotal === postObjReturn.length) {
               postObjReturn.sort(function (a, b) {
                 return b.created_at - a.created_at;
               });

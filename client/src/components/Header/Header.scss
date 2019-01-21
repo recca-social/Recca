@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.header {
+  background: $yellow-1;
+
+  h1 {
+    font-size: 22px;
+    padding: 10px 0;
+    margin-bottom: 0;
+    color: $black-1;
+  }
+}

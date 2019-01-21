@@ -32,7 +32,6 @@ module.exports = {
             
         })
         .then(function(finalReturn){
-            console.log(finalReturn)
             res.json(finalReturn)
         })
         
@@ -43,6 +42,7 @@ module.exports = {
         db.Media
         .findById({ _id: req.params.id })
         .then(dbModel => dbModel.remove())
+        .then(dbModel => db.User.findOneAndUpdate({ _id: req.user._id }, {$pull: { media: req.params.id }}, {new: true}))
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },

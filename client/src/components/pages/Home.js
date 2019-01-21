@@ -4,7 +4,8 @@ import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
 import Footer from "../Footer";
-import FeedModal from "../FeedModal"
+import FeedModal from "../FeedModal";
+import LoadingIcon from "../LoadingIcon";
 import { Redirect } from "react-router-dom";
 
 class Home extends Component {
@@ -13,6 +14,7 @@ class Home extends Component {
     redirectTo: "",
     activity: [],
     modalVisible: false
+    // loading: true
   };
 
   getFeed = () =>{
@@ -21,7 +23,7 @@ class Home extends Component {
     .then(function(res) {
       feedPosts = res.data
     })
-    .then(() => this.setState({ activity: feedPosts }))
+    .then(() => this.setState({ activity: feedPosts, loading: false }))
     .catch(err => console.log(err));
   }
 
@@ -88,6 +90,7 @@ class Home extends Component {
         show={this.state.modalVisible}
         />
         <div className="container">
+          {/* <LoadingIcon loading={this.state.loading} /> */}
           <div className="row feed">
             <FeedResults 
               items={this.state.activity}

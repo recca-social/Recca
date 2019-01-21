@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import "./Footer.scss";
 
 function Footer(props) {
+  const emailObj = {
+    eric: "keyes.eric@outlook.com",
+    brian: "brianjfitzgerald@gmail.com",
+    cadin: "cadin.mcqueen@gmail.com",
+    harry: "harrybeckeryoung@gmail.com"
+  }
   return (
     <div className="footer container-fluid">
       <div className="row">
@@ -10,12 +16,12 @@ function Footer(props) {
           <h5>Contact</h5>
           <div className="row">
             <div className="col-md-6 contact--left">
-              <p><Link to="mailto:keyes.eric@outlook.com">keyes.eric@outlook.com</Link></p>
-              <p><Link to="mailto:brianjfitzgerald@gmail.com">brianjfitzgerald@gmail.com</Link></p>
+              <p><a href={"mailto:" + emailObj.eric}>{emailObj.eric}</a></p>
+              <p><a href={"mailto:" + emailObj.brian}>{emailObj.brian}</a></p>
             </div>
             <div className="col-md-6 contact--right">
-              <p><Link to="mailto:cadin.mcqueen@gmail.com">cadin.mcqueen@gmail.com</Link></p>
-              <p><Link to="mailto:harrybeckeryoung@gmail.com">harrybeckeryoung@gmail.com</Link></p>
+              <p><a href={"mailto:" + emailObj.cadin}>{emailObj.cadin}</a></p>
+              <p><a href={"mailto:" + emailObj.harry}>{emailObj.harry}</a></p>
             </div>
           </div>
         </div>

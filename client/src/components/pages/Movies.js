@@ -31,19 +31,23 @@ class Movies extends Component {
     this.searchMovies(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchMovies = query => {
     const results = [];
     movieAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(movie => {
             results.push(
               {
                 type: "movie",
-                title: movie.title ? movie.title : "",
+                title: movie.title ? this.truncateByChar(movie.title, 60) : "",
                 year: movie.year ? movie.year : "",
                 image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "/images/placehold-img.jpg" : "/images/placehold-img.jpg",
                 description: movie.summary ? movie.summary : "No plot summary available",

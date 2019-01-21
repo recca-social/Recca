@@ -31,19 +31,23 @@ class Music extends Component {
     this.searchMusic(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchMusic = query => {
     const results = [];
     musicAPI.searchAlbum(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(music => {
             results.push(
               {
                 type: "music",
-                title: music.albumName ? music.albumName : "",
+                title: music.albumName ? this.truncateByChar(music.albumName, 60) : "",
                 image: music.image ? music.image : "/images/placehold-img-sq.jpg",
                 link: music.albumLink.spotify ? music.albumLink.spotify : "",
                 creator: music.artist ? music.artist.join(", ") : "",

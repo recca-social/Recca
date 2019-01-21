@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "../SearchForm";
 import FriendResults from "../FriendResults";
 import FriendSidebar from "../FriendSidebar";
+import FriendModal from "../FriendModal";
 import friendAPI from "../../utils/friendAPI";
 import userAPI from "../../utils/userAPI";
 import Footer from "../Footer";
@@ -203,6 +204,7 @@ class Friends extends Component {
               handleDeclineRequest={this.handleDeclineRequest}
               mediaType="friend"
             />
+            <FriendModal username={this.username} />
           </div>
         </div>
         <Footer />

@@ -1,5 +1,4 @@
 import React from "react";
-// import FriendModal from "../FriendModal";
 import "./FriendResults.scss";
 
 const FriendResults = props => {
@@ -17,11 +16,6 @@ const FriendResults = props => {
               <button onClick={() => props.handleAddFriend(item.apiId)} className="btn btn-add" data-toggle="modal" data-target={"#modal-" + item.username}>Add Friend <i className="icon icon-user-plus"></i></button>
             </div>
           : ""}
-              
-          {/* <FriendModal 
-            username={item.username}
-          /> */}
-
         </div>
       )) : ""}
     </div>

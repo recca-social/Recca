@@ -1,20 +1,11 @@
 import React from "react";
 
 const FriendModal = props => (
-  <div className="modal fade" id={"modal-" + props.username} tabIndex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          Hello
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          Hello World
-        </div>
-      </div>
-    </div>
+  <div className="modal" id={"modal-" + props.username} onClick={props.handleClose} style={{display: props.show ? "block" : "none"}}>
+    <div className="modal-content">
+            <span className="close" onClick={props.handleClose}>&times;</span>
+            <p className="modal-text">Friend Request Sent!</p>
+        </div> 
   </div>
 );
 

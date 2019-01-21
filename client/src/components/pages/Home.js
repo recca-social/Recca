@@ -29,6 +29,10 @@ class Home extends Component {
     this.setState({modalVisible: true})
   }
 
+  handleClose = () => {
+    this.setState({modalVisible: false})
+  }
+
   handleSave = id => {
     const media = this.state.activity.find(media => media.apiId === id);
     mediaAPI.create({
@@ -80,6 +84,7 @@ class Home extends Component {
       <div>
         { <Header title="User Feed"/> }
         <FeedModal
+        handleClose={this.handleClose}
         show={this.state.modalVisible}
         />
         <div className="container">

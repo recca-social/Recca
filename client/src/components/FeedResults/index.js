@@ -19,7 +19,7 @@ function Results(props) {
           <h5 className="feed-item__title">
             <a href={item.link ? item.link : ""} target="_blank" rel="noopener noreferrer">{item.title}&nbsp;<i className="icon icon-link-ext"></i></a>
           </h5>
-          {/* <p className="feed-item__date">{" " + parseDate(item.created_at)}</p> */}
+          {<p className="feed-item__date">{" " + parseDate(item.created_at)}</p>}
           <img
             alt={item.title} className="feed-item__img"
             src={item.image}

@@ -31,7 +31,7 @@ const PostModal = props => (
                 value={props.postText}
                 name="postText"
                 type="text"></textarea>
-              <p className="char-count">{props.postText.length}/420 characters</p>
+              <p className="char-count"><span className={props.postText.length >= 410 ? "char-count__limit" : ""}>{props.postText.length}</span>/420</p>
             </div>
           </form>
           

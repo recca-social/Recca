@@ -15,7 +15,8 @@ class Books extends Component {
     saved: [],
     results: [],
     postText: "",
-    message: ""
+    message: "",
+    length:""
   }
 
   handleInputChange = event => {
@@ -149,6 +150,7 @@ class Books extends Component {
                     handleRecommend={this.handleRecommend}
                     handleInputChange={this.handleInputChange}
                     postText={this.state.postText}
+                    length={this.state.length}
                   />
                 </div> : ""}
               {this.state.message ? 

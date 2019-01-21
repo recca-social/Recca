@@ -19,6 +19,7 @@
   }
 
 
+
   &__title {
     color: $black-1;
     margin-bottom: 5px;
@@ -30,6 +31,10 @@
   }
 }
 
+.char-count{
+  color:$black-1;
+  text-align: center;
+}
 
 .modal-header {
   border: none;

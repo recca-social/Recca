@@ -25,13 +25,16 @@ const PostModal = props => (
               <textarea
                 className="form-control"
                 rows="3"
+                maxLength="420"
                 placeholder="What makes it good?"
                 onChange={props.handleInputChange}
                 value={props.postText}
                 name="postText"
                 type="text"></textarea>
+              <p className="char-count">{props.postText.length}/420 characters</p>
             </div>
           </form>
+          
         </div>
         <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(props.media)} data-dismiss="modal">Post recommendation <i className="icon icon-star"></i></button>
       </div>

@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+@keyframes rock {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+}
+
+.loading {
+  margin: 0 auto;
+  text-align: center;
+
+  img {
+    animation: rock 1.8s infinite ease-in-out;
+  }
+}

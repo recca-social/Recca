@@ -45,7 +45,7 @@ class Books extends Component {
               {
                 type: "book",
                 title: book.volumeInfo.title ? book.volumeInfo.title : "",
-                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "/images/placehold-img.jpg",
                 description: book.volumeInfo.description ? book.volumeInfo.description : "",
                 link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
                 creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
@@ -82,9 +82,9 @@ class Books extends Component {
       creator: book.creator,
       genre: book.genre,
       apiId: book.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the book is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message : res.data.message })
       this.getBooks()
     })
   }
@@ -138,7 +138,7 @@ class Books extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -159,7 +159,7 @@ class Books extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Books</h2>
+                  <h2 className="text-center header-saved">Saved Books</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"

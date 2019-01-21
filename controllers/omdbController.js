@@ -25,9 +25,7 @@ module.exports = {
                         rating: eachResponse.data.imdbRating,
                         apiId: eachResponse.data.imdbID
                     }
-                    console.log(parsedObject)
                     parsedArray.push(parsedObject);
-                    console.log(parsedArray);
                     if (responseArray.length === parsedArray.length){
                         res.json(parsedArray)
                     }
@@ -58,9 +56,7 @@ module.exports = {
                             rating: eachResponse.data.imdbRating,
                             apiId: eachResponse.data.imdbID
                         }
-                        console.log(parsedObject)
                         parsedArray.push(parsedObject)
-                        console.log(parsedArray);
                         if (responseArray.length === parsedArray.length){
                             res.json(parsedArray)
                         }

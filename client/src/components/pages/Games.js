@@ -14,7 +14,8 @@ class Games extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -50,7 +51,7 @@ class Games extends Component {
                 genre: game.genre ? game.genre.join(", ") : "",
                 platform: game.platforms ? game.platforms.join(", ") : "",
                 rating: game.rating ? game.rating : "",
-                apiId: game.id
+                apiId: game.apiId
               }
             )
           });
@@ -83,10 +84,10 @@ class Games extends Component {
       genre: game.genre,
       platform: game.platform,
       rating: game.rating,
-      apiId: game.apiId
+      apiId: game.apiId.toString()
     }).then((res) => {
       //Once the game is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getGames()
     })
   }

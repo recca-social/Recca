@@ -83,7 +83,7 @@ class Books extends Component {
       apiId: book.apiId
     }).then((res) => {
       //Once the book is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getBooks()
     })
   }

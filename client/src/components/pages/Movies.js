@@ -14,7 +14,8 @@ class Movies extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -85,7 +86,7 @@ class Movies extends Component {
       apiId: movie.apiId
     }).then((res) => {
       //Once the movie is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getMovies()
     })
   }

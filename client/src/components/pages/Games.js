@@ -31,19 +31,23 @@ class Games extends Component {
     this.searchGames(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchGames = query => {
     const results = [];
     gameAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(game => {
             results.push(
               {
                 type: "game",
-                title: game.title ? game.title : "",
+                title: game.title ? this.truncateByChar(game.title, 60) : "",
                 year: game.releaseYear ? game.releaseYear : "",
                 image: game.coverArt ? game.coverArt : "/images/placehold-img.jpg",
                 description: game.description ? game.description : "",

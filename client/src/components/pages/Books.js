@@ -31,19 +31,23 @@ class Books extends Component {
     this.searchBooks(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchBooks = query => {
     const results = [];
     bookAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.totalItems === 0) {
-          this.setState({ message: "No results found" })
+          this.setState({ results: [], message: "No results found" })
         } else {
           res.data.items.forEach(book => {
             results.push(
               {
                 type: "book",
-                title: book.volumeInfo.title ? book.volumeInfo.title : "",
+                title: book.volumeInfo.title ? this.truncateByChar(book.volumeInfo.title, 60) : "",
                 image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "/images/placehold-img.jpg",
                 description: book.volumeInfo.description ? book.volumeInfo.description : "",
                 link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",

@@ -8,13 +8,21 @@ const mongoose = require("mongoose")
 const connection = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/recca");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
-const config = require("./config/authConfig")
+const config = require("./config/authConfig");
+const dotenv =require("dotenv");
+const result = dotenv.config();
 
 // Express middleware
+if(result.error){
+  console.log(error);
+} else {
+  console.log(result.parsed);
+}
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
   secret: config.sessionSecret,
+  resave: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection
   })

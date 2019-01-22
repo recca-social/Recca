@@ -1,4 +1,6 @@
 var axios = require("axios");
+const dotenv = require("dotenv");
+dotenv.config();
 var querystring = require('querystring');
 
 function parseAlbums(spotifyObject){
@@ -29,7 +31,7 @@ module.exports = {
         }),{
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            "Authorization":"Basic Njc0ZjJiMTQ5OTk1NDU0NGIwZTZmZTU0MWU3MzQyYmU6ODQ2ZDNkMGI5ODIwNDE5OTg1ODI4NTZkNTQzMTgxZWU="
+            "Authorization":process.env.SPOTIFY_AUTH
         }
         })
         .then(function(response){

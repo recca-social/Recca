@@ -18,7 +18,6 @@
     }
   }
 
-
   &__title {
     color: $black-1;
     margin-bottom: 5px;
@@ -28,16 +27,24 @@
     color: $black-1;
     margin-bottom: 5px;
   }
-}
 
+  .char-count{
+    color:$black-1;
+    text-align: right;
+  
+    &__limit {
+      color: $red-1;
+    }
+  }
 
-.modal-header {
-  border: none;
-
-  img {
-    float: left;
-    height: 75px;
-    width: auto;
-    margin-right: 15px;
+  .modal-header {
+    border: none;
+  
+    img {
+      float: left;
+      height: 75px;
+      width: auto;
+      margin-right: 15px;
+    }
   }
 }

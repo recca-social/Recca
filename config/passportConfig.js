@@ -8,7 +8,6 @@ passport.use('local-login', new LocalStrat({
   usernameField: 'username',
   passwordField: 'password',
 }, function (username, password, done) {
-  console.log("You're in passport");
   User.findOne({ username: username }).then(function (user) {
     console.log("Here's the retrieved info:" + user)
     // check if username exists
@@ -28,15 +27,11 @@ passport.use('local-signup', new LocalStrat({
   passReqToCallback: true
 },
   function (req, username, password, done) {
-    console.log("we're in passport")
     User.findOne({ username: username }).then(function (user) {
-      console.log("we're in the findOne signup")
       console.log(user)
       if (user) {
-        console.log("user found in passport")
         return done(null, false, {message: "Username in use"})
       } else if (password && req.body.firstName && req.body.lastName) {
-        console.log("we're in the making a new user function")
         var newUsername = username;
         var newPassword = password;
         var newFirstName = req.body.firstName;
@@ -48,9 +43,9 @@ passport.use('local-signup', new LocalStrat({
           lastName: newLastName
         }).then(function (newUser) {
           return done(null, newUser)
-        }).catch(err =>console.log(err))
+        }).catch(err => done(null,err))
       }
-    }).catch(err => console.log(err))
+    }).catch(err => done(null,err))
   }
 ));
 

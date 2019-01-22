@@ -1,4 +1,5 @@
 import React from "react";
+import PostModal from "../PostModal";
 import "./Sidebar.scss";
 
 function Sidebar(props) {
@@ -34,7 +35,7 @@ function Sidebar(props) {
                   <i className="icon icon-eye"><span className="sr-only">Set inactive</span></i>
                 </button>
                 <button onClick={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
-                  <i className="icon icon-check-empty"><span className="sr-only">Set complete</span></i>
+                  <i className="icon icon-check"><span className="sr-only">Set complete</span></i>
                 </button>
               </div>
               <div className="clearfix"></div>
@@ -61,11 +62,21 @@ function Sidebar(props) {
               <button onClick={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
                 <i className="icon icon-check"><span className="sr-only">Set incomplete</span></i>
               </button>
-              <button onClick={() => props.handleDelete(item._id) } className="btn-delete sidebar-btn">
-                <i className="icon icon-trash-empty"><span className="sr-only">Delete</span></i>
+              <button data-toggle="modal" data-target={"#modal-" + item.apiId} className="btn-recommend sidebar-btn">
+                <i className="icon icon-star"><span className="sr-only">Recommend</span></i>
               </button>
             </div>
             <div className="clearfix"></div>
+            <PostModal 
+              postText={props.postText}
+              handleInputChange={props.handleInputChange}
+              handleRecommend={props.handleRecommend}
+              media={item}
+              image={item.image}
+              title={item.title}
+              creator={item.creator}
+              apiId={item.apiId}
+            />
           </div>
         )) : <p className="text-center sidebar__message">Completed {props.mediaType}{props.mediaType !== "music" ? "s" : "" } will display here</p> }
       </div>

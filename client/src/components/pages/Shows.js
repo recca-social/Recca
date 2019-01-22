@@ -31,21 +31,25 @@ class Shows extends Component {
     this.searchShows(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchShows = query => {
     const results = [];
     showAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(show => {
             results.push(
               {
                 type: "show",
-                title: show.title ? show.title : "",
+                title: show.title ? this.truncateByChar(show.title, 60) : "",
                 year: show.year ? show.year : "",
-                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "/images/placehold-img.jpg" : "/images/placehold-img.jpg",
                 description: show.summary ? show.summary : "No plot summary available",
                 link: show.link ? show.link : "",
                 creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
@@ -139,7 +143,7 @@ class Shows extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -159,7 +163,7 @@ class Shows extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Shows</h2>
+                  <h2 className="text-center header-saved">Saved Shows</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"
@@ -180,6 +184,9 @@ class Shows extends Component {
               toggleActive={this.toggleActive}
               toggleComplete={this.toggleComplete}
               handleDelete={this.handleDelete}
+              handleRecommend={this.handleRecommend}
+              handleInputChange={this.handleInputChange}
+              postText={this.state.postText}
               mediaType="show"
             />
           </div>

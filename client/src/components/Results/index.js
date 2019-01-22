@@ -41,7 +41,7 @@ function Results(props) {
   }
   return (
     <div>
-      {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
+      {props.items ? props.items.filter(item => item.type === props.mediaType && !item.complete).map(item => (
         <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <img
             alt={item.title} className="media-item__img media-item__img--mobile"

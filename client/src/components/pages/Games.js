@@ -14,7 +14,8 @@ class Games extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -30,27 +31,31 @@ class Games extends Component {
     this.searchGames(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchGames = query => {
     const results = [];
     gameAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(game => {
             results.push(
               {
                 type: "game",
-                title: game.title ? game.title : "",
+                title: game.title ? this.truncateByChar(game.title, 60) : "",
                 year: game.releaseYear ? game.releaseYear : "",
-                image: game.coverArt ? game.coverArt : "http://placehold.it/128x170",
+                image: game.coverArt ? game.coverArt : "/images/placehold-img.jpg",
                 description: game.description ? game.description : "",
                 link: game.link ? game.link : "",
                 genre: game.genre ? game.genre.join(", ") : "",
                 platform: game.platforms ? game.platforms.join(", ") : "",
                 rating: game.rating ? game.rating : "",
-                apiId: game.id
+                apiId: game.apiId
               }
             )
           });
@@ -83,10 +88,10 @@ class Games extends Component {
       genre: game.genre,
       platform: game.platform,
       rating: game.rating,
-      apiId: game.apiId
-    }).then(() => {
+      apiId: game.apiId.toString()
+    }).then((res) => {
       //Once the game is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message : res.data.message })
       this.getGames()
     })
   }
@@ -139,7 +144,7 @@ class Games extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -159,7 +164,7 @@ class Games extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Games</h2>
+                  <h2 className="text-center header-saved">Saved Games</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"
@@ -180,6 +185,9 @@ class Games extends Component {
               toggleActive={this.toggleActive}
               toggleComplete={this.toggleComplete}
               handleDelete={this.handleDelete}
+              handleRecommend={this.handleRecommend}
+              handleInputChange={this.handleInputChange}
+              postText={this.state.postText}
               mediaType="game"
             />
           </div>

@@ -3,7 +3,6 @@ var db = require("../models");
 module.exports = {
     create: function(req, res){
         req.body.postAuthor = `${req.user.firstName} ${req.user.lastName}`;
-        console.log(req.body)
         db.Post
         .create(req.body)
         .then(function(dbPost){

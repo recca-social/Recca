@@ -15,7 +15,8 @@ class Books extends Component {
     saved: [],
     results: [],
     postText: "",
-    message: ""
+    message: "",
+    length:""
   }
 
   handleInputChange = event => {
@@ -31,20 +32,24 @@ class Books extends Component {
     this.searchBooks(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchBooks = query => {
     const results = [];
     bookAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.totalItems === 0) {
-          this.setState({ message: "No results found" })
+          this.setState({ results: [], message: "No results found" })
         } else {
           res.data.items.forEach(book => {
             results.push(
               {
                 type: "book",
-                title: book.volumeInfo.title ? book.volumeInfo.title : "",
-                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "http://placehold.it/128x170",
+                title: book.volumeInfo.title ? this.truncateByChar(book.volumeInfo.title, 60) : "",
+                image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "/images/placehold-img.jpg",
                 description: book.volumeInfo.description ? book.volumeInfo.description : "",
                 link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
                 creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
@@ -83,7 +88,7 @@ class Books extends Component {
       apiId: book.apiId
     }).then((res) => {
       //Once the book is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getBooks()
     })
   }
@@ -137,7 +142,7 @@ class Books extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -149,6 +154,7 @@ class Books extends Component {
                     handleRecommend={this.handleRecommend}
                     handleInputChange={this.handleInputChange}
                     postText={this.state.postText}
+                    length={this.state.length}
                   />
                 </div> : ""}
               {this.state.message ? 
@@ -157,7 +163,7 @@ class Books extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Books</h2>
+                  <h2 className="text-center header-saved">Saved Books</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"

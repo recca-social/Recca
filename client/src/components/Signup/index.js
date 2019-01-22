@@ -29,6 +29,10 @@ class Signup extends Component {
     });
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   handleSubmit = event => {
     console.log("we clicked the signup button")
     event.preventDefault();

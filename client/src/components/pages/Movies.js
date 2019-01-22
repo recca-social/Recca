@@ -14,7 +14,8 @@ class Movies extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -30,21 +31,25 @@ class Movies extends Component {
     this.searchMovies(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchMovies = query => {
     const results = [];
     movieAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(movie => {
             results.push(
               {
                 type: "movie",
-                title: movie.title ? movie.title : "",
+                title: movie.title ? this.truncateByChar(movie.title, 60) : "",
                 year: movie.year ? movie.year : "",
-                image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
+                image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "/images/placehold-img.jpg" : "/images/placehold-img.jpg",
                 description: movie.summary ? movie.summary : "No plot summary available",
                 link: movie.link ? movie.link : "",
                 creator: movie.director ? movie.director : "",
@@ -85,7 +90,7 @@ class Movies extends Component {
       apiId: movie.apiId
     }).then((res) => {
       //Once the movie is saved, reset state for results
-      this.setState({ results : [], message: res.data.messaage })
+      this.setState({ results : [], message : res.data.message })
       this.getMovies()
     })
   }
@@ -138,7 +143,7 @@ class Movies extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -158,7 +163,7 @@ class Movies extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Movies</h2>
+                  <h2 className="text-center header-saved">Saved Movies</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"

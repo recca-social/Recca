@@ -31,7 +31,7 @@ function parseData(array){
             description: array[i].summary,
             platforms: platformArr,
             link: array[i].url,
-            id: array[i].id,
+            apiId: array[i].id,
             genre: genreArr,
             rating: array[i].rating
         }

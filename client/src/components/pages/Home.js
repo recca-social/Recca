@@ -4,13 +4,17 @@ import mediaAPI from "../../utils/mediaAPI";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
 import Footer from "../Footer";
+import FeedModal from "../FeedModal";
+import LoadingIcon from "../LoadingIcon";
 import { Redirect } from "react-router-dom";
 
 class Home extends Component {
   state = {
     itemSaved: false,
     redirectTo: "",
-    activity: []
+    activity: [],
+    modalVisible: false,
+    loading: true
   };
 
   getFeed = () =>{
@@ -19,8 +23,16 @@ class Home extends Component {
     .then(function(res) {
       feedPosts = res.data
     })
-    .then(() => this.setState({ activity: feedPosts }))
+    .then(() => this.setState({ activity: feedPosts, loading: false }))
     .catch(err => console.log(err));
+  }
+
+  handleRepeat = () => {
+    this.setState({modalVisible: true})
+  }
+
+  handleClose = () => {
+    this.setState({modalVisible: false})
   }
 
   handleSave = id => {
@@ -38,16 +50,22 @@ class Home extends Component {
       rating: media.rating,
       apiId: media.apiId
     })
-    .then( ()=>{
-      let newPage = media.type
-      if (newPage !== "music"){
+    .then( (res)=>{
+      if(res.data.message){
+        this.handleRepeat()
+        console.log(res.data)
+      } else {
+        let newPage = media.type
+        if (newPage !== "music"){
         newPage += "s"
       }
     
-      this.setState({
+        this.setState({
         redirectTo: newPage,
         itemSaved: true
       })
+      }
+      
     }
  )
   }
@@ -67,11 +85,18 @@ class Home extends Component {
     return (
       <div>
         { <Header title="User Feed"/> }
-        <div className="row justify-content-center feed">
-          <FeedResults 
-            items={this.state.activity}
-            handleSave={this.handleSave}
-          />
+        <FeedModal
+        handleClose={this.handleClose}
+        show={this.state.modalVisible}
+        />
+        <div className="container">
+          <LoadingIcon loading={this.state.loading} />
+          <div className="row feed">
+            <FeedResults 
+              items={this.state.activity}
+              handleSave={this.handleSave}
+            />
+          </div>
         </div>
         <Footer />
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./post-modal.scss";
 
 const PostModal = props => (
-  <div className="modal fade" id={"modal-" + props.apiId} tabIndex="-1" role="dialog" aria-hidden="true">
+  <div className="modal post-modal fade" id={"modal-" + props.apiId} tabIndex="-1" role="dialog" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
         <div className="modal-header">
@@ -10,9 +10,9 @@ const PostModal = props => (
             alt={props.title} className="media-item__img"
             src={props.image}
           />
-          <div className="modal__media-details">
-            <h5 className="modal__title">{props.title}</h5>
-            <p className="modal__creator">{props.creator}</p>
+          <div className="post-modal__media-details">
+            <h5 className="post-modal__title">{props.title}</h5>
+            <p className="post-modal__creator">{props.creator}</p>
           </div>
           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -36,7 +36,7 @@ const PostModal = props => (
           </form>
           
         </div>
-        <button type="button" className="btn btn-recommend" onClick={() => props.handleRecommend(props.media)} data-dismiss="modal">Post recommendation <i className="icon icon-star"></i></button>
+        <button type="button" className="btn btn-post" onClick={() => props.handleRecommend(props.media)} data-dismiss="modal">Post recommendation <i className="icon icon-star"></i></button>
       </div>
     </div>
   </div>

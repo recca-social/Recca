@@ -20,8 +20,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-
-
   getFeedItems: function (req, res) {
     db.User.findById({ _id: req.user._id })
       .populate("friends")
@@ -47,7 +45,8 @@ module.exports = {
             }
           });
         }
-      });
+      })
+      .catch(err => res.status(422).json(err));;
   },
 
   getFeed: function (req, res) {
@@ -57,8 +56,7 @@ module.exports = {
       .populate("posts")
       .then(function (dbUser) {
         res.json(dbUser);
-      });
-  },
-
-
+      })
+      .catch(err => res.status(422).json(err));
+  }
 };

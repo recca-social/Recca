@@ -51,23 +51,19 @@ class Home extends Component {
       apiId: media.apiId
     })
     .then( (res)=>{
-      if(res.data.message){
+      if (res.data.message) {
         this.handleRepeat()
-        console.log(res.data)
       } else {
         let newPage = media.type
         if (newPage !== "music"){
-        newPage += "s"
-      }
-    
+          newPage += "s"
+        }
         this.setState({
-        redirectTo: newPage,
-        itemSaved: true
-      })
+          redirectTo: newPage,
+          itemSaved: true
+        })
       }
-      
-    }
- )
+    })
   }
 
   componentDidMount(){
@@ -84,7 +80,7 @@ class Home extends Component {
     }
     return (
       <div>
-        { <Header title="User Feed"/> }
+        <Header title="User Feed"/>
         <FeedModal
         handleClose={this.handleClose}
         show={this.state.modalVisible}

@@ -67,8 +67,7 @@ module.exports = {
                     .catch(err => res.status(422).json(err));
             }
         } else {
-            res.json({ message: "Recca will always be your friend." });
-            console.log("Recca will always love you")
+            res.json({ message: "No users found" });
         }
     },
 
@@ -92,7 +91,7 @@ module.exports = {
                         .catch(err => res.status(422).json(err));
                 } else {
                     res.json({
-                        message: "You already have a pending request with that user."
+                        message: "You are already friends with that user, or have a pending request."
                     });
                 }
             })

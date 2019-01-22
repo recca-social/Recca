@@ -8,6 +8,12 @@
     padding-left:15px;
     border: 1px solid #888;
     width: 25%;
+    @media only screen and (max-width: 800px) {
+      width: 75%;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 85%;
+    }
   }
 
   .feedmodal-bg {

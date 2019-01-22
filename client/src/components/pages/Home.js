@@ -89,9 +89,9 @@ class Home extends Component {
         handleClose={this.handleClose}
         show={this.state.modalVisible}
         />
-        <div className="container">
+        <div className="container justify-content-center">
           {/* <LoadingIcon loading={this.state.loading} /> */}
-          <div className="row feed">
+          <div className="row feed mx-auto">
             <FeedResults 
               items={this.state.activity}
               handleSave={this.handleSave}

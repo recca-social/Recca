@@ -10,9 +10,9 @@ function Results(props) {
   }
 
   return ( 
-    <div className="feed-item-wrapper">
+    <div className="feed-item-wrapper col-12">
       {props.items && props.items.length > 0 ? props.items.map(item => (
-        <div key={item._id} id={item.apiId} className={'feed-item'}>
+        <div key={item._id} id={item.apiId} className={'feed-item mx-auto'}>
           <p className="feed-item__user">
             <strong>{item.postAuthor}</strong> <span>recommends...</span>
           </p>
@@ -35,7 +35,7 @@ function Results(props) {
           <div className="clearfix"></div>
         </div>
       )) :
-      <p className="message">No recomendations to display</p> }
+      <p className="message mx-auto">No recomendations to display</p> }
     </div>
   );
 }

@@ -1,14 +1,17 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.modal {
+.post-modal {
+  z-index: 2000;
+
   .form-group {
     margin-bottom: 0;
   }
 
-  .btn-recommend {
+  .btn-post {
     margin-bottom: 20px;
     width: 50%;
+    background: $yellow-1;
     transform: translateX(50%);
     box-shadow: 2px 2px 12px 0 $black-3;
     transition: all 0.2s ease;
@@ -39,6 +42,7 @@
 
   .modal-header {
     border: none;
+    padding-bottom: 0;
   
     img {
       float: left;
@@ -46,5 +50,9 @@
       width: auto;
       margin-right: 15px;
     }
+  }
+
+  .modal-body {
+    padding-bottom: 0;
   }
 }

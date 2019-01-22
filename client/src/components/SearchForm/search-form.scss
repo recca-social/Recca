@@ -1,17 +1,21 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.form-group {
-  position: relative;
-  margin-bottom: 2rem;
+.search-form {
+  margin: 0 30px;
 
-  .form-control {
-    padding-right: 40px;
-  }
-
-  .btn {
-    position: absolute;
-    top: 0;
-    right: 0;
+  .form-group {
+    position: relative;
+    margin-bottom: 2rem;
+  
+    .form-control {
+      padding-right: 40px;
+    }
+  
+    .btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 }

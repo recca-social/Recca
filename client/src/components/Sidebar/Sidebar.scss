@@ -147,17 +147,17 @@
     font-size: 24px;
   }
 
-  .btn-delete {
+  .btn-recommend {
     font-size: 28px;
 
     &:hover, &:focus, &:active {
-      background: $red-1;
+      background: $yellow-1;
       color: $black-2;
     }
 
     &:hover, &:focus, &:active {
       .icon:before {
-        content:"\f1f8";
+        content:"\e804";
       }
     }
   }

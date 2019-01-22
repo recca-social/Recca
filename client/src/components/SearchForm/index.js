@@ -3,7 +3,7 @@ import "./search-form.scss";
 
 function SearchForm(props) {
   return (
-    <form>
+    <form className="search-form">
       <div className="form-group">
         <label className="sr-only" htmlFor="search">Search:</label>
         <input

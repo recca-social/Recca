@@ -184,6 +184,9 @@ class Shows extends Component {
               toggleActive={this.toggleActive}
               toggleComplete={this.toggleComplete}
               handleDelete={this.handleDelete}
+              handleRecommend={this.handleRecommend}
+              handleInputChange={this.handleInputChange}
+              postText={this.state.postText}
               mediaType="show"
             />
           </div>

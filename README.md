@@ -1,6 +1,6 @@
 # Recca
 
-Experience at: [Recca](https://recca.herokuapp.com/)
+Experience Recca at: [recca.herokuapp.com](https://recca.herokuapp.com/)
 
 Welcome to Recca! Our app is centered around the one thing we all love: entertainment. With so much of it available to consume, it can be difficult to organize and keep track of what you want to experience next. With Recca, users can search, save, track, and recommend their favorite movies, shows, books, music, and video games!
 
@@ -17,22 +17,24 @@ Sign up, tell your friends, and enjoy Recca!
 Recca was built with the MERN stack using [create-react-app](https://github.com/facebook/create-react-app). [Passport](http://www.passportjs.org/) was used in conjunction with bcrypt salt based encryption to handle user authentication and store session information. We use [Bootstrap](https://getbootstrap.com/) to handle higher level layout, and [Sass](https://www.npmjs.com/package/sass) to simplify and speed up the authoring of our stylesheets. Our four external API’s include [OMDB](http://www.omdbapi.com/) for movies and shows, [Google Books](https://developers.google.com/books/), [Spotify](https://developer.spotify.com/documentation/web-api/) for music, and [IDGB](https://igdb.github.io/api/) for games. Each API is queried using [axios](https://www.npmjs.com/package/axios) and the response is parsed to fit our media data model in preparation for storage in the database. The data is displayed to the user through React, where they can track and recommend media to their friends. Each media type is categorized on its own page, which are navigated with [react-router](https://github.com/ReactTraining/react-router). When the user saves a media item, the data is stored using [MongoDB](https://www.mongodb.com/), with the help of [Mongoose](https://mongoosejs.com/). Each user model is associated with their posts, friends, and media in order to store and serve up data to display every feature Recca provides.
 
 **Technologies:**
+* MongoDB
+* Express
+* React
+* Node
 * JavaScript
-* Bootstrap
 * Sass
-* Mongoose
 * APIs (OMDB, IGDB, Spotify, Google Books)
 
 
 **How to Install and Run Locally:**
 
-* Clone the repo
-* Run `npm install` in the root directory
+* Make sure you have [Node](https://nodejs.org/en/download/) installed on your system
+* Clone the repo with `git clone https://github.com/brijamfitz/Recca.git`
+* Change directories to the root of the project with `cd Recca`
+* Run `npm install` at the project root
 * Run `npm start`
 * At the Login page, click Create Account
 * Sign up and start exploring Recca!
-
-&nbsp;
 
 ---
 

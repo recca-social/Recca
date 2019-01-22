@@ -30,7 +30,7 @@
   }
 
   &__media-item {
-    padding: 10px 55px 10px 10px;
+    padding: 10px 60px 10px 10px;
     border-bottom: 2px solid $gray-3;
     clear: both; 
     position: relative;
@@ -83,6 +83,7 @@
       .btn-complete {
         &:hover, &:focus, &:active {
           background: $green-1;
+          border: 2px solid $white-1;
         }
     
         &:hover, &:focus, &:active {
@@ -153,6 +154,7 @@
     &:hover, &:focus, &:active {
       background: $yellow-1;
       color: $black-2;
+      border: 2px solid $white-1;
     }
 
     &:hover, &:focus, &:active {

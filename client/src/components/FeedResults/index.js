@@ -34,8 +34,7 @@ function Results(props) {
 
           <div className="clearfix"></div>
         </div>
-      )) :
-      <p className="message">No recomendations to display</p> }
+      )) : "" }
     </div>
   );
 }

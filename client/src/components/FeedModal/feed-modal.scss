@@ -1,17 +1,41 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.modal-content {
+#feedModal {
+
+  .close {
+    color: $gray-1;
+    float: right;
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
+    // margin-top: 5px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.feedmodal-content {
     background-color: white;
     margin: auto;
     padding-right: 15px;
     padding-left:15px;
-    padding-bottom:15px;
     border: 1px solid #888;
     width: 25%;
+    @media only screen and (max-width: 800px) {
+      width: 75%;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 85%;
+    }
   }
 
-  .modal {
+  .feedmodal-bg {
     display: none;
     position: fixed;
     z-index: 1; 
@@ -24,24 +48,10 @@
     background-color: rgba(0,0,0,0.4);
   }
 
-  .modal-text{
+  .feedmodal-text{
       color: black;
       text-align: center;
+      margin-top: 15px;
   }
   
   
-  .close {
-    color: $gray-1;
-    float: right;
-    text-align: right;
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 5px;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }

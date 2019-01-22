@@ -13,8 +13,8 @@ class Home extends Component {
     itemSaved: false,
     redirectTo: "",
     activity: [],
-    modalVisible: false
-    // loading: true
+    modalVisible: false,
+    loading: true
   };
 
   getFeed = () =>{
@@ -90,7 +90,7 @@ class Home extends Component {
         show={this.state.modalVisible}
         />
         <div className="container">
-          {/* <LoadingIcon loading={this.state.loading} /> */}
+          <LoadingIcon loading={this.state.loading} />
           <div className="row feed">
             <FeedResults 
               items={this.state.activity}

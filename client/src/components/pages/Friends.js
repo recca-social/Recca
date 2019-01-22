@@ -64,14 +64,12 @@ class Friends extends Component {
       .newFriendRequest(requestTo)
       .then(res => {
         if (res.data.message) {
-          // alert("You already have a pending request with that user");
           this.setState({
             message: res.data.message
           })
         } else {
-          alert("Friend Request Sent!");
           this.setState({
-            message: "Friend Request Sent!"
+            message: "Friend request sent!"
           })
         }
       })

@@ -1,6 +1,25 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
+#feedModal {
+
+  .close {
+    color: $gray-1;
+    float: right;
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
+    // margin-top: 5px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
 .feedmodal-content {
     background-color: white;
     margin: auto;
@@ -36,18 +55,3 @@
   }
   
   
-  .close {
-    color: $gray-1;
-    float: right;
-    text-align: right;
-    font-size: 28px;
-    font-weight: bold;
-    // margin-top: 5px;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }

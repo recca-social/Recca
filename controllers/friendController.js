@@ -92,7 +92,7 @@ module.exports = {
                         .catch(err => res.status(422).json(err));
                 } else {
                     res.json({
-                        message: "You already have a pending request with that user"
+                        message: "You already have a pending request with that user."
                     });
                 }
             })

@@ -27,7 +27,8 @@ class Login extends Component {
   componentDidMount() {
     this.setState({
       isLoggedIn: userAPI.isLoggedIn()
-    })
+    });
+    window.scrollTo(0, 0)
   }
 
   handleSubmit = event => {

@@ -1,17 +1,16 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.modal-content {
+.feedmodal-content {
     background-color: white;
     margin: auto;
     padding-right: 15px;
     padding-left:15px;
-    padding-bottom:15px;
     border: 1px solid #888;
     width: 25%;
   }
 
-  .modal {
+  .feedmodal-bg {
     display: none;
     position: fixed;
     z-index: 1; 
@@ -24,9 +23,10 @@
     background-color: rgba(0,0,0,0.4);
   }
 
-  .modal-text{
+  .feedmodal-text{
       color: black;
       text-align: center;
+      margin-top: 15px;
   }
   
   
@@ -36,7 +36,7 @@
     text-align: right;
     font-size: 28px;
     font-weight: bold;
-    margin-top: 5px;
+    // margin-top: 5px;
   }
   
   .close:hover,

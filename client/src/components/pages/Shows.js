@@ -47,14 +47,14 @@ class Shows extends Component {
             results.push(
               {
                 type: "show",
-                title: show.title ? this.truncateByChar(show.title, 60) : "",
-                year: show.year ? show.year : "",
-                image: show.poster && show.poster !== "N/A" ? show.poster : show.poster === "N/A" ? "/images/placehold-img.jpg" : "/images/placehold-img.jpg",
-                description: show.summary ? show.summary : "No plot summary available",
-                link: show.link ? show.link : "",
-                creator: show.writer && show.writer !== "N/A" ? show.writer : show.writer === "N/A" ? "" : "",
-                genre: show.genre ? show.genre : "",
-                rating: show.rating ? show.rating : "",
+                title: show.title ? this.truncateByChar(show.title, 60) : false,
+                year: show.year ? show.year : false,
+                image: show.poster && show.poster !== "N/A" ? show.poster : "/images/placehold-img.jpg",
+                description: show.summary && show.summary !== "N/A" ? show.summary : "No plot summary available",
+                link: show.link ? show.link : false,
+                creator: show.writer && show.writer !== "N/A" ? show.writer : false,
+                genre: show.genre ? show.genre : false,
+                rating: show.rating && show.rating !== "N/A" ? show.rating : false,
                 apiId: show.apiId
               }
             )

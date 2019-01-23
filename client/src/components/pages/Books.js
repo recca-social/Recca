@@ -48,12 +48,12 @@ class Books extends Component {
             results.push(
               {
                 type: "book",
-                title: book.volumeInfo.title ? this.truncateByChar(book.volumeInfo.title, 60) : "",
+                title: book.volumeInfo.title ? this.truncateByChar(book.volumeInfo.title, 60) : false,
                 image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "/images/placehold-img.jpg",
-                description: book.volumeInfo.description ? book.volumeInfo.description : "",
-                link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "",
-                creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "",
-                genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "",
+                description: book.volumeInfo.description ? book.volumeInfo.description : false,
+                link: book.volumeInfo.infoLink ? book.volumeInfo.infoLink : false,
+                creator: book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : false,
+                genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : false,
                 apiId: book.id
               }
             )

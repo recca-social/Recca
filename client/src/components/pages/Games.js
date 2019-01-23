@@ -47,14 +47,14 @@ class Games extends Component {
             results.push(
               {
                 type: "game",
-                title: game.title ? this.truncateByChar(game.title, 60) : "",
-                year: game.releaseYear ? game.releaseYear : "",
+                title: game.title ? this.truncateByChar(game.title, 60) : false,
+                year: game.releaseYear ? game.releaseYear : false,
                 image: game.coverArt ? game.coverArt : "/images/placehold-img.jpg",
-                description: game.description ? game.description : "",
-                link: game.link ? game.link : "",
-                genre: game.genre ? game.genre.join(", ") : "",
-                platform: game.platforms ? game.platforms.join(", ") : "",
-                rating: game.rating ? game.rating : "",
+                description: game.description ? game.description : false,
+                link: game.link ? game.link : false,
+                genre: game.genre ? game.genre.join(", ") : false,
+                platform: game.platforms ? game.platforms.join(", ") : false,
+                rating: game.rating ? game.rating : false,
                 apiId: game.apiId
               }
             )

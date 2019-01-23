@@ -55,7 +55,7 @@ class Games extends Component {
                 genre: game.genre ? game.genre.join(", ") : false,
                 platform: game.platforms ? game.platforms.join(", ") : false,
                 rating: game.rating ? game.rating : false,
-                apiId: game.apiId
+                apiId: game.apiId.toString()
               }
             )
           });

@@ -10,17 +10,16 @@ function parseData(array){
     let parsedArray = [];
     for (let i = 0; i < array.length; i++){
         let platformArr = [];
-        if (!array[i].platforms){
-            platformArr = false;
-        } else {
+        if (array[i].platforms) {
             for (let a = 0; a < array[i].platforms.length; a++){
                 platformArr.push(array[i].platforms[a].name)
             }
+        } else {
+            platformArr = false;
         }
 
         let genreArr = [];
         if (array[i].genre) {
-            console.log(array[i].genre)
             for (let a = 0; a < array[i].genres.length; a++){
                 genreArr.push(array[i].genres[a].name)
             }
@@ -68,8 +67,8 @@ module.exports = {
             }, 
             data: 'search "'+ parseQueryString(req.params.query) + '"; fields *, cover.*, genres.*, platforms.*, release_dates.*; limit 10;'
           })
-        .then(function(response){
-            if (response.data.length === 0){
+        .then(function(response) {
+            if (response.data.length === 0) {
                 res.json({message:"No results found"})
             } else {
                 res.json(parseData(response.data));

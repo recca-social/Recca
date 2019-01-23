@@ -14,7 +14,7 @@ const result = dotenv.config();
 
 // Express middleware
 if(result.error){
-  console.log(error);
+  console.log(result.error);
 } else {
   console.log(result.parsed);
 }

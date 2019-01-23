@@ -5,7 +5,7 @@ module.exports = {
   create: function (req, res) {
     db.User.create(req.body)
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => console.log(err));
   },
 
   //method for finding user and populating media, recommendations, and friends
@@ -17,7 +17,7 @@ module.exports = {
       .then(function (user) {
         res.json(user);
       })
-      .catch(err => res.status(422).json(err));
+      .catch(err => console.log(err));
   },
 
   getFeedItems: function (req, res) {
@@ -49,7 +49,7 @@ module.exports = {
           });
         }
       })
-      .catch(err => res.status(422).json(err));;
+      .catch(err => console.log(err));;
   },
 
   getFeed: function (req, res) {
@@ -60,6 +60,6 @@ module.exports = {
       .then(function (dbUser) {
         res.json(dbUser);
       })
-      .catch(err => res.status(422).json(err));
+      .catch(err => console.log(err));
   }
 };

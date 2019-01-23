@@ -12,6 +12,6 @@ module.exports = {
             console.log(dbUserInfo);
             res.json(dbUserInfo);
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     }
 }

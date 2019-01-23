@@ -25,7 +25,7 @@ module.exports = {
                 .then(function(dbUserInfo){
                     return dbUserInfo;
                 })
-                .catch(err => res.status(422).json(err));
+                .catch(err => console.log(err));
             } else {
                 return returnItem
             }
@@ -44,7 +44,7 @@ module.exports = {
         .then(dbModel => dbModel.remove())
         .then(dbModel => db.User.findOneAndUpdate({ _id: req.user._id }, {$pull: { media: req.params.id }}, {new: true}))
         .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     },
     //method to toggle media active state
     toggleActive: function(req, res) {
@@ -61,7 +61,7 @@ module.exports = {
             console.log(dbMedia)
             res.json(dbMedia)
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     },
     toggleComplete: function(req, res) {
         db.Media.findById( req.params.id )
@@ -77,6 +77,6 @@ module.exports = {
             console.log(dbMedia)
             res.json(dbMedia)
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     }
 }

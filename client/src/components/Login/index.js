@@ -54,7 +54,6 @@ class Login extends Component {
 
   render() {
     if (this.state.isLoggedIn === true) {
-      console.log(this.state.isLoggedIn);
       return <Redirect to="/home" />;
     }
     return (

@@ -76,3 +76,19 @@
     color: red;
     font-weight: bold;
 }
+
+.new-login .new-login-btn {
+    padding: 10px 25px;
+    background: $yellow-1;
+    color: #FFFFFF;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: .25rem;
+    height: 42px;
+    font-size: 15px;
+}
+.new-login .new-login-btn:hover {
+    text-decoration: none;
+    background: rgb(248, 179, 30);
+}

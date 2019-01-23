@@ -17,7 +17,6 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -27,12 +26,14 @@ class Login extends Component {
   componentDidMount() {
     this.setState({
       isLoggedIn: userAPI.isLoggedIn()
-    })
+    });
+    window.scrollTo(0, 0);
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    userAPI.localLogIn(this.state.username, this.state.password)
+    userAPI
+      .localLogIn(this.state.username, this.state.password)
       .then(response => {
         console.log(response);
         if (response.data.user) {
@@ -53,8 +54,7 @@ class Login extends Component {
 
   render() {
     if (this.state.isLoggedIn === true) {
-      console.log(this.state.isLoggedIn)
-      return <Redirect to="/home" />
+      return <Redirect to="/home" />;
     }
     return (
       <div>
@@ -71,8 +71,13 @@ class Login extends Component {
                 </div>
                 <h1 className="sr-only">Recca</h1>
               </div>
+              <p className="text-center mt-2">Quick test drive? Sign in with <br />username: <strong>demo</strong>, password: <strong>demo</strong></p>
               <form method="post" action="/login/local" className="login-form">
-              {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p> : <span></span> }
+                {this.state.message.length > 0 ? (
+                  <p className="warning">{this.state.message}</p>
+                ) : (
+                  <span />
+                )}
                 <div className="input-container">
                   <span className="fas fa-user" />
                   <input
@@ -102,29 +107,28 @@ class Login extends Component {
                   className="submit-btn"
                   onClick={this.handleSubmit}
                 />
+                <div className="separator">
+                  <span className="separator-text">OR</span>
+                </div>
                 <Link to="/signup" className="create-btn">
                   Create Account
-                  </Link>
+                </Link>
               </form>
-              <div className="separator">
-                <span className="separator-text">OR</span>
-              </div>
-              <div className="socmed-login">
+
+              {/* <div className="socmed-login">
                 <Link to="/login/facebook" className="socmed-btn facebook-btn">
                   <i className="fab fa-facebook-square" />
                   <span>Login with Facebook</span>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
 
         <Footer loginPage={true} />
       </div>
-
     );
   }
 }
-
 
 export default Login;

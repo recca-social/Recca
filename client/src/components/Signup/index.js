@@ -29,8 +29,12 @@ class Signup extends Component {
     });
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleSubmit = event => {
-    console.log("we clicked the signup button")
+    console.log("we clicked the signup button");
     event.preventDefault();
     axios
       .post("/login/signup", {
@@ -40,7 +44,7 @@ class Signup extends Component {
         lastName: this.state.lastName
       })
       .then(response => {
-        console.log(response)
+        console.log(response);
         if (response.data.user) {
           console.log("Successful sign-up!");
           this.setState({
@@ -48,7 +52,7 @@ class Signup extends Component {
           });
         } else {
           console.log("Username already taken!");
-          this.setState({message: response.data.message})
+          this.setState({ message: response.data.message });
         }
       })
       .catch(error => {
@@ -73,8 +77,16 @@ class Signup extends Component {
                   </div>
                   <h1 className="sr-only">Recca</h1>
                 </div>
-                {this.state.message.length > 0 ? <p className="warning">{this.state.message}</p>: ""}
-                <form method="post" action="/login/signup" className="login-form">
+                {this.state.message.length > 0 ? (
+                  <p className="warning">{this.state.message}</p>
+                ) : (
+                  ""
+                )}
+                <form
+                  method="post"
+                  action="/login/signup"
+                  className="login-form"
+                >
                   <div className="input-container first-name">
                     <input
                       type="text"
@@ -127,10 +139,9 @@ class Signup extends Component {
                 <div className="separator">
                   <span className="separator-text">OR</span>
                 </div>
-                <div className="socmed-login">
-                  <Link to="/login/facebook" className="socmed-btn facebook-btn">
-                    <i className="fab fa-facebook-square" />
-                    <span>Login with Facebook</span>
+                <div className="new-login">
+                  <Link to="/" className="new-login-btn">
+                    <span>Log In</span>
                   </Link>
                 </div>
               </div>

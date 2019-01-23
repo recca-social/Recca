@@ -14,7 +14,8 @@ class Music extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -30,22 +31,26 @@ class Music extends Component {
     this.searchMusic(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchMusic = query => {
     const results = [];
     musicAPI.searchAlbum(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(music => {
             results.push(
               {
                 type: "music",
-                title: music.albumName ? music.albumName : "",
-                image: music.image ? music.image : "http://placehold.it/128x128",
-                link: music.albumLink.spotify ? music.albumLink.spotify : "",
-                creator: music.artist ? music.artist.join(", ") : "",
+                title: music.albumName ? this.truncateByChar(music.albumName, 60) : false,
+                image: music.image ? music.image : "/images/placehold-img-sq.jpg",
+                link: music.albumLink.spotify ? music.albumLink.spotify : false,
+                creator: music.artist ? music.artist.join(", ") : false,
                 apiId: music.apiId
               }
             )
@@ -76,9 +81,9 @@ class Music extends Component {
       link: music.link,
       creator: music.creator,
       apiId: music.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the music is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message : res.data.message })
       this.getMusic()
     })
   }
@@ -131,7 +136,7 @@ class Music extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -151,7 +156,7 @@ class Music extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Music</h2>
+                  <h2 className="text-center header-saved">Saved Music</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"
@@ -172,6 +177,9 @@ class Music extends Component {
               toggleActive={this.toggleActive}
               toggleComplete={this.toggleComplete}
               handleDelete={this.handleDelete}
+              handleRecommend={this.handleRecommend}
+              handleInputChange={this.handleInputChange}
+              postText={this.state.postText}
               mediaType="music"
             />
           </div>

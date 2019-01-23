@@ -14,7 +14,8 @@ class Movies extends Component {
     search: "",
     saved: [],
     results: [],
-    postText: ""
+    postText: "",
+    message: ""
   }
 
   handleInputChange = event => {
@@ -30,26 +31,30 @@ class Movies extends Component {
     this.searchMovies(this.state.search)
   }
 
+  truncateByChar = (string, maxLength) => {
+    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string.substring(0, maxLength);
+  }
+
   searchMovies = query => {
     const results = [];
     movieAPI.search(query)
       .then(res => {
         // If no results, set state with message
         if (res.data.message) {
-          this.setState({ message: res.data.message })
+          this.setState({ results: [], message: res.data.message })
         } else {
           res.data.forEach(movie => {
             results.push(
               {
                 type: "movie",
-                title: movie.title ? movie.title : "",
-                year: movie.year ? movie.year : "",
-                image: movie.poster && movie.poster !== "N/A" ? movie.poster : movie.poster === "N/A" ? "http://placehold.it/128x170" : "http://placehold.it/128x170",
-                description: movie.summary ? movie.summary : "No plot summary available",
-                link: movie.link ? movie.link : "",
-                creator: movie.director ? movie.director : "",
-                genre: movie.genre ? movie.genre : "",
-                rating: movie.rating ? movie.rating : "",
+                title: movie.title ? this.truncateByChar(movie.title, 60) : false,
+                year: movie.year ? movie.year : false,
+                image: movie.poster && movie.poster !== "N/A" ? movie.poster : "/images/placehold-img.jpg",
+                description: movie.summary && movie.summary !== "N/A" ? movie.summary : "No plot summary available",
+                link: movie.link ? movie.link : false,
+                creator: movie.director && movie.director !== "N/A" ? movie.director : false,
+                genre: movie.genre ? movie.genre : false,
+                rating: movie.rating && movie.rating !== "N/A" ? movie.rating : false,
                 apiId: movie.apiId
               }
             )
@@ -83,9 +88,9 @@ class Movies extends Component {
       genre: movie.genre,
       rating: movie.rating,
       apiId: movie.apiId
-    }).then(() => {
+    }).then((res) => {
       //Once the movie is saved, reset state for results
-      this.setState({ results : [] })
+      this.setState({ results : [], message : res.data.message })
       this.getMovies()
     })
   }
@@ -138,7 +143,7 @@ class Movies extends Component {
               />
               {this.state.results.length ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Results</h2>
+                  <h2 className="text-center sr-only">Results</h2>
                   <button onClick={this.clearResults} className="btn-clear">Clear <i className="icon icon-collapse"></i></button>
                   <div className="clearfix"></div>
                   <Results 
@@ -158,7 +163,7 @@ class Movies extends Component {
               <hr />
               {this.state.saved ? 
                 <div className="media-wrapper">
-                  <h2 className="text-center">Saved Movies</h2>
+                  <h2 className="text-center header-saved">Saved Movies</h2>
                   <Results 
                     items={this.state.saved}
                     resultType="saved"
@@ -179,6 +184,9 @@ class Movies extends Component {
               toggleActive={this.toggleActive}
               toggleComplete={this.toggleComplete}
               handleDelete={this.handleDelete}
+              handleRecommend={this.handleRecommend}
+              handleInputChange={this.handleInputChange}
+              postText={this.state.postText}
               mediaType="movie"
             />
           </div>

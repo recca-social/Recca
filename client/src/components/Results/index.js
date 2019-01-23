@@ -41,7 +41,7 @@ function Results(props) {
   }
   return (
     <div>
-      {props.items ? props.items.filter(item => item.type === props.mediaType).map(item => (
+      {props.items ? props.items.filter(item => item.type === props.mediaType && !item.complete).map(item => (
         <div key={item.apiId} id={item.apiId} className={'media-item ' + (item.active ? "media-item--active" : item.complete ? 'media-item--complete' : '')}>
           <img
             alt={item.title} className="media-item__img media-item__img--mobile"
@@ -62,15 +62,15 @@ function Results(props) {
                   : ""}
               </h3>
               {item.description ? <p className="media-item__description"><Truncate lines={4} ellipsis={"..."}>{item.description}</Truncate></p>
+              : props.mediaType !== "music" ? <p className="media-item__description">No description available</p> : ""}
+
+              {props.mediaType === "music" && item.creator ?
+                <p className="media-item__metadata media-item__creator">
+                  <strong>{item.creator}</strong>
+                </p>
               : ""}
             </div>
           </div>
-
-          {props.mediaType === "music" && item.creator ?
-            <p className="media-item__metadata media-item__creator">
-              <strong>{item.creator}</strong>
-            </p>
-          : ""}
 
           {item.creator && props.mediaType !== "music" ? 
             <p className="media-item__metadata media-item__creator">

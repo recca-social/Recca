@@ -24,7 +24,7 @@ module.exports = {
                             return res.json({ message: "No users found" })
                         }
                     })
-                    .catch(err => res.status(422).json(err));
+                    .catch(err => console.log(err));
             } else if (queryArr.length == 2) {
                 db.User.find({
                     $or: [
@@ -39,7 +39,7 @@ module.exports = {
                             return res.json({ message: "No users found" })
                         }
                     })
-                    .catch(err => res.status(422).json(err));
+                    .catch(err => console.log(err));
             } else if (queryArr.length == 3) {
                 db.User.find({
                     $or: [
@@ -54,7 +54,7 @@ module.exports = {
                             return res.json({ message: "No users found" })
                         }
                     })
-                    .catch(err => res.status(422).json(err));
+                    .catch(err => console.log(err));
             } else {
                 db.User.find({ username: queryArr.join(" ") })
                     .then(userArr => {
@@ -64,11 +64,10 @@ module.exports = {
                             return res.json({ message: "No users found" })
                         }
                     })
-                    .catch(err => res.status(422).json(err));
+                    .catch(err => console.log(err));
             }
         } else {
-            res.json({ message: "Recca will always be your friend." });
-            console.log("Recca will always love you")
+            res.json({ message: "No users found" });
         }
     },
 
@@ -89,14 +88,14 @@ module.exports = {
                         .then(newResult => {
                             res.json(newResult);
                         })
-                        .catch(err => res.status(422).json(err));
+                        .catch(err => console.log(err));
                 } else {
                     res.json({
-                        message: "Hey, this person already got a friend request from you!"
+                        message: "You are already friends with that user, or have a pending request."
                     });
                 }
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => console.log(err));
     },
 
     // handling the friend request:  This guy takes strings 'accepted' or 'rejected' as req.body.status.  A green and red button would work fine.
@@ -132,7 +131,7 @@ module.exports = {
                     res.json(friendReq);
                 }
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => console.log(err));
     },
 
     pendingRequest: function (req, res) {
@@ -145,14 +144,13 @@ module.exports = {
                     res.json({ message: "No pending friend requests" });
                 }
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => console.log(err));
     },
 
     removeFriend: function (req, res) {
         db.Friends.findById({ _id: req.body.id })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+            .catch(err => console.log(err));
     }
-
 }

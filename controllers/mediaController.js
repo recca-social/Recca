@@ -11,7 +11,7 @@ module.exports = {
         .then(function(userInfo){
             for (let i = 0; i < userInfo.media.length; i++){
                 if (userInfo.media[i].apiId === req.body.apiId){
-                    return{message: "Duplicate media entry"}
+                    return{message: "You already have that item saved."}
                 }
             }
             return req.body
@@ -25,14 +25,13 @@ module.exports = {
                 .then(function(dbUserInfo){
                     return dbUserInfo;
                 })
-                .catch(err => res.status(422).json(err));
+                .catch(err => console.log(err));
             } else {
                 return returnItem
             }
             
         })
         .then(function(finalReturn){
-            console.log(finalReturn)
             res.json(finalReturn)
         })
         
@@ -43,8 +42,9 @@ module.exports = {
         db.Media
         .findById({ _id: req.params.id })
         .then(dbModel => dbModel.remove())
+        .then(dbModel => db.User.findOneAndUpdate({ _id: req.user._id }, {$pull: { media: req.params.id }}, {new: true}))
         .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     },
     //method to toggle media active state
     toggleActive: function(req, res) {
@@ -61,7 +61,7 @@ module.exports = {
             console.log(dbMedia)
             res.json(dbMedia)
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     },
     toggleComplete: function(req, res) {
         db.Media.findById( req.params.id )
@@ -77,6 +77,6 @@ module.exports = {
             console.log(dbMedia)
             res.json(dbMedia)
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err));
     }
 }

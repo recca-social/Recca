@@ -38,9 +38,9 @@ class Friends extends Component {
           res.data.forEach(friend => {
             results.push({
               type: "friend",
-              firstName: friend.firstName ? friend.firstName : "",
-              lastName: friend.lastName ? friend.lastName : "",
-              username: friend.username ? friend.username : "",
+              firstName: friend.firstName ? friend.firstName : false,
+              lastName: friend.lastName ? friend.lastName : false,
+              username: friend.username ? friend.username : false,
               apiId: friend._id
             });
           })

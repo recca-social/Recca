@@ -39,12 +39,12 @@ function parseData(array){
         }
 
         if (!array[i].release_dates){
-            parsedObject.releaseYear = ""
+            parsedObject.releaseYear = false
         } else {
             parsedObject.releaseYear = array[i].release_dates[0].y
         }
         if (!array[i].cover.url){
-            parsedObject.coverArt = "";
+            parsedObject.coverArt = false;
             parsedArray.push(parsedObject);
         } else {
             let parsedURL = array[i].cover.url.split("t_thumb").join("t_cover_big")

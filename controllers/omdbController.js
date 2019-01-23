@@ -1,5 +1,7 @@
 var axios = require("axios");
-const apiKey = '41d470d9'
+const dotenv = require("dotenv");
+dotenv.config();
+const apiKey = process.env.OMDB_KEY;
 
 module.exports = {
     searchSeries: function(req, res){
@@ -35,6 +37,7 @@ module.exports = {
         })
     },
     searchMovies: function(req, res){
+        console.log("sending movie search reaquest")
         axios.get("http://www.omdbapi.com/?apikey=" + apiKey + "&type=movie&s=" + req.params.query)
         .then(function(response){
             if (!response.data.Search){

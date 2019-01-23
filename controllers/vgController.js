@@ -1,4 +1,6 @@
 var axios = require("axios");
+const dotenv = require("dotenv");
+dotenv.config();
 
 function parseQueryString(string){
     return string.split("+").join(" ")
@@ -60,7 +62,7 @@ module.exports = {
             method: 'POST',
             url: "https://api-v3.igdb.com/games/",
             headers: {                
-                "user-key": "72783dc69b855c01f1c0618ddb9fed6f",
+                "user-key": process.env.IGDB_KEY,
                 "Accept": "application/json",
                 "Content-type": "text/plain"
             }, 

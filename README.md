@@ -2,6 +2,8 @@
 
 Experience Recca at: [recca.herokuapp.com](https://recca.herokuapp.com/)
 
+![](client/public/images/recca.gif)
+
 Welcome to Recca! Our app is centered around the one thing we all love: entertainment. With so much of it available to consume, it can be difficult to organize and keep track of what you want to experience next. With Recca, users can search, save, track, and recommend their favorite movies, shows, books, music, and video games!
 
 When a user searches for the media of their choice, they may Save or Recommend any of the results that are displayed. Saving will store it in the user’s list, where additional options are presented. Once saved, you can Recommend, set to Active, Complete, or Remove the item from your list. The sidebar will update automatically with any media that is set Active or Complete.

@@ -11,6 +11,7 @@ function Results(props) {
 
   return ( 
     <div className="feed-item-wrapper col-12">
+      <p className="text-center">{props.message}</p>
       {props.items && props.items.length > 0 ? props.items.map(item => (
         <div key={item._id} id={item.apiId} className={'feed-item mx-auto'}>
           <p className="feed-item__user">

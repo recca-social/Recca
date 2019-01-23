@@ -29,6 +29,9 @@ module.exports = {
         for (let i = 0; i < friendsArray.length; i++) {
           postTotal += friendsArray[i].posts.length
         }
+        if (postTotal === 0){
+          res.json({message: "No posts to display, add more friends from the top right icon!"})
+        }
         var postObjReturn = [];
         for (let i = 0; i < friendsArray.length; i++) {
           db.User.findById({ _id: friendsArray[i]._id })

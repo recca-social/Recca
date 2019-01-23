@@ -14,7 +14,8 @@ class Home extends Component {
     redirectTo: "",
     activity: [],
     modalVisible: false,
-    loading: true
+    loading: true,
+    message:""
   };
 
   getFeed = () =>{
@@ -23,6 +24,7 @@ class Home extends Component {
     .then(function(res) {
       feedPosts = res.data
     })
+    .then(() => this.setState({message: feedPosts.message}))
     .then(() => this.setState({ activity: feedPosts, loading: false }))
     .catch(err => console.log(err));
   }
@@ -88,7 +90,8 @@ class Home extends Component {
         <div className="container">
           <LoadingIcon loading={this.state.loading} />
           <div className="row feed">
-            <FeedResults 
+            <FeedResults
+              message={this.state.message} 
               items={this.state.activity}
               handleSave={this.handleSave}
             />

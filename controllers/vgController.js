@@ -41,7 +41,7 @@ function parseData(array){
         } else {
             parsedObject.releaseYear = array[i].release_dates[0].y
         }
-        if (!array[i].cover){
+        if (!array[i].cover.url){
             parsedObject.coverArt = "";
             parsedArray.push(parsedObject);
         } else {
@@ -72,7 +72,7 @@ module.exports = {
             } else {
                 res.json(parseData(response.data));
             }
-            
         })
+        .catch(err => res.status(422).json(err));
     }
 }

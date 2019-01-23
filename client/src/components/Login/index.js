@@ -72,6 +72,7 @@ class Login extends Component {
                 </div>
                 <h1 className="sr-only">Recca</h1>
               </div>
+              <p className="text-center mt-2">Quick test drive? Sign in with <br />username: <strong>demo</strong>, password: <strong>demo</strong></p>
               <form method="post" action="/login/local" className="login-form">
                 {this.state.message.length > 0 ? (
                   <p className="warning">{this.state.message}</p>

@@ -19,7 +19,7 @@ function parseData(array){
         }
 
         let genreArr = [];
-        if (array[i].genre) {
+        if (array[i].genres) {
             for (let a = 0; a < array[i].genres.length; a++){
                 genreArr.push(array[i].genres[a].name)
             }

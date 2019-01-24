@@ -47,10 +47,10 @@ class Music extends Component {
             results.push(
               {
                 type: "music",
-                title: music.albumName ? this.truncateByChar(music.albumName, 60) : false,
+                title: music.albumName ? this.truncateByChar(music.albumName, 60) : "",
                 image: music.image ? music.image : "/images/placehold-img-sq.jpg",
-                link: music.albumLink.spotify ? music.albumLink.spotify : false,
-                creator: music.artist ? music.artist.join(", ") : false,
+                link: music.albumLink.spotify ? music.albumLink.spotify : "",
+                creator: music.artist ? music.artist.join(", ") : "",
                 apiId: music.apiId
               }
             )

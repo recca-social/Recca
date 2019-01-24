@@ -47,14 +47,14 @@ class Movies extends Component {
             results.push(
               {
                 type: "movie",
-                title: movie.title ? this.truncateByChar(movie.title, 60) : false,
-                year: movie.year ? movie.year : false,
+                title: movie.title ? this.truncateByChar(movie.title, 60) : "",
+                year: movie.year ? movie.year : "",
                 image: movie.poster && movie.poster !== "N/A" ? movie.poster : "/images/placehold-img.jpg",
                 description: movie.summary && movie.summary !== "N/A" ? movie.summary : "No plot summary available",
-                link: movie.link ? movie.link : false,
-                creator: movie.director && movie.director !== "N/A" ? movie.director : false,
-                genre: movie.genre ? movie.genre : false,
-                rating: movie.rating && movie.rating !== "N/A" ? movie.rating : false,
+                link: movie.link ? movie.link : "",
+                creator: movie.director && movie.director !== "N/A" ? movie.director : "",
+                genre: movie.genre ? movie.genre : "",
+                rating: movie.rating && movie.rating !== "N/A" ? movie.rating : "",
                 apiId: movie.apiId
               }
             )

@@ -27,7 +27,7 @@ function Footer(props) {
         </div>
         <div className="col-md-6">
           <h5>Github Repo</h5>
-          <p className="text-center"><Link to="https://github.com/brijamfitz/Recca" target="_blank">github.com/brijamfitz/Recca</Link></p>
+          <p className="text-center"><a href="https://github.com/brijamfitz/Recca" target="_blank">github.com/brijamfitz/Recca</a></p>
         </div>
         { props.loginPage ? "" : <Link to="/logout" className="btn btn-logout">Logout <i className="icon icon-logout"></i></Link>}
       </div>

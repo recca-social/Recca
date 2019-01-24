@@ -117,7 +117,7 @@ function Results(props) {
                 <span>Complete <i className="icon icon-check"></i></span> :
                 <span>Complete <i className="icon icon-check-empty"></i></span>}
               </button>
-              <button onClick={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
+              <button onTouchTap={() => props.handleDelete(item._id) } className="btn btn-remove">Remove <i className="icon icon-trash-empty"></i></button>       
             </div>
           : props.resultType === "results" ?
             <div className="media-item__buttons media-item__buttons--results">

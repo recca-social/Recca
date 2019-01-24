@@ -34,7 +34,7 @@ function Sidebar(props) {
                 <button onClick={() => props.toggleActive(item._id) } className="btn-active sidebar-btn">
                   <i className="icon icon-eye"><span className="sr-only">Set inactive</span></i>
                 </button>
-                <button onClick={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
+                <button onTouchTap={() => props.toggleComplete(item._id) } className="btn-complete sidebar-btn">
                   <i className="icon icon-check"><span className="sr-only">Set complete</span></i>
                 </button>
               </div>

@@ -1,6 +1,6 @@
 # Recca
 
-Experience Recca at: [recca.herokuapp.com](https://recca.herokuapp.com/)
+Experience Recca at: [www.recca.social](https://www.recca.social)
 
 ![](client/public/images/recca.gif)
 
@@ -25,16 +25,17 @@ Recca was built with the MERN stack using [create-react-app](https://github.com/
 * Node
 * JavaScript
 * Sass
-* APIs (OMDB, IGDB, Spotify, Google Books)
+* APIs ([OMDB](http://www.omdbapi.com/), [IDGB](https://igdb.github.io/api/), [Spotify](https://developer.spotify.com/documentation/web-api/), [Google Books](https://developers.google.com/books/))
 
 
 **How to Install and Run Locally:**
 
 * Make sure you have [Node](https://nodejs.org/en/download/) installed on your system
-* Clone the repo with `git clone https://github.com/brijamfitz/Recca.git`
-* Change directories to the root of the project with `cd Recca`
-* Run `npm install` at the project root
-* Run `npm start`
+* `git clone https://github.com/recca-social/Recca.git`
+* `cd Recca` - Change directories to the root
+* `npm install`
+* `cp .env-example .env` - fill in your .env file with the appropriate API keys, or contact us to request access to ours
+* `npm start`
 * At the Login page, click Create Account
 * Sign up and start exploring Recca!
 
@@ -46,5 +47,7 @@ Designed, built, and maintained by:
 * [Cadin McQueen](https://github.com/Awfulnaut)
 * [Harry B Young](https://github.com/HarryBY1149)
 * [Brian Fitzgerald](https://github.com/brijamfitz)
+
+Contact us at [admin@recca.social](admin@recca.social)
 
 Copyright &#169; 2019

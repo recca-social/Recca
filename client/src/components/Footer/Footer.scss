@@ -19,6 +19,10 @@
     color: $white-1;
   }
 
+  p {
+    margin-bottom: 0;
+  }
+
   &__contact {
     margin-bottom: 15px;
 
@@ -28,22 +32,6 @@
 
     p {
       margin-bottom: 0;
-    }
-  }
-
-  .contact--left {
-    p {
-      @include respond(md) {
-        text-align: right;
-      }
-    }
-  }
-
-  .contact--right {
-    p {
-      @include respond(md) {
-        text-align: left;
-      }
     }
   }
 

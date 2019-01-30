@@ -30,11 +30,12 @@ Recca was built with the MERN stack using [create-react-app](https://github.com/
 
 **How to Install and Run Locally:**
 
-* Make sure you have [Node](https://nodejs.org/en/download/) installed on your system
+* Make sure you have [Node](https://nodejs.org/en/download/) and [MongoDB](https://docs.mongodb.com/manual/installation/) installed on your system
 * `git clone https://github.com/recca-social/Recca.git`
 * `cd Recca` - Change directories to the root
 * `npm install`
 * `cp .env-example .env` - fill in your .env file with the appropriate API keys, or contact us to request access to ours
+* Run `mongod` in a separate terminal window to allow Recca to create your local DB
 * `npm start`
 * At the Login page, click Create Account
 * Sign up and start exploring Recca!

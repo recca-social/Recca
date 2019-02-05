@@ -1,6 +1,4 @@
 import React from "react";
-import PostModal from "../PostModal";
-import Truncate from 'react-truncate';
 import SearchResult from "./searchResult.js";
 import SavedResult from "./savedResult.js";
 import "./media-item.scss";

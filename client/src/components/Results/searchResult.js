@@ -5,7 +5,7 @@ import "./media-item.scss";
 
 function SearchResult(props) {
   return (
-    <div id={props.item.apiId} className='media-item'>
+    <div id={props.item.apiId} className='media-item media-item--result'>
       <img
         alt={props.item.title} className="media-item__img media-item__img--mobile"
         src={props.item.image}

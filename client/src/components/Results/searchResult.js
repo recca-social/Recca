@@ -3,9 +3,9 @@ import PostModal from "../PostModal";
 import Truncate from 'react-truncate';
 import "./media-item.scss";
 
-function searchedMediaResult(props) {
+function SearchResult(props) {
   return (
-    <div key={props.item.apiId} id={props.item.apiId} className='media-item'>
+    <div id={props.item.apiId} className='media-item'>
       <img
         alt={props.item.title} className="media-item__img media-item__img--mobile"
         src={props.item.image}
@@ -24,7 +24,7 @@ function searchedMediaResult(props) {
                 <span className="media-item__year"> ({props.item.year})</span>
               : ""}
           </h3>
-          {props.item.description && props.resultType === "results" ? <p className="media-item__description"><Truncate lines={4} ellipsis={"..."}>{props.item.description}</Truncate></p>
+          {props.item.description && props.resultType === "results" ? <p className="media-item__description"><Truncate lines={5} ellipsis={"..."}>{props.item.description}</Truncate></p>
           : props.mediaType !== "music" ? <p className="media-item__description">No description available</p> : ""}
 
           {props.mediaType === "music" && props.item.creator ?
@@ -64,6 +64,11 @@ function searchedMediaResult(props) {
       : ""}
 
       <div className="clearfix"></div>
+
+      <div className="media-item__buttons media-item__buttons--results">
+        <button onClick={() => props.handleSave(props.item.apiId)} className="btn btn-save">Save <i className="icon icon-bookmark-empty"></i></button>
+        <button className="btn btn-recommend" data-toggle="modal" data-target={"#modal-" + props.item.apiId}>Recommend <i className="icon icon-star"></i></button>
+      </div>
               
       <PostModal 
         postText={props.postText}
@@ -79,4 +84,4 @@ function searchedMediaResult(props) {
   )
 }
 
-export default searchedMediaResult;
+export default SearchResult;

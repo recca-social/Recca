@@ -130,6 +130,43 @@ class Games extends Component {
     .catch(err => console.log(err))
   }
 
+
+  typeCheckPluralizer(type, string) {
+    var creatorTitle;
+    
+    if (type === "book") {
+      creatorTitle = "Author"
+    } else if (type === "music") {
+      creatorTitle = "Artist"
+    } else if (type === "movie") {
+      creatorTitle = "Director"
+    } else if (type === "show") {
+      creatorTitle = "Writer"
+    } else {
+      return creatorTitle = "Creator"
+    }
+
+    if (string.includes(",")) {
+      return `${creatorTitle}s`
+    } else {
+      return creatorTitle;
+    }
+  }
+  platformText(string) {
+    if (string.includes(",")) {
+      return "Platforms: "
+    } else {
+      return "Platform: "
+    }
+  }
+  genreText(string) {
+    if (string.includes(",")) {
+      return "Genres: "
+    } else {
+      return "Genre: "
+    }
+  }
+
   render() {
     return (
       <div>
@@ -156,6 +193,9 @@ class Games extends Component {
                     handleRecommend={this.handleRecommend}
                     handleInputChange={this.handleInputChange}
                     postText={this.state.postText}
+                    typeCheckPluralizer={this.typeCheckPluralizer}
+                    platformText={this.platformText}
+                    genreText={this.genreText}
                   />
                 </div> : ""}
               {this.state.message ? 
@@ -175,6 +215,9 @@ class Games extends Component {
                     handleInputChange={this.handleInputChange}
                     postText={this.state.postText}
                     handleRecommend={this.handleRecommend}
+                    typeCheckPluralizer={this.typeCheckPluralizer}
+                    platformText={this.platformText}
+                    genreText={this.genreText}
                   />
                 </div> : 
                 <p className="text-center empty-media-msg">Use the search bar above to find and save games!</p> }

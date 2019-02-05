@@ -24,7 +24,7 @@ function SearchResult(props) {
                 <span className="media-item__year"> ({props.item.year})</span>
               : ""}
           </h3>
-          {props.item.description && props.resultType === "results" ? <p className="media-item__description"><Truncate lines={5} ellipsis={"..."}>{props.item.description}</Truncate></p>
+          {props.item.description ? <p className="media-item__description"><Truncate lines={5} ellipsis={"..."}>{props.item.description}</Truncate></p>
           : props.mediaType !== "music" ? <p className="media-item__description">No description available</p> : ""}
 
           {props.mediaType === "music" && props.item.creator ?

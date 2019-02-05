@@ -4,7 +4,7 @@ import "./media-item.scss";
 
 function SavedResult(props) {
   return (
-    <div id={props.item.apiId} className={'media-item media-item--saved' + (props.item.active ? "media-item--active" : props.item.complete ? 'media-item--complete' : '')}>
+    <div id={props.item.apiId} className={'media-item media-item--saved ' + (props.item.active ? "media-item--active" : props.item.complete ? 'media-item--complete' : '')}>
       <img
         alt={props.item.title} className="media-item__img media-item__img--mobile"
         src={props.item.image}

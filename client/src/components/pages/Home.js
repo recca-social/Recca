@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import userAPI from "../../utils/userAPI";
-import mediaAPI from "../../utils/mediaAPI";
+import { userAPI, mediaAPI } from "../../api";
 import FeedResults from "../FeedResults";
 import Header from "../Header";
 import Footer from "../Footer";

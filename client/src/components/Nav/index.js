@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import userAPI from "../../utils/userAPI";
+import { userAPI } from "../../api";
 import "./Nav.scss";
 
 class Nav extends Component {

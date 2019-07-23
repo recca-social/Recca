@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 const authHandler = {
     isAuthenticated: false,
@@ -8,6 +8,6 @@ const authHandler = {
             this.isAuthenticated = res.data
         })
     }
-};
+}
 
-export default authHandler;
+export default authHandler

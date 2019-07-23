@@ -1,7 +1,9 @@
 import axios from "axios";
 
-export default {
+const postAPI = {
     post: function(mediaObj){
         return axios.post("/api/post/create", mediaObj)
     }
 }
+
+export default postAPI

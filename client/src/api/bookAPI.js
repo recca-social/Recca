@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios from "axios"
 
-export default {
+const bookAPI = {
     search: function(query){
         return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query)
     }
 }
+
+export default bookAPI

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import bookAPI from "../../utils/bookAPI";
-import mediaAPI from "../../utils/mediaAPI";
-import userAPI from "../../utils/userAPI";
-import postAPI from "../../utils/postAPI";
+import { bookAPI, mediaAPI, userAPI, postAPI } from "../../api";
 import SearchForm from "../SearchForm";
 import Sidebar from "../Sidebar";
 import Results from "../Results";

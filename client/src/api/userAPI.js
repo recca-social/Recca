@@ -1,39 +1,40 @@
-import axios from "axios";
+import axios from "axios"
 
-export default {
+const userAPI = {
   isLoggedIn: function() {
-    return axios.get("/login/check");
+    return axios.get("/login/check")
   },
 
   localLogIn: function(username, password) {
     return axios.post("/login/local", {
       username: username,
       password: password
-    });
+    })
   },
 
   logOut: function() {
-    return axios.get("/logout");
+    return axios.get("/logout")
   },
 
-  // Remove Friend
   removeFriend: function(id) {
-    return axios.delete("api/friend/" + id);
+    return axios.delete("api/friend/" + id)
   },
 
   facebookLogIn: function() {
-    return axios.get("/login/facebook");
+    return axios.get("/login/facebook")
   },
 
   getUserMedia: function() {
-    return axios.get("api/user/find");
+    return axios.get("api/user/find")
   },
 
   getUserFeed: function() {
-    return axios.get("api/user/feed/");
+    return axios.get("api/user/feed/")
   },
 
   getFeedItems: function() {
-    return axios.get("api/user/getFeedItems/");
+    return axios.get("api/user/getFeedItems/")
   }
-};
+}
+
+export default userAPI

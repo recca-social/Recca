@@ -1,8 +1,9 @@
-import axios from "axios";
+import axios from "axios"
 
-export default {
+const movieAPI = {
     search: function(query){
         return axios.get("/api/omdb/movie/search/" + query)
     }
-    
 }
+
+export default movieAPI

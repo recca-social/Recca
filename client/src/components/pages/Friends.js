@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "../SearchForm";
 import FriendResults from "../FriendResults";
 import FriendSidebar from "../FriendSidebar";
-import friendAPI from "../../utils/friendAPI";
-import userAPI from "../../utils/userAPI";
+import { friendAPI, userAPI } from "../../api";
 import Footer from "../Footer";
 
 class Friends extends Component {

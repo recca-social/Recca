@@ -1,7 +1,9 @@
 import axios from "axios";
 
-export default {
+const showAPI = {
     search: function(query){
         return axios.get("/api/omdb/show/search/" + query)
     }
 }
+
+export default showAPI

@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios from "axios"
 
-export default {
+const gameAPI = {
     search: function(query){
         return axios.get("api/vg/search/" + query)
     }
 }
+
+export default gameAPI

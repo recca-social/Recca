@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import authHandler from "../../utils/authHandler";
+import { authHandler } from "../../api";
 
 class ProtectedRoute extends React.Component {
     constructor(props){

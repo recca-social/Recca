@@ -35,7 +35,6 @@ class Login extends Component {
     userAPI
       .localLogIn(this.state.username, this.state.password)
       .then(response => {
-        console.log(response);
         if (response.data.user) {
           // Update App.js state
           this.setState({
